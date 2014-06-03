@@ -285,7 +285,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"> * from http//NadeauSoftware.com/ and distributed under the</span></div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment"> * Creative Commons Attribution 3.0 Unported License</span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"> * Returns the real time, in seconds, or -1.0 if an error occurred.</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"> * Time is measured since an arbitrary and OS-dependent start time.</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"> * The returned real time is only useful for computing an elapsed time</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"> * between two calls to this function.</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keywordtype">double</span> mu_timer_real(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;{</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">#if defined(_WIN32)</span></div>
@@ -356,7 +363,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">return</span> -1.0;        <span class="comment">/* Failed. */</span></div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;#endif</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;}</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"> * Returns the amount of CPU time used by the current process,</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment"> * in seconds, or -1.0 if an error occurred.</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="keywordtype">double</span> mu_timer_cpu(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;{</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor">#if defined(_WIN32)</span></div>
@@ -442,7 +453,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 3 2014 18:23:31 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 3 2014 18:25:55 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

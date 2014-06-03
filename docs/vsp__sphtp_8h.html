@@ -92,6 +92,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="vsp__util_8h_source.html">vesper_util/vsp_util.h</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for vsp_sphtp.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h__incl.png" border="0" usemap="#vesper__sphtp_2vsp__sphtp_8h" alt=""/></div>
+<map name="vesper__sphtp_2vsp__sphtp_8h" id="vesper__sphtp_2vsp__sphtp_8h">
+<area shape="rect" id="node2" href="vsp__util_8h.html" title="vesper_util/vsp_util.h" alt="" coords="19,80,164,107"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h__dep__incl.png" border="0" usemap="#vesper__sphtp_2vsp__sphtp_8hdep" alt=""/></div>
+<map name="vesper__sphtp_2vsp__sphtp_8hdep" id="vesper__sphtp_2vsp__sphtp_8hdep">
+<area shape="rect" id="node2" href="vsp__network__connector_8c_source.html" title="vesper_sphtp/vsp_network\l_connector.c" alt="" coords="5,81,184,122"/><area shape="rect" id="node3" href="vsp__test_8c.html" title="vesper_test/vsp_test.c" alt="" coords="208,88,361,115"/></map>
+</div>
 </div>
 <p><a href="vsp__sphtp_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -127,6 +141,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Max Mertens</dd></dl>
 <p>Copyright (c) 2014, Max Mertens. All rights reserved. This file is licensed under the "BSD 3-Clause License". Full license text is under the file "LICENSE" provided with this code. </p>
+
+<p>Definition in file <a class="el" href="vsp__sphtp_8h_source.html">vsp_sphtp.h</a>.</p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="a781efec707b494b2c5751eeefd51f7aa"></a>
 <div class="memitem">
@@ -139,6 +155,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Define type <a class="el" href="structvsp__sphtp__network__connector.html" title="State and other data used for network connection. ">vsp_sphtp_network_connector</a> to avoid 'struct' keyword. </p>
+
+<p>Definition at line <a class="el" href="vsp__sphtp_8h_source.html#l00023">23</a> of file <a class="el" href="vsp__sphtp_8h_source.html">vsp_sphtp.h</a>.</p>
 
 </div>
 </div>
@@ -160,6 +178,26 @@ Functions</h2></td></tr>
 <p>Create new <a class="el" href="structvsp__sphtp__network__connector.html" title="State and other data used for network connection. ">vsp_sphtp_network_connector</a> object. </p>
 <p>Returned pointer should be freed with <a class="el" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_free()</a>. Returns NULL and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00040">40</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_cgraph.png" border="0" usemap="#vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_cgraph" id="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="253,12,387,39"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_icgraph.png" border="0" usemap="#vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_icgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_icgraph" id="vsp__sphtp_8h_a367bbf60831315a9c3d7608d1597cdaa_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#a9c70d344c33e931fc2a80743ee71f9ac" title="Create global net_conn object. " alt="" coords="253,5,392,32"/><area shape="rect" id="node4" href="vsp__test_8c.html#ac8c7f7dfe86607c33b1bc028d822a669" title="Test vsp_sphtp_network_connector_create() and vsp_sphtp_network_connector_free(). ..." alt="" coords="281,56,365,83"/><area shape="rect" id="node3" href="vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3" title="Test SphTP implementation. " alt="" coords="440,5,571,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a453b4db5c8d034b71f0985128d630fff"></a>
@@ -178,6 +216,26 @@ Functions</h2></td></tr>
 
 <p>Free <a class="el" href="structvsp__sphtp__network__connector.html" title="State and other data used for network connection. ">vsp_sphtp_network_connector</a> object. </p>
 <p>Object should be created with <a class="el" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_create()</a>. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
+
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00159">159</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_cgraph.png" border="0" usemap="#vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_cgraph" id="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="283,5,416,32"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_icgraph.png" border="0" usemap="#vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_icgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_icgraph" id="vsp__sphtp_8h_a453b4db5c8d034b71f0985128d630fff_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#abef69f041ebe2ed80239b822d9717fc2" title="Free global net_conn object. " alt="" coords="283,5,443,32"/><area shape="rect" id="node4" href="vsp__test_8c.html#ac8c7f7dfe86607c33b1bc028d822a669" title="Test vsp_sphtp_network_connector_create() and vsp_sphtp_network_connector_free(). ..." alt="" coords="321,56,405,83"/><area shape="rect" id="node3" href="vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3" title="Test SphTP implementation. " alt="" coords="491,5,621,32"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -214,6 +272,26 @@ Functions</h2></td></tr>
 <p>Initialize and connect sockets. </p>
 <p>Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if failed. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. ">vsp_sphtp_disconnect</a> </dd></dl>
 
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00058">58</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_cgraph.png" border="0" usemap="#vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_cgraph" id="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="189,5,323,32"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_icgraph.png" border="0" usemap="#vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_icgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_icgraph" id="vsp__sphtp_8h_a6a18a169a9d2dd46ad9895d05636ae1a_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#ac2f9fd401b6477bd26bde613dbf8212a" title="Test vsp_sphtp_connect(). " alt="" coords="190,5,274,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a5eb4b081986861bc5cddeb2ecf670a68"></a>
@@ -232,6 +310,26 @@ Functions</h2></td></tr>
 
 <p>Disconnect and deinitialize sockets. </p>
 <p>Sockets have to be connected with <a class="el" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. ">vsp_sphtp_connect()</a> first. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
+
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00094">94</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_cgraph.png" border="0" usemap="#vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_cgraph" id="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="205,5,339,32"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_icgraph.png" border="0" usemap="#vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_icgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_icgraph" id="vsp__sphtp_8h_a5eb4b081986861bc5cddeb2ecf670a68_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#a195ebbb5a5672e5384d3bcdf5888380c" title="Test vsp_sphtp_disconnect(). " alt="" coords="206,5,290,32"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -252,6 +350,17 @@ Functions</h2></td></tr>
 <p>Run event loop for message reception. </p>
 <p>Should run in its own thread. Terminates when <a class="el" href="vsp__sphtp_8h.html#ad626aa9a2bc87447b3f809a40d985857" title="Stop event loop for message reception. ">vsp_sphtp_reception_thread_stop()</a> is called. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if interrupted or failed. </p>
 
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00129">129</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_a1046755e9b657737151c2f83efd7f739_cgraph.png" border="0" usemap="#vsp__sphtp_8h_a1046755e9b657737151c2f83efd7f739_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_a1046755e9b657737151c2f83efd7f739_cgraph" id="vsp__sphtp_8h_a1046755e9b657737151c2f83efd7f739_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="197,12,331,39"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ad626aa9a2bc87447b3f809a40d985857"></a>
@@ -271,12 +380,23 @@ Functions</h2></td></tr>
 <p>Stop event loop for message reception. </p>
 <p>Does not wait until <a class="el" href="vsp__sphtp_8h.html#a1046755e9b657737151c2f83efd7f739" title="Run event loop for message reception. ">vsp_sphtp_reception_thread_run()</a> has finished. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
+<p>Definition at line <a class="el" href="vsp__network__connector_8c_source.html#l00146">146</a> of file <a class="el" href="vsp__network__connector_8c_source.html">vsp_network_connector.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vsp__sphtp_8h_ad626aa9a2bc87447b3f809a40d985857_cgraph.png" border="0" usemap="#vsp__sphtp_8h_ad626aa9a2bc87447b3f809a40d985857_cgraph" alt=""/></div>
+<map name="vsp__sphtp_8h_ad626aa9a2bc87447b3f809a40d985857_cgraph" id="vsp__sphtp_8h_ad626aa9a2bc87447b3f809a40d985857_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="197,12,331,39"/></map>
+</div>
+</p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 3 2014 18:23:31 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 3 2014 18:25:55 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
