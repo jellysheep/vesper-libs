@@ -98,43 +98,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;`vesper-log` provides buffered and prefixed logging outputs to console.</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;### vesper-sphtp</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;### vesper-cmcp</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;`vesper-sphtp` provides an implementation of the [SphTP protocol][sphtp_link]</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;and lets you build simulation servers and clients connected over network.</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;[sphtp_link]: https:<span class="comment">//github.com/jellysheep/spheresim/wiki/Protocol</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">### vesper-test</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;`vesper-test` is a small unit test checking functionality of C modules.</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;### vesper-error</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;`vesper-error` is a helper module providing small functions <span class="keywordflow">for</span> error numbers</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;and names (like standard `errno` and `strerror()`).</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;### vesper-util</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;`vesper-cmcp` provides an implementation of the [CMCP protocol][cmcp_link]</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;and lets you build connected servers and clients, e.g. <span class="keywordflow">for</span> physical simulations</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;over a network.</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;[cmcp_link]: https:<span class="comment">//github.com/jellysheep/spheresim/wiki/Protocol</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">### vesper-test</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;`vesper-test` is a small unit test checking functionality of C modules.</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;### vesper-util</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;`vesper-util` is a helper module providing header files with symbol export</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;markers and small functions <span class="keywordflow">for</span> error numbers and names (like standard</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;`errno` and `strerror()`).</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;`vesper-util` is a helper module providing a header file with symbol export</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;markers.</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;## Coding style</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;## Coding style</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;See [`CODING_STYLE.md`](CODING_STYLE.md) file <span class="keywordflow">for</span> details about coding style of</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">this</span> project.</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;See [`CODING_STYLE.md`](CODING_STYLE.md) file <span class="keywordflow">for</span> details about coding style of</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">this</span> project.</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;## License</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;## License</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;vesper-libs is released under the BSD 3-Clause License.</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;Please refer to [`LICENSE`][license_link] file <span class="keywordflow">for</span> details.</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;vesper-libs is released under the BSD 3-Clause License.</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;Please refer to [`LICENSE`][license_link] file <span class="keywordflow">for</span> details.</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;[license_link]:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;https:<span class="comment">//github.com/VesperCommunity/vesper-libs/blob/master/LICENSE</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;[license_link]:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;https:<span class="comment">//github.com/VesperCommunity/vesper-libs/blob/master/LICENSE</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 3 2014 18:25:55 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 1 2014 12:51:54 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

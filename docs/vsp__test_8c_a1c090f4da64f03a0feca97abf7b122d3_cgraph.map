@@ -1,7 +1,0 @@
-<map id="MU_TEST_SUITE" name="MU_TEST_SUITE">
-<area shape="rect" id="node2" href="$vsp__test_8c.html#a9c70d344c33e931fc2a80743ee71f9ac" title="Create global net_conn object. " alt="" coords="195,15,333,41"/>
-<area shape="rect" id="node5" href="$vsp__test_8c.html#abef69f041ebe2ed80239b822d9717fc2" title="Free global net_conn object. " alt="" coords="184,67,344,93"/>
-<area shape="rect" id="node3" href="$vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. " alt="" coords="407,5,606,46"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="669,41,803,68"/>
-<area shape="rect" id="node6" href="$vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. " alt="" coords="393,71,621,97"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. " alt="" coords="139,5,274,32"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#a7d5afaf870e54976cf0835e6fb1ce1a6" title="Return error string for any error number. " alt="" coords="157,56,256,83"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. " alt="" coords="153,107,261,133"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="323,5,456,32"/>
-</map>

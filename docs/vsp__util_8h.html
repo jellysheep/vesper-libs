@@ -95,16 +95,22 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__util_8h__dep__incl.png" border="0" usemap="#vesper__util_2vsp__util_8hdep" alt=""/></div>
 <map name="vesper__util_2vsp__util_8hdep" id="vesper__util_2vsp__util_8hdep">
-<area shape="rect" id="node2" href="vsp__error_8h.html" title="vesper_error/vsp_error.h" alt="" coords="185,80,348,107"/><area shape="rect" id="node6" href="vsp__sphtp_8h.html" title="vesper_sphtp/vsp_sphtp.h" alt="" coords="373,80,547,107"/><area shape="rect" id="node3" href="vsp__error_8c_source.html" title="vesper_error/vsp_error.c" alt="" coords="5,163,168,189"/><area shape="rect" id="node4" href="vsp__network__connector_8c_source.html" title="vesper_sphtp/vsp_network\l_connector.c" alt="" coords="371,155,549,197"/><area shape="rect" id="node5" href="vsp__test_8c.html" title="vesper_test/vsp_test.c" alt="" coords="192,163,345,189"/></map>
+<area shape="rect" id="node2" href="vsp__connector_8c_source.html" title="vesper_cmcp/vsp_connector.c" alt="" coords="4,80,203,107"/></map>
 </div>
 </div>
 <p><a href="vsp__util_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a3b113e6b61794249dc57133f1f9776a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__util_8h.html#a3b113e6b61794249dc57133f1f9776a9">VESPER_API</a></td></tr>
-<tr class="memdesc:a3b113e6b61794249dc57133f1f9776a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared library export marker.  <a href="#a3b113e6b61794249dc57133f1f9776a9">More...</a><br /></td></tr>
-<tr class="separator:a3b113e6b61794249dc57133f1f9776a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a804c55494b54bb72b1f90fe85e0b8fd4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__util_8h.html#a804c55494b54bb72b1f90fe85e0b8fd4">VSP_ALLOC</a>(ptr, type, failure_action)</td></tr>
+<tr class="memdesc:a804c55494b54bb72b1f90fe85e0b8fd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to allocate memory, check result and react in case of failure.  <a href="#a804c55494b54bb72b1f90fe85e0b8fd4">More...</a><br /></td></tr>
+<tr class="separator:a804c55494b54bb72b1f90fe85e0b8fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb547cd6c2898416d5e3182cff31de9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__util_8h.html#a6cb547cd6c2898416d5e3182cff31de9">VSP_FREE</a>(ptr)</td></tr>
+<tr class="memdesc:a6cb547cd6c2898416d5e3182cff31de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory and set <code>ptr</code> to <code>NULL</code>.  <a href="#a6cb547cd6c2898416d5e3182cff31de9">More...</a><br /></td></tr>
+<tr class="separator:a6cb547cd6c2898416d5e3182cff31de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d4dc441fd32875ab365b4de6b53f430"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__util_8h.html#a6d4dc441fd32875ab365b4de6b53f430">VSP_ASSERT</a>(condition, failure_action)</td></tr>
+<tr class="memdesc:a6d4dc441fd32875ab365b4de6b53f430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert condition, set error number and react in case of failure.  <a href="#a6d4dc441fd32875ab365b4de6b53f430">More...</a><br /></td></tr>
+<tr class="separator:a6d4dc441fd32875ab365b4de6b53f430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Max Mertens</dd></dl>
@@ -112,27 +118,118 @@ Macros</h2></td></tr>
 
 <p>Definition in file <a class="el" href="vsp__util_8h_source.html">vsp_util.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a3b113e6b61794249dc57133f1f9776a9"></a>
+<a class="anchor" id="a804c55494b54bb72b1f90fe85e0b8fd4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VESPER_API</td>
+          <td class="memname">#define VSP_ALLOC</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">failure_action&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">    <span class="comment">/* allocate memory */</span> \</div>
+<div class="line">    ptr = malloc(<span class="keyword">sizeof</span>(type)); \</div>
+<div class="line">    if (ptr == NULL) { \</div>
+<div class="line">        <span class="comment">/* allocation failed */</span> <a class="code" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee">\</a></div>
+<div class="line"><a class="code" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee">        vsp_error_set_num</a>(ENOMEM); \</div>
+<div class="line">        failure_action; \</div>
+<div class="line">    } \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="vsp__error_8h_html_a97850dcb056056508e4e57f8dca381ee"><div class="ttname"><a href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee">vsp_error_set_num</a></div><div class="ttdeci">VSP_API void vsp_error_set_num(int error_num)</div><div class="ttdoc">Set current error number. </div><div class="ttdef"><b>Definition:</b> <a href="vsp__error_8c_source.html#l00023">vsp_error.c:23</a></div></div>
+</div><!-- fragment -->
+<p>Try to allocate memory, check result and react in case of failure. </p>
 
-<p>Shared library export marker. </p>
-<p>Defined to be <code>__declspec(dllexport)</code> or <code>__declspec(dllimport)</code> on Windows and <code>__attribute__((visibility("default")))</code> on GNU platforms. </p>
+<p>Definition at line <a class="el" href="vsp__util_8h_source.html#l00014">14</a> of file <a class="el" href="vsp__util_8h_source.html">vsp_util.h</a>.</p>
 
-<p>Definition at line <a class="el" href="vsp__util_8h_source.html#l00030">30</a> of file <a class="el" href="vsp__util_8h_source.html">vsp_util.h</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a6cb547cd6c2898416d5e3182cff31de9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VSP_FREE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">    <span class="comment">/* free memory */</span> \</div>
+<div class="line">    free(ptr); \</div>
+<div class="line">    ptr = NULL; \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+<p>Free memory and set <code>ptr</code> to <code>NULL</code>. </p>
+
+<p>Definition at line <a class="el" href="vsp__util_8h_source.html#l00025">25</a> of file <a class="el" href="vsp__util_8h_source.html">vsp_util.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6d4dc441fd32875ab365b4de6b53f430"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VSP_ASSERT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">failure_action&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">    <span class="comment">/* check condition */</span> \</div>
+<div class="line">    if (!(condition)) { \</div>
+<div class="line">        <span class="comment">/* condition failed */</span> \</div>
+<div class="line">        failure_action; \</div>
+<div class="line">    } \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+<p>Assert condition, set error number and react in case of failure. </p>
+
+<p>Definition at line <a class="el" href="vsp__util_8h_source.html#l00032">32</a> of file <a class="el" href="vsp__util_8h_source.html">vsp_util.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 3 2014 18:25:55 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 1 2014 12:51:54 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

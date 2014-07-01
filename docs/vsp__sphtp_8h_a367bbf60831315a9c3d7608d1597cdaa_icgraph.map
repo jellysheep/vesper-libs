@@ -1,5 +1,0 @@
-<map id="vsp_sphtp_network_connector_create" name="vsp_sphtp_network_connector_create">
-<area shape="rect" id="node2" href="$vsp__test_8c.html#a9c70d344c33e931fc2a80743ee71f9ac" title="Create global net_conn object. " alt="" coords="253,5,392,32"/>
-<area shape="rect" id="node4" href="$vsp__test_8c.html#ac8c7f7dfe86607c33b1bc028d822a669" title="Test vsp_sphtp_network_connector_create() and vsp_sphtp_network_connector_free(). ..." alt="" coords="281,56,365,83"/>
-<area shape="rect" id="node3" href="$vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3" title="Test SphTP implementation. " alt="" coords="440,5,571,32"/>
-</map>

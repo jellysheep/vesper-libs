@@ -93,14 +93,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;minunit.h&quot;</code><br />
-<code>#include &lt;<a class="el" href="vsp__error_8h_source.html">vesper_error/vsp_error.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="vsp__sphtp_8h_source.html">vesper_sphtp/vsp_sphtp.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="vsp__error_8h_source.html">vesper_util/vsp_error.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="vsp__cmcp_8h_source.html">vesper_cmcp/vsp_cmcp.h</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for vsp_test.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__test_8c__incl.png" border="0" usemap="#vesper__test_2vsp__test_8c" alt=""/></div>
 <map name="vesper__test_2vsp__test_8c" id="vesper__test_2vsp__test_8c">
-<area shape="rect" id="node2" href="minunit_8h_source.html" title="minunit.h" alt="" coords="41,80,115,107"/><area shape="rect" id="node5" href="vsp__error_8h.html" title="vesper_error/vsp_error.h" alt="" coords="140,80,303,107"/><area shape="rect" id="node7" href="vsp__sphtp_8h.html" title="vesper_sphtp/vsp_sphtp.h" alt="" coords="327,80,501,107"/><area shape="rect" id="node6" href="vsp__util_8h.html" title="vesper_util/vsp_util.h" alt="" coords="238,155,383,181"/></map>
+<area shape="rect" id="node2" href="minunit_8h_source.html" title="minunit.h" alt="" coords="41,80,115,107"/><area shape="rect" id="node5" href="vsp__error_8h.html" title="vesper_util/vsp_error.h" alt="" coords="140,80,293,107"/><area shape="rect" id="node7" href="vsp__cmcp_8h.html" title="vesper_cmcp/vsp_cmcp.h" alt="" coords="319,80,493,107"/><area shape="rect" id="node6" href="vsp__api_8h.html" title="vesper_util/vsp_api.h" alt="" coords="234,155,379,181"/></map>
 </div>
 </div>
 <p><a href="vsp__test_8c_source.html">Go to the source code of this file.</a></p>
@@ -116,37 +116,36 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9c70d344c33e931fc2a80743ee71f9ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a9c70d344c33e931fc2a80743ee71f9ac">vesper_sphtp_setup</a> (void)</td></tr>
-<tr class="memdesc:a9c70d344c33e931fc2a80743ee71f9ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create global net_conn object.  <a href="#a9c70d344c33e931fc2a80743ee71f9ac">More...</a><br /></td></tr>
-<tr class="separator:a9c70d344c33e931fc2a80743ee71f9ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abef69f041ebe2ed80239b822d9717fc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#abef69f041ebe2ed80239b822d9717fc2">vesper_sphtp_teardown</a> (void)</td></tr>
-<tr class="memdesc:abef69f041ebe2ed80239b822d9717fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free global net_conn object.  <a href="#abef69f041ebe2ed80239b822d9717fc2">More...</a><br /></td></tr>
-<tr class="separator:abef69f041ebe2ed80239b822d9717fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c7f7dfe86607c33b1bc028d822a669"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#ac8c7f7dfe86607c33b1bc028d822a669">MU_TEST</a> (vesper_sphtp_allocation)</td></tr>
-<tr class="memdesc:ac8c7f7dfe86607c33b1bc028d822a669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_create()</a> and <a class="el" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_free()</a>.  <a href="#ac8c7f7dfe86607c33b1bc028d822a669">More...</a><br /></td></tr>
-<tr class="separator:ac8c7f7dfe86607c33b1bc028d822a669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f9fd401b6477bd26bde613dbf8212a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#ac2f9fd401b6477bd26bde613dbf8212a">MU_TEST</a> (vesper_sphtp_connection)</td></tr>
-<tr class="memdesc:ac2f9fd401b6477bd26bde613dbf8212a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. ">vsp_sphtp_connect()</a>.  <a href="#ac2f9fd401b6477bd26bde613dbf8212a">More...</a><br /></td></tr>
-<tr class="separator:ac2f9fd401b6477bd26bde613dbf8212a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a195ebbb5a5672e5384d3bcdf5888380c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a195ebbb5a5672e5384d3bcdf5888380c">MU_TEST</a> (vesper_sphtp_disconnection)</td></tr>
-<tr class="memdesc:a195ebbb5a5672e5384d3bcdf5888380c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. ">vsp_sphtp_disconnect()</a>.  <a href="#a195ebbb5a5672e5384d3bcdf5888380c">More...</a><br /></td></tr>
-<tr class="separator:a195ebbb5a5672e5384d3bcdf5888380c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c2b01861314dd4f8d968aefac9112c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#aa3c2b01861314dd4f8d968aefac9112c">MU_TEST</a> (vesper_sphtp_reconnection)</td></tr>
-<tr class="memdesc:aa3c2b01861314dd4f8d968aefac9112c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. ">vsp_sphtp_connect()</a> and subsequent <a class="el" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. ">vsp_sphtp_disconnect()</a>.  <a href="#aa3c2b01861314dd4f8d968aefac9112c">More...</a><br /></td></tr>
-<tr class="separator:aa3c2b01861314dd4f8d968aefac9112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c090f4da64f03a0feca97abf7b122d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3">MU_TEST_SUITE</a> (vesper_sphtp)</td></tr>
-<tr class="memdesc:a1c090f4da64f03a0feca97abf7b122d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test SphTP implementation.  <a href="#a1c090f4da64f03a0feca97abf7b122d3">More...</a><br /></td></tr>
-<tr class="separator:a1c090f4da64f03a0feca97abf7b122d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0fa03ad21b5358c5292ce5d74d84427"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#af0fa03ad21b5358c5292ce5d74d84427">vsp_cmcp_setup</a> (void)</td></tr>
+<tr class="memdesc:af0fa03ad21b5358c5292ce5d74d84427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create global net_conn object.  <a href="#af0fa03ad21b5358c5292ce5d74d84427">More...</a><br /></td></tr>
+<tr class="separator:af0fa03ad21b5358c5292ce5d74d84427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad190a98294276bcbba124c20a73c816a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#ad190a98294276bcbba124c20a73c816a">vsp_cmcp_teardown</a> (void)</td></tr>
+<tr class="memdesc:ad190a98294276bcbba124c20a73c816a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free global net_conn object.  <a href="#ad190a98294276bcbba124c20a73c816a">More...</a><br /></td></tr>
+<tr class="separator:ad190a98294276bcbba124c20a73c816a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5195078a9b2c2a71fee7c8b5da2c1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#aac5195078a9b2c2a71fee7c8b5da2c1b">MU_TEST</a> (vsp_cmcp_allocation)</td></tr>
+<tr class="memdesc:aac5195078a9b2c2a71fee7c8b5da2c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. ">vsp_cmcp_connector_create()</a> and <a class="el" href="vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. ">vsp_cmcp_connector_free()</a>.  <a href="#aac5195078a9b2c2a71fee7c8b5da2c1b">More...</a><br /></td></tr>
+<tr class="separator:aac5195078a9b2c2a71fee7c8b5da2c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab787a361b09650adbdebccbf6a9907c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#ab787a361b09650adbdebccbf6a9907c7">MU_TEST</a> (vsp_cmcp_connection)</td></tr>
+<tr class="memdesc:ab787a361b09650adbdebccbf6a9907c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. ">vsp_cmcp_connect()</a>.  <a href="#ab787a361b09650adbdebccbf6a9907c7">More...</a><br /></td></tr>
+<tr class="separator:ab787a361b09650adbdebccbf6a9907c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef748563c4c3fedda1458da897a81bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#adef748563c4c3fedda1458da897a81bc">MU_TEST</a> (vsp_cmcp_disconnection)</td></tr>
+<tr class="memdesc:adef748563c4c3fedda1458da897a81bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. ">vsp_cmcp_disconnect()</a>.  <a href="#adef748563c4c3fedda1458da897a81bc">More...</a><br /></td></tr>
+<tr class="separator:adef748563c4c3fedda1458da897a81bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a011c78614258749ac4774b8803046044"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a011c78614258749ac4774b8803046044">MU_TEST</a> (vsp_cmcp_reconnection)</td></tr>
+<tr class="memdesc:a011c78614258749ac4774b8803046044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. ">vsp_cmcp_connect()</a> and subsequent <a class="el" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. ">vsp_cmcp_disconnect()</a>.  <a href="#a011c78614258749ac4774b8803046044">More...</a><br /></td></tr>
+<tr class="separator:a011c78614258749ac4774b8803046044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf914606c7a6945ec81d0ca0f367536"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a9bf914606c7a6945ec81d0ca0f367536">MU_TEST_SUITE</a> (vesper_cmcp)</td></tr>
+<tr class="memdesc:a9bf914606c7a6945ec81d0ca0f367536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test CMCP implementation.  <a href="#a9bf914606c7a6945ec81d0ca0f367536">More...</a><br /></td></tr>
+<tr class="separator:a9bf914606c7a6945ec81d0ca0f367536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run all module tests.  <a href="#a840291bc02cba5474a4cb46a9b9566fe">More...</a><br /></td></tr>
 <tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a9ae79238d793532eccf9b585ea3d2f68"><td class="memItemLeft" align="right" valign="top">static <br class="typebreak" />
-<a class="el" href="structvsp__sphtp__network__connector.html">vsp_sphtp_network_connector</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a9ae79238d793532eccf9b585ea3d2f68">net_conn</a></td></tr>
-<tr class="memdesc:a9ae79238d793532eccf9b585ea3d2f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global testing object.  <a href="#a9ae79238d793532eccf9b585ea3d2f68">More...</a><br /></td></tr>
-<tr class="separator:a9ae79238d793532eccf9b585ea3d2f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e33f11fcd29cafa1d44c458ece6e01"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structvsp__cmcp__connector.html">vsp_cmcp_connector</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__test_8c.html#a78e33f11fcd29cafa1d44c458ece6e01">net_conn</a></td></tr>
+<tr class="memdesc:a78e33f11fcd29cafa1d44c458ece6e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global testing object.  <a href="#a78e33f11fcd29cafa1d44c458ece6e01">More...</a><br /></td></tr>
+<tr class="separator:a78e33f11fcd29cafa1d44c458ece6e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Max Mertens</dd></dl>
@@ -187,12 +186,12 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a9c70d344c33e931fc2a80743ee71f9ac"></a>
+<a class="anchor" id="af0fa03ad21b5358c5292ce5d74d84427"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void vesper_sphtp_setup </td>
+          <td class="memname">void vsp_cmcp_setup </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -202,36 +201,36 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Create global net_conn object. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="vsp__test_8c.html#a9ae79238d793532eccf9b585ea3d2f68" title="Global testing object. ">net_conn</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="vsp__test_8c.html#a78e33f11fcd29cafa1d44c458ece6e01" title="Global testing object. ">net_conn</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00028">28</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_cgraph.png" border="0" usemap="#vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_cgraph" alt=""/></div>
-<map name="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_cgraph" id="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. " alt="" coords="193,5,391,46"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="440,12,573,39"/></map>
+<div class="center"><img src="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_cgraph.png" border="0" usemap="#vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_cgraph" alt=""/></div>
+<map name="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_cgraph" id="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. " alt="" coords="176,5,323,46"/></map>
 </div>
 </p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_icgraph.png" border="0" usemap="#vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_icgraph" alt=""/></div>
-<map name="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_icgraph" id="vsp__test_8c_a9c70d344c33e931fc2a80743ee71f9ac_icgraph">
-<area shape="rect" id="node2" href="vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3" title="Test SphTP implementation. " alt="" coords="192,5,323,32"/></map>
+<div class="center"><img src="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_icgraph.png" border="0" usemap="#vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_icgraph" alt=""/></div>
+<map name="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_icgraph" id="vsp__test_8c_af0fa03ad21b5358c5292ce5d74d84427_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#a9bf914606c7a6945ec81d0ca0f367536" title="Test CMCP implementation. " alt="" coords="176,5,307,32"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="abef69f041ebe2ed80239b822d9717fc2"></a>
+<a class="anchor" id="ad190a98294276bcbba124c20a73c816a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void vesper_sphtp_teardown </td>
+          <td class="memname">void vsp_cmcp_teardown </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -241,170 +240,170 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Free global net_conn object. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="vsp__test_8c.html#a9ae79238d793532eccf9b585ea3d2f68" title="Global testing object. ">net_conn</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="vsp__test_8c.html#a78e33f11fcd29cafa1d44c458ece6e01" title="Global testing object. ">net_conn</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00033">33</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_cgraph.png" border="0" usemap="#vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_cgraph" alt=""/></div>
-<map name="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_cgraph" id="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. " alt="" coords="214,5,442,32"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="491,5,624,32"/></map>
+<div class="center"><img src="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_cgraph.png" border="0" usemap="#vsp__test_8c_ad190a98294276bcbba124c20a73c816a_cgraph" alt=""/></div>
+<map name="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_cgraph" id="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. " alt="" coords="198,5,373,32"/><area shape="rect" id="node3" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="421,5,555,32"/></map>
 </div>
 </p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_icgraph.png" border="0" usemap="#vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_icgraph" alt=""/></div>
-<map name="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_icgraph" id="vsp__test_8c_abef69f041ebe2ed80239b822d9717fc2_icgraph">
-<area shape="rect" id="node2" href="vsp__test_8c.html#a1c090f4da64f03a0feca97abf7b122d3" title="Test SphTP implementation. " alt="" coords="213,5,344,32"/></map>
+<div class="center"><img src="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_icgraph.png" border="0" usemap="#vsp__test_8c_ad190a98294276bcbba124c20a73c816a_icgraph" alt=""/></div>
+<map name="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_icgraph" id="vsp__test_8c_ad190a98294276bcbba124c20a73c816a_icgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#a9bf914606c7a6945ec81d0ca0f367536" title="Test CMCP implementation. " alt="" coords="197,5,328,32"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ac8c7f7dfe86607c33b1bc028d822a669"></a>
+<a class="anchor" id="aac5195078a9b2c2a71fee7c8b5da2c1b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">MU_TEST </td>
           <td>(</td>
-          <td class="paramtype">vesper_sphtp_allocation&#160;</td>
+          <td class="paramtype">vsp_cmcp_allocation&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test <a class="el" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_create()</a> and <a class="el" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. ">vsp_sphtp_network_connector_free()</a>. </p>
+<p>Test <a class="el" href="vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. ">vsp_cmcp_connector_create()</a> and <a class="el" href="vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. ">vsp_cmcp_connector_free()</a>. </p>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00040">40</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_ac8c7f7dfe86607c33b1bc028d822a669_cgraph.png" border="0" usemap="#vsp__test_8c_ac8c7f7dfe86607c33b1bc028d822a669_cgraph" alt=""/></div>
-<map name="vsp__test_8c_ac8c7f7dfe86607c33b1bc028d822a669_cgraph" id="vsp__test_8c_ac8c7f7dfe86607c33b1bc028d822a669_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. " alt="" coords="154,5,353,46"/><area shape="rect" id="node4" href="vsp__error_8h.html#a7d5afaf870e54976cf0835e6fb1ce1a6" title="Return error string for any error number. " alt="" coords="204,71,303,97"/><area shape="rect" id="node5" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. " alt="" coords="199,121,307,148"/><area shape="rect" id="node6" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. " alt="" coords="139,172,367,199"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="416,92,549,119"/></map>
+<div class="center"><img src="vsp__test_8c_aac5195078a9b2c2a71fee7c8b5da2c1b_cgraph.png" border="0" usemap="#vsp__test_8c_aac5195078a9b2c2a71fee7c8b5da2c1b_cgraph" alt=""/></div>
+<map name="vsp__test_8c_aac5195078a9b2c2a71fee7c8b5da2c1b_cgraph" id="vsp__test_8c_aac5195078a9b2c2a71fee7c8b5da2c1b_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. " alt="" coords="153,5,300,46"/><area shape="rect" id="node3" href="vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="177,71,276,97"/><area shape="rect" id="node4" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="173,121,281,148"/><area shape="rect" id="node5" href="vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. " alt="" coords="139,172,314,199"/><area shape="rect" id="node6" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="363,172,496,199"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ac2f9fd401b6477bd26bde613dbf8212a"></a>
+<a class="anchor" id="ab787a361b09650adbdebccbf6a9907c7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">MU_TEST </td>
           <td>(</td>
-          <td class="paramtype">vesper_sphtp_connection&#160;</td>
+          <td class="paramtype">vsp_cmcp_connection&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test <a class="el" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. ">vsp_sphtp_connect()</a>. </p>
+<p>Test <a class="el" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. ">vsp_cmcp_connect()</a>. </p>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00053">53</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_ac2f9fd401b6477bd26bde613dbf8212a_cgraph.png" border="0" usemap="#vsp__test_8c_ac2f9fd401b6477bd26bde613dbf8212a_cgraph" alt=""/></div>
-<map name="vsp__test_8c_ac2f9fd401b6477bd26bde613dbf8212a_cgraph" id="vsp__test_8c_ac2f9fd401b6477bd26bde613dbf8212a_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. " alt="" coords="139,5,274,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#a7d5afaf870e54976cf0835e6fb1ce1a6" title="Return error string for any error number. " alt="" coords="157,56,256,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. " alt="" coords="153,107,261,133"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="323,5,456,32"/></map>
+<div class="center"><img src="vsp__test_8c_ab787a361b09650adbdebccbf6a9907c7_cgraph.png" border="0" usemap="#vsp__test_8c_ab787a361b09650adbdebccbf6a9907c7_cgraph" alt=""/></div>
+<map name="vsp__test_8c_ab787a361b09650adbdebccbf6a9907c7_cgraph" id="vsp__test_8c_ab787a361b09650adbdebccbf6a9907c7_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. " alt="" coords="139,5,274,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="157,56,256,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="153,107,261,133"/><area shape="rect" id="node3" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="323,5,456,32"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a195ebbb5a5672e5384d3bcdf5888380c"></a>
+<a class="anchor" id="adef748563c4c3fedda1458da897a81bc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">MU_TEST </td>
           <td>(</td>
-          <td class="paramtype">vesper_sphtp_disconnection&#160;</td>
+          <td class="paramtype">vsp_cmcp_disconnection&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test <a class="el" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. ">vsp_sphtp_disconnect()</a>. </p>
+<p>Test <a class="el" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. ">vsp_cmcp_disconnect()</a>. </p>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00062">62</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_a195ebbb5a5672e5384d3bcdf5888380c_cgraph.png" border="0" usemap="#vsp__test_8c_a195ebbb5a5672e5384d3bcdf5888380c_cgraph" alt=""/></div>
-<map name="vsp__test_8c_a195ebbb5a5672e5384d3bcdf5888380c_cgraph" id="vsp__test_8c_a195ebbb5a5672e5384d3bcdf5888380c_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. " alt="" coords="147,5,282,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#a7d5afaf870e54976cf0835e6fb1ce1a6" title="Return error string for any error number. " alt="" coords="165,56,264,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. " alt="" coords="161,107,269,133"/><area shape="rect" id="node6" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. " alt="" coords="139,157,291,184"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="339,81,472,108"/></map>
+<div class="center"><img src="vsp__test_8c_adef748563c4c3fedda1458da897a81bc_cgraph.png" border="0" usemap="#vsp__test_8c_adef748563c4c3fedda1458da897a81bc_cgraph" alt=""/></div>
+<map name="vsp__test_8c_adef748563c4c3fedda1458da897a81bc_cgraph" id="vsp__test_8c_adef748563c4c3fedda1458da897a81bc_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. " alt="" coords="147,5,282,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="165,56,264,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="161,107,269,133"/><area shape="rect" id="node6" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. " alt="" coords="139,157,291,184"/><area shape="rect" id="node3" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="339,81,472,108"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="aa3c2b01861314dd4f8d968aefac9112c"></a>
+<a class="anchor" id="a011c78614258749ac4774b8803046044"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">MU_TEST </td>
           <td>(</td>
-          <td class="paramtype">vesper_sphtp_reconnection&#160;</td>
+          <td class="paramtype">vsp_cmcp_reconnection&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test <a class="el" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. ">vsp_sphtp_connect()</a> and subsequent <a class="el" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. ">vsp_sphtp_disconnect()</a>. </p>
+<p>Test <a class="el" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. ">vsp_cmcp_connect()</a> and subsequent <a class="el" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. ">vsp_cmcp_disconnect()</a>. </p>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00074">74</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_aa3c2b01861314dd4f8d968aefac9112c_cgraph.png" border="0" usemap="#vsp__test_8c_aa3c2b01861314dd4f8d968aefac9112c_cgraph" alt=""/></div>
-<map name="vsp__test_8c_aa3c2b01861314dd4f8d968aefac9112c_cgraph" id="vsp__test_8c_aa3c2b01861314dd4f8d968aefac9112c_cgraph">
-<area shape="rect" id="node2" href="vsp__sphtp_8h.html#a6a18a169a9d2dd46ad9895d05636ae1a" title="Initialize and connect sockets. " alt="" coords="147,5,282,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#a7d5afaf870e54976cf0835e6fb1ce1a6" title="Return error string for any error number. " alt="" coords="165,56,264,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a83644cdac2928def2f84be38a0c1819a" title="Return current error number. " alt="" coords="161,107,269,133"/><area shape="rect" id="node6" href="vsp__sphtp_8h.html#a5eb4b081986861bc5cddeb2ecf670a68" title="Disconnect and deinitialize sockets. " alt="" coords="139,157,291,184"/><area shape="rect" id="node3" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="339,81,472,108"/></map>
+<div class="center"><img src="vsp__test_8c_a011c78614258749ac4774b8803046044_cgraph.png" border="0" usemap="#vsp__test_8c_a011c78614258749ac4774b8803046044_cgraph" alt=""/></div>
+<map name="vsp__test_8c_a011c78614258749ac4774b8803046044_cgraph" id="vsp__test_8c_a011c78614258749ac4774b8803046044_cgraph">
+<area shape="rect" id="node2" href="vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. " alt="" coords="147,5,282,32"/><area shape="rect" id="node4" href="vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="165,56,264,83"/><area shape="rect" id="node5" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="161,107,269,133"/><area shape="rect" id="node6" href="vsp__cmcp_8h.html#a0d170ee1ab32cf0e2e46a28109b95dd5" title="Disconnect and deinitialize sockets. " alt="" coords="139,157,291,184"/><area shape="rect" id="node3" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="339,81,472,108"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a1c090f4da64f03a0feca97abf7b122d3"></a>
+<a class="anchor" id="a9bf914606c7a6945ec81d0ca0f367536"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">MU_TEST_SUITE </td>
           <td>(</td>
-          <td class="paramtype">vesper_sphtp&#160;</td>
+          <td class="paramtype">vesper_cmcp&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test SphTP implementation. </p>
+<p>Test CMCP implementation. </p>
 
 <p>Definition at line <a class="el" href="vsp__test_8c_source.html#l00089">89</a> of file <a class="el" href="vsp__test_8c_source.html">vsp_test.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__test_8c_a1c090f4da64f03a0feca97abf7b122d3_cgraph.png" border="0" usemap="#vsp__test_8c_a1c090f4da64f03a0feca97abf7b122d3_cgraph" alt=""/></div>
-<map name="vsp__test_8c_a1c090f4da64f03a0feca97abf7b122d3_cgraph" id="vsp__test_8c_a1c090f4da64f03a0feca97abf7b122d3_cgraph">
-<area shape="rect" id="node2" href="vsp__test_8c.html#a9c70d344c33e931fc2a80743ee71f9ac" title="Create global net_conn object. " alt="" coords="195,15,333,41"/><area shape="rect" id="node5" href="vsp__test_8c.html#abef69f041ebe2ed80239b822d9717fc2" title="Free global net_conn object. " alt="" coords="184,67,344,93"/><area shape="rect" id="node3" href="vsp__sphtp_8h.html#a367bbf60831315a9c3d7608d1597cdaa" title="Create new vsp_sphtp_network_connector object. " alt="" coords="407,5,606,46"/><area shape="rect" id="node4" href="vsp__error_8h.html#a8667e5f8ae456e7f55c839225a619d92" title="Set current error number. " alt="" coords="669,41,803,68"/><area shape="rect" id="node6" href="vsp__sphtp_8h.html#a453b4db5c8d034b71f0985128d630fff" title="Free vsp_sphtp_network_connector object. " alt="" coords="393,71,621,97"/></map>
+<div class="center"><img src="vsp__test_8c_a9bf914606c7a6945ec81d0ca0f367536_cgraph.png" border="0" usemap="#vsp__test_8c_a9bf914606c7a6945ec81d0ca0f367536_cgraph" alt=""/></div>
+<map name="vsp__test_8c_a9bf914606c7a6945ec81d0ca0f367536_cgraph" id="vsp__test_8c_a9bf914606c7a6945ec81d0ca0f367536_cgraph">
+<area shape="rect" id="node2" href="vsp__test_8c.html#af0fa03ad21b5358c5292ce5d74d84427" title="Create global net_conn object. " alt="" coords="195,15,317,41"/><area shape="rect" id="node4" href="vsp__test_8c.html#ad190a98294276bcbba124c20a73c816a" title="Free global net_conn object. " alt="" coords="185,67,327,93"/><area shape="rect" id="node3" href="vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. " alt="" coords="391,5,537,46"/><area shape="rect" id="node5" href="vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. " alt="" coords="377,71,551,97"/><area shape="rect" id="node6" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="600,71,733,97"/></map>
 </div>
 </p>
 
@@ -431,7 +430,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a9ae79238d793532eccf9b585ea3d2f68"></a>
+<a class="anchor" id="a78e33f11fcd29cafa1d44c458ece6e01"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -439,7 +438,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structvsp__sphtp__network__connector.html">vsp_sphtp_network_connector</a>* net_conn</td>
+          <td class="memname"><a class="el" href="structvsp__cmcp__connector.html">vsp_cmcp_connector</a>* net_conn</td>
         </tr>
       </table>
   </td>
@@ -458,7 +457,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 3 2014 18:25:55 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 1 2014 12:51:54 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
