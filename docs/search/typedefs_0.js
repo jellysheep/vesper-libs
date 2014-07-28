@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vsp_5fcmcp_5fconnector',['vsp_cmcp_connector',['../vsp__cmcp_8h.html#a97b4398bc82b7bed4d6461ae74bc6f23',1,'vsp_cmcp.h']]]
+  ['vsp_5fcmcp_5fclient',['vsp_cmcp_client',['../vsp__cmcp__client_8h.html#ab9eb3b852c5c179da0564dd9dbc7c9b5',1,'vsp_cmcp_client.h']]],
+  ['vsp_5fcmcp_5fserver',['vsp_cmcp_server',['../vsp__cmcp__server_8h.html#af20eff81f62c0fff99c538e403e7502d',1,'vsp_cmcp_server.h']]]
 ];

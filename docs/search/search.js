@@ -7,13 +7,13 @@
 
 var indexSectionsWithContent =
 {
-  0: "cmnprsv",
+  0: "cgmprsv",
   1: "v",
   2: "v",
   3: "mv",
-  4: "nprs",
+  4: "gprs",
   5: "v",
-  6: "psv",
+  6: "sv",
   7: "c"
 };
 

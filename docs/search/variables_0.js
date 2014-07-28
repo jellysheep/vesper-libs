@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['net_5fconn',['net_conn',['../vsp__test_8c.html#a78e33f11fcd29cafa1d44c458ece6e01',1,'vsp_test.c']]]
+  ['global_5fcmcp_5fclient',['global_cmcp_client',['../vsp__test_8c.html#abc9144b39a422ecbbb8195ad984d61e6',1,'vsp_test.c']]],
+  ['global_5fcmcp_5fserver',['global_cmcp_server',['../vsp__test_8c.html#a0fd774da004499c8a2d3bd414d0e2461',1,'vsp_test.c']]]
 ];

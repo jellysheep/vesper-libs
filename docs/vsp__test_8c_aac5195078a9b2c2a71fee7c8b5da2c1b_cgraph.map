@@ -1,7 +1,0 @@
-<map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__cmcp_8h.html#aeea95999795f06950c12740c51da439a" title="Create new vsp_cmcp_connector object. " alt="" coords="153,5,300,46"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="177,71,276,97"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="173,121,281,148"/>
-<area shape="rect" id="node5" href="$vsp__cmcp_8h.html#ac9e94d0f83f38b9cd4304cfb19743957" title="Free vsp_cmcp_connector object. " alt="" coords="139,172,314,199"/>
-<area shape="rect" id="node6" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="363,172,496,199"/>
-</map>

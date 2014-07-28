@@ -1,6 +1,9 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__cmcp_8h.html#ad40720312ce998a897a8382eb9851250" title="Initialize and connect sockets. " alt="" coords="139,5,274,32"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="157,56,256,83"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="153,107,261,133"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="323,5,456,32"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. " alt="" coords="157,5,313,32"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="185,56,284,83"/>
+<area shape="rect" id="node5" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="181,107,289,133"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize and connect sockets. " alt="" coords="148,157,321,184"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__client_8h.html#acdc90ab341ee34a35994cd882b9c3dda" title="Disconnect and deinitialize sockets. " alt="" coords="139,208,330,235"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da" title="Unbind and deinitialize sockets. " alt="" coords="149,259,320,285"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="379,183,512,209"/>
 </map>
