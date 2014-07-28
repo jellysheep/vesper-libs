@@ -129,12 +129,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab8b1e408a2957ca816df9d284ff0a9da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da">vsp_cmcp_server_unbind</a> (<a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *cmcp_server)</td></tr>
 <tr class="memdesc:ab8b1e408a2957ca816df9d284ff0a9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unbind and deinitialize sockets.  <a href="#ab8b1e408a2957ca816df9d284ff0a9da">More...</a><br /></td></tr>
 <tr class="separator:ab8b1e408a2957ca816df9d284ff0a9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53fd82dcf2a86f0ef5a5dbbd288cedd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__server_8h.html#a53fd82dcf2a86f0ef5a5dbbd288cedd4">vsp_cmcp_server_reception_thread_run</a> (<a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *cmcp_server)</td></tr>
-<tr class="memdesc:a53fd82dcf2a86f0ef5a5dbbd288cedd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run event loop for message reception.  <a href="#a53fd82dcf2a86f0ef5a5dbbd288cedd4">More...</a><br /></td></tr>
-<tr class="separator:a53fd82dcf2a86f0ef5a5dbbd288cedd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a390c9b1bba4fd6a6200bd7410e06fb52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__server_8h.html#a390c9b1bba4fd6a6200bd7410e06fb52">vsp_cmcp_server_reception_thread_stop</a> (<a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *cmcp_server)</td></tr>
-<tr class="memdesc:a390c9b1bba4fd6a6200bd7410e06fb52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop event loop for message reception.  <a href="#a390c9b1bba4fd6a6200bd7410e06fb52">More...</a><br /></td></tr>
-<tr class="separator:a390c9b1bba4fd6a6200bd7410e06fb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8211f5dd103a2b71692abecd87cf25a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__server_8h.html#a8211f5dd103a2b71692abecd87cf25a3">vsp_cmcp_server_run</a> (<a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *cmcp_server)</td></tr>
+<tr class="memdesc:a8211f5dd103a2b71692abecd87cf25a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run event loop for message reception.  <a href="#a8211f5dd103a2b71692abecd87cf25a3">More...</a><br /></td></tr>
+<tr class="separator:a8211f5dd103a2b71692abecd87cf25a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841a5db79ab40b24af11e5c4dcba59aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa">vsp_cmcp_server_stop</a> (<a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *cmcp_server)</td></tr>
+<tr class="memdesc:a841a5db79ab40b24af11e5c4dcba59aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop event loop for message reception.  <a href="#a841a5db79ab40b24af11e5c4dcba59aa">More...</a><br /></td></tr>
+<tr class="separator:a841a5db79ab40b24af11e5c4dcba59aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Max Mertens</dd></dl>
@@ -298,7 +298,7 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Unbind and deinitialize sockets. </p>
-<p>Sockets have to be binded with <a class="el" href="vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. ">vsp_cmcp_server_bind()</a> first. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
+<p>Sockets have to be bound with <a class="el" href="vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. ">vsp_cmcp_server_bind()</a> first. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
 <p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00111">111</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 
@@ -322,12 +322,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a53fd82dcf2a86f0ef5a5dbbd288cedd4"></a>
+<a class="anchor" id="a8211f5dd103a2b71692abecd87cf25a3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int vsp_cmcp_server_reception_thread_run </td>
+          <td class="memname"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int vsp_cmcp_server_run </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *&#160;</td>
           <td class="paramname"><em>cmcp_server</em></td><td>)</td>
@@ -337,27 +337,27 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Run event loop for message reception. </p>
-<p>Should run in its own thread. Terminates when <a class="el" href="vsp__cmcp__server_8h.html#a390c9b1bba4fd6a6200bd7410e06fb52" title="Stop event loop for message reception. ">vsp_cmcp_server_reception_thread_stop()</a> is called. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if interrupted or failed. </p>
+<p>Should run in its own thread. Terminates when <a class="el" href="vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa" title="Stop event loop for message reception. ">vsp_cmcp_server_stop()</a> is called. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if interrupted or failed. </p>
 
 <p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00141">141</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__cmcp__server_8h_a53fd82dcf2a86f0ef5a5dbbd288cedd4_cgraph.png" border="0" usemap="#vsp__cmcp__server_8h_a53fd82dcf2a86f0ef5a5dbbd288cedd4_cgraph" alt=""/></div>
-<map name="vsp__cmcp__server_8h_a53fd82dcf2a86f0ef5a5dbbd288cedd4_cgraph" id="vsp__cmcp__server_8h_a53fd82dcf2a86f0ef5a5dbbd288cedd4_cgraph">
-<area shape="rect" id="node2" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="240,12,373,39"/></map>
+<div class="center"><img src="vsp__cmcp__server_8h_a8211f5dd103a2b71692abecd87cf25a3_cgraph.png" border="0" usemap="#vsp__cmcp__server_8h_a8211f5dd103a2b71692abecd87cf25a3_cgraph" alt=""/></div>
+<map name="vsp__cmcp__server_8h_a8211f5dd103a2b71692abecd87cf25a3_cgraph" id="vsp__cmcp__server_8h_a8211f5dd103a2b71692abecd87cf25a3_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="205,5,339,32"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a390c9b1bba4fd6a6200bd7410e06fb52"></a>
+<a class="anchor" id="a841a5db79ab40b24af11e5c4dcba59aa"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int vsp_cmcp_server_reception_thread_stop </td>
+          <td class="memname"><a class="el" href="vsp__api_8h.html#a08d709645aeb9632771178214c815d3d">VSP_API</a> int vsp_cmcp_server_stop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structvsp__cmcp__server.html">vsp_cmcp_server</a> *&#160;</td>
           <td class="paramname"><em>cmcp_server</em></td><td>)</td>
@@ -367,16 +367,16 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Stop event loop for message reception. </p>
-<p>Does not wait until <a class="el" href="vsp__cmcp__server_8h.html#a53fd82dcf2a86f0ef5a5dbbd288cedd4" title="Run event loop for message reception. ">vsp_cmcp_server_reception_thread_run()</a> has finished. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
+<p>Does not wait until <a class="el" href="vsp__cmcp__server_8h.html#a8211f5dd103a2b71692abecd87cf25a3" title="Run event loop for message reception. ">vsp_cmcp_server_run()</a> has finished. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
 <p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00155">155</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="vsp__cmcp__server_8h_a390c9b1bba4fd6a6200bd7410e06fb52_cgraph.png" border="0" usemap="#vsp__cmcp__server_8h_a390c9b1bba4fd6a6200bd7410e06fb52_cgraph" alt=""/></div>
-<map name="vsp__cmcp__server_8h_a390c9b1bba4fd6a6200bd7410e06fb52_cgraph" id="vsp__cmcp__server_8h_a390c9b1bba4fd6a6200bd7410e06fb52_cgraph">
-<area shape="rect" id="node2" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="240,12,373,39"/></map>
+<div class="center"><img src="vsp__cmcp__server_8h_a841a5db79ab40b24af11e5c4dcba59aa_cgraph.png" border="0" usemap="#vsp__cmcp__server_8h_a841a5db79ab40b24af11e5c4dcba59aa_cgraph" alt=""/></div>
+<map name="vsp__cmcp__server_8h_a841a5db79ab40b24af11e5c4dcba59aa_cgraph" id="vsp__cmcp__server_8h_a841a5db79ab40b24af11e5c4dcba59aa_cgraph">
+<area shape="rect" id="node2" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="211,5,344,32"/></map>
 </div>
 </p>
 
@@ -385,7 +385,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 28 2014 21:17:28 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 28 2014 22:44:16 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
