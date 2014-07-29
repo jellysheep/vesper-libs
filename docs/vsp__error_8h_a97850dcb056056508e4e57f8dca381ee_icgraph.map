@@ -2,16 +2,16 @@
 <area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="208,89,357,116"/>
 <area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize and connect sockets. " alt="" coords="196,140,369,167"/>
 <area shape="rect" id="node8" href="$vsp__cmcp__client_8h.html#acdc90ab341ee34a35994cd882b9c3dda" title="Disconnect and deinitialize sockets. " alt="" coords="187,191,378,217"/>
-<area shape="rect" id="node9" href="$vsp__cmcp__client_8h.html#a5efae2a8878382a9f5306b5c779cc87a" title="Run event loop for message reception. " alt="" coords="210,343,355,369"/>
-<area shape="rect" id="node10" href="$vsp__cmcp__client_8h.html#ae8a9234bb306b71f7d7421999fe6678c" title="Stop event loop for message reception. " alt="" coords="207,393,359,420"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__client_8h.html#a62a12729498f1c1b949c97aedee031c7" title="Start message reception thread and return immediately. " alt="" coords="206,241,359,268"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__client_8h.html#ae8a9234bb306b71f7d7421999fe6678c" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="207,292,359,319"/>
 <area shape="rect" id="node11" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="205,39,360,65"/>
-<area shape="rect" id="node13" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. " alt="" coords="205,241,361,268"/>
-<area shape="rect" id="node14" href="$vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da" title="Unbind and deinitialize sockets. " alt="" coords="197,292,368,319"/>
-<area shape="rect" id="node15" href="$vsp__cmcp__server_8h.html#a8211f5dd103a2b71692abecd87cf25a3" title="Run event loop for message reception. " alt="" coords="207,444,358,471"/>
-<area shape="rect" id="node16" href="$vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa" title="Stop event loop for message reception. " alt="" coords="204,495,361,521"/>
+<area shape="rect" id="node13" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. " alt="" coords="205,343,361,369"/>
+<area shape="rect" id="node14" href="$vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da" title="Unbind and deinitialize sockets. " alt="" coords="197,393,368,420"/>
+<area shape="rect" id="node15" href="$vsp__cmcp__server_8h.html#aa5565d607b5691dae167210d267aae90" title="Start message reception thread and return immediately. " alt="" coords="203,444,362,471"/>
+<area shape="rect" id="node16" href="$vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="204,495,361,521"/>
 <area shape="rect" id="node3" href="$vsp__test_8c.html#ad4df798fdf9da52f90e67f3e28237d12" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="427,57,579,98"/>
 <area shape="rect" id="node5" href="$vsp__test_8c.html#a15e7ad23651c74de1ee7865a0e5aa323" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="461,123,545,149"/>
 <area shape="rect" id="node4" href="$vsp__test_8c.html#ac1c5746ef43177c042248492ab6b7177" title="Test CMCP implementation. " alt="" coords="627,64,757,91"/>
-<area shape="rect" id="node7" href="$vsp__test_8c.html#ab787a361b09650adbdebccbf6a9907c7" title="Test connection between vsp_cmcp_server and vsp_cmcp_client. " alt="" coords="461,216,545,243"/>
+<area shape="rect" id="node7" href="$vsp__test_8c.html#ab787a361b09650adbdebccbf6a9907c7" title="Test connection between vsp_cmcp_server and vsp_cmcp_client. " alt="" coords="461,317,545,344"/>
 <area shape="rect" id="node12" href="$vsp__test_8c.html#a7e506ca9e27dfd993ae3b1d1c9d44b3b" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="461,5,545,32"/>
 </map>

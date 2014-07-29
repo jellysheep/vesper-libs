@@ -103,14 +103,14 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0b0070acc001abd6b05fa689b672374e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a0b0070acc001abd6b05fa689b672374e">subscribe_socket</a></td></tr>
 <tr class="memdesc:a0b0070acc001abd6b05fa689b672374e"><td class="mdescLeft">&#160;</td><td class="mdescRight">nanomsg socket number to receive messages.  <a href="#a0b0070acc001abd6b05fa689b672374e">More...</a><br /></td></tr>
 <tr class="separator:a0b0070acc001abd6b05fa689b672374e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab98d60574c60ff957b8e8ab1a30cd7b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#ab98d60574c60ff957b8e8ab1a30cd7b4">receiving</a></td></tr>
-<tr class="memdesc:ab98d60574c60ff957b8e8ab1a30cd7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for reception thread (1 if running, 0 otherwise).  <a href="#ab98d60574c60ff957b8e8ab1a30cd7b4">More...</a><br /></td></tr>
-<tr class="separator:ab98d60574c60ff957b8e8ab1a30cd7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac0f17dfc8f2102bd4280759afed9a6"><td class="memItemLeft" align="right" valign="top">pthread_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a6ac0f17dfc8f2102bd4280759afed9a6">thread</a></td></tr>
+<tr class="memdesc:a6ac0f17dfc8f2102bd4280759afed9a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reception thread.  <a href="#a6ac0f17dfc8f2102bd4280759afed9a6">More...</a><br /></td></tr>
+<tr class="separator:a6ac0f17dfc8f2102bd4280759afed9a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>State and other data used for network connection. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00030">30</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00037">37</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a2873f762d878a71c0b14338d5cbf3ed1"></a>
 <div class="memitem">
@@ -124,7 +124,7 @@ Public Attributes</h2></td></tr>
 
 <p>Finite state machine flag. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00032">32</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00039">39</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 
 </div>
 </div>
@@ -140,7 +140,7 @@ Public Attributes</h2></td></tr>
 
 <p>nanomsg socket number to publish messages. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00034">34</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00041">41</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 
 </div>
 </div>
@@ -156,23 +156,23 @@ Public Attributes</h2></td></tr>
 
 <p>nanomsg socket number to receive messages. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00036">36</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00043">43</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab98d60574c60ff957b8e8ab1a30cd7b4"></a>
+<a class="anchor" id="a6ac0f17dfc8f2102bd4280759afed9a6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int vsp_cmcp_client::receiving</td>
+          <td class="memname">pthread_t vsp_cmcp_client::thread</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Flag for reception thread (1 if running, 0 otherwise). </p>
+<p>Reception thread. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00038">38</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00045">45</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 28 2014 22:44:16 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 29 2014 22:01:32 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -7,11 +7,11 @@
 
 var indexSectionsWithContent =
 {
-  0: "cgmprsv",
+  0: "cgmpstv",
   1: "v",
   2: "v",
   3: "mv",
-  4: "gprs",
+  4: "gpst",
   5: "v",
   6: "sv",
   7: "c"
