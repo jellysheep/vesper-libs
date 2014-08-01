@@ -1,9 +1,0 @@
-<map id="MU_TEST_SUITE" name="MU_TEST_SUITE">
-<area shape="rect" id="node2" href="$vsp__test_8c.html#af1fceadc66efb543174c385edc2936a9" title="Create global global_cmcp_server and global_cmcp_client objects. " alt="" coords="184,45,336,86"/>
-<area shape="rect" id="node5" href="$vsp__test_8c.html#ad4df798fdf9da52f90e67f3e28237d12" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="184,110,336,151"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="384,5,552,32"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="387,56,549,83"/>
-<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="393,113,543,140"/>
-<area shape="rect" id="node8" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="391,164,545,191"/>
-<area shape="rect" id="node7" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="600,139,733,165"/>
-</map>

@@ -7,13 +7,13 @@
 
 var indexSectionsWithContent =
 {
-  0: "cgmpstv",
+  0: "cdgimpstv",
   1: "v",
   2: "v",
   3: "mv",
-  4: "gpst",
+  4: "dgpst",
   5: "v",
-  6: "sv",
+  6: "disv",
   7: "c"
 };
 

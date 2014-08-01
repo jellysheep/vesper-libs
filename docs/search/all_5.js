@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['thread',['thread',['../structvsp__cmcp__client.html#a6ac0f17dfc8f2102bd4280759afed9a6',1,'vsp_cmcp_client::thread()'],['../structvsp__cmcp__server.html#a9db1bed2687fec742d49c73da83d3b24',1,'vsp_cmcp_server::thread()']]]
+  ['publish_5fsocket',['publish_socket',['../structvsp__cmcp__client.html#abdbf7836efb2002739c2f23dd9e10114',1,'vsp_cmcp_client::publish_socket()'],['../structvsp__cmcp__server.html#a0d5078741a67ca276b1aed21677220e0',1,'vsp_cmcp_server::publish_socket()']]]
 ];

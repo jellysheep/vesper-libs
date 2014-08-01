@@ -1,7 +1,4 @@
 <map id="vesper_test/vsp_test.c" name="vesper_test/vsp_test.c">
-<area shape="rect" id="node2" href="$minunit_8h_source.html" title="minunit.h" alt="" coords="41,88,115,115"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html" title="vesper_util/vsp_error.h" alt="" coords="140,88,293,115"/>
-<area shape="rect" id="node7" href="$vsp__cmcp__server_8h.html" title="vesper_cmcp/vsp_cmcp\l_server.h" alt="" coords="319,81,483,122"/>
-<area shape="rect" id="node8" href="$vsp__cmcp__client_8h.html" title="vesper_cmcp/vsp_cmcp\l_client.h" alt="" coords="507,81,671,122"/>
-<area shape="rect" id="node6" href="$vsp__api_8h.html" title="vesper_util/vsp_api.h" alt="" coords="329,171,473,197"/>
+<area shape="rect" id="node2" href="$minunit_8h_source.html" title="minunit.h" alt="" coords="5,80,79,107"/>
+<area shape="rect" id="node3" href="$vsp__test_8h.html" title="vsp_test.h" alt="" coords="104,80,185,107"/>
 </map>

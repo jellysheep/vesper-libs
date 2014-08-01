@@ -6,8 +6,10 @@ var searchData=
   ['vsp_5fcmcp_5fclient_5ffree',['vsp_cmcp_client_free',['../vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5',1,'vsp_cmcp_client.c']]],
   ['vsp_5fcmcp_5fclient_5fstart',['vsp_cmcp_client_start',['../vsp__cmcp__client_8h.html#a62a12729498f1c1b949c97aedee031c7',1,'vsp_cmcp_client.c']]],
   ['vsp_5fcmcp_5fclient_5fstop',['vsp_cmcp_client_stop',['../vsp__cmcp__client_8h.html#ae8a9234bb306b71f7d7421999fe6678c',1,'vsp_cmcp_client.c']]],
-  ['vsp_5fcmcp_5fconnection_5fsetup',['vsp_cmcp_connection_setup',['../vsp__test_8c.html#af1fceadc66efb543174c385edc2936a9',1,'vsp_test.c']]],
-  ['vsp_5fcmcp_5fconnection_5fteardown',['vsp_cmcp_connection_teardown',['../vsp__test_8c.html#ad4df798fdf9da52f90e67f3e28237d12',1,'vsp_test.c']]],
+  ['vsp_5fcmcp_5fdatalist_5fadd_5fitem',['vsp_cmcp_datalist_add_item',['../vsp__cmcp__datalist_8h.html#a9a07be7ee25de8998e2e22bef2383f56',1,'vsp_cmcp_datalist.c']]],
+  ['vsp_5fcmcp_5fdatalist_5fcreate',['vsp_cmcp_datalist_create',['../vsp__cmcp__datalist_8h.html#aad32a2bf270077a1059702a2a62cb750',1,'vsp_cmcp_datalist.c']]],
+  ['vsp_5fcmcp_5fdatalist_5ffree',['vsp_cmcp_datalist_free',['../vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e',1,'vsp_cmcp_datalist.c']]],
+  ['vsp_5fcmcp_5fdatalist_5fget_5fdata',['vsp_cmcp_datalist_get_data',['../vsp__cmcp__datalist_8h.html#a3091a811d0dfcc7075cecb3dcfac0cba',1,'vsp_cmcp_datalist.c']]],
   ['vsp_5fcmcp_5fserver_5fbind',['vsp_cmcp_server_bind',['../vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34',1,'vsp_cmcp_server.c']]],
   ['vsp_5fcmcp_5fserver_5fcreate',['vsp_cmcp_server_create',['../vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e',1,'vsp_cmcp_server.c']]],
   ['vsp_5fcmcp_5fserver_5ffree',['vsp_cmcp_server_free',['../vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7',1,'vsp_cmcp_server.c']]],
@@ -16,5 +18,7 @@ var searchData=
   ['vsp_5fcmcp_5fserver_5funbind',['vsp_cmcp_server_unbind',['../vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da',1,'vsp_cmcp_server.c']]],
   ['vsp_5ferror_5fnum',['vsp_error_num',['../vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25',1,'vsp_error.c']]],
   ['vsp_5ferror_5fset_5fnum',['vsp_error_set_num',['../vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee',1,'vsp_error.c']]],
-  ['vsp_5ferror_5fstr',['vsp_error_str',['../vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a',1,'vsp_error.c']]]
+  ['vsp_5ferror_5fstr',['vsp_error_str',['../vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a',1,'vsp_error.c']]],
+  ['vsp_5ftest_5fcmcp_5fconnection_5fsetup',['vsp_test_cmcp_connection_setup',['../vsp__test__cmcp__connection_8c.html#a83eefc197feed4361a7b76c318a9ab67',1,'vsp_test_cmcp_connection.c']]],
+  ['vsp_5ftest_5fcmcp_5fconnection_5fteardown',['vsp_test_cmcp_connection_teardown',['../vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1',1,'vsp_test_cmcp_connection.c']]]
 ];
