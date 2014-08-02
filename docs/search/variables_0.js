@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['data_5fids',['data_ids',['../structvsp__cmcp__datalist.html#a2943c3aa399063efab49529465cc56d4',1,'vsp_cmcp_datalist']]],
-  ['data_5fitem_5fcount',['data_item_count',['../structvsp__cmcp__datalist.html#ad7368eb1dcfb01e8906cd3948a3c7930',1,'vsp_cmcp_datalist']]],
-  ['data_5flengths',['data_lengths',['../structvsp__cmcp__datalist.html#a222c9d1d9f1841ce58f517c68875385e',1,'vsp_cmcp_datalist']]],
-  ['data_5fpointers',['data_pointers',['../structvsp__cmcp__datalist.html#a1cc26e652bd7014e36c2b43356ebdbde',1,'vsp_cmcp_datalist']]]
+  ['cmcp_5fdatalist',['cmcp_datalist',['../structvsp__cmcp__message.html#ac990b530be8548c546fc9a900867aa17',1,'vsp_cmcp_message']]],
+  ['command_5fid',['command_id',['../structvsp__cmcp__message.html#aa336d883b2c8dc4224baaf3baf6727e5',1,'vsp_cmcp_message']]]
 ];

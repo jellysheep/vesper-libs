@@ -1,9 +1,11 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__cmcp__datalist_8h.html#aad32a2bf270077a1059702a2a62cb750" title="Create new vsp_cmcp_datalist object. " alt="" coords="147,5,322,32"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="185,56,284,83"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="181,107,289,133"/>
-<area shape="rect" id="node5" href="$vsp__cmcp__datalist_8h.html#a9a07be7ee25de8998e2e22bef2383f56" title="Add a data list item to the data list. " alt="" coords="139,157,330,184"/>
-<area shape="rect" id="node7" href="$vsp__cmcp__datalist_8h.html#a3091a811d0dfcc7075cecb3dcfac0cba" title="Get pointer to data stored in the data list. " alt="" coords="141,208,329,235"/>
-<area shape="rect" id="node8" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="155,259,315,285"/>
-<area shape="rect" id="node6" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="379,208,512,235"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__datalist_8h.html#aad32a2bf270077a1059702a2a62cb750" title="Create new vsp_cmcp_datalist object. " alt="" coords="139,5,314,32"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="177,56,276,83"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="173,107,281,133"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__datalist_8h.html#a6502eaa0996c7da9ed5ea85e5ac5c635" title="Add a data list item to the data list. " alt="" coords="363,216,554,243"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__datalist_8h.html#aa778240cdf3f234614e14deeae66f167" title="Copy list content to binary data array and get data length and pointer. " alt="" coords="365,267,553,293"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__datalist_8h.html#a3d0b51463a639ee8125c0833b8dbd186" title="Create new vsp_cmcp_datalist object of binary data. " alt="" coords="139,209,314,250"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__datalist_8h.html#a066c5081ae2d0538c2ec21a9880cc290" title="Get pointer to data stored in the data list. " alt="" coords="381,318,537,359"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="379,384,539,411"/>
+<area shape="rect" id="node6" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="603,296,736,323"/>
 </map>
