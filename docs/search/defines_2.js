@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['server_5fpublish_5faddress',['SERVER_PUBLISH_ADDRESS',['../vsp__test__cmcp__connection_8c.html#a7d63f7b478aef2fa2e5700ee5531d7d9',1,'vsp_test_cmcp_connection.c']]],
-  ['server_5fsubscribe_5faddress',['SERVER_SUBSCRIBE_ADDRESS',['../vsp__test__cmcp__connection_8c.html#a5153e30084813987e26f05abd280eb66',1,'vsp_test_cmcp_connection.c']]]
+  ['message_5fcommand_5fid',['MESSAGE_COMMAND_ID',['../vsp__test_8h.html#af95dcd809a30bd4457f8ed8ee1ffa967',1,'vsp_test.h']]],
+  ['message_5fsender_5fid',['MESSAGE_SENDER_ID',['../vsp__test_8h.html#a2d80059da1f64da49b9cb089d1c72f2d',1,'vsp_test.h']]],
+  ['message_5ftopic_5fid',['MESSAGE_TOPIC_ID',['../vsp__test_8h.html#acd0ddc1f1b34ce3cfb41e9171eafeb3b',1,'vsp_test.h']]]
 ];

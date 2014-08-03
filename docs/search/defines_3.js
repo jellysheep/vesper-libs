@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['vsp_5falloc',['VSP_ALLOC',['../vsp__util_8h.html#a804c55494b54bb72b1f90fe85e0b8fd4',1,'vsp_util.h']]],
-  ['vsp_5falloc_5fn',['VSP_ALLOC_N',['../vsp__util_8h.html#a83a930fdeaeb76018d2a35b350d8a154',1,'vsp_util.h']]],
-  ['vsp_5fapi',['VSP_API',['../vsp__api_8h.html#a08d709645aeb9632771178214c815d3d',1,'vsp_api.h']]],
-  ['vsp_5fassert',['VSP_ASSERT',['../vsp__util_8h.html#a6d4dc441fd32875ab365b4de6b53f430',1,'vsp_util.h']]],
-  ['vsp_5fcheck',['VSP_CHECK',['../vsp__util_8h.html#af16dd729b2f7c9e402a54819476283a0',1,'vsp_util.h']]],
-  ['vsp_5ffree',['VSP_FREE',['../vsp__util_8h.html#a6cb547cd6c2898416d5e3182cff31de9',1,'vsp_util.h']]]
+  ['server_5fpublish_5faddress',['SERVER_PUBLISH_ADDRESS',['../vsp__test_8h.html#a7d63f7b478aef2fa2e5700ee5531d7d9',1,'vsp_test.h']]],
+  ['server_5fsubscribe_5faddress',['SERVER_SUBSCRIBE_ADDRESS',['../vsp__test_8h.html#a5153e30084813987e26f05abd280eb66',1,'vsp_test.h']]]
 ];

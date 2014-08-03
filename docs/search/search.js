@@ -13,8 +13,10 @@ var indexSectionsWithContent =
   3: "mv",
   4: "cdgpst",
   5: "v",
-  6: "disv",
-  7: "c"
+  6: "v",
+  7: "v",
+  8: "dimsv",
+  9: "c"
 };
 
 var indexSectionNames =
@@ -25,8 +27,10 @@ var indexSectionNames =
   3: "functions",
   4: "variables",
   5: "typedefs",
-  6: "defines",
-  7: "pages"
+  6: "enums",
+  7: "enumvalues",
+  8: "defines",
+  9: "pages"
 };
 
 function convertToId(search)

@@ -1,24 +1,32 @@
 <map id="vsp_error_set_num" name="vsp_error_set_num">
-<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="208,64,357,91"/>
-<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize and connect sockets. " alt="" coords="196,629,369,656"/>
-<area shape="rect" id="node8" href="$vsp__cmcp__client_8h.html#acdc90ab341ee34a35994cd882b9c3dda" title="Disconnect and deinitialize sockets. " alt="" coords="187,680,378,707"/>
-<area shape="rect" id="node9" href="$vsp__cmcp__client_8h.html#a62a12729498f1c1b949c97aedee031c7" title="Start message reception thread and return immediately. " alt="" coords="206,731,359,757"/>
-<area shape="rect" id="node10" href="$vsp__cmcp__client_8h.html#ae8a9234bb306b71f7d7421999fe6678c" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="207,325,359,352"/>
-<area shape="rect" id="node11" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="441,705,601,732"/>
-<area shape="rect" id="node13" href="$vsp__cmcp__datalist_8h.html#aa778240cdf3f234614e14deeae66f167" title="Copy list content to binary data array and get data length and pointer. " alt="" coords="427,173,615,200"/>
-<area shape="rect" id="node14" href="$vsp__cmcp__datalist_8h.html#a6502eaa0996c7da9ed5ea85e5ac5c635" title="Add a data list item to the data list. " alt="" coords="187,224,378,251"/>
-<area shape="rect" id="node16" href="$vsp__cmcp__datalist_8h.html#a066c5081ae2d0538c2ec21a9880cc290" title="Get pointer to data stored in the data list. " alt="" coords="443,342,599,383"/>
-<area shape="rect" id="node17" href="$vsp__cmcp__message_8h.html#a9adb4524a326b4c9d4159bf2bca68009" title="Free vsp_cmcp_message object. " alt="" coords="197,528,368,555"/>
-<area shape="rect" id="node18" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="205,123,360,149"/>
-<area shape="rect" id="node20" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. " alt="" coords="205,477,361,504"/>
-<area shape="rect" id="node21" href="$vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da" title="Unbind and deinitialize sockets. " alt="" coords="197,579,368,605"/>
-<area shape="rect" id="node22" href="$vsp__cmcp__server_8h.html#aa5565d607b5691dae167210d267aae90" title="Start message reception thread and return immediately. " alt="" coords="203,376,362,403"/>
-<area shape="rect" id="node23" href="$vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="204,427,361,453"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="431,57,612,98"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="479,5,563,32"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="664,64,795,91"/>
-<area shape="rect" id="node7" href="$vsp__test__cmcp__connection_8c.html#a4be78bc435f3ffc88cacfb749e60bdf6" title="Test connection between vsp_cmcp_server and vsp_cmcp_client. " alt="" coords="479,528,563,555"/>
-<area shape="rect" id="node12" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="687,291,771,317"/>
-<area shape="rect" id="node15" href="$vsp__cmcp__datalist_8h.html#a3d0b51463a639ee8125c0833b8dbd186" title="Create new vsp_cmcp_datalist object of binary data. " alt="" coords="434,225,609,266"/>
-<area shape="rect" id="node19" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="479,123,563,149"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="208,89,357,116"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize and connect sockets. " alt="" coords="196,444,369,471"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__client_8h.html#acdc90ab341ee34a35994cd882b9c3dda" title="Disconnect and deinitialize sockets. " alt="" coords="187,495,378,521"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__client_8h.html#a62a12729498f1c1b949c97aedee031c7" title="Start message reception thread and return immediately. " alt="" coords="206,140,359,167"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__client_8h.html#ae8a9234bb306b71f7d7421999fe6678c" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="207,191,359,217"/>
+<area shape="rect" id="node11" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="203,849,363,876"/>
+<area shape="rect" id="node12" href="$vsp__cmcp__message_8h.html#a9adb4524a326b4c9d4159bf2bca68009" title="Free vsp_cmcp_message object. " alt="" coords="441,799,612,825"/>
+<area shape="rect" id="node15" href="$vsp__cmcp__datalist_8h.html#a3d0b51463a639ee8125c0833b8dbd186" title="Create new vsp_cmcp_datalist object of binary data. " alt="" coords="439,1018,614,1059"/>
+<area shape="rect" id="node16" href="$vsp__cmcp__message_8h.html#ac0a036eba6a542086051cf3f9ccb8d1a" title="Create new vsp_cmcp_message object from received binary data. " alt="" coords="675,1018,861,1059"/>
+<area shape="rect" id="node17" href="$vsp__cmcp__datalist_8h.html#a5f65a5f72dc913157bc69ac9e1f6eb34" title="Calculate necessary length of a binary data array storing all list items. " alt="" coords="205,1077,361,1118"/>
+<area shape="rect" id="node18" href="$vsp__cmcp__message_8h.html#a4c825cd08f5d4a35e2cc1e1d908f1a40" title="Calculate necessary length of a binary data array storing the message data. " alt="" coords="443,1135,610,1177"/>
+<area shape="rect" id="node19" href="$vsp__cmcp__datalist_8h.html#a4f5abcceda46ccbbbfb88ee517f380ed" title="Copy list content to specified binary data array. " alt="" coords="189,647,377,673"/>
+<area shape="rect" id="node20" href="$vsp__cmcp__message_8h.html#af558c37aa746f4dce5f75483f6a13e8b" title="Copy message data to specified binary data array. " alt="" coords="427,596,626,623"/>
+<area shape="rect" id="node21" href="$vsp__cmcp__datalist_8h.html#a6502eaa0996c7da9ed5ea85e5ac5c635" title="Add a data list item to the data list. " alt="" coords="187,967,378,993"/>
+<area shape="rect" id="node22" href="$vsp__cmcp__datalist_8h.html#a066c5081ae2d0538c2ec21a9880cc290" title="Get pointer to data stored in the data list. " alt="" coords="449,901,605,942"/>
+<area shape="rect" id="node23" href="$vsp__cmcp__message_8h.html#a4c2e8052c4486f0808a26f7026484c9c" title="Create new vsp_cmcp_message object to send message data. " alt="" coords="675,567,861,593"/>
+<area shape="rect" id="node24" href="$vsp__cmcp__message_8h.html#a410bfda700e3605d6d69ca6568a20ec4" title="Get specified ID and copy to specified address. " alt="" coords="676,689,860,716"/>
+<area shape="rect" id="node25" href="$vsp__cmcp__message_8h.html#a0a2c048db45fd78b3ccd2d655b0d8015" title="Get data list parsed by this message object. " alt="" coords="685,741,851,782"/>
+<area shape="rect" id="node26" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="205,39,360,65"/>
+<area shape="rect" id="node28" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize and bind sockets. " alt="" coords="205,241,361,268"/>
+<area shape="rect" id="node29" href="$vsp__cmcp__server_8h.html#ab8b1e408a2957ca816df9d284ff0a9da" title="Unbind and deinitialize sockets. " alt="" coords="197,292,368,319"/>
+<area shape="rect" id="node30" href="$vsp__cmcp__server_8h.html#aa5565d607b5691dae167210d267aae90" title="Start message reception thread and return immediately. " alt="" coords="203,343,362,369"/>
+<area shape="rect" id="node31" href="$vsp__cmcp__server_8h.html#a841a5db79ab40b24af11e5c4dcba59aa" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="204,393,361,420"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="436,57,617,98"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="485,123,569,149"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="703,64,833,91"/>
+<area shape="rect" id="node7" href="$vsp__test__cmcp__connection_8c.html#a4be78bc435f3ffc88cacfb749e60bdf6" title="Test connection between vsp_cmcp_server and vsp_cmcp_client. " alt="" coords="485,317,569,344"/>
+<area shape="rect" id="node14" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="726,937,810,964"/>
+<area shape="rect" id="node13" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="910,748,994,775"/>
+<area shape="rect" id="node27" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="485,5,569,32"/>
 </map>

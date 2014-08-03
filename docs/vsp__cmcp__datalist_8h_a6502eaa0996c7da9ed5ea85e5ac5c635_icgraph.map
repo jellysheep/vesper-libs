@@ -1,4 +1,6 @@
 <map id="vsp_cmcp_datalist_add_item" name="vsp_cmcp_datalist_add_item">
 <area shape="rect" id="node2" href="$vsp__cmcp__datalist_8h.html#a3d0b51463a639ee8125c0833b8dbd186" title="Create new vsp_cmcp_datalist object of binary data. " alt="" coords="246,5,421,46"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="470,41,554,68"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="521,71,605,97"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__message_8h.html#ac0a036eba6a542086051cf3f9ccb8d1a" title="Create new vsp_cmcp_message object from received binary data. " alt="" coords="470,5,655,46"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="705,12,789,39"/>
 </map>
