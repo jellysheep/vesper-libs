@@ -1,5 +1,5 @@
 <map id="vsp_cmcp_datalist_free" name="vsp_cmcp_datalist_free">
-<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a9adb4524a326b4c9d4159bf2bca68009" title="Free vsp_cmcp_message object. " alt="" coords="213,5,384,32"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. " alt="" coords="213,5,384,32"/>
 <area shape="rect" id="node4" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="257,56,341,83"/>
 <area shape="rect" id="node3" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="433,5,517,32"/>
 </map>

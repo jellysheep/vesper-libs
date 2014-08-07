@@ -7,30 +7,32 @@
 
 var indexSectionsWithContent =
 {
-  0: "cdgimpstv",
-  1: "v",
+  0: "cdfgilmnopstuv",
+  1: "lv",
   2: "v",
-  3: "mv",
-  4: "cdgpst",
-  5: "v",
+  3: "ltv",
+  4: "flmotv",
+  5: "cdglmnpstu",
   6: "v",
   7: "v",
-  8: "dimsv",
-  9: "c"
+  8: "v",
+  9: "dimsv",
+  10: "c"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "files",
-  3: "functions",
-  4: "variables",
-  5: "typedefs",
-  6: "enums",
-  7: "enumvalues",
-  8: "defines",
-  9: "pages"
+  2: "namespaces",
+  3: "files",
+  4: "functions",
+  5: "variables",
+  6: "typedefs",
+  7: "enums",
+  8: "enumvalues",
+  9: "defines",
+  10: "pages"
 };
 
 function convertToId(search)
