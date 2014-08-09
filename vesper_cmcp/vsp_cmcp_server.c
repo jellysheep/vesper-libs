@@ -9,10 +9,14 @@
 #include "vsp_cmcp_server.h"
 
 #include <vesper_util/vsp_error.h>
+#include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
 #include <pthread.h>
+
+/** Regular time in seconds between two heartbeat signals (type double). */
+#define VSP_CMCP_SERVER_HEARTBEAT_TIME 1.0
 
 /** vsp_cmcp_server finite state machine flag. */
 typedef enum {
@@ -38,6 +42,8 @@ struct vsp_cmcp_server {
     int subscribe_socket;
     /** Reception thread. */
     pthread_t thread;
+    /** Real time of next heartbeat. */
+    double time_next_heartbeat;
 };
 
 /** Start message reception thread and wait until thread has started.
@@ -51,6 +57,9 @@ static int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server);
 /** Event loop for message reception running in its own thread. */
 static void *vsp_cmcp_server_run(void *param);
 
+/** Check current time and send heartbeat if necessary. */
+static int _vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server);
+
 vsp_cmcp_server *vsp_cmcp_server_create(void)
 {
     vsp_cmcp_server *cmcp_server;
@@ -60,6 +69,7 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     cmcp_server->state = VSP_CMCP_SERVER_UNINITIALIZED;
     cmcp_server->publish_socket = -1;
     cmcp_server->subscribe_socket = -1;
+    cmcp_server->time_next_heartbeat = vsp_time_real();
     /* return struct pointer */
     return cmcp_server;
 }
@@ -195,6 +205,7 @@ int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
 void *vsp_cmcp_server_run(void *param)
 {
     vsp_cmcp_server *cmcp_server;
+    int ret;
 
     /* check parameter */
     VSP_ASSERT(param != NULL, vsp_error_set_num(EINVAL); return (void*) -1);
@@ -210,7 +221,9 @@ void *vsp_cmcp_server_run(void *param)
 
     /* reception loop */
     while (cmcp_server->state == VSP_CMCP_SERVER_RUNNING) {
-
+        ret = _vsp_cmcp_server_heartbeat(cmcp_server);
+        /* check error */
+        VSP_ASSERT(ret == 0, return -1);
     }
 
     /* check thread was requested to stop */
@@ -222,4 +235,27 @@ void *vsp_cmcp_server_run(void *param)
 
     /* success */
     return (void*) 0;
+}
+
+int _vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
+{
+    double time_now;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    time_now = vsp_time_real();
+    if (time_now < cmcp_server->time_next_heartbeat) {
+        /* not sending heartbeat yet; nothing to fail, hence success */
+        return 0;
+    }
+
+    /* update time of next heartbeat */
+    cmcp_server->time_next_heartbeat =
+        time_now + VSP_CMCP_SERVER_HEARTBEAT_TIME;
+
+    /* send heartbeat */
+    /* ... */
+
+    return 0;
 }
