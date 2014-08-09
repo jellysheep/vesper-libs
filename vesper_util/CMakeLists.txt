@@ -6,12 +6,11 @@ cmake_minimum_required(VERSION 2.8)
 set(API_HEADERS
     ${PROJECT_SOURCE_DIR}/vsp_api.h
     ${PROJECT_SOURCE_DIR}/vsp_error.h
-    ${PROJECT_SOURCE_DIR}/vsp_util.h
 )
 
 # add header files of this module
 set(HEADERS
-    # currently no headers
+    ${PROJECT_SOURCE_DIR}/vsp_util.h
 )
 
 # add source files of this module
