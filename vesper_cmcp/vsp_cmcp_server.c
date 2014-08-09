@@ -223,7 +223,7 @@ void *vsp_cmcp_server_run(void *param)
     while (cmcp_server->state == VSP_CMCP_SERVER_RUNNING) {
         ret = _vsp_cmcp_server_heartbeat(cmcp_server);
         /* check error */
-        VSP_ASSERT(ret == 0, return -1);
+        VSP_ASSERT(ret == 0, return (void*) -1);
     }
 
     /* check thread was requested to stop */

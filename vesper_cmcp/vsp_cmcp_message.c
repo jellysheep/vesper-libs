@@ -42,7 +42,7 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
 {
     vsp_cmcp_message *cmcp_message;
     /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_message, vsp_cmcp_message, return NULL);
     /* initialize struct data */

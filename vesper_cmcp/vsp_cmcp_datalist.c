@@ -65,7 +65,7 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
     vsp_cmcp_datalist *cmcp_datalist;
 
     /* check parameter */
-    VSP_ASSERT(data_pointer != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist, return NULL);
     /* initialize struct data: set number of list items to zero */
