@@ -45,23 +45,10 @@ VSP_API int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     const char *publish_address, const char *subscribe_address);
 
 /**
- * Disconnect and deinitialize sockets.
- * Sockets have to be connected with vsp_cmcp_client_connect() first.
- * Returns non-zero and sets vsp_error_num() if failed.
- */
-VSP_API int vsp_cmcp_client_disconnect(vsp_cmcp_client *cmcp_client);
-
-/**
  * Start message reception thread and return immediately.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 VSP_API int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
-
-/**
- * Stop message reception thread and wait until thread has finished and joined.
- * Returns non-zero and sets vsp_error_num() if thread or this method failed.
- */
-VSP_API int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client);
 
 #if defined __cplusplus
 }

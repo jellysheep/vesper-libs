@@ -39,14 +39,23 @@ MU_TEST(vsp_test_cmcp_connection_test);
 
 void vsp_test_cmcp_connection_setup(void)
 {
+    /* create server */
     global_cmcp_server = vsp_cmcp_server_create();
+    mu_assert(global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
+    /* create client */
     global_cmcp_client = vsp_cmcp_client_create();
+    mu_assert(global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));
 }
 
 void vsp_test_cmcp_connection_teardown(void)
 {
-    vsp_cmcp_client_free(global_cmcp_client);
-    vsp_cmcp_server_free(global_cmcp_server);
+    int ret;
+    /* free client */
+    ret = vsp_cmcp_client_free(global_cmcp_client);
+    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    /* free server */
+    ret = vsp_cmcp_server_free(global_cmcp_server);
+    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 }
 
 MU_TEST(vsp_test_cmcp_server_allocation)
@@ -89,18 +98,6 @@ MU_TEST(vsp_test_cmcp_connection_test)
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
     /* start client */
     ret = vsp_cmcp_client_start(global_cmcp_client);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    /* stop client */
-    ret = vsp_cmcp_client_stop(global_cmcp_client);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    /* stop server */
-    ret = vsp_cmcp_server_stop(global_cmcp_server);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    /* disconnect */
-    ret = vsp_cmcp_client_disconnect(global_cmcp_client);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    /* unbind */
-    ret = vsp_cmcp_server_unbind(global_cmcp_server);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 }
 

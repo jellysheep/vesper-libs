@@ -40,6 +40,10 @@ struct vsp_cmcp_server {
     pthread_t thread;
 };
 
+/** Stop message reception thread and wait until thread has finished and joined.
+ * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
+static int _vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server);
+
 /** Event loop for message reception running in its own thread. */
 static void *_vsp_cmcp_server_run(void *param);
 
@@ -66,7 +70,14 @@ int vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
     /* check parameter */
     VSP_ASSERT(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    if (cmcp_server->state != VSP_CMCP_SERVER_UNINITIALIZED) {
+    if (cmcp_server->state > VSP_CMCP_SERVER_INITIALIZED) {
+        /* worker thread is running, stop it */
+        ret = _vsp_cmcp_server_stop(cmcp_server);
+        /* check for error */
+        VSP_ASSERT(ret == 0, success = -1);
+    }
+
+    if (cmcp_server->state > VSP_CMCP_SERVER_UNINITIALIZED) {
         /* close publish socket */
         ret = nn_close(cmcp_server->publish_socket);
         /* check error set by nanomsg */
@@ -113,36 +124,6 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     return 0;
 }
 
-int vsp_cmcp_server_unbind(vsp_cmcp_server *cmcp_server)
-{
-    int ret;
-
-    /* check parameter */
-    VSP_ASSERT(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
-
-    /* check sockets already initialized */
-    VSP_ASSERT(cmcp_server->state != VSP_CMCP_SERVER_UNINITIALIZED,
-        vsp_error_set_num(ENOTCONN); return -1);
-
-    /* unbind sockets */
-    ret = nn_close(cmcp_server->publish_socket);
-    /* check error set by nanomsg */
-    VSP_ASSERT(ret == 0, return -1);
-
-    ret = nn_close(cmcp_server->subscribe_socket);
-    /* check error set by nanomsg */
-    VSP_ASSERT(ret == 0, return -1);
-
-    /* deinitialize sockets */
-    cmcp_server->publish_socket = -1;
-    cmcp_server->subscribe_socket = -1;
-
-    /* set state */
-    cmcp_server->state = VSP_CMCP_SERVER_UNINITIALIZED;
-    /* sockets successfully unbound */
-    return 0;
-}
-
 int vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
 {
     int ret;
@@ -168,7 +149,7 @@ int vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
     return 0;
 }
 
-int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
+int _vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
 {
     int ret;
 
