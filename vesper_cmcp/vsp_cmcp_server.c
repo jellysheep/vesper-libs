@@ -58,7 +58,7 @@ static int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server);
 static void *vsp_cmcp_server_run(void *param);
 
 /** Check current time and send heartbeat if necessary. */
-static int _vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server);
+static int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server);
 
 vsp_cmcp_server *vsp_cmcp_server_create(void)
 {
@@ -221,7 +221,7 @@ void *vsp_cmcp_server_run(void *param)
 
     /* reception loop */
     while (cmcp_server->state == VSP_CMCP_SERVER_RUNNING) {
-        ret = _vsp_cmcp_server_heartbeat(cmcp_server);
+        ret = vsp_cmcp_server_heartbeat(cmcp_server);
         /* check error */
         VSP_ASSERT(ret == 0, return (void*) -1);
     }
@@ -237,7 +237,7 @@ void *vsp_cmcp_server_run(void *param)
     return (void*) 0;
 }
 
-int _vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
+int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
 {
     double time_now;
 
