@@ -10,8 +10,6 @@
 #if !defined VSP_TIME_H_INCLUDED
 #define VSP_TIME_H_INCLUDED
 
-#include "vsp_api.h"
-
 #if defined __cplusplus
 extern "C" {
 #endif /* defined __cplusplus */
@@ -29,7 +27,7 @@ extern "C" {
  * The returned real time is only useful for computing an elapsed time
  * between two calls to this function.
  */
-VSP_API double vsp_time_real(void);
+double vsp_time_real(void);
 
 /**
  * Get the amount of CPU time used by the current process in seconds.
@@ -38,7 +36,7 @@ VSP_API double vsp_time_real(void);
  * The returned real time is only useful for computing an elapsed time
  * between two calls to this function.
  */
-VSP_API double vsp_time_cpu(void);
+double vsp_time_cpu(void);
 
 #if defined __cplusplus
 }
