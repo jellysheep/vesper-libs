@@ -37,18 +37,12 @@ VSP_API vsp_cmcp_client *vsp_cmcp_client_create(void);
 VSP_API int vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client);
 
 /**
- * Initialize and connect sockets.
+ * Initialize sockets and establish connection.
+ * An internal message reception thread is started.
  * Returns non-zero and sets vsp_error_num() if failed.
- * \see vsp_cmcp_client_disconnect
  */
 VSP_API int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     const char *publish_address, const char *subscribe_address);
-
-/**
- * Start message reception thread and return immediately.
- * Returns non-zero and sets vsp_error_num() if failed.
- */
-VSP_API int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
 
 #if defined __cplusplus
 }

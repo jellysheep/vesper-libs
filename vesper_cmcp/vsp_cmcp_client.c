@@ -40,6 +40,10 @@ struct vsp_cmcp_client {
     pthread_t thread;
 };
 
+/** Connect to server and start message reception thread.
+ * Returns non-zero and sets vsp_error_num() if failed. */
+static int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
+
 /** Stop message reception thread and wait until thread has finished and joined.
  * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
 static int _vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client);
@@ -120,11 +124,17 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
 
     /* set state */
     cmcp_client->state = VSP_CMCP_CLIENT_INITIALIZED;
-    /* sockets successfully connected */
+
+    /* start worker thread */
+    ret = _vsp_cmcp_client_start(cmcp_client);
+    /* check error */
+    VSP_ASSERT(ret == 0, return -1);
+
+    /* successfully connected and waiting for messages */
     return 0;
 }
 
-int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
+int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
 {
     int ret;
 
