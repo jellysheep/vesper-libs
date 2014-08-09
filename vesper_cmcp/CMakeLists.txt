@@ -12,6 +12,7 @@ set(API_HEADERS
 # add header files of this module
 set(HEADERS
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_message.h
+    ${PROJECT_SOURCE_DIR}/vsp_cmcp_common.h
 )
 
 # add source files of this module
@@ -20,6 +21,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_server.c
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_datalist.c
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_message.c
+    ${PROJECT_SOURCE_DIR}/vsp_cmcp_common.c
 )
 
 # add object files to be compiled
