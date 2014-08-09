@@ -14,7 +14,6 @@
 #include <vesper_cmcp/vsp_cmcp_server.h>
 #include <vesper_util/vsp_error.h>
 #include <stddef.h>
-#include <stdio.h>
 
 /** Global CMCP server object. */
 vsp_cmcp_server *global_cmcp_server;

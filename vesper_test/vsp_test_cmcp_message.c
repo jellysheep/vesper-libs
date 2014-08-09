@@ -14,7 +14,6 @@
 #include <vesper_cmcp/vsp_cmcp_message.h>
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_util.h>
-#include <stdio.h>
 #include <string.h>
 
 /** Create message and test creating binary data and parse it. */

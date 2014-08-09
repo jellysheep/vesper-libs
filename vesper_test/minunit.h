@@ -23,6 +23,8 @@
 #ifndef __MINUNIT_H__
 #define __MINUNIT_H__
 
+#include <vesper_util/vsp_time.h>
+
 #ifdef __cplusplus
     extern "C" {
 #endif
@@ -36,6 +38,8 @@
 #endif
 
 #endif
+
+#include <stdio.h>
 
 /* Maximum length of last message */
 #define MINUNIT_MESSAGE_LEN 1024
@@ -58,10 +62,6 @@ extern char minunit_last_message[MINUNIT_MESSAGE_LEN];
 /* Test setup and teardown function pointers */
 extern void (*minunit_setup)(void);
 extern void (*minunit_teardown)(void);
-
-/* Prototypes */
-double mu_timer_real(void);
-double mu_timer_cpu(void);
 
 /* Definitions */
 #define MU_TEST(method_name) void method_name(void)
@@ -87,8 +87,8 @@ double mu_timer_cpu(void);
 /* Test runner */
 #define MU_RUN_TEST(test) MU__SAFE_BLOCK(\
     if (minunit_real_timer==0 && minunit_real_timer==0) {\
-        minunit_real_timer = mu_timer_real();\
-        minunit_proc_timer = mu_timer_cpu();\
+        minunit_real_timer = vsp_time_real();\
+        minunit_proc_timer = vsp_time_cpu();\
     }\
     if (minunit_setup) (*minunit_setup)();\
     minunit_status = 0;\
@@ -108,8 +108,8 @@ double mu_timer_cpu(void);
     double minunit_end_real_timer;\
     double minunit_end_proc_timer;\
     printf("\n\n%d tests, %d assertions, %d failures\n", minunit_run, minunit_assert, minunit_fail);\
-    minunit_end_real_timer = mu_timer_real();\
-    minunit_end_proc_timer = mu_timer_cpu();\
+    minunit_end_real_timer = vsp_time_real();\
+    minunit_end_proc_timer = vsp_time_cpu();\
     printf("\nFinished in %.8f seconds (real) %.8f seconds (proc)\n\n",\
         minunit_end_real_timer - minunit_real_timer,\
         minunit_end_proc_timer - minunit_proc_timer);\
@@ -170,27 +170,6 @@ double mu_timer_cpu(void);
         printf(".");\
     }\
 )
-
-/*
- * The following two functions were written by David Robert Nadeau
- * from http//NadeauSoftware.com/ and distributed under the
- * Creative Commons Attribution 3.0 Unported License
- */
-
-/**
- * Returns the real time, in seconds, or -1.0 if an error occurred.
- *
- * Time is measured since an arbitrary and OS-dependent start time.
- * The returned real time is only useful for computing an elapsed time
- * between two calls to this function.
- */
-double mu_timer_real(void);
-
-/**
- * Returns the amount of CPU time used by the current process,
- * in seconds, or -1.0 if an error occurred.
- */
-double mu_timer_cpu(void);
 
 #ifdef __cplusplus
 }

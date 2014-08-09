@@ -16,7 +16,6 @@
 #include <err.h>
 #include <errno.h>
 #include <stddef.h>
-#include <stdio.h>
 #include <string.h>
 
 /** Create data list and test adding and reading items. */
