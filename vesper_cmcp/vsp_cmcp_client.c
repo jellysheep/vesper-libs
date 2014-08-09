@@ -43,18 +43,18 @@ struct vsp_cmcp_client {
 /** Connect to server and establish connection using handshake.
  * Connection establishment is specified by CMCP protocol.
  * Returns non-zero and sets vsp_error_num() if failed. */
-static int _vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client);
+static int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client);
 
 /** Connect to server and start message reception thread.
  * Returns non-zero and sets vsp_error_num() if failed. */
-static int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
+static int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
 
 /** Stop message reception thread and wait until thread has finished and joined.
  * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
-static int _vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client);
+static int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client);
 
 /** Event loop for message reception running in its own thread. */
-static void *_vsp_cmcp_client_run(void *param);
+static void *vsp_cmcp_client_run(void *param);
 
 vsp_cmcp_client *vsp_cmcp_client_create(void)
 {
@@ -81,7 +81,7 @@ int vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client)
 
     if (cmcp_client->state > VSP_CMCP_CLIENT_INITIALIZED) {
         /* worker thread is running, stop it */
-        ret = _vsp_cmcp_client_stop(cmcp_client);
+        ret = vsp_cmcp_client_stop(cmcp_client);
         /* check for error */
         VSP_ASSERT(ret == 0, success = -1);
     }
@@ -131,12 +131,12 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     cmcp_client->state = VSP_CMCP_CLIENT_INITIALIZED;
 
     /* establish connection */
-    ret = _vsp_cmcp_client_establish_connection(cmcp_client);
+    ret = vsp_cmcp_client_establish_connection(cmcp_client);
     /* check error */
     VSP_ASSERT(ret == 0, return -1);
 
     /* start worker thread */
-    ret = _vsp_cmcp_client_start(cmcp_client);
+    ret = vsp_cmcp_client_start(cmcp_client);
     /* check error */
     VSP_ASSERT(ret == 0, return -1);
 
@@ -144,12 +144,12 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     return 0;
 }
 
-int _vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
+int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
     return 0;
 }
 
-int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
+int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
 {
     int ret;
 
@@ -164,7 +164,7 @@ int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
     cmcp_client->state = VSP_CMCP_CLIENT_STARTING;
 
     /* start reception thread */
-    ret = pthread_create(&cmcp_client->thread, NULL, _vsp_cmcp_client_run,
+    ret = pthread_create(&cmcp_client->thread, NULL, vsp_cmcp_client_run,
         (void*) cmcp_client);
 
     /* check for pthread errors */
@@ -174,7 +174,7 @@ int _vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
     return 0;
 }
 
-int _vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client)
+int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client)
 {
     int ret;
 
@@ -207,7 +207,7 @@ int _vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client)
     return 0;
 }
 
-void *_vsp_cmcp_client_run(void *param)
+void *vsp_cmcp_client_run(void *param)
 {
     vsp_cmcp_client *cmcp_client;
 

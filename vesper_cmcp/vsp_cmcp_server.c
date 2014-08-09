@@ -42,14 +42,14 @@ struct vsp_cmcp_server {
 
 /** Start message reception thread and wait until thread has started.
  * Returns non-zero and sets vsp_error_num() if failed. */
-static int _vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server);
+static int vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server);
 
 /** Stop message reception thread and wait until thread has finished and joined.
  * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
-static int _vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server);
+static int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server);
 
 /** Event loop for message reception running in its own thread. */
-static void *_vsp_cmcp_server_run(void *param);
+static void *vsp_cmcp_server_run(void *param);
 
 vsp_cmcp_server *vsp_cmcp_server_create(void)
 {
@@ -76,7 +76,7 @@ int vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
 
     if (cmcp_server->state > VSP_CMCP_SERVER_INITIALIZED) {
         /* worker thread is running, stop it */
-        ret = _vsp_cmcp_server_stop(cmcp_server);
+        ret = vsp_cmcp_server_stop(cmcp_server);
         /* check for error */
         VSP_ASSERT(ret == 0, success = -1);
     }
@@ -126,7 +126,7 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     cmcp_server->state = VSP_CMCP_SERVER_INITIALIZED;
 
     /* start worker thread */
-    ret = _vsp_cmcp_server_start(cmcp_server);
+    ret = vsp_cmcp_server_start(cmcp_server);
     /* check error */
     VSP_ASSERT(ret == 0, return -1);
 
@@ -134,7 +134,7 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     return 0;
 }
 
-int _vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
+int vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
 {
     int ret;
 
@@ -149,7 +149,7 @@ int _vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
     cmcp_server->state = VSP_CMCP_SERVER_STARTING;
 
     /* start reception thread */
-    ret = pthread_create(&cmcp_server->thread, NULL, _vsp_cmcp_server_run,
+    ret = pthread_create(&cmcp_server->thread, NULL, vsp_cmcp_server_run,
         (void*) cmcp_server);
 
     /* check for pthread errors */
@@ -159,7 +159,7 @@ int _vsp_cmcp_server_start(vsp_cmcp_server *cmcp_server)
     return 0;
 }
 
-int _vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
+int vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
 {
     int ret;
 
@@ -192,7 +192,7 @@ int _vsp_cmcp_server_stop(vsp_cmcp_server *cmcp_server)
     return 0;
 }
 
-void *_vsp_cmcp_server_run(void *param)
+void *vsp_cmcp_server_run(void *param)
 {
     vsp_cmcp_server *cmcp_server;
 

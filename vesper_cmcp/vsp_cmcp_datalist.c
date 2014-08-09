@@ -29,7 +29,7 @@ struct vsp_cmcp_datalist {
 
 /** Search for a specific data list item by its ID.
  * Returns item index if found and -1 else. */
-static int _vsp_cmcp_datalist_find_item(vsp_cmcp_datalist *cmcp_datalist,
+static int vsp_cmcp_datalist_find_item(vsp_cmcp_datalist *cmcp_datalist,
     uint16_t data_item_id);
 
 vsp_cmcp_datalist *vsp_cmcp_datalist_create(void)
@@ -160,7 +160,7 @@ int vsp_cmcp_datalist_add_item(vsp_cmcp_datalist *cmcp_datalist,
         vsp_error_set_num(ENOMEM); return -1);
 
     /* check data list item was not added yet */
-    VSP_CHECK(_vsp_cmcp_datalist_find_item(cmcp_datalist, data_item_id) == -1,
+    VSP_CHECK(vsp_cmcp_datalist_find_item(cmcp_datalist, data_item_id) == -1,
         vsp_error_set_num(EALREADY); return -1);
 
     /* add data list item */
@@ -184,7 +184,7 @@ void *vsp_cmcp_datalist_get_data_item(vsp_cmcp_datalist *cmcp_datalist,
     VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return NULL);
 
     /* search for data ID */
-    index = _vsp_cmcp_datalist_find_item(cmcp_datalist, data_item_id);
+    index = vsp_cmcp_datalist_find_item(cmcp_datalist, data_item_id);
 
     /* check data list item index */
     VSP_CHECK(index != -1, vsp_error_set_num(EINVAL); return NULL);
@@ -197,7 +197,7 @@ void *vsp_cmcp_datalist_get_data_item(vsp_cmcp_datalist *cmcp_datalist,
     return cmcp_datalist->data_item_pointers[index];
 }
 
-int _vsp_cmcp_datalist_find_item(vsp_cmcp_datalist *cmcp_datalist,
+int vsp_cmcp_datalist_find_item(vsp_cmcp_datalist *cmcp_datalist,
     uint16_t data_item_id)
 {
     int index;
