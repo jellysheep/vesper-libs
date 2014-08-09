@@ -50,6 +50,8 @@ MU_TEST_SUITE(vsp_test_cmcp_connection);
 MU_TEST_SUITE(vsp_test_cmcp_datalist);
 /** Test CMCP message implementation. */
 MU_TEST_SUITE(vsp_test_cmcp_message);
+/** Test random number generation. */
+MU_TEST_SUITE(vsp_test_random);
 
 #if defined __cplusplus
 }

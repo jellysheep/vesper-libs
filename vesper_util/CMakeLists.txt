@@ -12,12 +12,14 @@ set(API_HEADERS
 set(HEADERS
     ${PROJECT_SOURCE_DIR}/vsp_util.h
     ${PROJECT_SOURCE_DIR}/vsp_time.h
+    ${PROJECT_SOURCE_DIR}/vsp_random.h
 )
 
 # add source files of this module
 set(SOURCES
     ${PROJECT_SOURCE_DIR}/vsp_error.c
     ${PROJECT_SOURCE_DIR}/vsp_time.c
+    ${PROJECT_SOURCE_DIR}/vsp_random.c
 )
 
 # add object files to be compiled

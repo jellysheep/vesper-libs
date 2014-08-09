@@ -15,6 +15,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/vsp_test_cmcp_connection.c
     ${PROJECT_SOURCE_DIR}/vsp_test_cmcp_datalist.c
     ${PROJECT_SOURCE_DIR}/vsp_test_cmcp_message.c
+    ${PROJECT_SOURCE_DIR}/vsp_test_random.c
 )
 
 # compile sources into executable
