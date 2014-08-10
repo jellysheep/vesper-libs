@@ -13,6 +13,7 @@ set(API_HEADERS
 set(HEADERS
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_message.h
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_common.h
+    ${PROJECT_SOURCE_DIR}/vsp_cmcp_command.h
 )
 
 # add source files of this module
