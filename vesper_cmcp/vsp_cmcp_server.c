@@ -7,6 +7,7 @@
  */
 
 #include "vsp_cmcp_server.h"
+#include "vsp_cmcp_command.h"
 #include "vsp_cmcp_common.h"
 
 #include <vesper_util/vsp_error.h>
@@ -274,6 +275,7 @@ void *vsp_cmcp_server_run(void *param)
 int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
 {
     double time_now;
+    int ret;
 
     /* check parameter */
     VSP_ASSERT(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
@@ -289,7 +291,10 @@ int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
         time_now + VSP_CMCP_SERVER_HEARTBEAT_TIME;
 
     /* send heartbeat */
-    /* ... */
+    ret = vsp_cmcp_common_create_send_message(cmcp_server->publish_socket,
+        0, cmcp_server->id, VSP_CMCP_COMMAND_HEARTBEAT, NULL);
+    /* check for error */
+    VSP_ASSERT(ret == 0, return -1);
 
     return 0;
 }
