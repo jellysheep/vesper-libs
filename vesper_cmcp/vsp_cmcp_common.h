@@ -10,6 +10,7 @@
 #if !defined VSP_CMCP_COMMON_H_INCLUDED
 #define VSP_CMCP_COMMON_H_INCLUDED
 
+#include "vsp_cmcp_datalist.h"
 #include "vsp_cmcp_message.h"
 
 #if defined __cplusplus
@@ -25,6 +26,14 @@ extern "C" {
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 int vsp_cmcp_common_send_message(int socket, vsp_cmcp_message *cmcp_message);
+
+/**
+ * Create and send message to the specified socket.
+ * Blocks until message could be sent. Frees internally created message object.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
 
 #if defined __cplusplus
 }

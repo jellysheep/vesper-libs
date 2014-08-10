@@ -44,3 +44,32 @@ int vsp_cmcp_common_send_message(int socket, vsp_cmcp_message *cmcp_message)
     /* success */
     return 0;
 }
+
+int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
+{
+    int ret;
+    vsp_cmcp_message *cmcp_message;
+
+    /* check parameters; data list may be NULL */
+    VSP_ASSERT(socket != -1, vsp_error_set_num(EINVAL); return -1);
+
+    /* generate message */
+    cmcp_message = vsp_cmcp_message_create(topic_id, sender_id, command_id,
+        cmcp_datalist);
+    /* check for error */
+    VSP_ASSERT(cmcp_message != NULL, return -1);
+
+    /* send message */
+    ret = vsp_cmcp_common_send_message(socket, cmcp_message);
+    /* check for error */
+    VSP_ASSERT(ret == 0, return -1);
+
+    /* free message */
+    ret = vsp_cmcp_message_free(cmcp_message);
+    /* check for error */
+    VSP_ASSERT(ret == 0, return -1);
+
+    /* success */
+    return 0;
+}
