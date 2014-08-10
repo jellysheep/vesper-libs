@@ -76,6 +76,12 @@ MU_TEST(vsp_test_cmcp_message_test)
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
     mu_assert(message_id == MESSAGE_COMMAND_ID, vsp_error_str(EINVAL));
 
+    /* check if invalid ID type is rejected */
+    ret = vsp_cmcp_message_get_id(cmcp_message2, (vsp_cmcp_message_id_type) -1,
+        &message_id);
+    mu_assert(ret != 0, "Invalid ID type was accepted.");
+    mu_assert(message_id == MESSAGE_COMMAND_ID,"Invalid ID type was accepted.");
+
     /* get data list from second message */
     cmcp_datalist2 = vsp_cmcp_message_get_datalist(cmcp_message2);
     mu_assert_abort(cmcp_datalist2 != NULL, vsp_error_str(vsp_error_num()));
