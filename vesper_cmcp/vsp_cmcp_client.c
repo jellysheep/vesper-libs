@@ -9,6 +9,7 @@
 #include "vsp_cmcp_client.h"
 
 #include <vesper_util/vsp_error.h>
+#include <vesper_util/vsp_random.h>
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
@@ -32,6 +33,8 @@ typedef enum {
 struct vsp_cmcp_client {
     /** Finite state machine flag. */
     volatile vsp_cmcp_client_state state;
+    /** ID identifying this client in the network. Odd number. */
+    uint16_t id;
     /** nanomsg socket number to publish messages. */
     int publish_socket;
     /** nanomsg socket number to receive messages. */
@@ -67,6 +70,8 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     VSP_ALLOC(cmcp_client, vsp_cmcp_client, return NULL);
     /* initialize struct data */
     cmcp_client->state = VSP_CMCP_CLIENT_UNINITIALIZED;
+    /* generate client ID that is odd */
+    cmcp_client->id = (uint16_t) (vsp_random_get() | 1);
     cmcp_client->publish_socket = -1;
     cmcp_client->subscribe_socket = -1;
     pthread_mutex_init(&cmcp_client->mutex, NULL);

@@ -9,6 +9,7 @@
 #include "vsp_cmcp_server.h"
 
 #include <vesper_util/vsp_error.h>
+#include <vesper_util/vsp_random.h>
 #include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
@@ -36,6 +37,8 @@ typedef enum {
 struct vsp_cmcp_server {
     /** Finite state machine flag. */
     volatile vsp_cmcp_server_state state;
+    /** ID identifying this server in the network. Even but non-zero number. */
+    uint16_t id;
     /** nanomsg socket number to publish messages. */
     int publish_socket;
     /** nanomsg socket number to receive messages. */
@@ -71,6 +74,10 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     VSP_ALLOC(cmcp_server, vsp_cmcp_server, return NULL);
     /* initialize struct data */
     cmcp_server->state = VSP_CMCP_SERVER_UNINITIALIZED;
+    /* generate server ID that is even (first bit cleared) but non-zero */
+    do {
+        cmcp_server->id = (uint16_t) (vsp_random_get() << 1);
+    } while (cmcp_server->id == 0);
     cmcp_server->publish_socket = -1;
     cmcp_server->subscribe_socket = -1;
     cmcp_server->time_next_heartbeat = vsp_time_real();
