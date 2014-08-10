@@ -57,7 +57,8 @@ double vsp_time_real(void)
     t = ((ULONGLONG)tm.dwHighDateTime << 32) | (ULONGLONG)tm.dwLowDateTime;
     return (double)t / 10000000.0;
 
-#elif (defined(__hpux) || defined(hpux)) || ((defined(__sun__) || defined(__sun) || defined(sun)) && (defined(__SVR4) || defined(__svr4__)))
+#elif (defined(__hpux) || defined(hpux)) || ((defined(__sun__) || \
+    defined(__sun) || defined(sun)) && (defined(__SVR4) || defined(__svr4__)))
     /* HP-UX, Solaris */
     return (double)gethrtime() / 1000000000.0;
 
@@ -97,9 +98,10 @@ double vsp_time_real(void)
         #else
             const clockid_t id = (clockid_t)-1; /* unknown */
         #endif /* defined(CLOCK_MONOTONIC_PRECISE) */
-        if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1)
+        if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1) {
             return (double)ts.tv_sec +
                 (double)ts.tv_nsec / 1000000000.0;
+        }
         /* fall through */
     }
     #endif /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
@@ -123,14 +125,16 @@ double vsp_time_cpu(void)
     if (GetProcessTimes(GetCurrentProcess(),
         &createTime, &exitTime, &kernelTime, &userTime) != -1) {
         SYSTEMTIME userSystemTime;
-        if (FileTimeToSystemTime(&userTime, &userSystemTime) != -1)
+        if (FileTimeToSystemTime(&userTime, &userSystemTime) != -1) {
             return (double)userSystemTime.wHour * 3600.0 +
                 (double)userSystemTime.wMinute * 60.0 +
                 (double)userSystemTime.wSecond +
                 (double)userSystemTime.wMilliseconds / 1000.0;
+        }
     }
 
-#elif defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
+#elif defined(__unix__) || defined(__unix) || defined(unix) \
+    || (defined(__APPLE__) && defined(__MACH__))
     /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, and Solaris */
 
     #if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
@@ -142,6 +146,7 @@ double vsp_time_cpu(void)
             /* clock ids vary by OS. Query the id, if possible */
             if (clock_getcpuclockid(0, &id) == -1)
         #endif /* _POSIX_CPUTIME > 0 */
+            {
         #if defined(CLOCK_PROCESS_CPUTIME_ID)
                 /* use known clock id for AIX, Linux, or Solaris */
                 id = CLOCK_PROCESS_CPUTIME_ID;
@@ -151,9 +156,11 @@ double vsp_time_cpu(void)
         #else
                 id = (clockid_t)-1;
         #endif /* defined(CLOCK_PROCESS_CPUTIME_ID) */
-            if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1)
+            }
+            if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1) {
                 return (double)ts.tv_sec +
                     (double)ts.tv_nsec / 1000000000.0;
+            }
         }
     #endif /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
 
@@ -170,16 +177,18 @@ double vsp_time_cpu(void)
     {
         const double ticks = (double)sysconf(_SC_CLK_TCK);
         struct tms tms;
-        if (times(&tms) != (clock_t)-1)
+        if (times(&tms) != (clock_t)-1) {
             return (double)tms.tms_utime / ticks;
+        }
     }
     #endif /* defined(_SC_CLK_TCK) */
 
     #if defined(CLOCKS_PER_SEC)
     {
         clock_t cl = clock();
-        if (cl != (clock_t)-1)
+        if (cl != (clock_t)-1) {
             return (double)cl / (double)CLOCKS_PER_SEC;
+        }
     }
     #endif /* defined(CLOCKS_PER_SEC) */
 
