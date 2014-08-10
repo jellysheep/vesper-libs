@@ -29,6 +29,18 @@ MU_TEST(vsp_test_cmcp_message_test)
     void *data_item_pointer;
     uint16_t message_id;
 
+    /* allocate message without data list */
+    cmcp_message1 = vsp_cmcp_message_create(MESSAGE_TOPIC_ID, MESSAGE_SENDER_ID,
+        MESSAGE_COMMAND_ID, NULL);
+    /* get binary data array length */
+    data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
+    /* fixed message header length 6 has to be updated if
+     * VSP_CMCP_MESSAGE_HEADER_LENGTH is changed */
+    mu_assert_abort(data_length == 6, vsp_error_str(EINVAL));
+    /* free message */
+    ret = vsp_cmcp_message_free(cmcp_message1);
+    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+
     /* allocate data list */
     cmcp_datalist1 = vsp_cmcp_datalist_create();
     mu_assert_abort(cmcp_datalist1 != NULL, vsp_error_str(vsp_error_num()));

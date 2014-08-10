@@ -41,8 +41,6 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
     uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
 {
     vsp_cmcp_message *cmcp_message;
-    /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_message, vsp_cmcp_message, return NULL);
     /* initialize struct data */
@@ -113,10 +111,16 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message)
         vsp_error_set_num(EINVAL); return -1);
 
     /* calculate data length */
-    data_length =
-        vsp_cmcp_datalist_get_data_length(cmcp_message->cmcp_datalist);
-    /* in case of failure vsp_error_num() is already set */
-    VSP_ASSERT(data_length >= 0, return -1);
+    data_length = 0;
+
+    /* empty data list value is allowed, then only message header is created */
+    if (cmcp_message->cmcp_datalist != NULL) {
+        /* add data list length */
+        data_length =
+            vsp_cmcp_datalist_get_data_length(cmcp_message->cmcp_datalist);
+        /* in case of failure vsp_error_num() is already set */
+        VSP_ASSERT(data_length >= 0, return -1);
+    }
 
     data_length += VSP_CMCP_MESSAGE_HEADER_LENGTH;
 
@@ -146,11 +150,14 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     *current_data_pointer = cmcp_message->command_id;
     ++current_data_pointer;
 
-    /* store data list values */
-    ret = vsp_cmcp_datalist_get_data(cmcp_message->cmcp_datalist,
-        current_data_pointer);
-    /* in case of failure vsp_error_num() is already set */
-    VSP_ASSERT(ret == 0, return -1);
+    /* empty data list value is allowed, then only message header is created */
+    if (cmcp_message->cmcp_datalist != NULL) {
+        /* store data list values */
+        ret = vsp_cmcp_datalist_get_data(cmcp_message->cmcp_datalist,
+            current_data_pointer);
+        /* in case of failure vsp_error_num() is already set */
+        VSP_ASSERT(ret == 0, return -1);
+    }
 
     /* success */
     return 0;
