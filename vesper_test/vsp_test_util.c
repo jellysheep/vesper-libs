@@ -37,7 +37,7 @@ MU_TEST(vsp_test_random_test)
     }
 }
 
-MU_TEST_SUITE(vsp_test_random)
+MU_TEST_SUITE(vsp_test_util)
 {
     MU_RUN_TEST(vsp_test_random_test);
 }
