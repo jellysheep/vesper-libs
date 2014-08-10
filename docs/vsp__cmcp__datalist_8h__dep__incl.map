@@ -1,7 +1,11 @@
 <map id="vesper_cmcp/vsp_cmcp_datalist.h" name="vesper_cmcp/vsp_cmcp_datalist.h">
-<area shape="rect" id="node2" href="$vsp__cmcp__datalist_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_datalist.c" alt="" coords="5,97,168,138"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__message_8h.html" title="vesper_cmcp/vsp_cmcp\l_message.h" alt="" coords="193,97,356,138"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="323,187,467,229"/>
-<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html" title="vesper_test/vsp_test\l_cmcp_datalist.c" alt="" coords="432,97,576,138"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__message_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_message.c" alt="" coords="134,187,297,229"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__common_8h.html" title="vesper_cmcp/vsp_cmcp\l_common.h" alt="" coords="193,187,356,229"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__message_8h.html" title="vesper_cmcp/vsp_cmcp\l_message.h" alt="" coords="381,97,544,138"/>
+<area shape="rect" id="node8" href="$vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="569,187,713,229"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__datalist_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_datalist.c" alt="" coords="621,97,784,138"/>
+<area shape="rect" id="node10" href="$vsp__test__cmcp__datalist_8c.html" title="vesper_test/vsp_test\l_cmcp_datalist.c" alt="" coords="809,97,953,138"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__client_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_client.c" alt="" coords="5,278,168,319"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__common_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_common.c" alt="" coords="193,278,356,319"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__server_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_server.c" alt="" coords="381,278,544,319"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__message_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_message.c" alt="" coords="381,187,544,229"/>
 </map>

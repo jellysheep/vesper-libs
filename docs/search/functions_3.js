@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['operator_3c_3c',['operator&lt;&lt;',['../classVesper_1_1Logging.html#a022610c284f7f481dc1750841b9fd1fa',1,'Vesper::Logging::operator&lt;&lt;(const T &amp;toWrite)'],['../classVesper_1_1Logging.html#a04480fcec154382280c9064738bb57cd',1,'Vesper::Logging::operator&lt;&lt;(LoggingTypes::LoggingFlags flag)']]]
+  ['pipefunction',['pipeFunction',['../classVesper_1_1Vout.html#af750afce1d27a6686d110b35133c4625',1,'Vesper::Vout']]],
+  ['popm',['popM',['../classVesper_1_1Vout.html#a8540da0cd50ae2b6f8d78efc2239754b',1,'Vesper::Vout']]],
+  ['pushm',['pushM',['../classVesper_1_1Vout.html#a525cb38e8d58997b0d1a2a9d8a101e0d',1,'Vesper::Vout']]]
 ];

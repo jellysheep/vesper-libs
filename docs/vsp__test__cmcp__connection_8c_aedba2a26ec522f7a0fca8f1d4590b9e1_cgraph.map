@@ -1,5 +1,7 @@
 <map id="vsp_test_cmcp_connection_teardown" name="vsp_test_cmcp_connection_teardown">
 <area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="237,5,387,32"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="235,56,389,83"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="437,31,571,57"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="263,56,361,83"/>
+<area shape="rect" id="node5" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="258,107,366,133"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="235,157,389,184"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="437,81,571,108"/>
 </map>

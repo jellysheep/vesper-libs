@@ -8,11 +8,11 @@
 var indexSectionsWithContent =
 {
   0: "cdfgilmnopstuv",
-  1: "lv",
+  1: "lmv",
   2: "v",
-  3: "ltv",
-  4: "flmotv",
-  5: "cdglmnpstu",
+  3: "v",
+  4: "flmpv",
+  5: "cdgilmnopstu",
   6: "v",
   7: "v",
   8: "v",

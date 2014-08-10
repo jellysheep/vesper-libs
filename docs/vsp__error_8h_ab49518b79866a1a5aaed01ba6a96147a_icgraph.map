@@ -1,3 +1,6 @@
 <map id="vsp_error_str" name="vsp_error_str">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="153,5,237,32"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#a83eefc197feed4361a7b76c318a9ab67" title="Create global global_cmcp_server and global_cmcp_client objects. " alt="" coords="152,5,333,46"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="152,70,333,111"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="201,136,285,163"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="381,45,512,72"/>
 </map>

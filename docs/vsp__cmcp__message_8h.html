@@ -108,7 +108,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__message_8h__dep__incl.png" border="0" usemap="#vesper__cmcp_2vsp__cmcp__message_8hdep" alt=""/></div>
 <map name="vesper__cmcp_2vsp__cmcp__message_8hdep" id="vesper__cmcp_2vsp__cmcp__message_8hdep">
-<area shape="rect" id="node2" href="vsp__cmcp__message_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_message.c" alt="" coords="5,97,168,138"/><area shape="rect" id="node3" href="vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="193,97,337,138"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__common_8h.html" title="vesper_cmcp/vsp_cmcp\l_common.h" alt="" coords="193,97,356,138"/><area shape="rect" id="node6" href="vsp__cmcp__message_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_message.c" alt="" coords="381,97,544,138"/><area shape="rect" id="node7" href="vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="569,97,713,138"/><area shape="rect" id="node3" href="vsp__cmcp__client_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_client.c" alt="" coords="5,187,168,229"/><area shape="rect" id="node4" href="vsp__cmcp__common_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_common.c" alt="" coords="193,187,356,229"/><area shape="rect" id="node5" href="vsp__cmcp__server_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_server.c" alt="" coords="381,187,544,229"/></map>
 </div>
 </div>
 <p><a href="vsp__cmcp__message_8h_source.html">Go to the source code of this file.</a></p>
@@ -240,25 +240,16 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Create new <a class="el" href="structvsp__cmcp__message.html" title="Message data sent over (network) connection. ">vsp_cmcp_message</a> object to send message data. </p>
-<p>Returned pointer should be freed with <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a>. The specified <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a> object must not be NULL. The <a class="el" href="structvsp__cmcp__message.html" title="Message data sent over (network) connection. ">vsp_cmcp_message</a> will not free the <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a> object and it has to be accessible until <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a> is called. Returns NULL and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
+<p>Returned pointer should be freed with <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a>. The specified <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a> object may be NULL, in this case only the message header will be written by <a class="el" href="vsp__cmcp__message_8h.html#a4c19c8c2def86e93ce2f362adb55b4f4" title="Copy message data to specified binary data array. ">vsp_cmcp_message_get_data()</a>. The <a class="el" href="structvsp__cmcp__message.html" title="Message data sent over (network) connection. ">vsp_cmcp_message</a> will not free the <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a> object and it has to be accessible until <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a> is called. Returns NULL and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
 <p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00040">40</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_cgraph.png" border="0" usemap="#vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_cgraph" alt=""/></div>
-<map name="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_cgraph" id="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_cgraph">
-<area shape="rect" id="node2" href="vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="240,5,373,32"/></map>
-</div>
-</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_icgraph.png" border="0" usemap="#vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_icgraph" alt=""/></div>
 <map name="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_icgraph" id="vsp__cmcp__message_8h_aeb40240c3360cbf04582c8c69a321b04_icgraph">
-<area shape="rect" id="node2" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="241,5,325,32"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__common_8h.html#abdc5a15e1848264793b66b643b9e0991" title="Create and send message to the specified socket. " alt="" coords="241,5,423,46"/><area shape="rect" id="node3" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="290,71,374,97"/></map>
 </div>
 </p>
 
@@ -281,7 +272,7 @@ Here is the caller graph for this function:</div>
 <p>Free <a class="el" href="structvsp__cmcp__message.html" title="Message data sent over (network) connection. ">vsp_cmcp_message</a> object. </p>
 <p>Object should be created with <a class="el" href="vsp__cmcp__message_8h.html#aeb40240c3360cbf04582c8c69a321b04" title="Create new vsp_cmcp_message object to send message data. ">vsp_cmcp_message_create()</a> or <a class="el" href="vsp__cmcp__message_8h.html#a6af8359b56fddd50363d49574586cf80" title="Create new vsp_cmcp_message object from received binary data. ">vsp_cmcp_message_create_parse()</a>. Frees internal <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a> object when created with <a class="el" href="vsp__cmcp__message_8h.html#a6af8359b56fddd50363d49574586cf80" title="Create new vsp_cmcp_message object from received binary data. ">vsp_cmcp_message_create_parse()</a>. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00058">58</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00056">56</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -297,7 +288,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__message_8h_a84eebc0e9381c53c466b8f559113d128_icgraph.png" border="0" usemap="#vsp__cmcp__message_8h_a84eebc0e9381c53c466b8f559113d128_icgraph" alt=""/></div>
 <map name="vsp__cmcp__message_8h_a84eebc0e9381c53c466b8f559113d128_icgraph" id="vsp__cmcp__message_8h_a84eebc0e9381c53c466b8f559113d128_icgraph">
-<area shape="rect" id="node2" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="225,5,309,32"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__common_8h.html#abdc5a15e1848264793b66b643b9e0991" title="Create and send message to the specified socket. " alt="" coords="225,5,407,46"/><area shape="rect" id="node3" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="274,71,358,97"/></map>
 </div>
 </p>
 
@@ -330,7 +321,7 @@ Here is the caller graph for this function:</div>
 <p>Create new <a class="el" href="structvsp__cmcp__message.html" title="Message data sent over (network) connection. ">vsp_cmcp_message</a> object from received binary data. </p>
 <p>The data will be copied partially and pointers to it are stored, so the data has to be accessible until <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a> is called. This function creates an internal object of type <a class="el" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. ">vsp_cmcp_datalist</a>. Returned pointer should be freed with <a class="el" href="vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. ">vsp_cmcp_message_free()</a>. Returns NULL and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00072">72</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00070">70</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -369,7 +360,7 @@ Here is the caller graph for this function:</div>
 <p>Calculate necessary length of a binary data array storing the message data. </p>
 <p>This function should only be called for messages created with <a class="el" href="vsp__cmcp__message_8h.html#aeb40240c3360cbf04582c8c69a321b04" title="Create new vsp_cmcp_message object to send message data. ">vsp_cmcp_message_create()</a>. Returns negative value and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00104">104</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00102">102</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -385,7 +376,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__message_8h_a88fe06957369115be86d1655926ab549_icgraph.png" border="0" usemap="#vsp__cmcp__message_8h_a88fe06957369115be86d1655926ab549_icgraph" alt=""/></div>
 <map name="vsp__cmcp__message_8h_a88fe06957369115be86d1655926ab549_icgraph" id="vsp__cmcp__message_8h_a88fe06957369115be86d1655926ab549_icgraph">
-<area shape="rect" id="node2" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="222,12,306,39"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__common_8h.html#a7747b0d4dc3f60b209482cc3c1b77a24" title="Send message to the specified socket. " alt="" coords="222,5,397,46"/><area shape="rect" id="node4" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="267,71,351,97"/><area shape="rect" id="node3" href="vsp__cmcp__common_8h.html#abdc5a15e1848264793b66b643b9e0991" title="Create and send message to the specified socket. " alt="" coords="446,5,629,46"/></map>
 </div>
 </p>
 
@@ -418,7 +409,7 @@ Here is the caller graph for this function:</div>
 <p>Copy message data to specified binary data array. </p>
 <p>The specified array has to be at least as long as the number of bytes <a class="el" href="vsp__cmcp__message_8h.html#a88fe06957369115be86d1655926ab549" title="Calculate necessary length of a binary data array storing the message data. ">vsp_cmcp_message_get_data_length()</a> returns. This function should only be called for messages created with <a class="el" href="vsp__cmcp__message_8h.html#aeb40240c3360cbf04582c8c69a321b04" title="Create new vsp_cmcp_message object to send message data. ">vsp_cmcp_message_create()</a>. Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00126">126</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00130">130</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -434,7 +425,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__message_8h_a4c19c8c2def86e93ce2f362adb55b4f4_icgraph.png" border="0" usemap="#vsp__cmcp__message_8h_a4c19c8c2def86e93ce2f362adb55b4f4_icgraph" alt=""/></div>
 <map name="vsp__cmcp__message_8h_a4c19c8c2def86e93ce2f362adb55b4f4_icgraph" id="vsp__cmcp__message_8h_a4c19c8c2def86e93ce2f362adb55b4f4_icgraph">
-<area shape="rect" id="node2" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="254,5,338,32"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__common_8h.html#a7747b0d4dc3f60b209482cc3c1b77a24" title="Send message to the specified socket. " alt="" coords="254,5,429,46"/><area shape="rect" id="node4" href="vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="299,71,383,97"/><area shape="rect" id="node3" href="vsp__cmcp__common_8h.html#abdc5a15e1848264793b66b643b9e0991" title="Create and send message to the specified socket. " alt="" coords="478,5,661,46"/></map>
 </div>
 </p>
 
@@ -473,7 +464,7 @@ Here is the caller graph for this function:</div>
 <p>Get specified ID and copy to specified address. </p>
 <p>Returns non-zero and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00159">159</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00166">166</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -512,7 +503,7 @@ Here is the caller graph for this function:</div>
 <p>Get data list parsed by this message object. </p>
 <p>This function should only be called for messages created with <a class="el" href="vsp__cmcp__message_8h.html#a6af8359b56fddd50363d49574586cf80" title="Create new vsp_cmcp_message object from received binary data. ">vsp_cmcp_message_create_parse()</a>. Returns NULL and sets <a class="el" href="vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. ">vsp_error_num()</a> if failed. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00181">181</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__message_8c_source.html#l00188">188</a> of file <a class="el" href="vsp__cmcp__message_8c_source.html">vsp_cmcp_message.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -537,7 +528,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 7 2014 17:42:40 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 10 2014 17:43:57 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

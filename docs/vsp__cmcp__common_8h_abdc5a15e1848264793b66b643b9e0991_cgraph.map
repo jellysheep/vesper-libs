@@ -1,0 +1,11 @@
+<map id="vsp_cmcp_common_create_send_message" name="vsp_cmcp_common_create_send_message">
+<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="957,151,1091,177"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__message_8h.html#aeb40240c3360cbf04582c8c69a321b04" title="Create new vsp_cmcp_message object to send message data. " alt="" coords="238,37,423,64"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__common_8h.html#a7747b0d4dc3f60b209482cc3c1b77a24" title="Send message to the specified socket. " alt="" coords="243,89,418,130"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. " alt="" coords="487,281,657,308"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__message_8h.html#a88fe06957369115be86d1655926ab549" title="Calculate necessary length of a binary data array storing the message data. " alt="" coords="489,89,655,130"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__message_8h.html#a4c19c8c2def86e93ce2f362adb55b4f4" title="Copy message data to specified binary data array. " alt="" coords="473,180,671,207"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__datalist_8h.html#a5f65a5f72dc913157bc69ac9e1f6eb34" title="Calculate necessary length of a binary data array storing all list items. " alt="" coords="737,114,893,155"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__datalist_8h.html#a4f5abcceda46ccbbbfb88ee517f380ed" title="Copy list content to specified binary data array. " alt="" coords="721,231,909,257"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="735,332,895,359"/>
+</map>

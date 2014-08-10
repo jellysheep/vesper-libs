@@ -1,5 +1,7 @@
 <map id="vsp_cmcp_datalist_get_data_length" name="vsp_cmcp_datalist_get_data_length">
-<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a88fe06957369115be86d1655926ab549" title="Calculate necessary length of a binary data array storing the message data. " alt="" coords="211,5,378,46"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="253,71,337,97"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="427,12,511,39"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a88fe06957369115be86d1655926ab549" title="Calculate necessary length of a binary data array storing the message data. " alt="" coords="211,34,378,75"/>
+<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="253,100,337,127"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__common_8h.html#a7747b0d4dc3f60b209482cc3c1b77a24" title="Send message to the specified socket. " alt="" coords="427,5,602,46"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="473,71,557,97"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__common_8h.html#abdc5a15e1848264793b66b643b9e0991" title="Create and send message to the specified socket. " alt="" coords="651,5,834,46"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="vesper_test/vsp_test.h" name="vesper_test/vsp_test.h">
-<area shape="rect" id="node2" href="$TestVesperLog_8cpp.html" title="vesper_test/TestVesperLog.cpp" alt="" coords="5,88,211,115"/>
-<area shape="rect" id="node3" href="$vsp__test_8c.html" title="vesper_test/vsp_test.c" alt="" coords="236,88,389,115"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html" title="vesper_test/vsp_test\l_cmcp_connection.c" alt="" coords="415,81,559,122"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__datalist_8c.html" title="vesper_test/vsp_test\l_cmcp_datalist.c" alt="" coords="583,81,727,122"/>
-<area shape="rect" id="node6" href="$vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="751,81,895,122"/>
+<area shape="rect" id="node2" href="$vsp__test_8c.html" title="vesper_test/vsp_test.c" alt="" coords="5,88,159,115"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html" title="vesper_test/vsp_test\l_cmcp_connection.c" alt="" coords="184,81,328,122"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__datalist_8c.html" title="vesper_test/vsp_test\l_cmcp_datalist.c" alt="" coords="352,81,496,122"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__message_8c.html" title="vesper_test/vsp_test\l_cmcp_message.c" alt="" coords="520,81,664,122"/>
+<area shape="rect" id="node6" href="$vsp__test__util_8c.html" title="vesper_test/vsp_test\l_util.c" alt="" coords="688,81,832,122"/>
 </map>
