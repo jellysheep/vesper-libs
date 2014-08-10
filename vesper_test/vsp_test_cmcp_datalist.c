@@ -31,7 +31,7 @@ MU_TEST(vsp_test_cmcp_datalist_test)
 
     /* allocation */
     cmcp_datalist1 = vsp_cmcp_datalist_create();
-    mu_assert(cmcp_datalist1 != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(cmcp_datalist1 != NULL, vsp_error_str(vsp_error_num()));
 
     /* insert data list items */
     ret = vsp_cmcp_datalist_add_item(cmcp_datalist1, DATALIST_ITEM1_ID,
@@ -49,14 +49,14 @@ MU_TEST(vsp_test_cmcp_datalist_test)
         vsp_error_str(EINVAL));
     /* allocate array */
     data_pointer = malloc(data_length);
-    mu_assert(data_pointer != NULL, vsp_error_str(ENOMEM));
+    mu_assert_abort(data_pointer != NULL, vsp_error_str(ENOMEM));
     /* get binary data */
     ret = vsp_cmcp_datalist_get_data(cmcp_datalist1, data_pointer);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 
     /* construct second data list using binary data array */
     cmcp_datalist2 = vsp_cmcp_datalist_create_parse(data_length, data_pointer);
-    mu_assert(cmcp_datalist2 != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(cmcp_datalist2 != NULL, vsp_error_str(vsp_error_num()));
 
     /* insert data ID a second time and check for rejection */
     ret = vsp_cmcp_datalist_add_item(cmcp_datalist2, DATALIST_ITEM1_ID,
@@ -66,13 +66,13 @@ MU_TEST(vsp_test_cmcp_datalist_test)
     /* get back data list item and verify data */
     data_item_pointer = vsp_cmcp_datalist_get_data_item(cmcp_datalist2,
         DATALIST_ITEM1_ID, DATALIST_ITEM1_LENGTH);
-    mu_assert(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
     mu_assert(memcmp(data_item_pointer, DATALIST_ITEM1_DATA,
         DATALIST_ITEM1_LENGTH) == 0, vsp_error_str(EINVAL));
 
     data_item_pointer = vsp_cmcp_datalist_get_data_item(cmcp_datalist2,
         DATALIST_ITEM2_ID, DATALIST_ITEM2_LENGTH);
-    mu_assert(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
     mu_assert(memcmp(data_item_pointer, DATALIST_ITEM2_DATA,
         DATALIST_ITEM2_LENGTH) == 0, vsp_error_str(EINVAL));
 

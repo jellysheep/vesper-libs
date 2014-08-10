@@ -40,10 +40,10 @@ void vsp_test_cmcp_connection_setup(void)
 {
     /* create server */
     global_cmcp_server = vsp_cmcp_server_create();
-    mu_assert(global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
     /* create client */
     global_cmcp_client = vsp_cmcp_client_create();
-    mu_assert(global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));
 }
 
 void vsp_test_cmcp_connection_teardown(void)
@@ -63,7 +63,8 @@ MU_TEST(vsp_test_cmcp_server_allocation)
     int ret;
     /* allocation */
     local_global_cmcp_server = vsp_cmcp_server_create();
-    mu_assert(local_global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(local_global_cmcp_server != NULL,
+        vsp_error_str(vsp_error_num()));
     /* deallocation */
     ret = vsp_cmcp_server_free(local_global_cmcp_server);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
@@ -75,7 +76,8 @@ MU_TEST(vsp_test_cmcp_client_allocation)
     int ret;
     /* allocation */
     local_global_cmcp_client = vsp_cmcp_client_create();
-    mu_assert(local_global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));
+    mu_assert_abort(local_global_cmcp_client != NULL,
+        vsp_error_str(vsp_error_num()));
     /* deallocation */
     ret = vsp_cmcp_client_free(local_global_cmcp_client);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
