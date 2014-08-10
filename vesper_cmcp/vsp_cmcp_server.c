@@ -7,6 +7,7 @@
  */
 
 #include "vsp_cmcp_server.h"
+#include "vsp_cmcp_common.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
@@ -37,7 +38,8 @@ typedef enum {
 struct vsp_cmcp_server {
     /** Finite state machine flag. */
     volatile vsp_cmcp_server_state state;
-    /** ID identifying this server in the network. Even but non-zero number. */
+    /** ID identifying this server in the network.
+     * Even number, must not equal broadcast topic ID. */
     uint16_t id;
     /** nanomsg socket number to publish messages. */
     int publish_socket;
@@ -74,10 +76,11 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     VSP_ALLOC(cmcp_server, vsp_cmcp_server, return NULL);
     /* initialize struct data */
     cmcp_server->state = VSP_CMCP_SERVER_UNINITIALIZED;
-    /* generate server ID that is even (first bit cleared) but non-zero */
+    /* generate server ID that is even (first bit cleared)
+     * but does not equal broadcast topic ID */
     do {
         cmcp_server->id = (uint16_t) (vsp_random_get() << 1);
-    } while (cmcp_server->id == 0);
+    } while (cmcp_server->id == VSP_CMCP_BROADCAST_TOPIC_ID);
     cmcp_server->publish_socket = -1;
     cmcp_server->subscribe_socket = -1;
     cmcp_server->time_next_heartbeat = vsp_time_real();

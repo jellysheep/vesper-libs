@@ -16,6 +16,9 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
+/** Topic ID used to broadcast to all connected clients or servers. */
+#define VSP_CMCP_BROADCAST_TOPIC_ID 0
+
 /**
  * Send message to the specified socket.
  * Blocks until message could be sent.
