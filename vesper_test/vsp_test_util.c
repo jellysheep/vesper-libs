@@ -14,9 +14,31 @@
 #include <vesper_util/vsp_random.h>
 #include <vesper_util/vsp_util.h>
 #include <stdio.h>
+#include <string.h>
+
+/** Check error number functions. */
+MU_TEST(vsp_test_error_test);
 
 /** Check output of pseudo-random number generator. */
 MU_TEST(vsp_test_random_test);
+
+MU_TEST(vsp_test_error_test)
+{
+    int error;
+    int ret;
+    const char *error_str;
+
+    error = EINVAL;
+    /* set error number */
+    vsp_error_set_num(error);
+    /* get error number back */
+    ret = vsp_error_num();
+    mu_assert(ret == error, "Error value was not stored correctly.");
+    /* get error string */
+    error_str = vsp_error_str(error);
+    mu_assert(error_str != NULL && strlen(error_str) > 0,
+        "No error string returned.");
+}
 
 MU_TEST(vsp_test_random_test)
 {
@@ -39,5 +61,6 @@ MU_TEST(vsp_test_random_test)
 
 MU_TEST_SUITE(vsp_test_util)
 {
+    MU_RUN_TEST(vsp_test_error_test);
     MU_RUN_TEST(vsp_test_random_test);
 }
