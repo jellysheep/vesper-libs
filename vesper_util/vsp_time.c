@@ -167,9 +167,10 @@ double vsp_time_cpu(void)
     #if defined(RUSAGE_SELF)
     {
         struct rusage rusage;
-        if (getrusage(RUSAGE_SELF, &rusage) != -1)
+        if (getrusage(RUSAGE_SELF, &rusage) != -1) {
             return (double)rusage.ru_utime.tv_sec +
                 (double)rusage.ru_utime.tv_usec / 1000000.0;
+        }
     }
     #endif /* defined(RUSAGE_SELF) */
 
