@@ -31,13 +31,17 @@ typedef enum {
 /** State and other data used for network connection. */
 struct vsp_cmcp_client {
     /** Finite state machine flag. */
-    vsp_cmcp_client_state state;
+    volatile vsp_cmcp_client_state state;
     /** nanomsg socket number to publish messages. */
     int publish_socket;
     /** nanomsg socket number to receive messages. */
     int subscribe_socket;
     /** Reception thread. */
     pthread_t thread;
+    /** State mutex. */
+    pthread_mutex_t mutex;
+    /** Condition variable used for safe thread start. */
+    pthread_cond_t condition;
 };
 
 /** Connect to server and establish connection using handshake.
@@ -65,6 +69,8 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     cmcp_client->state = VSP_CMCP_CLIENT_UNINITIALIZED;
     cmcp_client->publish_socket = -1;
     cmcp_client->subscribe_socket = -1;
+    pthread_mutex_init(&cmcp_client->mutex, NULL);
+    pthread_cond_init(&cmcp_client->condition, NULL);
     /* return struct pointer */
     return cmcp_client;
 }
@@ -97,6 +103,8 @@ int vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client)
         /* check error set by nanomsg */
         VSP_ASSERT(ret == 0, success = -1);
     }
+    pthread_mutex_destroy(&cmcp_client->mutex);
+    pthread_cond_destroy(&cmcp_client->condition);
     /* free memory */
     VSP_FREE(cmcp_client);
     return success;
@@ -160,6 +168,9 @@ int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
     VSP_ASSERT(cmcp_client->state == VSP_CMCP_CLIENT_INITIALIZED,
         vsp_error_set_num(EINVAL); return -1);
 
+    /* lock state mutex */
+    pthread_mutex_lock(&cmcp_client->mutex);
+
     /* mark thread as starting */
     cmcp_client->state = VSP_CMCP_CLIENT_STARTING;
 
@@ -168,7 +179,19 @@ int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
         (void*) cmcp_client);
 
     /* check for pthread errors */
+    VSP_ASSERT(ret == 0, pthread_mutex_unlock(&cmcp_client->mutex);
+        vsp_error_set_num(ret); return -1);
+
+    /* wait until thread is running */
+    ret = pthread_cond_wait(&cmcp_client->condition, &cmcp_client->mutex);
+    /* unlock mutex again */
+    pthread_mutex_unlock(&cmcp_client->mutex);
+    /* check for condition waiting errors */
     VSP_ASSERT(ret == 0, vsp_error_set_num(ret); return -1);
+
+    /* check thread is running */
+    VSP_ASSERT(cmcp_client->state == VSP_CMCP_CLIENT_RUNNING,
+        vsp_error_set_num(EINVAL); return -1);
 
     /* success */
     return 0;
@@ -180,11 +203,6 @@ int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client)
 
     /* check parameter */
     VSP_ASSERT(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
-
-    /* wait until thread has started */
-    while (cmcp_client->state == VSP_CMCP_CLIENT_STARTING) {
-        /* do nothing */
-    }
 
     /* check thread is running */
     VSP_ASSERT(cmcp_client->state == VSP_CMCP_CLIENT_RUNNING,
@@ -220,8 +238,14 @@ void *vsp_cmcp_client_run(void *param)
     VSP_ASSERT(cmcp_client->state == VSP_CMCP_CLIENT_STARTING,
         vsp_error_set_num(EINVAL); return (void*) -1);
 
+    /* lock mutex */
+    pthread_mutex_lock(&cmcp_client->mutex);
     /* mark thread as running */
     cmcp_client->state = VSP_CMCP_CLIENT_RUNNING;
+    /* signal waiting thread */
+    pthread_cond_signal(&cmcp_client->condition);
+    /* unlock mutex */
+    pthread_mutex_unlock(&cmcp_client->mutex);
 
     /* reception loop */
     while (cmcp_client->state == VSP_CMCP_CLIENT_RUNNING) {
