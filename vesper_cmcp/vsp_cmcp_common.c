@@ -49,7 +49,11 @@ int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
     uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
 {
     int ret;
+    int success;
     vsp_cmcp_message *cmcp_message;
+
+    /* clear state, no errors yet */
+    success = 0;
 
     /* check parameters; data list may be NULL */
     VSP_ASSERT(socket != -1, vsp_error_set_num(EINVAL); return -1);
@@ -62,8 +66,8 @@ int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
 
     /* send message */
     ret = vsp_cmcp_common_send_message(socket, cmcp_message);
-    /* check for error */
-    VSP_ASSERT(ret == 0, return -1);
+    /* check for error, but do not directly return because of memory leak */
+    VSP_ASSERT(ret == 0, success = -1);
 
     /* free message */
     ret = vsp_cmcp_message_free(cmcp_message);
@@ -71,5 +75,5 @@ int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
     VSP_ASSERT(ret == 0, return -1);
 
     /* success */
-    return 0;
+    return success;
 }
