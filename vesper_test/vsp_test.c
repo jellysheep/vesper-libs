@@ -21,5 +21,11 @@ int main(void)
     MU_RUN_SUITE(vsp_test_cmcp_message);
     MU_RUN_SUITE(vsp_test_util);
     MU_REPORT();
-    return 0;
+    if (minunit_fail > 0) {
+        /* some tests failed */
+        return 1;
+    } else {
+        /* all tests passed */
+        return 0;
+    }
 }
