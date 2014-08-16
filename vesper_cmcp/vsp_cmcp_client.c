@@ -139,7 +139,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     /* connect socket */
     ret = nn_connect(cmcp_client->publish_socket, publish_address);
     /* check error set by nanomsg */
-    VSP_CHECK(ret >= 0, return -1);
+    VSP_CHECK(ret >= 0, nn_close(cmcp_client->publish_socket); return -1);
 
     /* initialize and connect subscribe socket */
     cmcp_client->subscribe_socket = nn_socket(AF_SP, NN_SUB);

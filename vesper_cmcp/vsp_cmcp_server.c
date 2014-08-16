@@ -145,7 +145,7 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     /* bind socket */
     ret = nn_bind(cmcp_server->publish_socket, publish_address);
     /* check error set by nanomsg */
-    VSP_CHECK(ret >= 0, return -1);
+    VSP_CHECK(ret >= 0, nn_close(cmcp_server->publish_socket); return -1);
 
     /* initialize and bind subscribe socket */
     cmcp_server->subscribe_socket = nn_socket(AF_SP, NN_SUB);
