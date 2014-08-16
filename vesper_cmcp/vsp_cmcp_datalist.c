@@ -81,6 +81,11 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
         current_data_pointer += 2;
         data_length -= 2;
 
+        /* check if as much data available as specified in data_item_length */
+        if (data_length < data_item_length) {
+            break;
+        }
+
         data_item_pointer = current_data_pointer;
         current_data_pointer += data_item_length;
         data_length -= data_item_length;
