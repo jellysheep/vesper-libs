@@ -14,6 +14,10 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
+/** Function did not fail when invoked with invalid (out of range) parameter. */
+#define VSP_TEST_INVALID_PARAMETER_ACCEPTED "Invalid parameter was accepted."
+
+
 /** Server publish socket address. */
 #define VSP_TEST_SERVER_PUBLISH_ADDRESS "tcp://127.0.0.1:7571"
 /** Server subscribe socket address. */

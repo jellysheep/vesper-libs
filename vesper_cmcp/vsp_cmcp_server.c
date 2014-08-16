@@ -99,7 +99,7 @@ int vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
     success = 0;
 
     /* check parameter */
-    VSP_ASSERT(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
 
     if (cmcp_server->state > VSP_CMCP_SERVER_INITIALIZED) {
         /* worker thread is running, stop it */
@@ -132,24 +132,31 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     int ret;
 
     /* check parameters */
-    VSP_ASSERT(cmcp_server != NULL && publish_address != NULL
+    VSP_CHECK(cmcp_server != NULL && publish_address != NULL
         && subscribe_address != NULL, vsp_error_set_num(EINVAL); return -1);
     /* check sockets not yet initialized */
-    VSP_ASSERT(cmcp_server->state == VSP_CMCP_SERVER_UNINITIALIZED,
+    VSP_CHECK(cmcp_server->state == VSP_CMCP_SERVER_UNINITIALIZED,
         vsp_error_set_num(EALREADY); return -1);
 
-    /* initialize sockets */
+    /* initialize and bind publish socket */
     cmcp_server->publish_socket = nn_socket(AF_SP, NN_PUB);
-    cmcp_server->subscribe_socket = nn_socket(AF_SP, NN_SUB);
-
-    /* bind sockets */
+    /* check error set by nanomsg */
+    VSP_CHECK(cmcp_server->publish_socket != -1, return -1);
+    /* bind socket */
     ret = nn_bind(cmcp_server->publish_socket, publish_address);
     /* check error set by nanomsg */
-    VSP_ASSERT(ret >= 0, return -1);
+    VSP_CHECK(ret >= 0, return -1);
 
+    /* initialize and bind subscribe socket */
+    cmcp_server->subscribe_socket = nn_socket(AF_SP, NN_SUB);
+    /* check error set by nanomsg, cleanup publish socket if failed */
+    VSP_CHECK(cmcp_server->subscribe_socket != -1,
+        nn_close(cmcp_server->publish_socket); return -1);
+    /* bind socket */
     ret = nn_bind(cmcp_server->subscribe_socket, subscribe_address);
-    /* check error set by nanomsg */
-    VSP_ASSERT(ret >= 0, return -1);
+    /* check error set by nanomsg, cleanup both sockets if failed */
+    VSP_CHECK(ret >= 0, nn_close(cmcp_server->publish_socket);
+        nn_close(cmcp_server->subscribe_socket); return -1);
 
     /* set state */
     cmcp_server->state = VSP_CMCP_SERVER_INITIALIZED;

@@ -33,6 +33,14 @@ MU_TEST(vsp_test_cmcp_server_allocation);
 /** Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). */
 MU_TEST(vsp_test_cmcp_client_allocation);
 
+/** Test to invoke server functions with invalid parameters and check if they
+ * behave correctly and do not abort. */
+MU_TEST(vsp_test_cmcp_server_invalid_parameters);
+
+/** Test to invoke client functions with invalid parameters and check if they
+ * behave correctly and do not abort. */
+MU_TEST(vsp_test_cmcp_client_invalid_parameters);
+
 /** Test connection between vsp_cmcp_server and vsp_cmcp_client. */
 MU_TEST(vsp_test_cmcp_connection_test);
 
@@ -83,6 +91,70 @@ MU_TEST(vsp_test_cmcp_client_allocation)
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 }
 
+MU_TEST(vsp_test_cmcp_server_invalid_parameters)
+{
+    int ret;
+
+    /* invalid server deallocation */
+    ret = vsp_cmcp_server_free(NULL);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid server bind: server object NULL */
+    ret = vsp_cmcp_server_bind(NULL,
+        VSP_TEST_SERVER_PUBLISH_ADDRESS, VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid server bind: address NULL */
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        NULL, VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        VSP_TEST_SERVER_PUBLISH_ADDRESS, NULL);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid server bind: address empty */
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        "", VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        VSP_TEST_SERVER_PUBLISH_ADDRESS, "");
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+}
+
+MU_TEST(vsp_test_cmcp_client_invalid_parameters)
+{
+    int ret;
+
+    /* invalid client deallocation */
+    ret = vsp_cmcp_client_free(NULL);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid client connect: client object NULL */
+    ret = vsp_cmcp_client_connect(NULL,
+        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, VSP_TEST_SERVER_PUBLISH_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid client connect: address NULL */
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        NULL, VSP_TEST_SERVER_PUBLISH_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, NULL);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    /* invalid client connect: address empty */
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        "", VSP_TEST_SERVER_PUBLISH_ADDRESS);
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, "");
+    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+}
+
 MU_TEST(vsp_test_cmcp_connection_test)
 {
     int ret;
@@ -102,5 +174,7 @@ MU_TEST_SUITE(vsp_test_cmcp_connection)
     MU_RUN_TEST(vsp_test_cmcp_client_allocation);
     MU_SUITE_CONFIGURE(&vsp_test_cmcp_connection_setup,
         &vsp_test_cmcp_connection_teardown);
+    MU_RUN_TEST(vsp_test_cmcp_server_invalid_parameters);
+    MU_RUN_TEST(vsp_test_cmcp_client_invalid_parameters);
     MU_RUN_TEST(vsp_test_cmcp_connection_test);
 }
