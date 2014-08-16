@@ -12,9 +12,6 @@
 #include <vesper_util/vsp_util.h>
 #include <string.h>
 
-/** Maximum number of items per data list */
-#define VSP_CMCP_DATALIST_MAX_ITEMS 16
-
 /** State and other data used for network connection. */
 struct vsp_cmcp_datalist {
     /** Data list item IDs. */
@@ -46,7 +43,7 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create(void)
 int vsp_cmcp_datalist_free(vsp_cmcp_datalist *cmcp_datalist)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
 
     /* free memory */
     VSP_FREE(cmcp_datalist);
@@ -65,7 +62,7 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
     vsp_cmcp_datalist *cmcp_datalist;
 
     /* check parameter */
-    VSP_ASSERT(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_CHECK(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist, return NULL);
     /* initialize struct data: set number of list items to zero */
@@ -107,7 +104,7 @@ int vsp_cmcp_datalist_get_data_length(vsp_cmcp_datalist *cmcp_datalist)
     uint16_t index;
 
     /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
 
     data_length = 0;
     /* calculate data length */
@@ -129,8 +126,9 @@ int vsp_cmcp_datalist_get_data(vsp_cmcp_datalist *cmcp_datalist,
     /* using byte pointer for safe pointer arithmetic */
     uint8_t *current_data_pointer;
 
-    /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    /* check parameters */
+    VSP_CHECK(cmcp_datalist != NULL && data_pointer != NULL,
+        vsp_error_set_num(EINVAL); return -1);
 
     /* store data item values */
     current_data_pointer = data_pointer;
@@ -157,11 +155,12 @@ int vsp_cmcp_datalist_get_data(vsp_cmcp_datalist *cmcp_datalist,
 int vsp_cmcp_datalist_add_item(vsp_cmcp_datalist *cmcp_datalist,
     uint16_t data_item_id, uint16_t data_item_length, void *data_item_pointer)
 {
-    /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    /* check parameters */
+    VSP_CHECK(cmcp_datalist != NULL && data_item_pointer != NULL,
+        vsp_error_set_num(EINVAL); return -1);
 
     /* check data list item count */
-    VSP_ASSERT(cmcp_datalist->data_item_count < VSP_CMCP_DATALIST_MAX_ITEMS,
+    VSP_CHECK(cmcp_datalist->data_item_count < VSP_CMCP_DATALIST_MAX_ITEMS,
         vsp_error_set_num(ENOMEM); return -1);
 
     /* check data list item was not added yet */
@@ -186,7 +185,7 @@ void *vsp_cmcp_datalist_get_data_item(vsp_cmcp_datalist *cmcp_datalist,
     int index;
 
     /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_CHECK(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return NULL);
 
     /* search for data ID */
     index = vsp_cmcp_datalist_find_item(cmcp_datalist, data_item_id);

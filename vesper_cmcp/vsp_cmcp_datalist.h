@@ -17,6 +17,9 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
+/** Maximum number of items per data list */
+#define VSP_CMCP_DATALIST_MAX_ITEMS 16
+
 /**
  * Data list storing any number of data list items.
  * A data list item consists of an ID, a length and the data itself.
