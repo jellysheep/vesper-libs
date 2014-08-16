@@ -48,7 +48,8 @@
     ptr = NULL; \
 } while (0)
 
-/** Check condition, set error number and react in case of failure. */
+/** Check condition, set error number and react in case of failure.
+ * This macro should be used when checking public API function parameters. */
 #define VSP_CHECK(condition, failure_action) do { \
     /* check condition */ \
     if (!(condition)) { \
@@ -58,7 +59,8 @@
 } while (0)
 
 /** Assert condition, set error number and react in case of failure.
- * Aborts if condition fails in debug mode. */
+ * Aborts if condition fails in debug mode.
+ * This macro should be used when checking for internal runtime errors. */
 #if !defined(NDEBUG)
   #define VSP_ASSERT(condition, failure_action) assert(condition)
 #else
