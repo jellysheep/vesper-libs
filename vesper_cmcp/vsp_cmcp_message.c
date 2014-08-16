@@ -11,10 +11,6 @@
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_util.h>
 
-/** Size of message headers in bytes:
- * 2 bytes topic ID, 2 bytes sender ID, 2 bytes command ID. */
-#define VSP_CMCP_MESSAGE_HEADER_LENGTH 6
-
 /** Message type: send or receive message. */
 typedef enum {
     /** Message will be sent. */
@@ -56,9 +52,10 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
 int vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
 
     if (cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE) {
+        /* silently ignore any errors */
         vsp_cmcp_datalist_free(cmcp_message->cmcp_datalist);
     }
 
@@ -75,9 +72,9 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
     vsp_cmcp_message *cmcp_message;
 
     /* check parameters */
-    VSP_ASSERT(data_length >= VSP_CMCP_MESSAGE_HEADER_LENGTH,
+    VSP_CHECK(data_length >= VSP_CMCP_MESSAGE_HEADER_LENGTH,
         vsp_error_set_num(EINVAL); return NULL);
-    VSP_ASSERT(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_CHECK(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_message, vsp_cmcp_message, return NULL);
     /* initialize struct data */
@@ -104,10 +101,10 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message)
     int data_length;
 
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
 
     /* check message type */
-    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
+    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
         vsp_error_set_num(EINVAL); return -1);
 
     /* calculate data length */
@@ -134,11 +131,12 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     /* using short int pointer for safe pointer arithmetic */
     uint16_t *current_data_pointer;
 
-    /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    /* check parameters */
+    VSP_CHECK(cmcp_message != NULL && data_pointer != NULL,
+        vsp_error_set_num(EINVAL); return -1);
 
     /* check message type */
-    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
+    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
         vsp_error_set_num(EINVAL); return -1);
 
     /* store message header */
@@ -167,8 +165,8 @@ int vsp_cmcp_message_get_id(vsp_cmcp_message *cmcp_message,
     vsp_cmcp_message_id_type id_type, uint16_t *id_pointer)
 {
     /* check parameters */
-    VSP_ASSERT(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
-    VSP_ASSERT(id_pointer != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(id_pointer != NULL, vsp_error_set_num(EINVAL); return -1);
 
     switch (id_type) {
         case VSP_CMCP_MESSAGE_TOPIC_ID:
@@ -188,10 +186,10 @@ int vsp_cmcp_message_get_id(vsp_cmcp_message *cmcp_message,
 vsp_cmcp_datalist *vsp_cmcp_message_get_datalist(
     vsp_cmcp_message *cmcp_message) {
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return NULL);
 
     /* check message type */
-    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE,
+    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE,
         vsp_error_set_num(EINVAL); return NULL);
 
     return cmcp_message->cmcp_datalist;
