@@ -87,12 +87,12 @@ MU_TEST(vsp_test_cmcp_connection_test)
 {
     int ret;
     /* bind */
-    ret = vsp_cmcp_server_bind(global_cmcp_server, SERVER_PUBLISH_ADDRESS,
-        SERVER_SUBSCRIBE_ADDRESS);
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        VSP_TEST_SERVER_PUBLISH_ADDRESS, VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
     /* connect */
-    ret = vsp_cmcp_client_connect(global_cmcp_client, SERVER_SUBSCRIBE_ADDRESS,
-        SERVER_PUBLISH_ADDRESS);
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, VSP_TEST_SERVER_PUBLISH_ADDRESS);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 }
 

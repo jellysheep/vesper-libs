@@ -30,8 +30,8 @@ MU_TEST(vsp_test_cmcp_message_test)
     uint16_t message_id;
 
     /* allocate message without data list */
-    cmcp_message1 = vsp_cmcp_message_create(MESSAGE_TOPIC_ID, MESSAGE_SENDER_ID,
-        MESSAGE_COMMAND_ID, NULL);
+    cmcp_message1 = vsp_cmcp_message_create(VSP_TEST_MESSAGE_TOPIC_ID,
+        VSP_TEST_MESSAGE_SENDER_ID, VSP_TEST_MESSAGE_COMMAND_ID, NULL);
     /* get binary data array length */
     data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
     /* fixed message header length 6 has to be updated if
@@ -45,24 +45,25 @@ MU_TEST(vsp_test_cmcp_message_test)
     cmcp_datalist1 = vsp_cmcp_datalist_create();
     mu_assert_abort(cmcp_datalist1 != NULL, vsp_error_str(vsp_error_num()));
     /* insert data list items */
-    ret = vsp_cmcp_datalist_add_item(cmcp_datalist1, DATALIST_ITEM1_ID,
-        DATALIST_ITEM1_LENGTH, DATALIST_ITEM1_DATA);
+    ret = vsp_cmcp_datalist_add_item(cmcp_datalist1, VSP_TEST_DATALIST_ITEM1_ID,
+        VSP_TEST_DATALIST_ITEM1_LENGTH, VSP_TEST_DATALIST_ITEM1_DATA);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    ret = vsp_cmcp_datalist_add_item(cmcp_datalist1, DATALIST_ITEM2_ID,
-        DATALIST_ITEM2_LENGTH, DATALIST_ITEM2_DATA);
+    ret = vsp_cmcp_datalist_add_item(cmcp_datalist1, VSP_TEST_DATALIST_ITEM2_ID,
+        VSP_TEST_DATALIST_ITEM2_LENGTH, VSP_TEST_DATALIST_ITEM2_DATA);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 
     /* allocate message */
-    cmcp_message1 = vsp_cmcp_message_create(MESSAGE_TOPIC_ID, MESSAGE_SENDER_ID,
-        MESSAGE_COMMAND_ID, cmcp_datalist1);
+    cmcp_message1 = vsp_cmcp_message_create(VSP_TEST_MESSAGE_TOPIC_ID,
+        VSP_TEST_MESSAGE_SENDER_ID, VSP_TEST_MESSAGE_COMMAND_ID,
+        cmcp_datalist1);
 
     /* get binary data array length */
     data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
     /* fixed message header length 6 has to be updated if
      * VSP_CMCP_MESSAGE_HEADER_LENGTH is changed */
     mu_assert_abort(data_length ==
-        (DATALIST_ITEM1_LENGTH + DATALIST_ITEM2_LENGTH + 8 + 6),
-        vsp_error_str(EINVAL));
+        (VSP_TEST_DATALIST_ITEM1_LENGTH + VSP_TEST_DATALIST_ITEM2_LENGTH
+        + 8 + 6), vsp_error_str(EINVAL));
     /* allocate array */
     data_pointer = malloc(data_length);
     mu_assert_abort(data_pointer != NULL, vsp_error_str(ENOMEM));
@@ -78,21 +79,22 @@ MU_TEST(vsp_test_cmcp_message_test)
     ret = vsp_cmcp_message_get_id(cmcp_message2, VSP_CMCP_MESSAGE_TOPIC_ID,
         &message_id);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    mu_assert(message_id == MESSAGE_TOPIC_ID, vsp_error_str(EINVAL));
+    mu_assert(message_id == VSP_TEST_MESSAGE_TOPIC_ID, vsp_error_str(EINVAL));
     ret = vsp_cmcp_message_get_id(cmcp_message2, VSP_CMCP_MESSAGE_SENDER_ID,
         &message_id);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    mu_assert(message_id == MESSAGE_SENDER_ID, vsp_error_str(EINVAL));
+    mu_assert(message_id == VSP_TEST_MESSAGE_SENDER_ID, vsp_error_str(EINVAL));
     ret = vsp_cmcp_message_get_id(cmcp_message2, VSP_CMCP_MESSAGE_COMMAND_ID,
         &message_id);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    mu_assert(message_id == MESSAGE_COMMAND_ID, vsp_error_str(EINVAL));
+    mu_assert(message_id == VSP_TEST_MESSAGE_COMMAND_ID, vsp_error_str(EINVAL));
 
     /* check if invalid ID type is rejected */
     ret = vsp_cmcp_message_get_id(cmcp_message2, (vsp_cmcp_message_id_type) -1,
         &message_id);
     mu_assert(ret != 0, "Invalid ID type accepted.");
-    mu_assert(message_id == MESSAGE_COMMAND_ID, "Invalid ID type accepted.");
+    mu_assert(message_id == VSP_TEST_MESSAGE_COMMAND_ID,
+        "Invalid ID type accepted.");
 
     /* get data list from second message */
     cmcp_datalist2 = vsp_cmcp_message_get_datalist(cmcp_message2);
@@ -100,16 +102,16 @@ MU_TEST(vsp_test_cmcp_message_test)
 
     /* get back data list item and verify data */
     data_item_pointer = vsp_cmcp_datalist_get_data_item(cmcp_datalist2,
-        DATALIST_ITEM1_ID, DATALIST_ITEM1_LENGTH);
+        VSP_TEST_DATALIST_ITEM1_ID, VSP_TEST_DATALIST_ITEM1_LENGTH);
     mu_assert_abort(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
-    mu_assert(memcmp(data_item_pointer, DATALIST_ITEM1_DATA,
-        DATALIST_ITEM1_LENGTH) == 0, vsp_error_str(EINVAL));
+    mu_assert(memcmp(data_item_pointer, VSP_TEST_DATALIST_ITEM1_DATA,
+        VSP_TEST_DATALIST_ITEM1_LENGTH) == 0, vsp_error_str(EINVAL));
 
     data_item_pointer = vsp_cmcp_datalist_get_data_item(cmcp_datalist2,
-        DATALIST_ITEM2_ID, DATALIST_ITEM2_LENGTH);
+        VSP_TEST_DATALIST_ITEM2_ID, VSP_TEST_DATALIST_ITEM2_LENGTH);
     mu_assert_abort(data_item_pointer != NULL, vsp_error_str(vsp_error_num()));
-    mu_assert(memcmp(data_item_pointer, DATALIST_ITEM2_DATA,
-        DATALIST_ITEM2_LENGTH) == 0, vsp_error_str(EINVAL));
+    mu_assert(memcmp(data_item_pointer, VSP_TEST_DATALIST_ITEM2_DATA,
+        VSP_TEST_DATALIST_ITEM2_LENGTH) == 0, vsp_error_str(EINVAL));
 
     /* deallocation; cmcp_datalist2 will be freed by cmcp_message2 */
     VSP_FREE(data_pointer);

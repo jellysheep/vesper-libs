@@ -15,33 +15,33 @@ extern "C" {
 #endif /* defined __cplusplus */
 
 /** Server publish socket address. */
-#define SERVER_PUBLISH_ADDRESS "tcp://127.0.0.1:7571"
+#define VSP_TEST_SERVER_PUBLISH_ADDRESS "tcp://127.0.0.1:7571"
 /** Server subscribe socket address. */
-#define SERVER_SUBSCRIBE_ADDRESS "tcp://127.0.0.1:7572"
+#define VSP_TEST_SERVER_SUBSCRIBE_ADDRESS "tcp://127.0.0.1:7572"
 
 
 /** First data list item ID. */
-#define DATALIST_ITEM1_ID 32349
+#define VSP_TEST_DATALIST_ITEM1_ID 32349
 /** Second data list item ID. */
-#define DATALIST_ITEM2_ID 9273
+#define VSP_TEST_DATALIST_ITEM2_ID 9273
 
 /** First data list item length. */
-#define DATALIST_ITEM1_LENGTH 6
+#define VSP_TEST_DATALIST_ITEM1_LENGTH 6
 /** Second data list item length. */
-#define DATALIST_ITEM2_LENGTH 7
+#define VSP_TEST_DATALIST_ITEM2_LENGTH 7
 
 /** First data list item data. */
-#define DATALIST_ITEM1_DATA "Hello"
+#define VSP_TEST_DATALIST_ITEM1_DATA "Hello"
 /** Second data list item data. */
-#define DATALIST_ITEM2_DATA "World!"
+#define VSP_TEST_DATALIST_ITEM2_DATA "World!"
 
 
 /** Message topic ID. */
-#define MESSAGE_TOPIC_ID 28437
+#define VSP_TEST_MESSAGE_TOPIC_ID 28437
 /** Message sender ID. */
-#define MESSAGE_SENDER_ID 6391
+#define VSP_TEST_MESSAGE_SENDER_ID 6391
 /** Message command ID. */
-#define MESSAGE_COMMAND_ID 57743
+#define VSP_TEST_MESSAGE_COMMAND_ID 57743
 
 
 /** Test CMCP implementation. */
