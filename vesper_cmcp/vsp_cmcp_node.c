@@ -14,6 +14,16 @@
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
 
+/** Wall clock time in milliseconds until server receive times out.
+ * Server heartbeats can only be sent as often as the receive call times out,
+ * so this has to be set not higher than VSP_CMCP_SERVER_HEARTBEAT_TIME. */
+static const int VSP_CMCP_SERVER_TIMEOUT = 1000;
+
+/** Wall clock time in milliseconds until client receive times out.
+ * Clients wait for server heartbeats and fail establishing a connection
+ * when they time out, so this has to be set to something reasonably high. */
+static const int VSP_CMCP_CLIENT_TIMEOUT = 5000;
+
 /**
  * Send previously created message to the specified socket.
  * Blocks until message could be sent.
@@ -127,6 +137,19 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     } else {
         ret = nn_connect(cmcp_node->subscribe_socket,
             subscribe_address);
+    }
+    /* check error set by nanomsg, cleanup both sockets if failed */
+    VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
+        nn_close(cmcp_node->subscribe_socket); return -1);
+    /* set receive timeout */
+    if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
+        ret = nn_setsockopt(cmcp_node->subscribe_socket,
+            NN_SOL_SOCKET, NN_RCVTIMEO,
+            &VSP_CMCP_SERVER_TIMEOUT, sizeof(VSP_CMCP_SERVER_TIMEOUT));
+    } else {
+        ret = nn_setsockopt(cmcp_node->subscribe_socket,
+            NN_SOL_SOCKET, NN_RCVTIMEO,
+            &VSP_CMCP_CLIENT_TIMEOUT, sizeof(VSP_CMCP_CLIENT_TIMEOUT));
     }
     /* check error set by nanomsg, cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
