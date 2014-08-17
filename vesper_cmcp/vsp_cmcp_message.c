@@ -51,12 +51,15 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
 
 int vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message)
 {
+    int ret;
+
     /* check parameter */
     VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
 
     if (cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE) {
-        /* silently ignore any errors */
-        vsp_cmcp_datalist_free(cmcp_message->cmcp_datalist);
+        ret = vsp_cmcp_datalist_free(cmcp_message->cmcp_datalist);
+        VSP_ASSERT(ret == 0,
+            /* failures are silently ignored in release build */);
     }
 
     /* free memory */

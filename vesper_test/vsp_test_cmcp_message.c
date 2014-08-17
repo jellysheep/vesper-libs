@@ -153,7 +153,7 @@ MU_TEST(vsp_test_cmcp_message_test)
 
     /* get binary data array length */
     data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
-    mu_assert(data_length ==
+    mu_assert_abort(data_length ==
         (VSP_TEST_DATALIST_ITEM1_LENGTH + VSP_TEST_DATALIST_ITEM2_LENGTH
         + 8 + VSP_CMCP_MESSAGE_HEADER_LENGTH), vsp_error_str(EINVAL));
     /* allocate array */

@@ -147,7 +147,7 @@ MU_TEST(vsp_test_cmcp_datalist_test)
 
     /* get binary data array length */
     data_length = vsp_cmcp_datalist_get_data_length(global_cmcp_datalist);
-    mu_assert(data_length ==
+    mu_assert_abort(data_length ==
         (VSP_TEST_DATALIST_ITEM1_LENGTH + VSP_TEST_DATALIST_ITEM2_LENGTH + 8),
         vsp_error_str(EINVAL));
     /* allocate array */
