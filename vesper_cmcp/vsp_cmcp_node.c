@@ -6,12 +6,12 @@
  * Full license text is under the file "LICENSE" provided with this code.
  */
 
-#include "vsp_cmcp_common.h"
+#include "vsp_cmcp_node.h"
 
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 
-int vsp_cmcp_common_send_message(int socket, vsp_cmcp_message *cmcp_message)
+int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message)
 {
     int ret;
     int data_length;
@@ -45,7 +45,7 @@ int vsp_cmcp_common_send_message(int socket, vsp_cmcp_message *cmcp_message)
     return 0;
 }
 
-int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
+int vsp_cmcp_node_create_send_message(int socket, uint16_t topic_id,
     uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
 {
     int ret;
@@ -65,7 +65,7 @@ int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
     VSP_ASSERT(cmcp_message != NULL, return -1);
 
     /* send message */
-    ret = vsp_cmcp_common_send_message(socket, cmcp_message);
+    ret = vsp_cmcp_node_send_message(socket, cmcp_message);
     /* check for error, but do not directly return because of memory leak */
     VSP_ASSERT(ret == 0, success = -1);
 

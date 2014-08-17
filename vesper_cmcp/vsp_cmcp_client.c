@@ -7,7 +7,7 @@
  */
 
 #include "vsp_cmcp_client.h"
-#include "vsp_cmcp_common.h"
+#include "vsp_cmcp_node.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>

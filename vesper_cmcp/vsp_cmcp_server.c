@@ -8,7 +8,7 @@
 
 #include "vsp_cmcp_server.h"
 #include "vsp_cmcp_command.h"
-#include "vsp_cmcp_common.h"
+#include "vsp_cmcp_node.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
@@ -298,7 +298,7 @@ int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
         time_now + VSP_CMCP_SERVER_HEARTBEAT_TIME;
 
     /* send heartbeat */
-    ret = vsp_cmcp_common_create_send_message(cmcp_server->publish_socket,
+    ret = vsp_cmcp_node_create_send_message(cmcp_server->publish_socket,
         0, cmcp_server->id, VSP_CMCP_COMMAND_HEARTBEAT, NULL);
     /* check for error */
     VSP_ASSERT(ret == 0, return -1);

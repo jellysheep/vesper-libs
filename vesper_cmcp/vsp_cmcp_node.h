@@ -25,14 +25,14 @@ extern "C" {
  * Blocks until message could be sent.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_common_send_message(int socket, vsp_cmcp_message *cmcp_message);
+int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message);
 
 /**
  * Create and send message to the specified socket.
  * Blocks until message could be sent. Frees internally created message object.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_common_create_send_message(int socket, uint16_t topic_id,
+int vsp_cmcp_node_create_send_message(int socket, uint16_t topic_id,
     uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
 
 #if defined __cplusplus
