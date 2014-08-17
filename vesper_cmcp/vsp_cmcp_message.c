@@ -93,7 +93,8 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
     cmcp_message->cmcp_datalist = vsp_cmcp_datalist_create_parse(
         data_length - VSP_CMCP_MESSAGE_HEADER_LENGTH, current_data_pointer);
     /* in case of failure vsp_error_num() is already set */
-    VSP_ASSERT(cmcp_message->cmcp_datalist != NULL, return NULL);
+    VSP_ASSERT(cmcp_message->cmcp_datalist != NULL,
+        VSP_FREE(cmcp_message); return NULL);
 
     /* return struct pointer */
     return cmcp_message;
