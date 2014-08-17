@@ -12,23 +12,7 @@
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
 #include <vesper_util/vsp_util.h>
-#include <nanomsg/nn.h>
-#include <nanomsg/pubsub.h>
 #include <pthread.h>
-
-/** vsp_cmcp_client finite state machine flag. */
-typedef enum {
-    /** Sockets are not initialized and not connected. */
-    VSP_CMCP_CLIENT_UNINITIALIZED,
-    /** Sockets are initialized and connected. */
-    VSP_CMCP_CLIENT_INITIALIZED,
-    /** Message reception thread was started. */
-    VSP_CMCP_CLIENT_STARTING,
-    /** Message reception thread is running. */
-    VSP_CMCP_CLIENT_RUNNING,
-    /** Message reception thread was stopped. */
-    VSP_CMCP_CLIENT_STOPPING
-} vsp_cmcp_client_state;
 
 /** State and other data used for network connection. */
 struct vsp_cmcp_client {
@@ -40,14 +24,6 @@ struct vsp_cmcp_client {
  * Connection establishment is specified by CMCP protocol.
  * Returns non-zero and sets vsp_error_num() if failed. */
 static int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client);
-
-/** Connect to server and start message reception thread.
- * Returns non-zero and sets vsp_error_num() if failed. */
-static int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client);
-
-/** Stop message reception thread and wait until thread has finished and joined.
- * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
-static int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client);
 
 /** Event loop for message reception running in its own thread. */
 static void *vsp_cmcp_client_run(void *param);
@@ -76,24 +52,6 @@ int vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client)
     /* check parameter */
     VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    if (cmcp_client->cmcp_node->state > VSP_CMCP_CLIENT_INITIALIZED) {
-        /* worker thread is running, stop it */
-        ret = vsp_cmcp_client_stop(cmcp_client);
-        /* check for error */
-        VSP_ASSERT(ret == 0, success = -1);
-    }
-
-    if (cmcp_client->cmcp_node->state > VSP_CMCP_CLIENT_UNINITIALIZED) {
-        /* close publish socket */
-        ret = nn_close(cmcp_client->cmcp_node->publish_socket);
-        /* check error set by nanomsg */
-        VSP_ASSERT(ret == 0, success = -1);
-
-        /* close subscribe socket */
-        ret = nn_close(cmcp_client->cmcp_node->subscribe_socket);
-        /* check error set by nanomsg */
-        VSP_ASSERT(ret == 0, success = -1);
-    }
     /* free node base type */
     ret = vsp_cmcp_node_free(cmcp_client->cmcp_node);
     VSP_ASSERT(ret == 0,
@@ -109,37 +67,14 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
 {
     int ret;
 
-    /* check parameters */
-    VSP_CHECK(cmcp_client != NULL && publish_address != NULL
-        && subscribe_address != NULL, vsp_error_set_num(EINVAL); return -1);
-    /* check sockets not yet initialized */
-    VSP_CHECK(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_UNINITIALIZED,
-        vsp_error_set_num(EALREADY); return -1);
+    /* check parameter */
+    VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    /* initialize and connect publish socket */
-    cmcp_client->cmcp_node->publish_socket = nn_socket(AF_SP, NN_PUB);
-    /* check error set by nanomsg */
-    VSP_CHECK(cmcp_client->cmcp_node->publish_socket != -1, return -1);
-    /* connect socket */
-    ret = nn_connect(cmcp_client->cmcp_node->publish_socket, publish_address);
-    /* check error set by nanomsg */
-    VSP_CHECK(ret >= 0, nn_close(cmcp_client->cmcp_node->publish_socket);
-        return -1);
-
-    /* initialize and connect subscribe socket */
-    cmcp_client->cmcp_node->subscribe_socket = nn_socket(AF_SP, NN_SUB);
-    /* check error set by nanomsg, cleanup publish socket if failed */
-    VSP_CHECK(cmcp_client->cmcp_node->subscribe_socket != -1,
-        nn_close(cmcp_client->cmcp_node->publish_socket); return -1);
-    /* connect socket */
-    ret = nn_connect(cmcp_client->cmcp_node->subscribe_socket,
-        subscribe_address);
-    /* check error set by nanomsg, cleanup both sockets if failed */
-    VSP_CHECK(ret >= 0, nn_close(cmcp_client->cmcp_node->publish_socket);
-        nn_close(cmcp_client->cmcp_node->subscribe_socket); return -1);
-
-    /* set state */
-    cmcp_client->cmcp_node->state = VSP_CMCP_CLIENT_INITIALIZED;
+    /* connect sockets */
+    ret = vsp_cmcp_node_connect(cmcp_client->cmcp_node,
+        publish_address, subscribe_address);
+    /* check error */
+    VSP_CHECK(ret == 0, return -1);
 
     /* establish connection */
     ret = vsp_cmcp_client_establish_connection(cmcp_client);
@@ -147,7 +82,8 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     VSP_ASSERT(ret == 0, return -1);
 
     /* start worker thread */
-    ret = vsp_cmcp_client_start(cmcp_client);
+    ret = vsp_cmcp_node_start(cmcp_client->cmcp_node, vsp_cmcp_client_run,
+        cmcp_client);
     /* check error */
     VSP_ASSERT(ret == 0, return -1);
 
@@ -157,75 +93,6 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
 
 int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
-    return 0;
-}
-
-int vsp_cmcp_client_start(vsp_cmcp_client *cmcp_client)
-{
-    int ret;
-
-    /* check parameter */
-    VSP_ASSERT(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
-
-    /* check sockets are initialized and thread is not running */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_INITIALIZED,
-        vsp_error_set_num(EINVAL); return -1);
-
-    /* lock state mutex */
-    pthread_mutex_lock(&cmcp_client->cmcp_node->mutex);
-
-    /* mark thread as starting */
-    cmcp_client->cmcp_node->state = VSP_CMCP_CLIENT_STARTING;
-
-    /* start reception thread */
-    ret = pthread_create(&cmcp_client->cmcp_node->thread, NULL,
-        vsp_cmcp_client_run, (void*) cmcp_client);
-
-    /* check for pthread errors */
-    VSP_ASSERT(ret == 0, pthread_mutex_unlock(&cmcp_client->cmcp_node->mutex);
-        vsp_error_set_num(ret); return -1);
-
-    /* wait until thread is running */
-    ret = pthread_cond_wait(&cmcp_client->cmcp_node->condition,
-        &cmcp_client->cmcp_node->mutex);
-    /* unlock mutex again */
-    pthread_mutex_unlock(&cmcp_client->cmcp_node->mutex);
-    /* check for condition waiting errors */
-    VSP_ASSERT(ret == 0, vsp_error_set_num(ret); return -1);
-
-    /* check thread is running */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_RUNNING,
-        vsp_error_set_num(EINVAL); return -1);
-
-    /* success */
-    return 0;
-}
-
-int vsp_cmcp_client_stop(vsp_cmcp_client *cmcp_client)
-{
-    int ret;
-
-    /* check parameter */
-    VSP_ASSERT(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
-
-    /* check thread is running */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_RUNNING,
-        vsp_error_set_num(EINVAL); return -1);
-
-    /* stop reception thread */
-    cmcp_client->cmcp_node->state = VSP_CMCP_CLIENT_STOPPING;
-
-    /* wait for thread to join */
-    ret = pthread_join(cmcp_client->cmcp_node->thread, NULL);
-
-    /* check thread has successfully stopped */
-    VSP_ASSERT(ret == 0, vsp_error_set_num(EINTR); return -1);
-
-    /* check state */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_INITIALIZED,
-        vsp_error_set_num(EINTR); return -1);
-
-    /* success */
     return 0;
 }
 
@@ -239,29 +106,29 @@ void *vsp_cmcp_client_run(void *param)
     cmcp_client = (vsp_cmcp_client*) param;
 
     /* check sockets are initialized and thread was started */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_STARTING,
+    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_NODE_STARTING,
         vsp_error_set_num(EINVAL); return (void*) -1);
 
     /* lock mutex */
     pthread_mutex_lock(&cmcp_client->cmcp_node->mutex);
     /* mark thread as running */
-    cmcp_client->cmcp_node->state = VSP_CMCP_CLIENT_RUNNING;
+    cmcp_client->cmcp_node->state = VSP_CMCP_NODE_RUNNING;
     /* signal waiting thread */
     pthread_cond_signal(&cmcp_client->cmcp_node->condition);
     /* unlock mutex */
     pthread_mutex_unlock(&cmcp_client->cmcp_node->mutex);
 
     /* reception loop */
-    while (cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_RUNNING) {
+    while (cmcp_client->cmcp_node->state == VSP_CMCP_NODE_RUNNING) {
 
     }
 
     /* check thread was requested to stop */
-    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_CLIENT_STOPPING,
+    VSP_ASSERT(cmcp_client->cmcp_node->state == VSP_CMCP_NODE_STOPPING,
         vsp_error_set_num(EINTR); return (void*) -1);
 
     /* signal that thread has stopped */
-    cmcp_client->cmcp_node->state = VSP_CMCP_CLIENT_INITIALIZED;
+    cmcp_client->cmcp_node->state = VSP_CMCP_NODE_INITIALIZED;
 
     /* success */
     return (void*) 0;

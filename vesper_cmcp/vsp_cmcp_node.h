@@ -30,6 +30,22 @@ typedef enum {
     VSP_CMCP_NODE_CLIENT
 } vsp_cmcp_node_type;
 
+/** vsp_cmcp_node finite state machine flag. */
+typedef enum {
+    /** Sockets are not initialized and not connected. */
+    VSP_CMCP_NODE_UNINITIALIZED,
+    /** Sockets are initialized and connected. */
+    VSP_CMCP_NODE_INITIALIZED,
+    /** Message reception thread was started. */
+    VSP_CMCP_NODE_STARTING,
+    /** Message reception thread was stopped. */
+    VSP_CMCP_NODE_STOPPING,
+    /** Message reception thread is running. */
+    VSP_CMCP_NODE_RUNNING,
+    /** Lowest state number not used by CMCP nodes. */
+    VSP_CMCP_NODE_MAX_STATE
+} vsp_cmcp_node_state;
+
 /** State and other data used for network connection.
  * Base type for vsp_cmcp_server and vsp_cmcp_client.
  * This structure implements basic functions of a finite-state machine. */
@@ -40,7 +56,7 @@ struct vsp_cmcp_node {
      * Must not equal broadcast topic ID. */
     uint16_t id;
     /** Finite state machine flag. */
-    volatile int state;
+    volatile vsp_cmcp_node_state state;
     /** Mutex locking state changes. */
     pthread_mutex_t mutex;
     /** Condition variable used to wait for state changes. */
@@ -58,7 +74,7 @@ typedef struct vsp_cmcp_node vsp_cmcp_node;
 
 /**
  * Create new vsp_cmcp_node object.
- * The state of the newly created node is set to zero.
+ * The state of the newly created node is set to VSP_CMCP_NODE_UNINITIALIZED.
  * Returned pointer should be freed with vsp_cmcp_node_free().
  * Returns NULL and sets vsp_error_num() if failed.
  */
@@ -70,6 +86,22 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type);
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
+
+/**
+ * Initialize and connect sockets.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
+    const char *publish_address, const char *subscribe_address);
+
+/** Start message reception thread and wait until thread has started.
+ * Returns non-zero and sets vsp_error_num() if failed. */
+int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node,
+    void *(*start_routine) (void *), void *param);
+
+/** Stop message reception thread and wait until thread has finished and joined.
+ * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
+int vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node);
 
 /**
  * Create and send message to the node's publish socket.
