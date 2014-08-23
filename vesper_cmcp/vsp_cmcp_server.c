@@ -16,8 +16,8 @@
 #include <vesper_util/vsp_util.h>
 #include <pthread.h>
 
-/** Regular time in seconds between two heartbeat signals (type double). */
-#define VSP_CMCP_SERVER_HEARTBEAT_TIME 1.0
+/** Wall clock time in milliseconds between two server heartbeat signals. */
+#define VSP_CMCP_SERVER_HEARTBEAT_TIME 1000
 
 /** State and other data used for network connection. */
 struct vsp_cmcp_server {
@@ -150,7 +150,7 @@ int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
 
     /* update time of next heartbeat */
     cmcp_server->time_next_heartbeat =
-        time_now + VSP_CMCP_SERVER_HEARTBEAT_TIME;
+        time_now + (VSP_CMCP_SERVER_HEARTBEAT_TIME / 1000.0);
 
     /* send heartbeat */
     ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,

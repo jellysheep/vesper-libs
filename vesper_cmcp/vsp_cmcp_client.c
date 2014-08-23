@@ -14,6 +14,9 @@
 #include <vesper_util/vsp_util.h>
 #include <pthread.h>
 
+/** Wall clock time in milliseconds between two client heartbeat signals. */
+#define VSP_CMCP_CLIENT_HEARTBEAT_TIME 1000
+
 /** State and other data used for network connection. */
 struct vsp_cmcp_client {
     /** Basic node and finite-state machine data. */
