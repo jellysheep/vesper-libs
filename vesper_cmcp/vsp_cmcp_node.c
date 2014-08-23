@@ -27,6 +27,18 @@ static const int VSP_CMCP_NODE_TIMEOUT = 1000;
  */
 int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message);
 
+/**
+ * Free internal message and message buffer if memory is allocated.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+int vsp_cmcp_node_free_message(vsp_cmcp_node *cmcp_node);
+
+/**
+ * Subscribe the node to the specified topic ID.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
+
 vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
 {
     vsp_cmcp_node *cmcp_node;
@@ -55,6 +67,8 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
     cmcp_node->subscribe_socket = -1;
     pthread_mutex_init(&cmcp_node->mutex, NULL);
     pthread_cond_init(&cmcp_node->condition, NULL);
+    cmcp_node->message_buffer = NULL;
+    cmcp_node->cmcp_message = NULL;
     /* return struct pointer */
     return cmcp_node;
 }
@@ -62,9 +76,12 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
 int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node)
 {
     int ret;
+    int success;
 
     /* check parameter */
     VSP_CHECK(cmcp_node != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    success = 0;
 
     /* clean up socket connections */
     if (cmcp_node->state > VSP_CMCP_NODE_INITIALIZED) {
@@ -89,6 +106,12 @@ int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node)
     /* clean up mutex and condition variable */
     pthread_mutex_destroy(&cmcp_node->mutex);
     pthread_cond_destroy(&cmcp_node->condition);
+
+    /* free message and message buffer */
+    ret = vsp_cmcp_node_free_message(cmcp_node);
+    /* check for error */
+    VSP_ASSERT(ret == 0,
+        /* failures are silently ignored in release build */);
 
     /* free memory */
     VSP_FREE(cmcp_node);
@@ -143,6 +166,11 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
         &VSP_CMCP_NODE_TIMEOUT, sizeof(VSP_CMCP_NODE_TIMEOUT));
     /* check error set by nanomsg, cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
+        nn_close(cmcp_node->subscribe_socket); return -1);
+    /* subscribe to broadcast ID */
+    ret = vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_BROADCAST_TOPIC_ID);
+    /* check error set by nanomsg, cleanup both sockets if failed */
+    VSP_CHECK(ret == 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
 
     /* set state */
@@ -286,4 +314,79 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
 
     /* success */
     return success;
+}
+
+vsp_cmcp_message *vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node)
+{
+    int ret;
+    int data_length;
+    vsp_cmcp_message *cmcp_message;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL, vsp_error_set_num(EINVAL); return NULL);
+
+    /* free message and message buffer */
+    ret = vsp_cmcp_node_free_message(cmcp_node);
+    /* check for error */
+    VSP_ASSERT(ret == 0, return NULL);
+
+    /* try to receive message */
+    data_length = nn_recv(cmcp_node->subscribe_socket,
+        &cmcp_node->message_buffer, NN_MSG, 0);
+    /* check for error */
+    VSP_CHECK(data_length > 0, cmcp_node->message_buffer = NULL; return NULL);
+
+    /* parse message */
+    cmcp_message = vsp_cmcp_message_create_parse(data_length,
+        cmcp_node->message_buffer);
+    /* check for error */
+    VSP_CHECK(cmcp_message != NULL, return NULL);
+
+    return cmcp_message;
+}
+
+int vsp_cmcp_node_free_message(vsp_cmcp_node *cmcp_node)
+{
+    int ret;
+    int success;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    success = 0;
+
+    /* free CMCP message */
+    if (cmcp_node->cmcp_message != NULL) {
+        ret = vsp_cmcp_message_free(cmcp_node->cmcp_message);
+        cmcp_node->cmcp_message = NULL;
+        /* check for error */
+        VSP_ASSERT(ret == 0, success = -1);
+    }
+
+    /* free message buffer */
+    if (cmcp_node->message_buffer != NULL) {
+        ret = nn_freemsg(cmcp_node->message_buffer);
+        cmcp_node->message_buffer = NULL;
+        /* check for error */
+        VSP_ASSERT(ret == 0, success = -1);
+    }
+
+    return success;
+}
+
+int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
+{
+    int ret;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    /* subscribe to topic ID */
+    ret = nn_setsockopt(cmcp_node->subscribe_socket, NN_SUB, NN_SUB_SUBSCRIBE,
+        &topic_id, sizeof(topic_id));
+    /* check for error */
+    VSP_ASSERT(ret == 0, return -1);
+
+    /* success */
+    return 0;
 }

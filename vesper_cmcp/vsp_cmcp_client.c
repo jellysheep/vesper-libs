@@ -7,15 +7,20 @@
  */
 
 #include "vsp_cmcp_client.h"
+#include "vsp_cmcp_command.h"
 #include "vsp_cmcp_node.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
+#include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
 #include <pthread.h>
 
 /** Wall clock time in milliseconds between two client heartbeat signals. */
 #define VSP_CMCP_CLIENT_HEARTBEAT_TIME 1000
+
+/** Wall clock time in milliseconds between two client heartbeat signals. */
+#define VSP_CMCP_CLIENT_CONNECTION_TIMEOUT 10000
 
 /** State and other data used for network connection. */
 struct vsp_cmcp_client {
@@ -73,7 +78,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     /* check parameter */
     VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    /* connect sockets */
+    /* connect sockets; the node's state is checked by this function */
     ret = vsp_cmcp_node_connect(cmcp_client->cmcp_node,
         publish_address, subscribe_address);
     /* check error */
@@ -82,7 +87,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     /* establish connection */
     ret = vsp_cmcp_client_establish_connection(cmcp_client);
     /* check error */
-    VSP_ASSERT(ret == 0, return -1);
+    VSP_CHECK(ret == 0, return -1);
 
     /* start worker thread */
     ret = vsp_cmcp_node_start(cmcp_client->cmcp_node, vsp_cmcp_client_run,
@@ -96,6 +101,55 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
 
 int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
+    int ret;
+    vsp_cmcp_message *cmcp_message;
+    double time_now, time_connection_timeout;
+    uint16_t topic_id, sender_id, command_id;
+
+    /* check parameter */
+    VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    /* initialize IDs */
+    topic_id = 0;
+    sender_id = 0;
+    command_id = 0;
+
+    /* start measuring time for heartbeat timeout */
+    time_now = vsp_time_real();
+    time_connection_timeout =
+        time_now + (VSP_CMCP_CLIENT_CONNECTION_TIMEOUT / 1000.0);
+
+    do {
+        /* try to receive message */
+        cmcp_message = vsp_cmcp_node_recv_message(cmcp_client->cmcp_node);
+        /* measure passed time */
+        time_now = vsp_time_real();
+        /* check error: in case of failure just retry */
+        VSP_CHECK(cmcp_message != NULL, continue);
+        /* get and check message data; in case of failure just retry */
+        ret = vsp_cmcp_message_get_id(cmcp_message,
+            VSP_CMCP_MESSAGE_TOPIC_ID, &topic_id);
+        VSP_CHECK(ret == 0, continue);
+        ret = vsp_cmcp_message_get_id(cmcp_message,
+            VSP_CMCP_MESSAGE_SENDER_ID, &sender_id);
+        VSP_CHECK(ret == 0, continue);
+        ret = vsp_cmcp_message_get_id(cmcp_message,
+            VSP_CMCP_MESSAGE_COMMAND_ID, &command_id);
+        VSP_CHECK(ret == 0, continue);
+        /* check if server heartbeat received, else retry */
+        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
+            && sender_id != 0 && (sender_id & 1) == 0
+            && command_id == VSP_CMCP_COMMAND_HEARTBEAT, continue);
+        /* success, do not retry */
+        break;
+    } while (time_now < time_connection_timeout);
+
+    /* check for error */
+    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(ENOTCONN); return -1);
+
+    /* server heartbeat received */
+
+    /* success */
     return 0;
 }
 
