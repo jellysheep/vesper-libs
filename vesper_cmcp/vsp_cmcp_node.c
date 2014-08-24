@@ -101,7 +101,7 @@ int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node)
 
     /* free memory */
     VSP_FREE(cmcp_node);
-    return 0;
+    return success;
 }
 
 int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
