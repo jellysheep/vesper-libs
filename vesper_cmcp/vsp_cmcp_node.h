@@ -67,10 +67,6 @@ struct vsp_cmcp_node {
     int subscribe_socket;
     /** Reception thread. */
     pthread_t thread;
-    /** Received message buffer, automatically freed after use. */
-    void *message_buffer;
-    /** Received message, automatically freed after use. */
-    vsp_cmcp_message *cmcp_message;
 };
 
 /** Define type vsp_cmcp_node to avoid 'struct' keyword. */
@@ -119,12 +115,11 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
 /**
  * Wait for and receive message from the node's subscribe socket.
  * Blocks until message could be received.
- * Returns a pointer to an internally created message object.
- * The internal message object is freed agein when vsp_cmcp_node_recv_message()
- * or vsp_cmcp_node_free() are invoked.
- * Returns NULL and sets vsp_error_num() if failed.
+ * Stores a pointer to the message data and returns the data length.
+ * The message data has to be freed with nn_freemsg().
+ * Returns negative value and sets vsp_error_num() if failed.
  */
-vsp_cmcp_message *vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node);
+int vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node, void **message_buffer);
 
 #if defined __cplusplus
 }
