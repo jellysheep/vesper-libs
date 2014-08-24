@@ -125,23 +125,26 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         /* measure passed time */
         time_now = vsp_time_real();
         /* check error: in case of failure just retry */
-        VSP_CHECK(cmcp_message != NULL, continue);
+        VSP_CHECK(cmcp_message != NULL, goto retry);
         /* get and check message data; in case of failure just retry */
         ret = vsp_cmcp_message_get_id(cmcp_message,
             VSP_CMCP_MESSAGE_TOPIC_ID, &topic_id);
-        VSP_CHECK(ret == 0, continue);
+        VSP_ASSERT(ret == 0, goto retry);
         ret = vsp_cmcp_message_get_id(cmcp_message,
             VSP_CMCP_MESSAGE_SENDER_ID, &sender_id);
-        VSP_CHECK(ret == 0, continue);
+        VSP_ASSERT(ret == 0, goto retry);
         ret = vsp_cmcp_message_get_id(cmcp_message,
             VSP_CMCP_MESSAGE_COMMAND_ID, &command_id);
-        VSP_CHECK(ret == 0, continue);
+        VSP_ASSERT(ret == 0, goto retry);
         /* check if server heartbeat received, else retry */
         VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
             && sender_id != 0 && (sender_id & 1) == 0
-            && command_id == VSP_CMCP_COMMAND_HEARTBEAT, continue);
+            && command_id == VSP_CMCP_COMMAND_HEARTBEAT, goto retry);
         /* success, do not retry */
         break;
+        /* failure: retry */
+        retry:
+            continue;
     } while (time_now < time_connection_timeout);
 
     /* check for error */
