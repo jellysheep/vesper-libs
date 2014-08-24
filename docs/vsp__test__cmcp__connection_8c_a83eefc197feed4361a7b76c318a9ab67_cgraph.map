@@ -1,8 +1,10 @@
 <map id="vsp_test_cmcp_connection_setup" name="vsp_test_cmcp_connection_setup">
 <area shape="rect" id="node2" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="235,5,403,32"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="269,56,368,83"/>
-<area shape="rect" id="node6" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="265,107,373,133"/>
-<area shape="rect" id="node7" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="237,157,400,184"/>
-<area shape="rect" id="node3" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="451,107,570,133"/>
-<area shape="rect" id="node4" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="459,5,562,32"/>
+<area shape="rect" id="node7" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="269,56,368,83"/>
+<area shape="rect" id="node8" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="265,107,373,133"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="237,157,400,184"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="451,107,611,133"/>
+<area shape="rect" id="node6" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="479,5,582,32"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="659,81,792,108"/>
+<area shape="rect" id="node5" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="666,132,785,159"/>
 </map>

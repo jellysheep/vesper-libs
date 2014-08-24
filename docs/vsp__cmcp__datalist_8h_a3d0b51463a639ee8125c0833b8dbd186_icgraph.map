@@ -1,5 +1,5 @@
 <map id="vsp_cmcp_datalist_create_parse" name="vsp_cmcp_datalist_create_parse">
-<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a6af8359b56fddd50363d49574586cf80" title="Create new vsp_cmcp_message object from received binary data. " alt="" coords="230,5,415,46"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="281,71,365,97"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__message_8c.html#a53c1a1446fd83a860f826f27cd6dd715" title="Create message and test creating binary data and parse it. " alt="" coords="465,12,549,39"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a6af8359b56fddd50363d49574586cf80" title="Create new vsp_cmcp_message object from received binary data. " alt="" coords="228,5,413,47"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__datalist_8c.html#ac0138c288f71832748c0463a149f823f" title="Test to invoke data list functions with invalid parameters and check if they behave correctly and do ..." alt="" coords="279,71,363,98"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__message_8c.html#abc2facfd1744ec12ffd18efa462d0567" title="Test to invoke message functions with invalid parameters and check if they behave correctly and do no..." alt="" coords="461,13,545,39"/>
 </map>

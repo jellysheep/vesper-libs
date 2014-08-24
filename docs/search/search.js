@@ -16,7 +16,7 @@ var indexSectionsWithContent =
   6: "v",
   7: "v",
   8: "v",
-  9: "dimsv",
+  9: "iv",
   10: "c"
 };
 

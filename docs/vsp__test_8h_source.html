@@ -105,55 +105,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined __cplusplus */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/** Server publish socket address. */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a7d63f7b478aef2fa2e5700ee5531d7d9">   18</a></span>&#160;<span class="preprocessor">#define SERVER_PUBLISH_ADDRESS &quot;tcp://127.0.0.1:7571&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/** Server subscribe socket address. */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a5153e30084813987e26f05abd280eb66">   20</a></span>&#160;<span class="preprocessor">#define SERVER_SUBSCRIBE_ADDRESS &quot;tcp://127.0.0.1:7572&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/** First data list item ID. */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a695bfbbdb7ae55bf99fa1cc99d154296">   24</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM1_ID 32349</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/** Second data list item ID. */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a543be46d870535cd23705b478e308de5">   26</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM2_ID 9273</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/** First data list item length. */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a1f38c76158628dce25f57ff406c2272f">   29</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM1_LENGTH 6</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/** Second data list item length. */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a2c1677011fb6603adc20456947d23f6a">   31</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM2_LENGTH 7</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/** First data list item data. */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a239aabc520434360a3cf66b544d80fde">   34</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM1_DATA &quot;Hello&quot;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/** Second data list item data. */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a2450abb7ed64bbc1022d0a07a914256c">   36</a></span>&#160;<span class="preprocessor">#define DATALIST_ITEM2_DATA &quot;World!&quot;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/** Message topic ID. */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#acd0ddc1f1b34ce3cfb41e9171eafeb3b">   40</a></span>&#160;<span class="preprocessor">#define MESSAGE_TOPIC_ID 28437</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/** Message sender ID. */</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a2d80059da1f64da49b9cb089d1c72f2d">   42</a></span>&#160;<span class="preprocessor">#define MESSAGE_SENDER_ID 6391</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/** Message command ID. */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#af95dcd809a30bd4457f8ed8ee1ffa967">   44</a></span>&#160;<span class="preprocessor">#define MESSAGE_COMMAND_ID 57743</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/** Test CMCP implementation. */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_connection);<span class="comment"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/** Test data list implementation. */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_datalist);<span class="comment"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/** Test CMCP message implementation. */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_message);<span class="comment"></span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/** Test internal utility functions. */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_util);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#if defined __cplusplus</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined __cplusplus */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/** Function did not fail when invoked with invalid (out of range) parameter. */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a28ba7e13d891a1876fc0a4478bd91495">   18</a></span>&#160;<span class="preprocessor">#define VSP_TEST_INVALID_PARAMETER_ACCEPTED &quot;Invalid parameter was accepted.&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/** Server publish socket address. */</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a2f4ad4ecbcdf4a23d293382a4ddb9019">   22</a></span>&#160;<span class="preprocessor">#define VSP_TEST_SERVER_PUBLISH_ADDRESS &quot;tcp://127.0.0.1:7571&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/** Server subscribe socket address. */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a13c379f4484f5b73f6af84276f1a471a">   24</a></span>&#160;<span class="preprocessor">#define VSP_TEST_SERVER_SUBSCRIBE_ADDRESS &quot;tcp://127.0.0.1:7572&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/** First data list item ID. */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#af92de2d6b33d4a8440720d760c45596a">   28</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM1_ID 32349</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/** Second data list item ID. */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a4622ec57fc30ca198ed74c871eacb896">   30</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM2_ID 9273</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/** First data list item length. */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a043417f26aad5a5824df64563d4aa2a1">   33</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM1_LENGTH 6</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/** Second data list item length. */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a1a23247470c46fdd912edf0bfe89b8b4">   35</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM2_LENGTH 7</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/** First data list item data. */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#aaf14d0eb21bfc32448cf5b136bd42cc3">   38</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM1_DATA &quot;Hello&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/** Second data list item data. */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#ad38b91238389c24acb46828a57bb67ad">   40</a></span>&#160;<span class="preprocessor">#define VSP_TEST_DATALIST_ITEM2_DATA &quot;World!&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/** Message topic ID. */</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#a77c89b877e7cafcecbcd1e900cd54564">   44</a></span>&#160;<span class="preprocessor">#define VSP_TEST_MESSAGE_TOPIC_ID 28437</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/** Message sender ID. */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#ad8e1cd6edbcc3b339c1cfba7f403da83">   46</a></span>&#160;<span class="preprocessor">#define VSP_TEST_MESSAGE_SENDER_ID 6391</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/** Message command ID. */</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="vsp__test_8h.html#addf710143bead3e50f0f4efcb2d5adc2">   48</a></span>&#160;<span class="preprocessor">#define VSP_TEST_MESSAGE_COMMAND_ID 57743</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/** Test CMCP implementation. */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_connection);<span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/** Test data list implementation. */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_datalist);<span class="comment"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/** Test CMCP message implementation. */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_cmcp_message);<span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/** Test internal utility functions. */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a>(vsp_test_util);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined VSP_TEST_H_INCLUDED */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="vsp__test_8h_html_a07258d78cf9d9101765ff46fa3d3751f"><div class="ttname"><a href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a></div><div class="ttdeci">MU_TEST_SUITE(vsp_test_cmcp_connection)</div><div class="ttdoc">Test CMCP implementation. </div><div class="ttdef"><b>Definition:</b> <a href="vsp__test__cmcp__connection_8c_source.html#l00099">vsp_test_cmcp_connection.c:99</a></div></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#if defined __cplusplus</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined __cplusplus */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined VSP_TEST_H_INCLUDED */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="vsp__test_8h_html_a07258d78cf9d9101765ff46fa3d3751f"><div class="ttname"><a href="vsp__test_8h.html#a07258d78cf9d9101765ff46fa3d3751f">MU_TEST_SUITE</a></div><div class="ttdeci">MU_TEST_SUITE(vsp_test_cmcp_connection)</div><div class="ttdoc">Test CMCP implementation. </div><div class="ttdef"><b>Definition:</b> <a href="vsp__test__cmcp__connection_8c_source.html#l00171">vsp_test_cmcp_connection.c:171</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 10 2014 17:43:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

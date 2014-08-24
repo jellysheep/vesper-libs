@@ -1,8 +1,11 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="139,5,301,32"/>
-<area shape="rect" id="node4" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="171,56,269,83"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="166,107,274,133"/>
-<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="145,157,295,184"/>
-<area shape="rect" id="node3" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="357,5,475,32"/>
-<area shape="rect" id="node7" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="349,157,483,184"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="137,5,300,32"/>
+<area shape="rect" id="node6" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="169,56,268,83"/>
+<area shape="rect" id="node7" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="165,107,273,133"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="144,157,293,184"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="348,5,508,32"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="753,132,887,159"/>
+<area shape="rect" id="node5" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="571,56,690,83"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__node_8h.html#a1167e9ff2773e0a497c5c25a37d39e34" title="Free vsp_cmcp_node object. " alt="" coords="355,157,501,184"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__node_8h.html#a20071bc5474786b9f6086ab75ebd7370" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="556,208,705,235"/>
 </map>

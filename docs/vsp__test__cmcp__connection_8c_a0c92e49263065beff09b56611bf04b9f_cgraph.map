@@ -1,9 +1,12 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="139,31,307,57"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="173,81,272,108"/>
-<area shape="rect" id="node6" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="169,132,277,159"/>
-<area shape="rect" id="node7" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="145,183,300,209"/>
-<area shape="rect" id="node3" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="362,5,481,32"/>
-<area shape="rect" id="node4" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="370,56,473,83"/>
-<area shape="rect" id="node8" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="355,183,488,209"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="137,5,305,32"/>
+<area shape="rect" id="node7" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="172,56,271,83"/>
+<area shape="rect" id="node8" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="167,107,275,133"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="144,157,299,184"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="353,5,513,32"/>
+<area shape="rect" id="node6" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="382,56,485,83"/>
+<area shape="rect" id="node4" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="759,132,892,159"/>
+<area shape="rect" id="node5" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="577,56,695,83"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__node_8h.html#a1167e9ff2773e0a497c5c25a37d39e34" title="Free vsp_cmcp_node object. " alt="" coords="360,157,507,184"/>
+<area shape="rect" id="node11" href="$vsp__cmcp__node_8h.html#a20071bc5474786b9f6086ab75ebd7370" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="561,208,711,235"/>
 </map>

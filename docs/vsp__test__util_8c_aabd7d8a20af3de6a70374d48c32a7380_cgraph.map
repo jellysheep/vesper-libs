@@ -1,4 +1,4 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="139,5,242,32"/>
-<area shape="rect" id="node3" href="$vsp__time_8h.html#a38aef29465773d6403c6ae8554d06cef" title="Get the amount of CPU time used by the current process in seconds. " alt="" coords="139,56,242,83"/>
+<area shape="rect" id="node2" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="137,5,240,32"/>
+<area shape="rect" id="node3" href="$vsp__time_8h.html#a38aef29465773d6403c6ae8554d06cef" title="Get the amount of CPU time used by the current process in seconds. " alt="" coords="137,56,240,83"/>
 </map>

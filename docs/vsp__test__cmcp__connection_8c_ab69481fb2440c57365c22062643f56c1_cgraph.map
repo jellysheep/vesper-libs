@@ -1,0 +1,9 @@
+<map id="MU_TEST" name="MU_TEST">
+<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="137,40,287,67"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="335,155,508,182"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="775,91,908,118"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a1167e9ff2773e0a497c5c25a37d39e34" title="Free vsp_cmcp_node object. " alt="" coords="348,40,495,67"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__node_8h.html#a20071bc5474786b9f6086ab75ebd7370" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="567,66,716,92"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="556,167,727,194"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__node_8h.html#a60200672cc9e2b861e3ad338156105cd" title="Start message reception thread and wait until thread has started. " alt="" coords="566,218,717,244"/>
+</map>

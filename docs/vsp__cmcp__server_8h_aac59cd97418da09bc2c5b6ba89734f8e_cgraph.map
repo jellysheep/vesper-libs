@@ -1,4 +1,6 @@
 <map id="vsp_cmcp_server_create" name="vsp_cmcp_server_create">
-<area shape="rect" id="node2" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="222,5,341,32"/>
-<area shape="rect" id="node3" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="230,56,333,83"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="221,31,381,57"/>
+<area shape="rect" id="node5" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="250,81,353,108"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="429,5,563,32"/>
+<area shape="rect" id="node4" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="437,56,555,83"/>
 </map>

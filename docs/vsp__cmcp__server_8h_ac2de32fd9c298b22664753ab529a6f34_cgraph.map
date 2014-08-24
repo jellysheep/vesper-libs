@@ -1,3 +1,5 @@
 <map id="vsp_cmcp_server_bind" name="vsp_cmcp_server_bind">
-<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="211,5,344,32"/>
+<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="428,23,561,50"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="209,23,380,50"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a60200672cc9e2b861e3ad338156105cd" title="Start message reception thread and wait until thread has started. " alt="" coords="219,74,370,101"/>
 </map>

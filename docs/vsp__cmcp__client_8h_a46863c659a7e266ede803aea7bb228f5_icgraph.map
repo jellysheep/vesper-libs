@@ -1,5 +1,5 @@
 <map id="vsp_cmcp_client_free" name="vsp_cmcp_client_free">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="203,5,384,46"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="251,71,335,97"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="432,12,563,39"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="203,5,384,47"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="251,71,335,98"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="432,13,563,39"/>
 </map>

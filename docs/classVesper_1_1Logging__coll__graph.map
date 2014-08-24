@@ -1,5 +1,5 @@
 <map id="Vesper::Logging" name="Vesper::Logging">
-<area shape="rect" id="node2" href="$classVesper_1_1Vout.html" title="Vesper::Vout" alt="" coords="83,232,181,259"/>
-<area shape="rect" id="node3" href="$structVesper_1_1LoggingType_1_1LoggingPipe.html" title="Vesper::LoggingType\l::LoggingPipe" alt="" coords="129,113,273,154"/>
-<area shape="rect" id="node4" href="$structVesper_1_1LoggingType_1_1MessagePipe.html" title="Vesper::LoggingType\l::MessagePipe" alt="" coords="174,6,319,47"/>
+<area shape="rect" id="node2" href="$classVesper_1_1Vout.html" title="Vesper::Vout" alt="" coords="83,228,182,255"/>
+<area shape="rect" id="node3" href="$structVesper_1_1LoggingType_1_1LoggingPipe.html" title="Vesper::LoggingType\l::LoggingPipe" alt="" coords="129,109,275,151"/>
+<area shape="rect" id="node4" href="$structVesper_1_1LoggingType_1_1MessagePipe.html" title="Vesper::LoggingType\l::MessagePipe" alt="" coords="175,5,320,47"/>
 </map>

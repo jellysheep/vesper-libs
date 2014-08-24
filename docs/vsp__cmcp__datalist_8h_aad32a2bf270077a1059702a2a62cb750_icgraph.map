@@ -1,3 +1,5 @@
 <map id="vsp_cmcp_datalist_create" name="vsp_cmcp_datalist_create">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__datalist_8c.html#a0bcdbcb8ba5192b6e05f32aa212c6a45" title="Create data list and test adding and reading items. " alt="" coords="230,5,314,32"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__datalist_8c.html#a83e40b8c484d81f753b708be4b53c4ba" title="Create global global_cmcp_datalist object. " alt="" coords="228,5,388,47"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__message_8c.html#abc2facfd1744ec12ffd18efa462d0567" title="Test to invoke message functions with invalid parameters and check if they behave correctly and do no..." alt="" coords="266,71,350,98"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__datalist_8c.html#a090cd0507591fae691f4268b4f843bc9" title="Test data list implementation. " alt="" coords="436,13,567,39"/>
 </map>
