@@ -17,13 +17,13 @@ extern "C" {
 #endif /* defined __cplusplus */
 
 /**
- * Get a pseudo-random 32 bit integer value.
+ * Get a pseudo-random 64 bit integer value.
  * This function is not thread-safe and should not be called by multiple threads
  * at the same time.
  * The pseudo-random number generator is implemented as a linear feedback shift
  * register, so this function never returns zero value (all bits cleared).
  */
-uint32_t vsp_random_get(void);
+uint64_t vsp_random_get(void);
 
 #if defined __cplusplus
 }

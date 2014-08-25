@@ -18,12 +18,12 @@
   #include <unistd.h>
 #endif
 
-/** Initialize 32 bit seed for pseudo-random number generator. */
+/** Initialize 64 bit seed for pseudo-random number generator. */
 static void vsp_random_initialize(void);
 
 /** Linear feedback shift value.
  * Must not be zero, so is set to zero until initialized. */
-static uint32_t vsp_random_value = {0};
+static uint64_t vsp_random_value = {0};
 
 void vsp_random_initialize(void)
 {
@@ -40,28 +40,28 @@ void vsp_random_initialize(void)
     realtime = vsp_time_real();
     realtime_int = *(uint64_t*) &realtime;
     #if defined(_WIN32)
-        pid = (uint64_t) GetCurrentProcessId();
+        pid = (uint32_t) GetCurrentProcessId();
     #else
-        pid = (uint64_t) getpid();
+        pid = (uint32_t) getpid();
     #endif
     /* mix random data into seed */
     seed = realtime_int;
     seed ^= pid;
-    seed ^= (uint32_t) (seed >> 32);
+    seed ^= (pid << 32);
     /* store seed */
-    vsp_random_value = (uint32_t) seed;
+    vsp_random_value = seed;
 }
 
-uint32_t vsp_random_get(void)
+uint64_t vsp_random_get(void)
 {
-    uint32_t bit;
+    uint64_t bit;
     /* initialize generator seed */
     vsp_random_initialize();
     /* generate next linear feedback shift value bit */
-    /* uses xor from bits 32, 22, 2, 1 */
-    bit = ((vsp_random_value >> 0) ^ (vsp_random_value >> 10)
-        ^ (vsp_random_value >> 30) ^ (vsp_random_value >> 31)) & 1;
+    /* uses xor from bits 64, 63, 61, 60 */
+    bit = ((vsp_random_value >> 0) ^ (vsp_random_value >> 1)
+        ^ (vsp_random_value >> 3) ^ (vsp_random_value >> 4)) & 1;
     /* update and return value */
-    vsp_random_value = (vsp_random_value >> 1) | (bit << 31);
+    vsp_random_value = (vsp_random_value >> 1) | (bit << 63);
     return vsp_random_value;
 }

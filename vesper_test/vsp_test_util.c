@@ -46,8 +46,8 @@ MU_TEST(vsp_test_error_test)
 
 MU_TEST(vsp_test_random_test)
 {
-    uint32_t value1;
-    uint32_t value2;
+    uint64_t value1;
+    uint64_t value2;
     uint32_t i;
 
     /* check if initial value is not zero */
@@ -57,7 +57,7 @@ MU_TEST(vsp_test_random_test)
     /* loop a few times and check shifting */
     for (i = 0; i < 4; i++) {
         value2 = vsp_random_get();
-        mu_assert((value2 & ~(1 << 31)) == (value1 >> 1),
+        mu_assert((value2 & ~(((uint64_t)1) << 63)) == (value1 >> 1),
             "Random generator shifting not working.");
         value1 = value2;
     }
