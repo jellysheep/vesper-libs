@@ -152,7 +152,8 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         /* check if server heartbeat received, else retry */
         VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
             && sender_id != 0 && (sender_id & 1) == 0
-            && command_id == VSP_CMCP_COMMAND_HEARTBEAT, goto cleanup_retry);
+            && command_id == VSP_CMCP_COMMAND_SERVER_HEARTBEAT,
+            goto cleanup_retry);
         /* success, do not retry */
         break;
         /* failure: retry */

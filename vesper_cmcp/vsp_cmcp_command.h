@@ -14,13 +14,31 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
-/** Internal message commands used for CMCP handshake as well as
+/** Internal server message commands used for CMCP handshake as well as
  * connection establishment and maintaining.
  * Necessary data list parameters have to be listed here. */
 typedef enum {
-    /** Heartbeat signal command. No parameters required. */
-    VSP_CMCP_COMMAND_HEARTBEAT
-} vsp_cmcp_command_id;
+    /** Server heartbeat signal command. No parameters required. */
+    VSP_CMCP_COMMAND_SERVER_HEARTBEAT
+} vsp_cmcp_server_command_id;
+
+/** Internal client message commands used for CMCP handshake as well as
+ * connection establishment and maintaining.
+ * Necessary data list parameters have to be listed here. */
+typedef enum {
+    /** Command to announce client connection to server.
+     * Parameters: VSP_CMCP_PARAMETER_NONCE. */
+    VSP_CMCP_COMMAND_CLIENT_ANNOUNCE
+} vsp_cmcp_client_command_id;
+
+/** Internal message command parameters used for CMCP handshake as well as
+ * connection establishment and maintaining.
+ * The data type and size (in bytes) has to be specified. */
+typedef enum {
+    /** A randomly generated nonce used for temporary node indentification.
+     * Type: uint64_t. Size: 8 bytes. */
+    VSP_CMCP_PARAMETER_NONCE
+} vsp_cmcp_command_parameter_id;
 
 #if defined __cplusplus
 }

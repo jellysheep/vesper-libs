@@ -154,7 +154,7 @@ int vsp_cmcp_server_heartbeat(vsp_cmcp_server *cmcp_server)
 
     /* send heartbeat */
     ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
-        0, cmcp_server->cmcp_node->id, VSP_CMCP_COMMAND_HEARTBEAT, NULL);
+        0, cmcp_server->cmcp_node->id, VSP_CMCP_COMMAND_SERVER_HEARTBEAT, NULL);
     /* check for error */
     VSP_ASSERT(ret == 0, return -1);
 
