@@ -165,26 +165,28 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     return 0;
 }
 
-int vsp_cmcp_message_get_id(vsp_cmcp_message *cmcp_message,
-    vsp_cmcp_message_id_type id_type, uint16_t *id_pointer)
+uint16_t vsp_cmcp_message_get_topic_id(vsp_cmcp_message *cmcp_message)
 {
-    /* check parameters */
-    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
-    VSP_CHECK(id_pointer != NULL, vsp_error_set_num(EINVAL); return -1);
+    /* check parameter */
+    VSP_CHECK(cmcp_message != NULL,
+        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    return cmcp_message->topic_id;
+}
 
-    switch (id_type) {
-        case VSP_CMCP_MESSAGE_TOPIC_ID:
-            *id_pointer = cmcp_message->topic_id;
-            return 0;
-        case VSP_CMCP_MESSAGE_SENDER_ID:
-            *id_pointer = cmcp_message->sender_id;
-            return 0;
-        case VSP_CMCP_MESSAGE_COMMAND_ID:
-            *id_pointer = cmcp_message->command_id;
-            return 0;
-        default:
-            return -1;
-    }
+uint16_t vsp_cmcp_message_get_sender_id(vsp_cmcp_message *cmcp_message)
+{
+    /* check parameter */
+    VSP_CHECK(cmcp_message != NULL,
+        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    return cmcp_message->sender_id;
+}
+
+uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message)
+{
+    /* check parameter */
+    VSP_CHECK(cmcp_message != NULL,
+        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    return cmcp_message->command_id;
 }
 
 vsp_cmcp_datalist *vsp_cmcp_message_get_datalist(

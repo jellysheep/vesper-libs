@@ -23,16 +23,6 @@ extern "C" {
  * 2 bytes topic ID, 2 bytes sender ID, 2 bytes command ID. */
 #define VSP_CMCP_MESSAGE_HEADER_LENGTH 6
 
-/** Message ID types. */
-typedef enum {
-    /** Message topic or receiver ID. */
-    VSP_CMCP_MESSAGE_TOPIC_ID,
-    /** Message sender ID. */
-    VSP_CMCP_MESSAGE_SENDER_ID,
-    /** Message command ID. */
-    VSP_CMCP_MESSAGE_COMMAND_ID
-} vsp_cmcp_message_id_type;
-
 /** Message data sent over (network) connection. */
 struct vsp_cmcp_message;
 
@@ -92,11 +82,22 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     void *data_pointer);
 
 /**
- * Get specified ID and copy to specified address.
- * Returns non-zero and sets vsp_error_num() if failed.
+ * Get the message topic ID.
+ * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_message_get_id(vsp_cmcp_message *cmcp_message,
-    vsp_cmcp_message_id_type id_type, uint16_t *id_pointer);
+uint16_t vsp_cmcp_message_get_topic_id(vsp_cmcp_message *cmcp_message);
+
+/**
+ * Get the message sender ID.
+ * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
+ */
+uint16_t vsp_cmcp_message_get_sender_id(vsp_cmcp_message *cmcp_message);
+
+/**
+ * Get the message command ID.
+ * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
+ */
+uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message);
 
 /**
  * Get data list parsed by this message object.

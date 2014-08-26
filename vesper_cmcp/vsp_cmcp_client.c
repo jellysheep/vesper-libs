@@ -143,15 +143,12 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         /* check error: in case of failure clean up and retry */
         VSP_CHECK(cmcp_message != NULL, goto cleanup_retry);
         /* get and check message data; in case of failure just retry */
-        ret = vsp_cmcp_message_get_id(cmcp_message,
-            VSP_CMCP_MESSAGE_TOPIC_ID, &topic_id);
-        VSP_ASSERT(ret == 0, goto cleanup_retry);
-        ret = vsp_cmcp_message_get_id(cmcp_message,
-            VSP_CMCP_MESSAGE_SENDER_ID, &sender_id);
-        VSP_ASSERT(ret == 0, goto cleanup_retry);
-        ret = vsp_cmcp_message_get_id(cmcp_message,
-            VSP_CMCP_MESSAGE_COMMAND_ID, &command_id);
-        VSP_ASSERT(ret == 0, goto cleanup_retry);
+        topic_id = vsp_cmcp_message_get_topic_id(cmcp_message);
+        VSP_ASSERT(topic_id != (uint16_t) -1, goto cleanup_retry);
+        sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
+        VSP_ASSERT(sender_id != (uint16_t) -1, goto cleanup_retry);
+        command_id = vsp_cmcp_message_get_command_id(cmcp_message);
+        VSP_ASSERT(command_id != (uint16_t) -1, goto cleanup_retry);
         /* check if server heartbeat received, else retry */
         VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
             && sender_id != 0 && (sender_id & 1) == 0
