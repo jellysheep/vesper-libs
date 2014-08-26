@@ -103,6 +103,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
 int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
     int ret;
+    int success;
     int data_length;
     void *message_buffer;
     vsp_cmcp_message *cmcp_message;
@@ -112,11 +113,10 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     /* check parameter */
     VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    /* initialize message data */
+    /* initialize local variables */
+    success = 0;
     message_buffer = NULL;
     cmcp_message = NULL;
-
-    /* initialize IDs */
     topic_id = 0;
     sender_id = 0;
     command_id = 0;
@@ -133,12 +133,12 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         /* measure passed time */
         time_now = vsp_time_real();
         /* check error: in case of failure just retry */
-        VSP_CHECK(data_length > 0, goto retry);
+        VSP_CHECK(data_length > 0, goto cleanup_retry);
         /* parse message data */
         cmcp_message = vsp_cmcp_message_create_parse(data_length,
             message_buffer);
         /* check error: in case of failure clean up and retry */
-        VSP_CHECK(cmcp_message != NULL, nn_freemsg(message_buffer); goto retry);
+        VSP_CHECK(cmcp_message != NULL, goto cleanup_retry);
         /* get and check message data; in case of failure just retry */
         ret = vsp_cmcp_message_get_id(cmcp_message,
             VSP_CMCP_MESSAGE_TOPIC_ID, &topic_id);
@@ -159,35 +159,49 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         /* failure: retry */
         cleanup_retry:
             /* clean up */
-            ret = vsp_cmcp_message_free(cmcp_message);
-            VSP_ASSERT(ret == 0,
-                /* failures are silently ignored in release build */);
-            cmcp_message = NULL;
-            ret = nn_freemsg(message_buffer);
-            VSP_ASSERT(ret == 0,
-                /* failures are silently ignored in release build */);
-            message_buffer = NULL;
-        retry:
+            if (cmcp_message != NULL) {
+                ret = vsp_cmcp_message_free(cmcp_message);
+                VSP_ASSERT(ret == 0,
+                    /* failures are silently ignored in release build */);
+                cmcp_message = NULL;
+            }
+            if (message_buffer != NULL) {
+                ret = nn_freemsg(message_buffer);
+                VSP_ASSERT(ret == 0,
+                    /* failures are silently ignored in release build */);
+                message_buffer = NULL;
+            }
             continue;
     } while (time_now < time_connection_timeout);
 
     /* check for error */
-    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(ENOTCONN); return -1);
+    VSP_CHECK(cmcp_message != NULL,
+        vsp_error_set_num(ENOTCONN); goto error_exit);
 
     /* server heartbeat received */
 
-    /* clean up */
-    ret = vsp_cmcp_message_free(cmcp_message);
-    VSP_ASSERT(ret == 0,
-        /* failures are silently ignored in release build */);
-    cmcp_message = NULL;
-    ret = nn_freemsg(message_buffer);
-    VSP_ASSERT(ret == 0,
-        /* failures are silently ignored in release build */);
-    message_buffer = NULL;
+    /* success: clean up and exit */
+    goto cleanup_exit;
 
-    /* success */
-    return 0;
+    error_exit:
+        success = -1;
+        /* fall through to cleanup_exit */
+
+    cleanup_exit:
+        /* clean up */
+        if (cmcp_message != NULL) {
+            ret = vsp_cmcp_message_free(cmcp_message);
+            VSP_ASSERT(ret == 0,
+                /* failures are silently ignored in release build */);
+            cmcp_message = NULL;
+        }
+        if (message_buffer != NULL) {
+            ret = nn_freemsg(message_buffer);
+            VSP_ASSERT(ret == 0,
+                /* failures are silently ignored in release build */);
+            message_buffer = NULL;
+        }
+        return success;
 }
 
 void *vsp_cmcp_client_run(void *param)
