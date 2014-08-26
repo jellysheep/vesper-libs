@@ -28,7 +28,9 @@ typedef enum {
 typedef enum {
     /** Command to announce client connection to server.
      * Parameters: VSP_CMCP_PARAMETER_NONCE. */
-    VSP_CMCP_COMMAND_CLIENT_ANNOUNCE
+    VSP_CMCP_COMMAND_CLIENT_ANNOUNCE,
+    /** Client heartbeat signal command. No parameters required. */
+    VSP_CMCP_COMMAND_CLIENT_HEARTBEAT
 } vsp_cmcp_client_command_id;
 
 /** Internal message command parameters used for CMCP handshake as well as

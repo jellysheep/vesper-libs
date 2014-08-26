@@ -7,18 +7,22 @@
  */
 
 #include "vsp_cmcp_node.h"
+#include "vsp_cmcp_command.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
+#include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
 
 /** Wall clock time in milliseconds until server receive times out.
  * Heartbeats can only be sent as often as the receive call times out,
- * so this has to be set not higher than VSP_CMCP_SERVER_HEARTBEAT_TIME
- * or VSP_CMCP_CLIENT_HEARTBEAT_TIME. */
+ * so this has to be set to at most VSP_CMCP_NODE_HEARTBEAT_TIME. */
 static const int VSP_CMCP_NODE_TIMEOUT = 1000;
+
+/** Wall clock time in milliseconds between two heartbeat signals. */
+#define VSP_CMCP_NODE_HEARTBEAT_TIME 1000
 
 /**
  * Send previously created message to the specified socket.
@@ -32,6 +36,12 @@ int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message);
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
+
+/** Event loop for message reception running in its own thread. */
+static void *vsp_cmcp_node_run(void *param);
+
+/** Check current time and send heartbeat if necessary. */
+static int vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node);
 
 vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
 {
@@ -61,6 +71,7 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
     cmcp_node->subscribe_socket = -1;
     pthread_mutex_init(&cmcp_node->mutex, NULL);
     pthread_cond_init(&cmcp_node->condition, NULL);
+    cmcp_node->time_next_heartbeat = vsp_time_real();
     /* return struct pointer */
     return cmcp_node;
 }
@@ -166,8 +177,7 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     return 0;
 }
 
-int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node,
-    void *(*start_routine) (void *), void *param)
+int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node)
 {
     int ret;
 
@@ -185,7 +195,8 @@ int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node,
     cmcp_node->state = VSP_CMCP_NODE_STARTING;
 
     /* start reception thread */
-    ret = pthread_create(&cmcp_node->thread, NULL, start_routine, param);
+    ret = pthread_create(&cmcp_node->thread, NULL,
+        vsp_cmcp_node_run, cmcp_node);
 
     /* check for pthread errors */
     VSP_ASSERT(ret == 0, pthread_mutex_unlock(&cmcp_node->mutex);
@@ -334,5 +345,80 @@ int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
     VSP_ASSERT(ret == 0, return -1);
 
     /* success */
+    return 0;
+}
+
+void *vsp_cmcp_node_run(void *param)
+{
+    vsp_cmcp_node *cmcp_node;
+    int ret;
+
+    /* check parameter */
+    VSP_ASSERT(param != NULL, vsp_error_set_num(EINVAL); return (void*) -1);
+
+    cmcp_node = (vsp_cmcp_node*) param;
+
+    /* check sockets are initialized and thread was started */
+    VSP_ASSERT(cmcp_node->state == VSP_CMCP_NODE_STARTING,
+        vsp_error_set_num(EINVAL); return (void*) -1);
+
+    /* lock mutex */
+    pthread_mutex_lock(&cmcp_node->mutex);
+    /* mark thread as running */
+    cmcp_node->state = VSP_CMCP_NODE_RUNNING;
+    /* signal waiting thread */
+    pthread_cond_signal(&cmcp_node->condition);
+    /* unlock mutex */
+    pthread_mutex_unlock(&cmcp_node->mutex);
+
+    /* reception loop */
+    while (cmcp_node->state == VSP_CMCP_NODE_RUNNING) {
+        ret = vsp_cmcp_node_heartbeat(cmcp_node);
+        /* check error */
+        VSP_ASSERT(ret == 0, return (void*) -1);
+    }
+
+    /* check thread was requested to stop */
+    VSP_ASSERT(cmcp_node->state == VSP_CMCP_NODE_STOPPING,
+        vsp_error_set_num(EINTR); return (void*) -1);
+
+    /* signal that thread has stopped */
+    cmcp_node->state = VSP_CMCP_NODE_INITIALIZED;
+
+    /* success */
+    return (void*) 0;
+}
+
+int vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node)
+{
+    double time_now;
+    int ret;
+    uint16_t command_id;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    time_now = vsp_time_real();
+    if (time_now < cmcp_node->time_next_heartbeat) {
+        /* not sending heartbeat yet; nothing to fail, hence success */
+        return 0;
+    }
+
+    /* update time of next heartbeat */
+    cmcp_node->time_next_heartbeat =
+        time_now + (VSP_CMCP_NODE_HEARTBEAT_TIME / 1000.0);
+
+    /* send heartbeat */
+
+    if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
+        command_id = VSP_CMCP_COMMAND_SERVER_HEARTBEAT;
+    } else {
+        command_id = VSP_CMCP_COMMAND_CLIENT_HEARTBEAT;
+    }
+    ret = vsp_cmcp_node_create_send_message(cmcp_node,
+        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_node->id, command_id, NULL);
+    /* check for error */
+    VSP_ASSERT(ret == 0, return -1);
+
     return 0;
 }

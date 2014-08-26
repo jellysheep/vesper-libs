@@ -41,9 +41,7 @@ typedef enum {
     /** Message reception thread was stopped. */
     VSP_CMCP_NODE_STOPPING,
     /** Message reception thread is running. */
-    VSP_CMCP_NODE_RUNNING,
-    /** Lowest state number not used by CMCP nodes. */
-    VSP_CMCP_NODE_MAX_STATE
+    VSP_CMCP_NODE_RUNNING
 } vsp_cmcp_node_state;
 
 /** State and other data used for network connection.
@@ -67,6 +65,8 @@ struct vsp_cmcp_node {
     int subscribe_socket;
     /** Reception thread. */
     pthread_t thread;
+    /** Real time of next heartbeat. */
+    double time_next_heartbeat;
 };
 
 /** Define type vsp_cmcp_node to avoid 'struct' keyword. */
@@ -96,8 +96,7 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
 
 /** Start message reception thread and wait until thread has started.
  * Returns non-zero and sets vsp_error_num() if failed. */
-int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node,
-    void *(*start_routine) (void *), void *param);
+int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node);
 
 /** Stop message reception thread and wait until thread has finished and joined.
  * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
