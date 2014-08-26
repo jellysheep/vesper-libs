@@ -21,7 +21,7 @@
 #define VSP_CMCP_CLIENT_HEARTBEAT_TIME 1000
 
 /** Wall clock time in milliseconds between two client heartbeat signals. */
-#define VSP_CMCP_CLIENT_CONNECTION_TIMEOUT 30000
+#define VSP_CMCP_CLIENT_CONNECTION_TIMEOUT 60000
 
 /** State and other data used for network connection. */
 struct vsp_cmcp_client {
@@ -107,8 +107,10 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     int data_length;
     void *message_buffer;
     vsp_cmcp_message *cmcp_message;
+    vsp_cmcp_datalist *cmcp_datalist;
     double time_now, time_connection_timeout;
     uint16_t topic_id, sender_id, command_id;
+    uint64_t nonce;
 
     /* check parameter */
     VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
@@ -117,6 +119,7 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     success = 0;
     message_buffer = NULL;
     cmcp_message = NULL;
+    cmcp_datalist = NULL;
     topic_id = 0;
     sender_id = 0;
     command_id = 0;
@@ -180,6 +183,35 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 
     /* server heartbeat received */
 
+    /* clean up */
+    ret = vsp_cmcp_message_free(cmcp_message);
+    VSP_ASSERT(ret == 0,
+        /* failures are silently ignored in release build */);
+    cmcp_message = NULL;
+    ret = nn_freemsg(message_buffer);
+    VSP_ASSERT(ret == 0,
+        /* failures are silently ignored in release build */);
+    message_buffer = NULL;
+
+    /* create identification nonce */
+    nonce = vsp_random_get();
+
+    /* create announcement command message */
+    cmcp_datalist = vsp_cmcp_datalist_create();
+    /* check for error */
+    VSP_ASSERT(cmcp_datalist != NULL, goto error_exit);
+    /* add nonce parameter as a data list item */
+    ret = vsp_cmcp_datalist_add_item(cmcp_datalist, VSP_CMCP_PARAMETER_NONCE,
+        sizeof(nonce), &nonce);
+    /* check for error */
+    VSP_ASSERT(ret == 0, goto error_exit);
+    /* send message */
+    ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
+        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_client->cmcp_node->id,
+        VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
+    /* check for error */
+    VSP_ASSERT(ret == 0, goto error_exit);
+
     /* success: clean up and exit */
     goto cleanup_exit;
 
@@ -189,6 +221,12 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 
     cleanup_exit:
         /* clean up */
+        if (cmcp_datalist != NULL) {
+            ret = vsp_cmcp_datalist_free(cmcp_datalist);
+            VSP_ASSERT(ret == 0,
+                /* failures are silently ignored in release build */);
+            cmcp_datalist = NULL;
+        }
         if (cmcp_message != NULL) {
             ret = vsp_cmcp_message_free(cmcp_message);
             VSP_ASSERT(ret == 0,
