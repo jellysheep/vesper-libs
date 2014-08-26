@@ -180,16 +180,6 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 
     /* server heartbeat received */
 
-    /* clean up */
-    ret = vsp_cmcp_message_free(cmcp_message);
-    VSP_ASSERT(ret == 0,
-        /* failures are silently ignored in release build */);
-    cmcp_message = NULL;
-    ret = nn_freemsg(message_buffer);
-    VSP_ASSERT(ret == 0,
-        /* failures are silently ignored in release build */);
-    message_buffer = NULL;
-
     /* create identification nonce */
     nonce = vsp_random_get();
 
