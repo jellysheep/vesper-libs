@@ -14,14 +14,33 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
-/** Forward-declare struct timeval to avoid including huge header files. */
-struct timeval;
+#if defined(_WIN32)
+
+  /** Declare struct timespec as it is not declared on Windows. */
+  struct timespec {
+      long int tv_sec;
+      long int tv_nsec;
+  };
+
+#elif defined(__unix__) || defined(__unix) \
+    || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
+
+  /* change POSIX C SOURCE version for pure c99 compilers */
+  #if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
+    #undef _POSIX_C_SOURCE
+    #define _POSIX_C_SOURCE 200112L
+  #endif /* !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L */
+
+  /* struct timespec */
+  #include <sys/time.h>
+
+#endif
 
 /**
- * Get real (wall clock) time since epoch as a timeval struct.
+ * Get real (wall clock) time since epoch as a timespec struct.
  * Aborts if no timer is available.
  */
-void vsp_time_real_timeval(struct timeval *time);
+void vsp_time_real_timespec(struct timespec *time);
 
 /**
  * Get real (wall clock) time since epoch in seconds.

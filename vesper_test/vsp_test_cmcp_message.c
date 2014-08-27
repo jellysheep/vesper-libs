@@ -29,7 +29,6 @@ MU_TEST(vsp_test_cmcp_message_invalid_parameters)
     vsp_cmcp_message *cmcp_message1;
     vsp_cmcp_datalist *cmcp_datalist1, *cmcp_datalist2;
     uint8_t buffer[VSP_CMCP_MESSAGE_HEADER_LENGTH] = {0};
-    uint16_t id;
 
     /* invalid message deallocation */
     ret = vsp_cmcp_message_free(NULL);

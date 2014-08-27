@@ -29,7 +29,7 @@ static uint64_t vsp_random_value = {0};
 void vsp_random_initialize(void)
 {
     uint64_t seed;
-    struct timeval realtime;
+    struct timespec realtime;
     uint64_t pid;
 
     if (vsp_random_value != 0) {
@@ -37,7 +37,7 @@ void vsp_random_initialize(void)
     }
 
     /* get random data from current time and process id */
-    vsp_time_real_timeval(&realtime);
+    vsp_time_real_timespec(&realtime);
     #if defined(_WIN32)
         pid = (uint32_t) GetCurrentProcessId();
     #else
@@ -45,7 +45,7 @@ void vsp_random_initialize(void)
     #endif
     /* mix random data into seed */
     seed = realtime.tv_sec;
-    seed ^= realtime.tv_usec;
+    seed ^= realtime.tv_nsec;
     seed ^= pid;
     seed ^= (pid << 32);
     /* store seed */

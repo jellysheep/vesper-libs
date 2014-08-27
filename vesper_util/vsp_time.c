@@ -13,12 +13,11 @@
     || defined(unix) || (defined(__APPLE__) && defined(__MACH__)))
 
   #include <unistd.h> /* POSIX flags */
-  #include <time.h>   /* clock_gettime(), time() */
-  #include <sys/time.h>   /* gethrtime(), gettimeofday() */
   #include <sys/resource.h>
   #include <sys/times.h>
+  #include <time.h>
 
-#else
+#elif !defined(_WIN32)
   #error "Unable to define timers for an unknown OS."
 #endif
 
@@ -26,14 +25,13 @@
 /** FILETIME of Jan 1 1970 00:00:00. */
 #define VSP_TIME_EPOCH_FILETIME 116444736000000000ULL
 
-void vsp_time_real_timeval(struct timeval *time)
+void vsp_time_real_timespec(struct timespec *time)
 {
-    /* check parameter */
-    VSP_ASSERT(time != NULL, abort());
-
 #if defined(_WIN32)
     FILETIME tm;
     ULONGLONG t;
+    /* check parameter */
+    VSP_ASSERT(time != NULL, abort());
     #if defined(NTDDI_WIN8) && NTDDI_VERSION >= NTDDI_WIN8
         /* Windows 8, Windows Server 2012 and later */
         GetSystemTimePreciseAsFileTime(&tm);
@@ -44,15 +42,17 @@ void vsp_time_real_timeval(struct timeval *time)
     t = ((ULONGLONG)tm.dwHighDateTime << 32) | (ULONGLONG)tm.dwLowDateTime;
     t -= VSP_TIME_EPOCH_FILETIME;
     time->tv_sec = t / 10000000;
-    time->tv_usec = (t / 10) % 1000000;
+    time->tv_nsec = (t % 10000000) * 100;
     return;
 
 #elif defined(_POSIX_VERSION)
     /* POSIX */
+    struct timeval tv;
+    /* check parameter */
+    VSP_ASSERT(time != NULL, abort());
     #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
         && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
     {
-        struct timespec ts;
         #if defined(CLOCK_MONOTONIC_PRECISE)
             /* BSD */
             const clockid_t id = CLOCK_MONOTONIC_PRECISE;
@@ -71,9 +71,7 @@ void vsp_time_real_timeval(struct timeval *time)
         #else
             const clockid_t id = (clockid_t)-1; /* unknown */
         #endif /* defined(CLOCK_MONOTONIC_PRECISE) */
-        if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1) {
-            time->tv_sec = ts.tv_sec;
-            time->tv_usec = ts.tv_nsec / 1000;
+        if (id != (clockid_t)-1 && clock_gettime(id, time) != -1) {
             return;
         }
         /* fall through */
@@ -81,7 +79,9 @@ void vsp_time_real_timeval(struct timeval *time)
     #endif /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
 
     /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
-    gettimeofday(time, NULL);
+    gettimeofday(&tv, NULL);
+    time->tv_sec = tv.tv_sec;
+    time->tv_nsec = tv.tv_usec * 1000;
     return;
 #else
     abort(); /* failed */
@@ -90,9 +90,9 @@ void vsp_time_real_timeval(struct timeval *time)
 
 double vsp_time_real_double(void)
 {
-    struct timeval time;
-    vsp_time_real_timeval(&time);
-    return ((double) time.tv_sec) + ((double) time.tv_usec / 1000000.0);
+    struct timespec time;
+    vsp_time_real_timespec(&time);
+    return ((double) time.tv_sec) + ((double) time.tv_nsec / 1000000000.0);
 }
 
 /*
