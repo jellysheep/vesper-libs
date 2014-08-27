@@ -67,6 +67,10 @@ struct vsp_cmcp_node {
     pthread_t thread;
     /** Real time of next heartbeat. */
     double time_next_heartbeat;
+    /** Message callback function. */
+    void (*message_callback)(void*, vsp_cmcp_message*);
+    /** Message callback parameter. */
+    void *callback_param;
 };
 
 /** Define type vsp_cmcp_node to avoid 'struct' keyword. */
@@ -76,9 +80,13 @@ typedef struct vsp_cmcp_node vsp_cmcp_node;
  * Create new vsp_cmcp_node object.
  * The state of the newly created node is set to VSP_CMCP_NODE_UNINITIALIZED.
  * Returned pointer should be freed with vsp_cmcp_node_free().
+ * The provided message callback function will be called whenever
+ * vsp_cmcp_node_start() has been invoked (i.e. the reception thread is
+ * running) and a message is received. callback_param may be NULL.
  * Returns NULL and sets vsp_error_num() if failed.
  */
-vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type);
+vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
+    void (*message_callback)(void*, vsp_cmcp_message*), void *callback_param);
 
 /**
  * Free vsp_cmcp_node object.

@@ -30,13 +30,19 @@ struct vsp_cmcp_client {
  * Returns non-zero and sets vsp_error_num() if failed. */
 static int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client);
 
+/** Message callback function invoked by cmcp_node.
+ * This function will be called for every received message. */
+static void vsp_cmcp_client_message_callback(void *param,
+    vsp_cmcp_message *cmcp_message);
+
 vsp_cmcp_client *vsp_cmcp_client_create(void)
 {
     vsp_cmcp_client *cmcp_client;
     /* allocate memory */
     VSP_ALLOC(cmcp_client, vsp_cmcp_client, return NULL);
     /* initialize base type */
-    cmcp_client->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_CLIENT);
+    cmcp_client->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_CLIENT,
+        vsp_cmcp_client_message_callback, cmcp_client);
     /* in case of failure vsp_error_num() is already set */
     VSP_ASSERT(cmcp_client->cmcp_node != NULL,
         VSP_FREE(cmcp_client); return NULL);
@@ -219,4 +225,17 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
             message_buffer = NULL;
         }
         return success;
+}
+
+void vsp_cmcp_client_message_callback(void *param,
+    vsp_cmcp_message *cmcp_message)
+{
+    vsp_cmcp_client *cmcp_client;
+
+    /* check parameters; failures are silently ignored in release build */
+    VSP_ASSERT(param != NULL && cmcp_message != NULL, return);
+
+    cmcp_client = (vsp_cmcp_client*) param;
+
+    /* process message */
 }

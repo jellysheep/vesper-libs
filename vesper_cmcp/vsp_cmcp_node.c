@@ -44,12 +44,13 @@ static void *vsp_cmcp_node_run(void *param);
 /** Check current time and send heartbeat if necessary. */
 static int vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node);
 
-vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
+vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
+    void (*message_callback)(void*, vsp_cmcp_message*), void *callback_param)
 {
     vsp_cmcp_node *cmcp_node;
-    /* check parameter */
-    VSP_CHECK(node_type == VSP_CMCP_NODE_SERVER
-        || node_type == VSP_CMCP_NODE_CLIENT,
+    /* check parameters */
+    VSP_CHECK((node_type == VSP_CMCP_NODE_SERVER
+        || node_type == VSP_CMCP_NODE_CLIENT) && message_callback != NULL,
         vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
     VSP_ALLOC(cmcp_node, vsp_cmcp_node, return NULL);
@@ -73,6 +74,8 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type)
     pthread_mutex_init(&cmcp_node->mutex, NULL);
     pthread_cond_init(&cmcp_node->condition, NULL);
     cmcp_node->time_next_heartbeat = vsp_time_real();
+    cmcp_node->message_callback = message_callback;
+    cmcp_node->callback_param = callback_param;
     /* return struct pointer */
     return cmcp_node;
 }
@@ -353,11 +356,17 @@ void *vsp_cmcp_node_run(void *param)
 {
     vsp_cmcp_node *cmcp_node;
     int ret;
+    int data_length;
+    void *message_buffer;
+    vsp_cmcp_message *cmcp_message;
 
     /* check parameter */
     VSP_ASSERT(param != NULL, vsp_error_set_num(EINVAL); return (void*) -1);
 
+    /* initialize local variables */
     cmcp_node = (vsp_cmcp_node*) param;
+    message_buffer = NULL;
+    cmcp_message = NULL;
 
     /* check sockets are initialized and thread was started */
     VSP_ASSERT(cmcp_node->state == VSP_CMCP_NODE_STARTING,
@@ -374,9 +383,39 @@ void *vsp_cmcp_node_run(void *param)
 
     /* reception loop */
     while (cmcp_node->state == VSP_CMCP_NODE_RUNNING) {
+        /* send heartbeat */
         ret = vsp_cmcp_node_heartbeat(cmcp_node);
         /* check error */
         VSP_ASSERT(ret == 0, return (void*) -1);
+
+        /* try to receive message */
+        data_length = vsp_cmcp_node_recv_message(cmcp_node, &message_buffer);
+        /* check error: in case of failure just retry */
+        VSP_CHECK(data_length > 0, goto cleanup);
+        /* parse message data */
+        cmcp_message = vsp_cmcp_message_create_parse(data_length,
+            message_buffer);
+        /* check error: in case of failure clean up and retry */
+        VSP_CHECK(cmcp_message != NULL, goto cleanup);
+
+        /* message successfully received; invoke callback function */
+        cmcp_node->message_callback(cmcp_node->callback_param, cmcp_message);
+
+        cleanup:
+            /* clean up */
+            if (cmcp_message != NULL) {
+                ret = vsp_cmcp_message_free(cmcp_message);
+                VSP_ASSERT(ret == 0,
+                    /* failures are silently ignored in release build */);
+                cmcp_message = NULL;
+            }
+            if (message_buffer != NULL) {
+                ret = nn_freemsg(message_buffer);
+                VSP_ASSERT(ret == 0,
+                    /* failures are silently ignored in release build */);
+                message_buffer = NULL;
+            }
+            continue;
     }
 
     /* check thread was requested to stop */
