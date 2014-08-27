@@ -29,13 +29,14 @@ static const int VSP_CMCP_NODE_TIMEOUT = 1000;
  * Blocks until message could be sent.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message);
+static int vsp_cmcp_node_send_message(int socket,
+    vsp_cmcp_message *cmcp_message);
 
 /**
  * Subscribe the node to the specified topic ID.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
+static int vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
 
 /** Event loop for message reception running in its own thread. */
 static void *vsp_cmcp_node_run(void *param);
