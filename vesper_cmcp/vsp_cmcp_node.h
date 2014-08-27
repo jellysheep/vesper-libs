@@ -7,8 +7,8 @@
  * Full license text is under the file "LICENSE" provided with this code.
  */
 
-#if !defined VSP_CMCP_COMMON_H_INCLUDED
-#define VSP_CMCP_COMMON_H_INCLUDED
+#if !defined VSP_CMCP_NODE_H_INCLUDED
+#define VSP_CMCP_NODE_H_INCLUDED
 
 #include "vsp_cmcp_datalist.h"
 #include "vsp_cmcp_message.h"
@@ -132,4 +132,4 @@ int vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node, void **message_buffer);
 }
 #endif /* defined __cplusplus */
 
-#endif /* !defined VSP_CMCP_COMMON_H_INCLUDED */
+#endif /* !defined VSP_CMCP_NODE_H_INCLUDED */
