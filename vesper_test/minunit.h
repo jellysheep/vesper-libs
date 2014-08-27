@@ -88,8 +88,8 @@ extern void (*minunit_teardown)(void);
 /* Test runner */
 #define MU_RUN_TEST(test) MU__SAFE_BLOCK(\
     if (minunit_real_timer==0 && minunit_real_timer==0) {\
-        minunit_real_timer = vsp_time_real();\
-        minunit_proc_timer = vsp_time_cpu();\
+        minunit_real_timer = vsp_time_real_double();\
+        minunit_proc_timer = vsp_time_cpu_double();\
     }\
     if (minunit_setup) (*minunit_setup)();\
     minunit_status = 0;\
@@ -109,8 +109,8 @@ extern void (*minunit_teardown)(void);
     double minunit_end_real_timer;\
     double minunit_end_proc_timer;\
     printf("\n\n%d tests, %d assertions, %d failures\n", minunit_run, minunit_assert, minunit_fail);\
-    minunit_end_real_timer = vsp_time_real();\
-    minunit_end_proc_timer = vsp_time_cpu();\
+    minunit_end_real_timer = vsp_time_real_double();\
+    minunit_end_proc_timer = vsp_time_cpu_double();\
     printf("\nFinished in %.8f seconds (real) %.8f seconds (proc)\n\n",\
         minunit_end_real_timer - minunit_real_timer,\
         minunit_end_proc_timer - minunit_proc_timer);\

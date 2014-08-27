@@ -123,7 +123,7 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     command_id = 0;
 
     /* start measuring time for heartbeat timeout */
-    time_now = vsp_time_real();
+    time_now = vsp_time_real_double();
     time_connection_timeout =
         time_now + (VSP_CMCP_CLIENT_CONNECTION_TIMEOUT / 1000.0);
 
@@ -132,7 +132,7 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         data_length = vsp_cmcp_node_recv_message(cmcp_client->cmcp_node,
             &message_buffer);
         /* measure passed time */
-        time_now = vsp_time_real();
+        time_now = vsp_time_real_double();
         /* check error: in case of failure just retry */
         VSP_CHECK(data_length > 0, goto cleanup_retry);
         /* parse message data */

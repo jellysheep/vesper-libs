@@ -68,12 +68,12 @@ MU_TEST(vsp_test_time_test)
     double realtime_before, realtime_after;
     double cputime_before, cputime_after;
 
-    realtime_before = vsp_time_real();
-    cputime_before = vsp_time_cpu();
+    realtime_before = vsp_time_real_double();
+    cputime_before = vsp_time_cpu_double();
 
     do {
-        realtime_after = vsp_time_real();
-        cputime_after = vsp_time_cpu();
+        realtime_after = vsp_time_real_double();
+        cputime_after = vsp_time_cpu_double();
     } while (realtime_after == realtime_before ||
         cputime_after == cputime_before);
 

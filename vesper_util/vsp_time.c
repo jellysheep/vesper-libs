@@ -7,19 +7,10 @@
  */
 
 #include "vsp_time.h"
+#include "vsp_util.h"
 
-#if defined(_WIN32)
-
-  #include <Windows.h>
-
-#elif defined(__unix__) || defined(__unix) || defined(unix) \
-|| (defined(__APPLE__) && defined(__MACH__))
-
-  /* change POSIX C SOURCE version for pure c99 compilers */
-  #if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
-    #undef _POSIX_C_SOURCE
-    #define _POSIX_C_SOURCE 200112L
-  #endif /* !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L */
+#if !defined(_WIN32) && (defined(__unix__) || defined(__unix) \
+    || defined(unix) || (defined(__APPLE__) && defined(__MACH__)))
 
   #include <unistd.h> /* POSIX flags */
   #include <time.h>   /* clock_gettime(), time() */
@@ -27,23 +18,19 @@
   #include <sys/resource.h>
   #include <sys/times.h>
 
-  #if defined(__MACH__) && defined(__APPLE__)
-    #include <mach/mach.h>
-    #include <mach/mach_time.h>
-  #endif /* defined(__MACH__) && defined(__APPLE__) */
-
 #else
   #error "Unable to define timers for an unknown OS."
-#endif /* defined(_WIN32) */
+#endif
 
-/*
- * The following two functions were written by David Robert Nadeau
- * from http//NadeauSoftware.com/ and distributed under the
- * Creative Commons Attribution 3.0 Unported License
- */
 
-double vsp_time_real(void)
+/** FILETIME of Jan 1 1970 00:00:00. */
+#define VSP_TIME_EPOCH_FILETIME 116444736000000000ULL
+
+void vsp_time_real_timeval(struct timeval *time)
 {
+    /* check parameter */
+    VSP_ASSERT(time != NULL, abort());
+
 #if defined(_WIN32)
     FILETIME tm;
     ULONGLONG t;
@@ -55,29 +42,15 @@ double vsp_time_real(void)
         GetSystemTimeAsFileTime(&tm);
     #endif
     t = ((ULONGLONG)tm.dwHighDateTime << 32) | (ULONGLONG)tm.dwLowDateTime;
-    return (double)t / 10000000.0;
-
-#elif (defined(__hpux) || defined(hpux)) || ((defined(__sun__) || \
-    defined(__sun) || defined(sun)) && (defined(__SVR4) || defined(__svr4__)))
-    /* HP-UX, Solaris */
-    return (double)gethrtime() / 1000000000.0;
-
-#elif defined(__MACH__) && defined(__APPLE__)
-    /* OSX */
-    static double timeConvert = 0.0;
-    if (timeConvert == 0.0) {
-        mach_timebase_info_data_t timeBase;
-        (void)mach_timebase_info(&timeBase);
-        timeConvert = (double)timeBase.numer /
-            (double)timeBase.denom /
-            1000000000.0;
-    }
-    return (double)mach_absolute_time() * timeConvert;
+    t -= VSP_TIME_EPOCH_FILETIME;
+    time->tv_sec = t / 10000000;
+    time->tv_usec = (t / 10) % 1000000;
+    return;
 
 #elif defined(_POSIX_VERSION)
-    struct timeval tm;
     /* POSIX */
-    #if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+    #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
+        && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
     {
         struct timespec ts;
         #if defined(CLOCK_MONOTONIC_PRECISE)
@@ -99,22 +72,36 @@ double vsp_time_real(void)
             const clockid_t id = (clockid_t)-1; /* unknown */
         #endif /* defined(CLOCK_MONOTONIC_PRECISE) */
         if (id != (clockid_t)-1 && clock_gettime(id, &ts) != -1) {
-            return (double)ts.tv_sec +
-                (double)ts.tv_nsec / 1000000000.0;
+            time->tv_sec = ts.tv_sec;
+            time->tv_usec = ts.tv_nsec / 1000;
+            return;
         }
         /* fall through */
     }
     #endif /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
 
     /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
-    gettimeofday(&tm, NULL);
-    return (double)tm.tv_sec + (double)tm.tv_usec / 1000000.0;
+    gettimeofday(time, NULL);
+    return;
 #else
-    return -1.0; /* failed */
+    abort(); /* failed */
 #endif /* defined(_WIN32) */
 }
 
-double vsp_time_cpu(void)
+double vsp_time_real_double(void)
+{
+    struct timeval time;
+    vsp_time_real_timeval(&time);
+    return ((double) time.tv_sec) + ((double) time.tv_usec / 1000000.0);
+}
+
+/*
+ * The following function was written by David Robert Nadeau
+ * from http://NadeauSoftware.com/ and distributed under the
+ * Creative Commons Attribution 3.0 Unported License.
+ */
+
+double vsp_time_cpu_double()
 {
 #if defined(_WIN32)
     /* Windows */
@@ -137,7 +124,8 @@ double vsp_time_cpu(void)
     || (defined(__APPLE__) && defined(__MACH__))
     /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, and Solaris */
 
-    #if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+    #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
+        && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
     /* prefer high-res POSIX timers, when available */
     {
         clockid_t id;

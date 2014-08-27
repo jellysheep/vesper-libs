@@ -14,20 +14,20 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
-/*
- * The following two functions were written by David Robert Nadeau
- * from http//NadeauSoftware.com/ and distributed under the
- * Creative Commons Attribution 3.0 Unported License
- */
+/** Forward-declare struct timeval to avoid including huge header files. */
+struct timeval;
 
 /**
- * Get real time in seconds.
- * Returns -1.0 if an error occurred.
- * Time is measured since an arbitrary and OS-dependent start time.
- * The returned real time is only useful for computing an elapsed time
- * between two calls to this function.
+ * Get real (wall clock) time since epoch as a timeval struct.
+ * Aborts if no timer is available.
  */
-double vsp_time_real(void);
+void vsp_time_real_timeval(struct timeval *time);
+
+/**
+ * Get real (wall clock) time since epoch in seconds.
+ * Aborts if no timer is available.
+ */
+double vsp_time_real_double(void);
 
 /**
  * Get the amount of CPU time used by the current process in seconds.
@@ -36,7 +36,7 @@ double vsp_time_real(void);
  * The returned real time is only useful for computing an elapsed time
  * between two calls to this function.
  */
-double vsp_time_cpu(void);
+double vsp_time_cpu_double(void);
 
 #if defined __cplusplus
 }

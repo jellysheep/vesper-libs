@@ -73,7 +73,7 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
     cmcp_node->subscribe_socket = -1;
     pthread_mutex_init(&cmcp_node->mutex, NULL);
     pthread_cond_init(&cmcp_node->condition, NULL);
-    cmcp_node->time_next_heartbeat = vsp_time_real();
+    cmcp_node->time_next_heartbeat = vsp_time_real_double();
     cmcp_node->message_callback = message_callback;
     cmcp_node->callback_param = callback_param;
     /* return struct pointer */
@@ -438,7 +438,7 @@ int vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node)
     /* check parameter */
     VSP_ASSERT(cmcp_node != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    time_now = vsp_time_real();
+    time_now = vsp_time_real_double();
     if (time_now < cmcp_node->time_next_heartbeat) {
         /* not sending heartbeat yet; nothing to fail, hence success */
         return 0;

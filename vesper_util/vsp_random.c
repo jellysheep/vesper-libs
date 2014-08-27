@@ -14,9 +14,10 @@
 #if defined(_WIN32)
   #include <Windows.h>
 #else
+  #include <sys/time.h>
   #include <sys/types.h>
   #include <unistd.h>
-#endif
+#endif /* defined(_WIN32) */
 
 /** Initialize 64 bit seed for pseudo-random number generator. */
 static void vsp_random_initialize(void);
@@ -28,8 +29,7 @@ static uint64_t vsp_random_value = {0};
 void vsp_random_initialize(void)
 {
     uint64_t seed;
-    double realtime;
-    uint64_t realtime_int;
+    struct timeval realtime;
     uint64_t pid;
 
     if (vsp_random_value != 0) {
@@ -37,15 +37,15 @@ void vsp_random_initialize(void)
     }
 
     /* get random data from current time and process id */
-    realtime = vsp_time_real();
-    realtime_int = *(uint64_t*) &realtime;
+    vsp_time_real_timeval(&realtime);
     #if defined(_WIN32)
         pid = (uint32_t) GetCurrentProcessId();
     #else
         pid = (uint32_t) getpid();
     #endif
     /* mix random data into seed */
-    seed = realtime_int;
+    seed = realtime.tv_sec;
+    seed ^= realtime.tv_usec;
     seed ^= pid;
     seed ^= (pid << 32);
     /* store seed */
