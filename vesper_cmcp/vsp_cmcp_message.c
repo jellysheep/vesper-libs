@@ -168,24 +168,21 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
 uint16_t vsp_cmcp_message_get_topic_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL,
-        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    VSP_ASSERT(cmcp_message != NULL, abort());
     return cmcp_message->topic_id;
 }
 
 uint16_t vsp_cmcp_message_get_sender_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL,
-        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    VSP_ASSERT(cmcp_message != NULL, abort());
     return cmcp_message->sender_id;
 }
 
 uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL,
-        vsp_error_set_num(EINVAL); return (uint16_t)-1);
+    VSP_ASSERT(cmcp_message != NULL, abort());
     return cmcp_message->command_id;
 }
 

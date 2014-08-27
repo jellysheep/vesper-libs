@@ -83,19 +83,19 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
 
 /**
  * Get the message topic ID.
- * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
+ * cmcp_message must not be NULL. Aborts if failed.
  */
 uint16_t vsp_cmcp_message_get_topic_id(vsp_cmcp_message *cmcp_message);
 
 /**
  * Get the message sender ID.
- * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
+ * cmcp_message must not be NULL. Aborts if failed.
  */
 uint16_t vsp_cmcp_message_get_sender_id(vsp_cmcp_message *cmcp_message);
 
 /**
  * Get the message command ID.
- * Returns (uint16_t)-1 and sets vsp_error_num() if failed.
+ * cmcp_message must not be NULL. Aborts if failed.
  */
 uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message);
 

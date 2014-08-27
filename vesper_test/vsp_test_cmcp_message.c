@@ -53,10 +53,6 @@ MU_TEST(vsp_test_cmcp_message_invalid_parameters)
     ret = vsp_cmcp_message_get_data(NULL, buffer);
     mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
 
-    /* get message id from NULL object */
-    id = vsp_cmcp_message_get_topic_id(NULL);
-    mu_assert(id == (uint16_t) -1, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
     /* get data list from NULL object */
     cmcp_datalist1 = vsp_cmcp_message_get_datalist(NULL);
     mu_assert(cmcp_datalist1 == NULL, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
@@ -159,15 +155,12 @@ MU_TEST(vsp_test_cmcp_message_test)
 
     /* get back and verify message IDs */
     message_id = vsp_cmcp_message_get_topic_id(cmcp_message2);
-    mu_assert(message_id != (uint16_t) -1, vsp_error_str(vsp_error_num()));
     mu_assert(message_id == VSP_TEST_MESSAGE_TOPIC_ID, vsp_error_str(EINVAL));
 
     message_id = vsp_cmcp_message_get_sender_id(cmcp_message2);
-    mu_assert(message_id != (uint16_t) -1, vsp_error_str(vsp_error_num()));
     mu_assert(message_id == VSP_TEST_MESSAGE_SENDER_ID, vsp_error_str(EINVAL));
 
     message_id = vsp_cmcp_message_get_command_id(cmcp_message2);
-    mu_assert(message_id != (uint16_t) -1, vsp_error_str(vsp_error_num()));
     mu_assert(message_id == VSP_TEST_MESSAGE_COMMAND_ID, vsp_error_str(EINVAL));
 
     /* get data list from second message */
