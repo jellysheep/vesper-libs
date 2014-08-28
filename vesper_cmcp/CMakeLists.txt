@@ -14,6 +14,7 @@ set(HEADERS
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_message.h
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_node.h
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_command.h
+    ${PROJECT_SOURCE_DIR}/vsp_cmcp_state.h
 )
 
 # add source files of this module
@@ -23,6 +24,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_datalist.c
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_message.c
     ${PROJECT_SOURCE_DIR}/vsp_cmcp_node.c
+    ${PROJECT_SOURCE_DIR}/vsp_cmcp_state.c
 )
 
 # add object files to be compiled

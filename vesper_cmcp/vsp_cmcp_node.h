@@ -12,6 +12,7 @@
 
 #include "vsp_cmcp_datalist.h"
 #include "vsp_cmcp_message.h"
+#include "vsp_cmcp_state.h"
 
 #include <pthread.h>
 
@@ -53,12 +54,8 @@ struct vsp_cmcp_node {
     /** ID identifying this node in the network.
      * Must not equal broadcast topic ID. */
     uint16_t id;
-    /** Finite state machine flag. */
-    volatile vsp_cmcp_node_state state;
-    /** Mutex locking state changes. */
-    pthread_mutex_t mutex;
-    /** Condition variable used to wait for state changes. */
-    pthread_cond_t condition;
+    /** Finite state machine struct. */
+    vsp_cmcp_state *state;
     /** nanomsg socket number to publish messages. */
     int publish_socket;
     /** nanomsg socket number to receive messages. */
