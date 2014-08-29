@@ -47,9 +47,8 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
  * vsp_cmcp_message_create_parse().
  * Frees internal vsp_cmcp_datalist object when created with
  * vsp_cmcp_message_create_parse().
- * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message);
+void vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message);
 
 /**
  * Create new vsp_cmcp_message object from received binary data.
@@ -66,7 +65,6 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
  * Calculate necessary length of a binary data array storing the message data.
  * This function should only be called for messages created with
  * vsp_cmcp_message_create().
- * Returns negative value and sets vsp_error_num() if failed.
  */
 int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message);
 
@@ -76,9 +74,8 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message);
  * vsp_cmcp_message_get_data_length() returns.
  * This function should only be called for messages created with
  * vsp_cmcp_message_create().
- * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
+void vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     void *data_pointer);
 
 /**
@@ -103,7 +100,6 @@ uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message);
  * Get data list parsed by this message object.
  * This function should only be called for messages created with
  * vsp_cmcp_message_create_parse().
- * Returns NULL and sets vsp_error_num() if failed.
  */
 vsp_cmcp_datalist *vsp_cmcp_message_get_datalist(
     vsp_cmcp_message *cmcp_message);

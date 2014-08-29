@@ -35,7 +35,7 @@ vsp_cmcp_state *vsp_cmcp_state_create(int initial_state);
  * Object should be created with vsp_cmcp_state_create().
  * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state);
+void vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state);
 
 /**
  * Get the current state.

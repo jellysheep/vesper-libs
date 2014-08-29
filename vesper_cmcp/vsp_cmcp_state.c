@@ -26,7 +26,7 @@ vsp_cmcp_state *vsp_cmcp_state_create(int initial_state)
 {
     vsp_cmcp_state *cmcp_state;
     /* allocate memory */
-    VSP_ALLOC(cmcp_state, vsp_cmcp_state, return NULL);
+    VSP_ALLOC(cmcp_state, vsp_cmcp_state);
     /* initialize struct data */
     cmcp_state->state = initial_state;
     pthread_mutex_init(&cmcp_state->mutex, NULL);
@@ -35,19 +35,18 @@ vsp_cmcp_state *vsp_cmcp_state_create(int initial_state)
     return cmcp_state;
 }
 
-int vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state)
+void vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state)
 {
     /* check parameter */
-    VSP_CHECK(cmcp_state != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_state != NULL);
     /* free memory */
     VSP_FREE(cmcp_state);
-    return 0;
 }
 
 int vsp_cmcp_state_get(vsp_cmcp_state *cmcp_state)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL, abort());
+    VSP_ASSERT(cmcp_state != NULL);
     /* return state value */
     return cmcp_state->state;
 }
@@ -55,7 +54,7 @@ int vsp_cmcp_state_get(vsp_cmcp_state *cmcp_state)
 void vsp_cmcp_state_set(vsp_cmcp_state *cmcp_state, int state)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL, abort());
+    VSP_ASSERT(cmcp_state != NULL);
     /* lock state mutex */
     pthread_mutex_lock(&cmcp_state->mutex);
     /* update state value */
@@ -69,7 +68,7 @@ void vsp_cmcp_state_set(vsp_cmcp_state *cmcp_state, int state)
 void vsp_cmcp_state_lock(vsp_cmcp_state *cmcp_state)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL, abort());
+    VSP_ASSERT(cmcp_state != NULL);
     /* lock mutex */
     pthread_mutex_lock(&cmcp_state->mutex);
 }
@@ -77,7 +76,7 @@ void vsp_cmcp_state_lock(vsp_cmcp_state *cmcp_state)
 void vsp_cmcp_state_unlock(vsp_cmcp_state *cmcp_state)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL, abort());
+    VSP_ASSERT(cmcp_state != NULL);
     /* unlock mutex */
     pthread_mutex_unlock(&cmcp_state->mutex);
 }
@@ -87,7 +86,7 @@ int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
 {
     int ret;
     /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL, abort());
+    VSP_ASSERT(cmcp_state != NULL);
     if (timeout_time != NULL) {
         /* wait until thread is running, with timeout */
         ret = pthread_cond_timedwait(&cmcp_state->condition,
@@ -99,7 +98,7 @@ int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
     /* unlock mutex */
     pthread_mutex_unlock(&cmcp_state->mutex);
     /* check for condition waiting errors */
-    VSP_ASSERT(ret == 0, vsp_error_set_num(ret); return -1);
+    VSP_ASSERT(ret == 0);
     /* success */
     return 0;
 }

@@ -88,9 +88,8 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
 /**
  * Free vsp_cmcp_node object.
  * Object should be created with vsp_cmcp_node_create().
- * Returns non-zero and sets vsp_error_num() if failed.
  */
-int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
+void vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
 
 /**
  * Initialize and connect sockets.
@@ -99,13 +98,11 @@ int vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
 int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     const char *publish_address, const char *subscribe_address);
 
-/** Start message reception thread and wait until thread has started.
- * Returns non-zero and sets vsp_error_num() if failed. */
-int vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node);
+/** Start message reception thread and wait until thread has started. */
+void vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node);
 
-/** Stop message reception thread and wait until thread has finished and joined.
- * Returns non-zero and sets vsp_error_num() if thread or this method failed. */
-int vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node);
+/** Stop message reception thread and wait until thread has finished. */
+void vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node);
 
 /**
  * Create and send message to the node's publish socket.

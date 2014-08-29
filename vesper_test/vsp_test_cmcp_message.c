@@ -16,87 +16,8 @@
 #include <vesper_util/vsp_util.h>
 #include <string.h>
 
-/** Test to invoke message functions with invalid parameters and check if they
- * behave correctly and do not abort. */
-MU_TEST(vsp_test_cmcp_message_invalid_parameters);
-
 /** Create message and test creating binary data and parse it. */
 MU_TEST(vsp_test_cmcp_message_test);
-
-MU_TEST(vsp_test_cmcp_message_invalid_parameters)
-{
-    int ret;
-    vsp_cmcp_message *cmcp_message1;
-    vsp_cmcp_datalist *cmcp_datalist1, *cmcp_datalist2;
-    uint8_t buffer[VSP_CMCP_MESSAGE_HEADER_LENGTH] = {0};
-
-    /* invalid message deallocation */
-    ret = vsp_cmcp_message_free(NULL);
-    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* parse message from NULL data */
-    cmcp_message1 = vsp_cmcp_message_create_parse(
-        VSP_CMCP_MESSAGE_HEADER_LENGTH, NULL);
-    mu_assert(cmcp_message1 == NULL, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* parse message from too small buffer size */
-    cmcp_message1 = vsp_cmcp_message_create_parse(
-        VSP_CMCP_MESSAGE_HEADER_LENGTH - 1, buffer);
-    mu_assert(cmcp_message1 == NULL, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* get message data length from NULL object */
-    ret = vsp_cmcp_message_get_data_length(NULL);
-    mu_assert(ret < 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* get message data from NULL object */
-    ret = vsp_cmcp_message_get_data(NULL, buffer);
-    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* get data list from NULL object */
-    cmcp_datalist1 = vsp_cmcp_message_get_datalist(NULL);
-    mu_assert(cmcp_datalist1 == NULL, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* parse message */
-    cmcp_message1 = vsp_cmcp_message_create_parse(
-        VSP_CMCP_MESSAGE_HEADER_LENGTH, buffer);
-    mu_assert_abort(cmcp_message1 != NULL, vsp_error_str(vsp_error_num()));
-
-    /* get message data length from parsed message */
-    ret = vsp_cmcp_message_get_data_length(cmcp_message1);
-    mu_assert(ret < 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* get message data from parsed message */
-    ret = vsp_cmcp_message_get_data(cmcp_message1, buffer);
-    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* deallocate message */
-    ret = vsp_cmcp_message_free(cmcp_message1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-
-    /* create data list */
-    cmcp_datalist1 = vsp_cmcp_datalist_create();
-    mu_assert_abort(cmcp_datalist1 != NULL, vsp_error_str(vsp_error_num()));
-
-    /* create message */
-    cmcp_message1 = vsp_cmcp_message_create(0, 0, 0, cmcp_datalist1);
-    mu_assert_abort(cmcp_message1 != NULL, vsp_error_str(vsp_error_num()));
-
-    /* get message data to NULL buffer */
-    ret = vsp_cmcp_message_get_data(cmcp_message1, NULL);
-    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* get data list from created message */
-    cmcp_datalist2 = vsp_cmcp_message_get_datalist(cmcp_message1);
-    mu_assert(cmcp_datalist2 == NULL, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
-
-    /* deallocate message */
-    ret = vsp_cmcp_message_free(cmcp_message1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-
-    /* deallocate data list */
-    ret = vsp_cmcp_datalist_free(cmcp_datalist1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-}
 
 MU_TEST(vsp_test_cmcp_message_test)
 {
@@ -117,8 +38,7 @@ MU_TEST(vsp_test_cmcp_message_test)
     mu_assert(data_length == VSP_CMCP_MESSAGE_HEADER_LENGTH,
         vsp_error_str(EINVAL));
     /* free message */
-    ret = vsp_cmcp_message_free(cmcp_message1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    vsp_cmcp_message_free(cmcp_message1);
 
     /* allocate data list */
     cmcp_datalist1 = vsp_cmcp_datalist_create();
@@ -145,8 +65,7 @@ MU_TEST(vsp_test_cmcp_message_test)
     data_pointer = malloc(data_length);
     mu_assert_abort(data_pointer != NULL, vsp_error_str(ENOMEM));
     /* get binary data */
-    ret = vsp_cmcp_message_get_data(cmcp_message1, data_pointer);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    vsp_cmcp_message_get_data(cmcp_message1, data_pointer);
 
     /* construct second message using binary data array */
     cmcp_message2 = vsp_cmcp_message_create_parse(data_length, data_pointer);
@@ -181,16 +100,12 @@ MU_TEST(vsp_test_cmcp_message_test)
 
     /* deallocation; cmcp_datalist2 will be freed by cmcp_message2 */
     VSP_FREE(data_pointer);
-    ret = vsp_cmcp_datalist_free(cmcp_datalist1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    ret = vsp_cmcp_message_free(cmcp_message1);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    ret = vsp_cmcp_message_free(cmcp_message2);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    vsp_cmcp_datalist_free(cmcp_datalist1);
+    vsp_cmcp_message_free(cmcp_message1);
+    vsp_cmcp_message_free(cmcp_message2);
 }
 
 MU_TEST_SUITE(vsp_test_cmcp_message)
 {
-    MU_RUN_TEST(vsp_test_cmcp_message_invalid_parameters);
     MU_RUN_TEST(vsp_test_cmcp_message_test);
 }

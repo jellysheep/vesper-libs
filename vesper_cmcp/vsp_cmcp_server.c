@@ -27,35 +27,27 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
 {
     vsp_cmcp_server *cmcp_server;
     /* allocate memory */
-    VSP_ALLOC(cmcp_server, vsp_cmcp_server, return NULL);
+    VSP_ALLOC(cmcp_server, vsp_cmcp_server);
     /* initialize base type */
     cmcp_server->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_SERVER,
         vsp_cmcp_server_message_callback, cmcp_server);
     /* in case of failure vsp_error_num() is already set */
-    VSP_ASSERT(cmcp_server->cmcp_node != NULL,
+    VSP_CHECK(cmcp_server->cmcp_node != NULL,
         VSP_FREE(cmcp_server); return NULL);
     /* return struct pointer */
     return cmcp_server;
 }
 
-int vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
+void vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
 {
-    int ret;
-    int success;
-
-    success = 0;
-
     /* check parameter */
-    VSP_CHECK(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_server != NULL, return);
 
     /* free node base type */
-    ret = vsp_cmcp_node_free(cmcp_server->cmcp_node);
-    VSP_ASSERT(ret == 0,
-        /* failures are silently ignored in release build */);
+    vsp_cmcp_node_free(cmcp_server->cmcp_node);
 
     /* free memory */
     VSP_FREE(cmcp_server);
-    return success;
 }
 
 int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
@@ -63,19 +55,20 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
 {
     int ret;
 
-    /* check parameter */
-    VSP_CHECK(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL && publish_address != NULL
+        && subscribe_address != NULL, vsp_error_set_num(EINVAL); return -1);
 
     /* bind sockets */
     ret = vsp_cmcp_node_connect(cmcp_server->cmcp_node,
         publish_address, subscribe_address);
-    /* check error */
+    /* check for errors */
     VSP_CHECK(ret == 0, return -1);
 
     /* start worker thread */
-    ret = vsp_cmcp_node_start(cmcp_server->cmcp_node);
-    /* check error */
-    VSP_ASSERT(ret == 0, return -1);
+    vsp_cmcp_node_start(cmcp_server->cmcp_node);
+    /* check for errors */
+    VSP_CHECK(ret == 0, return -1);
 
     /* sockets successfully bound */
     return 0;
@@ -86,8 +79,8 @@ void vsp_cmcp_server_message_callback(void *param,
 {
     vsp_cmcp_server *cmcp_server;
 
-    /* check parameters; failures are silently ignored in release build */
-    VSP_ASSERT(param != NULL && cmcp_message != NULL, return);
+    /* check parameters; failures are silently ignored */
+    VSP_CHECK(param != NULL && cmcp_message != NULL, return);
 
     cmcp_server = (vsp_cmcp_server*) param;
 

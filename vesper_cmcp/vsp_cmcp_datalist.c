@@ -33,21 +33,20 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create(void)
 {
     vsp_cmcp_datalist *cmcp_datalist;
     /* allocate memory */
-    VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist, return NULL);
+    VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist);
     /* initialize struct data: set number of list items to zero */
     cmcp_datalist->data_item_count = 0;
     /* return struct pointer */
     return cmcp_datalist;
 }
 
-int vsp_cmcp_datalist_free(vsp_cmcp_datalist *cmcp_datalist)
+void vsp_cmcp_datalist_free(vsp_cmcp_datalist *cmcp_datalist)
 {
     /* check parameter */
-    VSP_CHECK(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_datalist != NULL, return);
 
     /* free memory */
     VSP_FREE(cmcp_datalist);
-    return 0;
 }
 
 vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
@@ -64,7 +63,7 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
     /* check parameter */
     VSP_CHECK(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
     /* allocate memory */
-    VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist, return NULL);
+    VSP_ALLOC(cmcp_datalist, vsp_cmcp_datalist);
     /* initialize struct data: set number of list items to zero */
     cmcp_datalist->data_item_count = 0;
     /* add data list items */
@@ -90,8 +89,7 @@ vsp_cmcp_datalist *vsp_cmcp_datalist_create_parse(uint16_t data_length,
         /* add data list item */
         ret = vsp_cmcp_datalist_add_item(cmcp_datalist, data_item_id,
             data_item_length, data_item_pointer);
-        VSP_ASSERT(ret == 0,
-            /* failures are silently ignored in release build */);
+        VSP_CHECK(ret == 0, /* failures are silently ignored */);
     }
     /* return struct pointer */
     return cmcp_datalist;
@@ -205,9 +203,6 @@ int vsp_cmcp_datalist_find_item(vsp_cmcp_datalist *cmcp_datalist,
     uint16_t data_item_id)
 {
     int index;
-
-    /* check parameter */
-    VSP_ASSERT(cmcp_datalist != NULL, vsp_error_set_num(EINVAL); return -1);
 
     for (index = 0; index < cmcp_datalist->data_item_count; ++index) {
         if (cmcp_datalist->data_item_ids[index] == data_item_id) {

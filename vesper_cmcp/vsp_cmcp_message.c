@@ -38,7 +38,7 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
 {
     vsp_cmcp_message *cmcp_message;
     /* allocate memory */
-    VSP_ALLOC(cmcp_message, vsp_cmcp_message, return NULL);
+    VSP_ALLOC(cmcp_message, vsp_cmcp_message);
     /* initialize struct data */
     cmcp_message->type = VSP_CMCP_MESSAGE_TYPE_SEND;
     cmcp_message->topic_id = topic_id;
@@ -49,22 +49,17 @@ vsp_cmcp_message *vsp_cmcp_message_create(uint16_t topic_id,
     return cmcp_message;
 }
 
-int vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message)
+void vsp_cmcp_message_free(vsp_cmcp_message *cmcp_message)
 {
-    int ret;
-
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_CHECK(cmcp_message != NULL, return);
 
     if (cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE) {
-        ret = vsp_cmcp_datalist_free(cmcp_message->cmcp_datalist);
-        VSP_ASSERT(ret == 0,
-            /* failures are silently ignored in release build */);
+        vsp_cmcp_datalist_free(cmcp_message->cmcp_datalist);
     }
 
     /* free memory */
     VSP_FREE(cmcp_message);
-    return 0;
 }
 
 vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
@@ -75,11 +70,10 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
     vsp_cmcp_message *cmcp_message;
 
     /* check parameters */
-    VSP_CHECK(data_length >= VSP_CMCP_MESSAGE_HEADER_LENGTH,
-        vsp_error_set_num(EINVAL); return NULL);
-    VSP_CHECK(data_pointer != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_ASSERT(data_length >= VSP_CMCP_MESSAGE_HEADER_LENGTH);
+    VSP_ASSERT(data_pointer != NULL);
     /* allocate memory */
-    VSP_ALLOC(cmcp_message, vsp_cmcp_message, return NULL);
+    VSP_ALLOC(cmcp_message, vsp_cmcp_message);
     /* initialize struct data */
     cmcp_message->type = VSP_CMCP_MESSAGE_TYPE_RECEIVE;
     current_data_pointer = data_pointer;
@@ -93,7 +87,7 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
     cmcp_message->cmcp_datalist = vsp_cmcp_datalist_create_parse(
         data_length - VSP_CMCP_MESSAGE_HEADER_LENGTH, current_data_pointer);
     /* in case of failure vsp_error_num() is already set */
-    VSP_ASSERT(cmcp_message->cmcp_datalist != NULL,
+    VSP_CHECK(cmcp_message->cmcp_datalist != NULL,
         VSP_FREE(cmcp_message); return NULL);
 
     /* return struct pointer */
@@ -105,11 +99,10 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message)
     int data_length;
 
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_message != NULL);
 
     /* check message type */
-    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
-        vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND);
 
     /* calculate data length */
     data_length = 0;
@@ -119,8 +112,7 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message)
         /* add data list length */
         data_length =
             vsp_cmcp_datalist_get_data_length(cmcp_message->cmcp_datalist);
-        /* in case of failure vsp_error_num() is already set */
-        VSP_ASSERT(data_length >= 0, return -1);
+        VSP_ASSERT(data_length >= 0);
     }
 
     data_length += VSP_CMCP_MESSAGE_HEADER_LENGTH;
@@ -128,7 +120,7 @@ int vsp_cmcp_message_get_data_length(vsp_cmcp_message *cmcp_message)
     return data_length;
 }
 
-int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
+void vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     void *data_pointer)
 {
     int ret;
@@ -136,12 +128,10 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
     uint16_t *current_data_pointer;
 
     /* check parameters */
-    VSP_CHECK(cmcp_message != NULL && data_pointer != NULL,
-        vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_message != NULL && data_pointer != NULL);
 
     /* check message type */
-    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND,
-        vsp_error_set_num(EINVAL); return -1);
+    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_SEND);
 
     /* store message header */
     current_data_pointer = data_pointer;
@@ -157,43 +147,38 @@ int vsp_cmcp_message_get_data(vsp_cmcp_message *cmcp_message,
         /* store data list values */
         ret = vsp_cmcp_datalist_get_data(cmcp_message->cmcp_datalist,
             current_data_pointer);
-        /* in case of failure vsp_error_num() is already set */
-        VSP_ASSERT(ret == 0, return -1);
+        VSP_ASSERT(ret == 0);
     }
-
-    /* success */
-    return 0;
 }
 
 uint16_t vsp_cmcp_message_get_topic_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, abort());
+    VSP_ASSERT(cmcp_message != NULL);
     return cmcp_message->topic_id;
 }
 
 uint16_t vsp_cmcp_message_get_sender_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, abort());
+    VSP_ASSERT(cmcp_message != NULL);
     return cmcp_message->sender_id;
 }
 
 uint16_t vsp_cmcp_message_get_command_id(vsp_cmcp_message *cmcp_message)
 {
     /* check parameter */
-    VSP_ASSERT(cmcp_message != NULL, abort());
+    VSP_ASSERT(cmcp_message != NULL);
     return cmcp_message->command_id;
 }
 
 vsp_cmcp_datalist *vsp_cmcp_message_get_datalist(
     vsp_cmcp_message *cmcp_message) {
     /* check parameter */
-    VSP_CHECK(cmcp_message != NULL, vsp_error_set_num(EINVAL); return NULL);
+    VSP_ASSERT(cmcp_message != NULL);
 
     /* check message type */
-    VSP_CHECK(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE,
-        vsp_error_set_num(EINVAL); return NULL);
+    VSP_ASSERT(cmcp_message->type == VSP_CMCP_MESSAGE_TYPE_RECEIVE);
 
     return cmcp_message->cmcp_datalist;
 }

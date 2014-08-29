@@ -22,6 +22,17 @@ Code in `vesper-libs` should use [One True Brace Style (1TBS)][1TBS_link].
 [1TBS_link]:
 http://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS
 
+## Error handling and parameter checking
+
+* Functions that can have runtime errors should report errors by returning
+  an error status value (e.g. NULL or -1).
+* Public API functions should check their parameters for invalid values and
+  report an error (see above) if the check fails.
+* Internal functions should check their parameters for invalid values and
+  abort if the check fails.
+* Static (file-local) functions should not check their parameters for invalid
+  values, as the functions invoking them have to ensure parameter validity.
+
 ## Miscellaneous
 
 Code in `vesper-libs` should furthermore conform to the following rules:

@@ -44,10 +44,8 @@ void vsp_test_cmcp_datalist_setup(void)
 
 void vsp_test_cmcp_datalist_teardown(void)
 {
-    int ret;
     /* deallocation */
-    ret = vsp_cmcp_datalist_free(global_cmcp_datalist);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    vsp_cmcp_datalist_free(global_cmcp_datalist);
 }
 
 MU_TEST(vsp_test_cmcp_datalist_invalid_parameters)
@@ -59,8 +57,7 @@ MU_TEST(vsp_test_cmcp_datalist_invalid_parameters)
     int i;
 
     /* invalid data list deallocation */
-    ret = vsp_cmcp_datalist_free(NULL);
-    mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
+    vsp_cmcp_datalist_free(NULL);
 
     /* create data list length of NULL data buffer */
     cmcp_datalist2 = vsp_cmcp_datalist_create_parse(0, NULL);
@@ -191,8 +188,7 @@ MU_TEST(vsp_test_cmcp_datalist_test)
 
     /* deallocation */
     VSP_FREE(data_pointer);
-    ret = vsp_cmcp_datalist_free(cmcp_datalist2);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    vsp_cmcp_datalist_free(cmcp_datalist2);
 }
 
 MU_TEST_SUITE(vsp_test_cmcp_datalist)

@@ -31,7 +31,7 @@ void vsp_time_real_timespec(struct timespec *time)
     FILETIME tm;
     ULONGLONG t;
     /* check parameter */
-    VSP_ASSERT(time != NULL, abort());
+    VSP_ASSERT(time != NULL);
     #if defined(NTDDI_WIN8) && NTDDI_VERSION >= NTDDI_WIN8
         /* Windows 8, Windows Server 2012 and later */
         GetSystemTimePreciseAsFileTime(&tm);
@@ -49,7 +49,7 @@ void vsp_time_real_timespec(struct timespec *time)
     /* POSIX */
     struct timeval tv;
     /* check parameter */
-    VSP_ASSERT(time != NULL, abort());
+    VSP_ASSERT(time != NULL);
     #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
         && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
     {
