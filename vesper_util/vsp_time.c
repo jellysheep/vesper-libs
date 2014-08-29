@@ -47,42 +47,26 @@ void vsp_time_real_timespec(struct timespec *time)
 
 #elif defined(_POSIX_VERSION)
     /* POSIX */
-    struct timeval tv;
-    /* check parameter */
-    VSP_ASSERT(time != NULL);
     #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
-        && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+        && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) \
+        && defined(CLOCK_REALTIME)
     {
-        #if defined(CLOCK_MONOTONIC_PRECISE)
-            /* BSD */
-            const clockid_t id = CLOCK_MONOTONIC_PRECISE;
-        #elif defined(CLOCK_MONOTONIC_RAW)
-            /* Linux */
-            const clockid_t id = CLOCK_MONOTONIC_RAW;
-        #elif defined(CLOCK_HIGHRES)
-            /* Solaris */
-            const clockid_t id = CLOCK_HIGHRES;
-        #elif defined(CLOCK_MONOTONIC)
-            /* AIX, BSD, Linux, POSIX, Solaris */
-            const clockid_t id = CLOCK_MONOTONIC;
-        #elif defined(CLOCK_REALTIME)
-            /* AIX, BSD, HP-UX, Linux, POSIX */
-            const clockid_t id = CLOCK_REALTIME;
-        #else
-            const clockid_t id = (clockid_t)-1; /* unknown */
-        #endif /* defined(CLOCK_MONOTONIC_PRECISE) */
-        if (id != (clockid_t)-1 && clock_gettime(id, time) != -1) {
+        /* AIX, BSD, HP-UX, Linux, POSIX */
+        const clockid_t id = CLOCK_REALTIME;
+        if (clock_gettime(id, time) != -1) {
             return;
         }
-        /* fall through */
     }
-    #endif /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
-
-    /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
-    gettimeofday(&tv, NULL);
-    time->tv_sec = tv.tv_sec;
-    time->tv_nsec = tv.tv_usec * 1000;
-    return;
+    #else /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
+        /* check parameter */
+        VSP_ASSERT(time != NULL);
+        /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
+        struct timeval tv;
+        gettimeofday(&tv, NULL);
+        time->tv_sec = tv.tv_sec;
+        time->tv_nsec = tv.tv_usec * 1000;
+        return;
+    #endif
 #else
     abort(); /* failed */
 #endif /* defined(_WIN32) */
