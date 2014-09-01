@@ -161,8 +161,9 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     /* check for errors set by nanomsg, cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
-    /* subscribe to broadcast ID */
+    /* subscribe to broadcast ID and node ID */
     vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_BROADCAST_TOPIC_ID);
+    vsp_cmcp_node_subscribe(cmcp_node, cmcp_node->id);
 
     /* set state */
     vsp_cmcp_state_set(cmcp_node->state, VSP_CMCP_NODE_INITIALIZED);

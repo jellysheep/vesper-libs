@@ -19,7 +19,13 @@ extern "C" {
  * Necessary data list parameters have to be listed here. */
 typedef enum {
     /** Server heartbeat signal command. No parameters required. */
-    VSP_CMCP_COMMAND_SERVER_HEARTBEAT
+    VSP_CMCP_COMMAND_SERVER_HEARTBEAT,
+    /** Acknowledge signal when registering a new client.
+     * Parameters: VSP_CMCP_PARAMETER_NONCE. */
+    VSP_CMCP_COMMAND_SERVER_ACK_CLIENT,
+    /** Negative acknowledge when rejecting a new client.
+     * Parameters: VSP_CMCP_PARAMETER_NONCE. */
+    VSP_CMCP_COMMAND_SERVER_NACK_CLIENT
 } vsp_cmcp_server_command_id;
 
 /** Internal client message commands used for CMCP handshake as well as

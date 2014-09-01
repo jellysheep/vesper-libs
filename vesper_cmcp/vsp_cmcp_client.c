@@ -36,6 +36,8 @@ struct vsp_cmcp_client {
     vsp_cmcp_node *cmcp_node;
     /** Client finite state machine flag, not related to node state. */
     vsp_cmcp_state *state;
+    /** Randomly generated nonce used for temporary node indentification. */
+    uint64_t nonce;
 };
 
 /** Connect to server and establish connection using handshake.
@@ -134,10 +136,10 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
         vsp_cmcp_state_lock(cmcp_client->state);
         ret = vsp_cmcp_state_wait(cmcp_client->state, &time_connection_timeout);
         state = vsp_cmcp_state_get(cmcp_client->state);
-    } while (ret == 0 && state != VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED);
+    } while (ret == 0 && state != VSP_CMCP_CLIENT_CONNECTED);
 
     /* check if connected */
-    VSP_CHECK(state == VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED, success = -1);
+    VSP_CHECK(state == VSP_CMCP_CLIENT_CONNECTED, success = -1);
 
     return success;
 }
@@ -146,25 +148,33 @@ void vsp_cmcp_client_message_callback(void *param,
     vsp_cmcp_message *cmcp_message)
 {
     vsp_cmcp_client *cmcp_client;
-    int ret;
+    vsp_cmcp_datalist *cmcp_datalist;
+    uint64_t *client_nonce;
+    int ret, state;
     uint16_t topic_id, sender_id, command_id;
-    uint64_t nonce;
 
     /* check parameters; failures are silently ignored */
     VSP_CHECK(param != NULL && cmcp_message != NULL, return);
 
     cmcp_client = (vsp_cmcp_client*) param;
 
+    /* get message IDs */
+    topic_id = vsp_cmcp_message_get_topic_id(cmcp_message);
+    sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
+    command_id = vsp_cmcp_message_get_command_id(cmcp_message);
+    /* get data list */
+    cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
+    /* check data list; failures are silently ignored */
+    VSP_CHECK(cmcp_datalist != NULL, return);
+
+    /* get current state */
+    state = vsp_cmcp_state_get(cmcp_client->state);
+
     /* process message */
-    if (vsp_cmcp_state_get(cmcp_client->state)
-        == VSP_CMCP_CLIENT_DISCONNECTED) {
-        /* receive only server heartbeat signals */
-        topic_id = vsp_cmcp_message_get_topic_id(cmcp_message);
-        sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
-        command_id = vsp_cmcp_message_get_command_id(cmcp_message);
+    if (state == VSP_CMCP_CLIENT_DISCONNECTED) {
         /* check if server heartbeat received */
         VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
-            && sender_id != 0 && (sender_id & 1) == 0
+            && sender_id != VSP_CMCP_BROADCAST_TOPIC_ID && (sender_id & 1) == 0
             && command_id == VSP_CMCP_COMMAND_SERVER_HEARTBEAT, return);
         /* server heartbeat received */
         vsp_cmcp_state_set(cmcp_client->state,
@@ -173,6 +183,30 @@ void vsp_cmcp_client_message_callback(void *param,
         ret = vsp_cmcp_client_send_announcement(cmcp_client);
         /* check for errors; failures are silently ignored */
         VSP_CHECK(ret == 0, return);
+    } else if (state == VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED) {
+        /* check if server (negative) acknowledge received */
+        VSP_CHECK(topic_id == cmcp_client->cmcp_node->id
+            && sender_id != VSP_CMCP_BROADCAST_TOPIC_ID && (sender_id & 1) == 0
+            && (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT
+            || command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT), return);
+        /* get client nonce */
+        client_nonce = vsp_cmcp_datalist_get_data_item(cmcp_datalist,
+            VSP_CMCP_PARAMETER_NONCE, sizeof(uint64_t));
+        /* check data list item (nonce); failures are silently ignored */
+        VSP_CHECK(client_nonce != NULL, return);
+        /* ignore message if nonce does not match this node's nonce */
+        VSP_CHECK(*client_nonce == cmcp_client->nonce, return);
+
+        if (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT) {
+            /* acknowledge received, connected */
+            vsp_cmcp_state_set(cmcp_client->state, VSP_CMCP_CLIENT_CONNECTED);
+        } else if (command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT) {
+            /* negative acknowledge received, rejected */
+            vsp_cmcp_state_set(cmcp_client->state,
+                VSP_CMCP_CLIENT_DISCONNECTED);
+            /* connection establishment will be automatically retried when next
+             * server heartbeat signal is received */
+        }
     }
 }
 
@@ -181,14 +215,13 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     int ret;
     int success;
     vsp_cmcp_datalist *cmcp_datalist;
-    uint64_t nonce;
 
     /* initialize local variables */
     success = 0;
     cmcp_datalist = NULL;
 
     /* create identification nonce */
-    nonce = vsp_random_get();
+    cmcp_client->nonce = vsp_random_get();
 
     /* create announcement command message */
     cmcp_datalist = vsp_cmcp_datalist_create();
@@ -196,7 +229,7 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     VSP_ASSERT(cmcp_datalist != NULL);
     /* add nonce parameter as a data list item */
     ret = vsp_cmcp_datalist_add_item(cmcp_datalist, VSP_CMCP_PARAMETER_NONCE,
-        sizeof(nonce), &nonce);
+        sizeof(uint64_t), &cmcp_client->nonce);
     /* check for errors */
     VSP_CHECK(ret == 0, goto error_exit);
     /* send message */
