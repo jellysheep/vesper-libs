@@ -54,6 +54,10 @@ static int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client);
 static void vsp_cmcp_client_message_callback(void *param,
     vsp_cmcp_message *cmcp_message);
 
+/** Handle an internal CMCP control message. */
+void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
+
 vsp_cmcp_client *vsp_cmcp_client_create(void)
 {
     vsp_cmcp_client *cmcp_client;
@@ -149,8 +153,6 @@ void vsp_cmcp_client_message_callback(void *param,
 {
     vsp_cmcp_client *cmcp_client;
     vsp_cmcp_datalist *cmcp_datalist;
-    uint64_t *client_nonce;
-    int ret, state;
     uint16_t topic_id, sender_id, command_id;
 
     /* check parameters; failures are silently ignored */
@@ -162,19 +164,39 @@ void vsp_cmcp_client_message_callback(void *param,
     topic_id = vsp_cmcp_message_get_topic_id(cmcp_message);
     sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
     command_id = vsp_cmcp_message_get_command_id(cmcp_message);
+
+    /* check if message has valid sender */
+    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID, return);
+
     /* get data list */
     cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
     /* check data list; failures are silently ignored */
     VSP_CHECK(cmcp_datalist != NULL, return);
 
+    /* check if internal control message received */
+    if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
+        /* handle control message */
+        vsp_cmcp_client_handle_control_message(cmcp_client, sender_id,
+            command_id, cmcp_datalist);
+    } else {
+        /* handle user message */
+        /* ... */
+    }
+}
+
+void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
+{
+    int ret, state;
+    uint64_t *client_nonce;
+
     /* get current state */
     state = vsp_cmcp_state_get(cmcp_client->state);
 
-    /* process message */
+    /* process controll message */
     if (state == VSP_CMCP_CLIENT_DISCONNECTED) {
         /* check if server heartbeat received */
-        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
-            && sender_id != VSP_CMCP_BROADCAST_TOPIC_ID && (sender_id & 1) == 0
+        VSP_CHECK((sender_id & 1) == 0
             && command_id == VSP_CMCP_COMMAND_SERVER_HEARTBEAT, return);
         /* server heartbeat received */
         vsp_cmcp_state_set(cmcp_client->state,
@@ -185,8 +207,7 @@ void vsp_cmcp_client_message_callback(void *param,
         VSP_CHECK(ret == 0, return);
     } else if (state == VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED) {
         /* check if server (negative) acknowledge received */
-        VSP_CHECK(topic_id == cmcp_client->cmcp_node->id
-            && sender_id != VSP_CMCP_BROADCAST_TOPIC_ID && (sender_id & 1) == 0
+        VSP_CHECK((sender_id & 1) == 0
             && (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT
             || command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT), return);
         /* get client nonce */

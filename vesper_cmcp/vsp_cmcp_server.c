@@ -39,6 +39,10 @@ struct vsp_cmcp_server {
 static void vsp_cmcp_server_message_callback(void *param,
     vsp_cmcp_message *cmcp_message);
 
+/** Handle an internal CMCP control message. */
+void vsp_cmcp_server_handle_control_message(vsp_cmcp_server *cmcp_server,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
+
 /** Try to register newly connected client and send (negative) acknowledge. */
 static void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
     uint16_t client_id, uint64_t client_nonce);
@@ -111,6 +115,7 @@ void vsp_cmcp_server_message_callback(void *param,
     vsp_cmcp_message *cmcp_message)
 {
     vsp_cmcp_server *cmcp_server;
+    vsp_cmcp_datalist *cmcp_datalist;
     uint16_t topic_id, sender_id, command_id;
 
     /* check parameters; failures are silently ignored */
@@ -118,22 +123,38 @@ void vsp_cmcp_server_message_callback(void *param,
 
     cmcp_server = (vsp_cmcp_server*) param;
 
-    /* process message */
-    /* receive only server heartbeat signals */
+    /* get message IDs */
     topic_id = vsp_cmcp_message_get_topic_id(cmcp_message);
     sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
     command_id = vsp_cmcp_message_get_command_id(cmcp_message);
+
+    /* check if message has valid sender */
+    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID, return);
+
+    /* get data list */
+    cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
+    /* check data list; failures are silently ignored */
+    VSP_CHECK(cmcp_datalist != NULL, return);
+
+    /* check if internal control message received */
+    if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
+        /* handle control message */
+        vsp_cmcp_server_handle_control_message(cmcp_server, sender_id,
+            command_id, cmcp_datalist);
+    } else {
+        /* handle user message */
+        /* ... */
+    }
+}
+
+void vsp_cmcp_server_handle_control_message(vsp_cmcp_server *cmcp_server,
+    uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
+{
     /* check if client announcement received */
-    if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
-        && sender_id != VSP_CMCP_BROADCAST_TOPIC_ID && (sender_id & 1) == 1
+    if ((sender_id & 1) == 1
         && command_id == VSP_CMCP_COMMAND_CLIENT_ANNOUNCE) {
         /* client announcement received */
-        vsp_cmcp_datalist *cmcp_datalist;
         uint64_t *client_nonce;
-        /* get data list */
-        cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
-        /* check data list; failures are silently ignored */
-        VSP_CHECK(cmcp_datalist != NULL, return);
         /* get client nonce */
         client_nonce = vsp_cmcp_datalist_get_data_item(cmcp_datalist,
             VSP_CMCP_PARAMETER_NONCE, sizeof(uint64_t));
@@ -187,14 +208,14 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
     if (success == 0) {
         /* new client peer ID registered, send acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
-            client_id, cmcp_server->cmcp_node->id,
+            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->cmcp_node->id,
             VSP_CMCP_COMMAND_SERVER_ACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);
     } else {
         /* new client peer ID rejected, send negative acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
-            client_id, cmcp_server->cmcp_node->id,
+            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->cmcp_node->id,
             VSP_CMCP_COMMAND_SERVER_NACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);
