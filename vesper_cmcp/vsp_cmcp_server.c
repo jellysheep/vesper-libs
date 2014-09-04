@@ -26,6 +26,8 @@ typedef struct vsp_cmcp_server_peer vsp_cmcp_server_peer;
 struct vsp_cmcp_server {
     /** Basic node and finite-state machine data. */
     vsp_cmcp_node *cmcp_node;
+    /** ID identifying this server in the network. */
+    uint16_t id;
     /** Number of registered client peers. */
     uint16_t client_count;
     /** Client peer IDs. */
@@ -63,6 +65,8 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     /* in case of failure vsp_error_num() is already set */
     VSP_CHECK(cmcp_server->cmcp_node != NULL,
         VSP_FREE(cmcp_server); return NULL);
+    /* get node ID */
+    cmcp_server->id = vsp_cmcp_node_get_id(cmcp_server->cmcp_node);
     /* no client peers registered yet */
     cmcp_server->client_count = 0;
     /* return struct pointer */
@@ -208,14 +212,14 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
     if (success == 0) {
         /* new client peer ID registered, send acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
-            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->cmcp_node->id,
+            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_ACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);
     } else {
         /* new client peer ID rejected, send negative acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
-            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->cmcp_node->id,
+            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_NACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);

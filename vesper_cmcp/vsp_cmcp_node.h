@@ -12,9 +12,6 @@
 
 #include "vsp_cmcp_datalist.h"
 #include "vsp_cmcp_message.h"
-#include "vsp_cmcp_state.h"
-
-#include <pthread.h>
 
 #if defined __cplusplus
 extern "C" {
@@ -31,44 +28,9 @@ typedef enum {
     VSP_CMCP_NODE_CLIENT
 } vsp_cmcp_node_type;
 
-/** vsp_cmcp_node finite state machine flag. */
-typedef enum {
-    /** Sockets are not initialized and not connected. */
-    VSP_CMCP_NODE_UNINITIALIZED,
-    /** Sockets are initialized and connected. */
-    VSP_CMCP_NODE_INITIALIZED,
-    /** Message reception thread was started. */
-    VSP_CMCP_NODE_STARTING,
-    /** Message reception thread was stopped. */
-    VSP_CMCP_NODE_STOPPING,
-    /** Message reception thread is running. */
-    VSP_CMCP_NODE_RUNNING
-} vsp_cmcp_node_state;
-
 /** State and other data used for network connection.
- * Base type for vsp_cmcp_server and vsp_cmcp_client.
- * This structure implements basic functions of a finite-state machine. */
-struct vsp_cmcp_node {
-    /** Node type. */
-    vsp_cmcp_node_type node_type;
-    /** ID identifying this node in the network.
-     * Must not equal broadcast topic ID. */
-    uint16_t id;
-    /** Finite state machine struct. */
-    vsp_cmcp_state *state;
-    /** nanomsg socket number to publish messages. */
-    int publish_socket;
-    /** nanomsg socket number to receive messages. */
-    int subscribe_socket;
-    /** Reception thread. */
-    pthread_t thread;
-    /** Real time of next heartbeat. */
-    double time_next_heartbeat;
-    /** Message callback function. */
-    void (*message_callback)(void*, vsp_cmcp_message*);
-    /** Message callback parameter. */
-    void *callback_param;
-};
+ * Base type for vsp_cmcp_server and vsp_cmcp_client. */
+struct vsp_cmcp_node;
 
 /** Define type vsp_cmcp_node to avoid 'struct' keyword. */
 typedef struct vsp_cmcp_node vsp_cmcp_node;
@@ -90,6 +52,9 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
  * Object should be created with vsp_cmcp_node_create().
  */
 void vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
+
+/** Get the network ID of this node. */
+uint16_t vsp_cmcp_node_get_id(vsp_cmcp_node *cmcp_node);
 
 /**
  * Initialize and connect sockets.

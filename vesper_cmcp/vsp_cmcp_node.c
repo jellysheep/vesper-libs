@@ -8,6 +8,7 @@
 
 #include "vsp_cmcp_node.h"
 #include "vsp_cmcp_command.h"
+#include "vsp_cmcp_state.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
@@ -15,6 +16,7 @@
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
+#include <pthread.h>
 
 /** Wall clock time in milliseconds until server receive times out.
  * Heartbeats can only be sent as often as the receive call times out,
@@ -23,6 +25,44 @@ static const int VSP_CMCP_NODE_TIMEOUT = 1000;
 
 /** Wall clock time in milliseconds between two heartbeat signals. */
 #define VSP_CMCP_NODE_HEARTBEAT_TIME 1000
+
+/** vsp_cmcp_node finite state machine flag. */
+typedef enum {
+    /** Sockets are not initialized and not connected. */
+    VSP_CMCP_NODE_UNINITIALIZED,
+    /** Sockets are initialized and connected. */
+    VSP_CMCP_NODE_INITIALIZED,
+    /** Message reception thread was started. */
+    VSP_CMCP_NODE_STARTING,
+    /** Message reception thread was stopped. */
+    VSP_CMCP_NODE_STOPPING,
+    /** Message reception thread is running. */
+    VSP_CMCP_NODE_RUNNING
+} vsp_cmcp_node_state;
+
+/** State and other data used for network connection.
+ * Base type for vsp_cmcp_server and vsp_cmcp_client. */
+struct vsp_cmcp_node {
+    /** Node type. */
+    vsp_cmcp_node_type node_type;
+    /** ID identifying this node in the network.
+     * Must not equal broadcast topic ID. */
+    uint16_t id;
+    /** Finite state machine struct. */
+    vsp_cmcp_state *state;
+    /** nanomsg socket number to publish messages. */
+    int publish_socket;
+    /** nanomsg socket number to receive messages. */
+    int subscribe_socket;
+    /** Reception thread. */
+    pthread_t thread;
+    /** Real time of next heartbeat. */
+    double time_next_heartbeat;
+    /** Message callback function. */
+    void (*message_callback)(void*, vsp_cmcp_message*);
+    /** Message callback parameter. */
+    void *callback_param;
+};
 
 /**
  * Send previously created message to the specified socket.
@@ -110,6 +150,14 @@ void vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node)
 
     /* free memory */
     VSP_FREE(cmcp_node);
+}
+
+uint16_t vsp_cmcp_node_get_id(vsp_cmcp_node *cmcp_node)
+{
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL);
+
+    return cmcp_node->id;
 }
 
 int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,

@@ -9,6 +9,7 @@
 #include "vsp_cmcp_client.h"
 #include "vsp_cmcp_command.h"
 #include "vsp_cmcp_node.h"
+#include "vsp_cmcp_state.h"
 
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_random.h>
@@ -34,6 +35,8 @@ typedef enum {
 struct vsp_cmcp_client {
     /** Basic node and finite-state machine data. */
     vsp_cmcp_node *cmcp_node;
+    /** ID identifying this client in the network. */
+    uint16_t id;
     /** Client finite state machine flag, not related to node state. */
     vsp_cmcp_state *state;
     /** Randomly generated nonce used for temporary node indentification. */
@@ -69,6 +72,8 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     /* in case of failure vsp_error_num() is already set */
     VSP_CHECK(cmcp_client->cmcp_node != NULL,
         VSP_FREE(cmcp_client); return NULL);
+    /* get node ID */
+    cmcp_client->id = vsp_cmcp_node_get_id(cmcp_client->cmcp_node);
     /* initialize state struct */
     cmcp_client->state = vsp_cmcp_state_create(VSP_CMCP_CLIENT_DISCONNECTED);
     /* in case of failure vsp_error_num() is already set */
@@ -255,7 +260,7 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     VSP_CHECK(ret == 0, goto error_exit);
     /* send message */
     ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
-        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_client->cmcp_node->id,
+        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_client->id,
         VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
     /* check for errors */
     VSP_CHECK(ret == 0, goto error_exit);
