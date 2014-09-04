@@ -38,13 +38,23 @@ extern "C" {
 
 /**
  * Get real (wall clock) time since epoch as a timespec struct.
- * Aborts if no timer is available.
  */
 void vsp_time_real_timespec(struct timespec *time);
 
 /**
+ * Get real (wall clock) time since epoch as a timespec struct and add an amount
+ * of milliseconds to get a time in the future.
+ */
+void vsp_time_real_timespec_from_now(struct timespec *time,
+    unsigned int milliseconds);
+
+/**
+ * Returns zero if a specified real (wall clock) time since epoch has passed.
+ */
+int vsp_time_real_timespec_passed(struct timespec *time);
+
+/**
  * Get real (wall clock) time since epoch in seconds.
- * Aborts if no timer is available.
  */
 double vsp_time_real_double(void);
 

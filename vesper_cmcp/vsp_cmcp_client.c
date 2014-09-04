@@ -129,16 +129,14 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     int ret;
     int success;
     int state;
-    struct timespec time_now, time_connection_timeout;
+    struct timespec time_connection_timeout;
 
     /* initialize local variables */
     success = 0;
 
     /* start measuring time for heartbeat timeout */
-    vsp_time_real_timespec(&time_now);
-    time_connection_timeout.tv_sec = time_now.tv_sec
-        + (VSP_CMCP_CLIENT_CONNECTION_TIMEOUT / 1000);
-    time_connection_timeout.tv_nsec = time_now.tv_nsec;
+    vsp_time_real_timespec_from_now(&time_connection_timeout,
+        VSP_CMCP_CLIENT_CONNECTION_TIMEOUT);
 
     /* wait until connected or waiting timed out */
     do {

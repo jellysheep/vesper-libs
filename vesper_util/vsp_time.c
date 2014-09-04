@@ -46,6 +46,9 @@ void vsp_time_real_timespec(struct timespec *time)
     return;
 
 #elif defined(_POSIX_VERSION)
+    struct timeval tv;
+    /* check parameter */
+    VSP_ASSERT(time != NULL);
     /* POSIX */
     #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L \
         && defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) \
@@ -56,20 +59,44 @@ void vsp_time_real_timespec(struct timespec *time)
         if (clock_gettime(id, time) != -1) {
             return;
         }
+        /* else fall through */
     }
-    #else /* defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) */
-        /* check parameter */
-        VSP_ASSERT(time != NULL);
-        /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
-        struct timeval tv;
-        gettimeofday(&tv, NULL);
-        time->tv_sec = tv.tv_sec;
-        time->tv_nsec = tv.tv_usec * 1000;
-        return;
     #endif
+    /* AIX, BSD, Cygwin, HP-UX, Linux, OSX, POSIX, Solaris */
+    gettimeofday(&tv, NULL);
+    time->tv_sec = tv.tv_sec;
+    time->tv_nsec = tv.tv_usec * 1000;
+    return;
 #else
-    abort(); /* failed */
+  #error "Unable to define timers for an unknown OS."
 #endif /* defined(_WIN32) */
+}
+
+void vsp_time_real_timespec_from_now(struct timespec *time,
+    unsigned int milliseconds)
+{
+    vsp_time_real_timespec(time);
+    /* add fractional seconds */
+    time->tv_nsec += (milliseconds % 1000) * 1000000l;
+    /* remove overflow */
+    if (time->tv_nsec > 1000000000l) {
+        time->tv_nsec -= 1000000000l;
+        time->tv_sec += 1;
+    }
+    /* add whole seconds */
+    time->tv_sec += milliseconds / 1000;
+}
+
+int vsp_time_real_timespec_passed(struct timespec *time)
+{
+    struct timespec now;
+    vsp_time_real_timespec(&now);
+    if (now.tv_sec > time->tv_sec
+        || (now.tv_sec == time->tv_sec && now.tv_nsec > time->tv_nsec)) {
+        return 0;
+    } else {
+        return -1;
+    }
 }
 
 double vsp_time_real_double(void)
