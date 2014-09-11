@@ -21,6 +21,8 @@
 typedef enum {
     /** Client is not connected to server. */
     VSP_CMCP_CLIENT_DISCONNECTED,
+    /** Client is trying to connect to server. */
+    VSP_CMCP_CLIENT_TRYING_TO_CONNECT,
     /** Client received heartbeat signal from server,
      * so reception socket is working. */
     VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED,
@@ -142,8 +144,15 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     vsp_time_real_timespec_from_now(&time_connection_timeout,
         VSP_CMCP_NODE_CONNECTION_TIMEOUT);
 
+    state = vsp_cmcp_state_get(cmcp_client->state);
+
     /* wait until connected or waiting timed out */
     do {
+        if (state == VSP_CMCP_CLIENT_DISCONNECTED) {
+            /* enable connecting to server */
+            vsp_cmcp_state_set(cmcp_client->state,
+                VSP_CMCP_CLIENT_TRYING_TO_CONNECT);
+        }
         vsp_cmcp_state_lock(cmcp_client->state);
         ret = vsp_cmcp_state_wait(cmcp_client->state, &time_connection_timeout);
         state = vsp_cmcp_state_get(cmcp_client->state);
@@ -170,8 +179,7 @@ void vsp_cmcp_client_regular_callback(void *param)
         /* connection to server timed out */
         vsp_cmcp_state_set(cmcp_client->state,
             VSP_CMCP_CLIENT_DISCONNECTED);
-        /* connection establishment will be automatically retried when next
-         * server heartbeat signal is received */
+        /* connection establishment will not be automatically retried */
         /* TODO: inform about lost connection through API */
     }
 }
@@ -222,7 +230,7 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
     state = vsp_cmcp_state_get(cmcp_client->state);
 
     /* process controll message */
-    if (state == VSP_CMCP_CLIENT_DISCONNECTED) {
+    if (state == VSP_CMCP_CLIENT_TRYING_TO_CONNECT) {
         /* check if server heartbeat received */
         VSP_CHECK((sender_id & 1) == 0
             && command_id == VSP_CMCP_COMMAND_SERVER_HEARTBEAT, return);
