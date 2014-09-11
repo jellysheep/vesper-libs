@@ -20,6 +20,14 @@ extern "C" {
 /** Topic ID used to broadcast to all connected clients or servers. */
 #define VSP_CMCP_BROADCAST_TOPIC_ID 0
 
+/** Wall clock time in milliseconds between two heartbeat signals.
+ * This is also the timeout of a node's receive call. */
+const int VSP_CMCP_NODE_HEARTBEAT_TIME;
+
+/** Time interval in milliseconds. When a node has not received heartbeat
+ * signals from a node peer for this amount of time, connection is timed out. */
+#define VSP_CMCP_NODE_CONNECTION_TIMEOUT 10000
+
 /** Node types. */
 typedef enum {
     /** Server node. */
@@ -39,13 +47,16 @@ typedef struct vsp_cmcp_node vsp_cmcp_node;
  * Create new vsp_cmcp_node object.
  * The state of the newly created node is set to VSP_CMCP_NODE_UNINITIALIZED.
  * Returned pointer should be freed with vsp_cmcp_node_free().
- * The provided message callback function will be called whenever
- * vsp_cmcp_node_start() has been invoked (i.e. the reception thread is
- * running) and a message is received. callback_param may be NULL.
+ * The message_callback function will be called whenever a message is received
+ * and vsp_cmcp_node_start() has been invoked (reception thread is running).
+ * The regular_callback function will be called regularly with a time interval
+ * as specified in VSP_CMCP_NODE_HEARTBEAT_TIME, or more frequently.
+ * callback_param may be NULL.
  * Returns NULL and sets vsp_error_num() if failed.
  */
 vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
-    void (*message_callback)(void*, vsp_cmcp_message*), void *callback_param);
+    void (*message_callback)(void*, vsp_cmcp_message*),
+    void (*regular_callback)(void*), void *callback_param);
 
 /**
  * Free vsp_cmcp_node object.

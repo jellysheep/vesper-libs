@@ -18,13 +18,9 @@
 #include <nanomsg/pubsub.h>
 #include <pthread.h>
 
-/** Wall clock time in milliseconds until server receive times out.
- * Heartbeats can only be sent as often as the receive call times out,
- * so this has to be set to at most VSP_CMCP_NODE_HEARTBEAT_TIME. */
-static const int VSP_CMCP_NODE_TIMEOUT = 1000;
-
-/** Wall clock time in milliseconds between two heartbeat signals. */
-#define VSP_CMCP_NODE_HEARTBEAT_TIME 1000
+/** Wall clock time in milliseconds between two heartbeat signals.
+ * This is also the timeout of a node's receive call. */
+const int VSP_CMCP_NODE_HEARTBEAT_TIME = 1000;
 
 /** vsp_cmcp_node finite state machine flag. */
 typedef enum {
@@ -60,6 +56,8 @@ struct vsp_cmcp_node {
     double time_next_heartbeat;
     /** Message callback function. */
     void (*message_callback)(void*, vsp_cmcp_message*);
+    /** Regular callback function. */
+    void (*regular_callback)(void*);
     /** Message callback parameter. */
     void *callback_param;
 };
@@ -86,7 +84,8 @@ static void *vsp_cmcp_node_run(void *param);
 static void vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node);
 
 vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
-    void (*message_callback)(void*, vsp_cmcp_message*), void *callback_param)
+    void (*message_callback)(void*, vsp_cmcp_message*),
+    void (*regular_callback)(void*), void *callback_param)
 {
     vsp_cmcp_node *cmcp_node;
     /* check parameters */
@@ -115,6 +114,7 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
     cmcp_node->subscribe_socket = -1;
     cmcp_node->time_next_heartbeat = vsp_time_real_double();
     cmcp_node->message_callback = message_callback;
+    cmcp_node->regular_callback = regular_callback;
     cmcp_node->callback_param = callback_param;
     /* return struct pointer */
     return cmcp_node;
@@ -204,8 +204,7 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
         nn_close(cmcp_node->subscribe_socket); return -1);
     /* set receive timeout */
     ret = nn_setsockopt(cmcp_node->subscribe_socket,
-        NN_SOL_SOCKET, NN_RCVTIMEO,
-        &VSP_CMCP_NODE_TIMEOUT, sizeof(VSP_CMCP_NODE_TIMEOUT));
+        NN_SOL_SOCKET, NN_RCVTIMEO, &VSP_CMCP_NODE_HEARTBEAT_TIME, sizeof(int));
     /* check for errors set by nanomsg, cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
@@ -401,6 +400,9 @@ void *vsp_cmcp_node_run(void *param)
     while (vsp_cmcp_state_get(cmcp_node->state) == VSP_CMCP_NODE_RUNNING) {
         /* send heartbeat */
         vsp_cmcp_node_heartbeat(cmcp_node);
+
+        /* invoke regular callback function */
+        cmcp_node->regular_callback(cmcp_node->callback_param);
 
         /* try to receive message */
         data_length = vsp_cmcp_node_recv_message(cmcp_node, &message_buffer);

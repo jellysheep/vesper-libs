@@ -11,12 +11,15 @@
 #include "vsp_cmcp_node.h"
 
 #include <vesper_util/vsp_error.h>
+#include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
 
 #define VSP_CMCP_SERVER_MAX_PEERS 16
 
 /** Data of a network node connected to server. */
 struct vsp_cmcp_server_peer {
+    /** The time when the connection to this peer times out. */
+    struct timespec time_connection_timeout;
 };
 
 /** Define type vsp_cmcp_server_peer to avoid 'struct' keyword. */
@@ -36,6 +39,10 @@ struct vsp_cmcp_server {
     vsp_cmcp_server_peer *client_data[VSP_CMCP_SERVER_MAX_PEERS];
 };
 
+/** Regular callback function invoked by cmcp_node.
+ * This function will be called regularly. */
+static void vsp_cmcp_server_regular_callback(void *param);
+
 /** Message callback function invoked by cmcp_node.
  * This function will be called for every received message. */
 static void vsp_cmcp_server_message_callback(void *param,
@@ -54,6 +61,11 @@ static void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
 static int vsp_cmcp_server_find_client(
     vsp_cmcp_server *cmcp_server, uint16_t client_id);
 
+/** Deregister the client with the specified ID.
+ * Future messages of this ID will be ignored (except announcements). */
+static void vsp_cmcp_server_deregister_client(vsp_cmcp_server *cmcp_server,
+    uint16_t client_id);
+
 vsp_cmcp_server *vsp_cmcp_server_create(void)
 {
     vsp_cmcp_server *cmcp_server;
@@ -61,7 +73,8 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     VSP_ALLOC(cmcp_server, vsp_cmcp_server);
     /* initialize base type */
     cmcp_server->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_SERVER,
-        vsp_cmcp_server_message_callback, cmcp_server);
+        vsp_cmcp_server_message_callback,
+        vsp_cmcp_server_regular_callback, cmcp_server);
     /* in case of failure vsp_error_num() is already set */
     VSP_CHECK(cmcp_server->cmcp_node != NULL,
         VSP_FREE(cmcp_server); return NULL);
@@ -115,6 +128,27 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     return 0;
 }
 
+void vsp_cmcp_server_regular_callback(void *param)
+{
+    vsp_cmcp_server *cmcp_server;
+    int index;
+
+    /* check parameters; failures are silently ignored */
+    VSP_CHECK(param != NULL, return);
+
+    cmcp_server = (vsp_cmcp_server*) param;
+
+    /* check if client peer connections have timed out */
+    for (index = 0; index < cmcp_server->client_count; ++index) {
+        if (vsp_time_real_timespec_passed(
+            &cmcp_server->client_data[index]->time_connection_timeout) == 0) {
+            /* client peer connection timed out */
+            vsp_cmcp_server_deregister_client(cmcp_server,
+                cmcp_server->client_ids[index]);
+        }
+    }
+}
+
 void vsp_cmcp_server_message_callback(void *param,
     vsp_cmcp_message *cmcp_message)
 {
@@ -146,7 +180,7 @@ void vsp_cmcp_server_message_callback(void *param,
         vsp_cmcp_server_handle_control_message(cmcp_server, sender_id,
             command_id, cmcp_datalist);
     } else {
-        /* handle user message */
+        /* handle data message */
         /* ... */
     }
 }
@@ -199,7 +233,8 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
         /* create client data struct */
         VSP_ALLOC(client, vsp_cmcp_server_peer);
         /* initialize struct data */
-        /* ... */
+        vsp_time_real_timespec_from_now(&client->time_connection_timeout,
+            VSP_CMCP_NODE_CONNECTION_TIMEOUT);
         /* store client peer ID */
         cmcp_server->client_ids[cmcp_server->client_count] = client_id;
         /* store client peer data */
@@ -243,4 +278,28 @@ int vsp_cmcp_server_find_client(vsp_cmcp_server *cmcp_server,
 
     /* client peer ID not found */
     return -1;
+}
+
+void vsp_cmcp_server_deregister_client(vsp_cmcp_server *cmcp_server,
+    uint16_t client_id)
+{
+    int index;
+
+    /* find client ID */
+    index = vsp_cmcp_server_find_client(cmcp_server, client_id);
+    /* check for errors */
+    VSP_ASSERT(index >= 0);
+
+    /* free memory */
+    VSP_FREE(cmcp_server->client_data[index]);
+
+    /* move array entries */
+    /* last registered client will be at the position of the deleted client */
+    --cmcp_server->client_count;
+    cmcp_server->client_ids[index] =
+        cmcp_server->client_ids[cmcp_server->client_count];
+    cmcp_server->client_data[index] =
+        cmcp_server->client_data[cmcp_server->client_count];
+
+    /* client ID deleted from client peer list; deregistering done */
 }

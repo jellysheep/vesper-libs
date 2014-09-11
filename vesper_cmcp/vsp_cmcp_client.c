@@ -17,9 +17,6 @@
 #include <vesper_util/vsp_util.h>
 #include <nanomsg/nn.h>
 
-/** Wall clock time in milliseconds between two client heartbeat signals. */
-#define VSP_CMCP_CLIENT_CONNECTION_TIMEOUT 60000
-
 /** vsp_cmcp_node finite state machine flag. */
 typedef enum {
     /** Client is not connected to server. */
@@ -41,6 +38,8 @@ struct vsp_cmcp_client {
     vsp_cmcp_state *state;
     /** Randomly generated nonce used for temporary node indentification. */
     uint64_t nonce;
+    /** The time when the connection to server times out. */
+    struct timespec time_connection_timeout;
 };
 
 /** Connect to server and establish connection using handshake.
@@ -51,6 +50,10 @@ static int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client);
 /** Send an announcement message to server.
  * Returns non-zero and sets vsp_error_num() if failed. */
 static int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client);
+
+/** Regular callback function invoked by cmcp_node.
+ * This function will be called regularly. */
+static void vsp_cmcp_client_regular_callback(void *param);
 
 /** Message callback function invoked by cmcp_node.
  * This function will be called for every received message. */
@@ -68,7 +71,8 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     VSP_ALLOC(cmcp_client, vsp_cmcp_client);
     /* initialize base type */
     cmcp_client->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_CLIENT,
-        vsp_cmcp_client_message_callback, cmcp_client);
+        vsp_cmcp_client_message_callback, vsp_cmcp_client_regular_callback,
+        cmcp_client);
     /* in case of failure vsp_error_num() is already set */
     VSP_CHECK(cmcp_client->cmcp_node != NULL,
         VSP_FREE(cmcp_client); return NULL);
@@ -136,7 +140,7 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 
     /* start measuring time for heartbeat timeout */
     vsp_time_real_timespec_from_now(&time_connection_timeout,
-        VSP_CMCP_CLIENT_CONNECTION_TIMEOUT);
+        VSP_CMCP_NODE_CONNECTION_TIMEOUT);
 
     /* wait until connected or waiting timed out */
     do {
@@ -149,6 +153,27 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     VSP_CHECK(state == VSP_CMCP_CLIENT_CONNECTED, success = -1);
 
     return success;
+}
+
+void vsp_cmcp_client_regular_callback(void *param)
+{
+    vsp_cmcp_client *cmcp_client;
+
+    /* check parameters; failures are silently ignored */
+    VSP_CHECK(param != NULL, return);
+
+    cmcp_client = (vsp_cmcp_client*) param;
+
+    if (vsp_cmcp_state_get(cmcp_client->state) == VSP_CMCP_CLIENT_CONNECTED
+        && vsp_time_real_timespec_passed(
+        &cmcp_client->time_connection_timeout) == 0) {
+        /* connection to server timed out */
+        vsp_cmcp_state_set(cmcp_client->state,
+            VSP_CMCP_CLIENT_DISCONNECTED);
+        /* connection establishment will be automatically retried when next
+         * server heartbeat signal is received */
+        /* TODO: inform about lost connection through API */
+    }
 }
 
 void vsp_cmcp_client_message_callback(void *param,
@@ -182,7 +207,7 @@ void vsp_cmcp_client_message_callback(void *param,
         vsp_cmcp_client_handle_control_message(cmcp_client, sender_id,
             command_id, cmcp_datalist);
     } else {
-        /* handle user message */
+        /* handle data message */
         /* ... */
     }
 }
@@ -224,6 +249,10 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
         if (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT) {
             /* acknowledge received, connected */
             vsp_cmcp_state_set(cmcp_client->state, VSP_CMCP_CLIENT_CONNECTED);
+            /* initialize timeout time */
+            vsp_time_real_timespec_from_now(
+                &cmcp_client->time_connection_timeout,
+                VSP_CMCP_NODE_CONNECTION_TIMEOUT);
         } else if (command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT) {
             /* negative acknowledge received, rejected */
             vsp_cmcp_state_set(cmcp_client->state,
