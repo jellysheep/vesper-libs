@@ -19,7 +19,7 @@
 #include <pthread.h>
 
 /** Wall clock time in milliseconds between two heartbeat signals.
- * This is also the timeout of a node's receive call. */
+ * This is also the timeout of a receive call of a node. */
 const int VSP_CMCP_NODE_HEARTBEAT_TIME = 1000;
 
 /** vsp_cmcp_node finite state machine flag. */

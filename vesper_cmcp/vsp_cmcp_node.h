@@ -21,7 +21,7 @@ extern "C" {
 #define VSP_CMCP_BROADCAST_TOPIC_ID 0
 
 /** Wall clock time in milliseconds between two heartbeat signals.
- * This is also the timeout of a node's receive call. */
+ * This is also the timeout of a receive call of a node. */
 const int VSP_CMCP_NODE_HEARTBEAT_TIME;
 
 /** Time interval in milliseconds. When a node has not received heartbeat
@@ -81,7 +81,7 @@ void vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node);
 void vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node);
 
 /**
- * Create and send message to the node's publish socket.
+ * Create and send message to the publish socket of the node.
  * Blocks until message could be sent. Frees internally created message object.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
@@ -90,7 +90,7 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
     vsp_cmcp_datalist *cmcp_datalist);
 
 /**
- * Wait for and receive message from the node's subscribe socket.
+ * Wait for and receive message from the subscribe socket of the node.
  * Blocks until message could be received.
  * Stores a pointer to the message data and returns the data length.
  * The message data has to be freed with nn_freemsg().
