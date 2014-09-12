@@ -36,6 +36,8 @@ struct vsp_cmcp_client {
     vsp_cmcp_node *cmcp_node;
     /** ID identifying this client in the network. */
     uint16_t id;
+    /** Node ID of the connected server. */
+    uint16_t server_id;
     /** Client finite state machine flag, not related to node state. */
     vsp_cmcp_state *state;
     /** Randomly generated nonce used for temporary node indentification. */
@@ -112,7 +114,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     VSP_CHECK(cmcp_client != NULL && publish_address != NULL
         && subscribe_address != NULL, vsp_error_set_num(EINVAL); return -1);
 
-    /* connect sockets; the node's state is checked by this function */
+    /* connect sockets; the node state is checked by this function */
     ret = vsp_cmcp_node_connect(cmcp_client->cmcp_node,
         publish_address, subscribe_address);
     /* check for errors */
@@ -190,6 +192,7 @@ void vsp_cmcp_client_message_callback(void *param,
     vsp_cmcp_client *cmcp_client;
     vsp_cmcp_datalist *cmcp_datalist;
     uint16_t topic_id, sender_id, command_id;
+    int state;
 
     /* check parameters; failures are silently ignored */
     VSP_CHECK(param != NULL && cmcp_message != NULL, return);
@@ -210,6 +213,17 @@ void vsp_cmcp_client_message_callback(void *param,
     cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
     /* check data list; failures are silently ignored */
     VSP_CHECK(cmcp_datalist != NULL, return);
+
+    /* get current state */
+    state = vsp_cmcp_state_get(cmcp_client->state);
+
+    /* check if message is from connected server */
+    if (state == VSP_CMCP_CLIENT_CONNECTED
+        && sender_id == cmcp_client->server_id) {
+        /* reset timeout time */
+        vsp_time_real_timespec_from_now(&cmcp_client->time_connection_timeout,
+            VSP_CMCP_NODE_CONNECTION_TIMEOUT);
+    }
 
     /* check if internal control message received */
     if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
@@ -235,6 +249,8 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
     if (state == VSP_CMCP_CLIENT_TRYING_TO_CONNECT) {
         /* check if server heartbeat received */
         VSP_CHECK(command_id == VSP_CMCP_COMMAND_SERVER_HEARTBEAT, return);
+        /* store server node ID */
+        cmcp_client->server_id = sender_id;
         /* server heartbeat received */
         vsp_cmcp_state_set(cmcp_client->state,
             VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED);
@@ -243,15 +259,16 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
         /* check for errors; failures are silently ignored */
         VSP_CHECK(ret == 0, return);
     } else if (state == VSP_CMCP_CLIENT_HEARTBEAT_RECEIVED) {
-        /* check if (negative) acknowledge received */
-        VSP_CHECK(command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT
-            || command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT, return);
+        /* check if (negative) acknowledge received from connected server */
+        VSP_CHECK(sender_id == cmcp_client->server_id
+            && (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT
+            || command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT), return);
         /* get client nonce */
         client_nonce = vsp_cmcp_datalist_get_data_item(cmcp_datalist,
             VSP_CMCP_PARAMETER_NONCE, sizeof(uint64_t));
         /* check data list item (nonce); failures are silently ignored */
         VSP_CHECK(client_nonce != NULL, return);
-        /* ignore message if nonce does not match this node's nonce */
+        /* ignore message if nonce does not match the nonce of this node */
         VSP_CHECK(*client_nonce == cmcp_client->nonce, return);
 
         if (command_id == VSP_CMCP_COMMAND_SERVER_ACK_CLIENT) {

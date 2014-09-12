@@ -174,6 +174,19 @@ void vsp_cmcp_server_message_callback(void *param,
     /* check data list; failures are silently ignored */
     VSP_CHECK(cmcp_datalist != NULL, return);
 
+    /* reset client peer timeout time if message received */
+    if ((sender_id & 1) == 1) {
+        int index;
+        /* try to find client in registered peers */
+        index = vsp_cmcp_server_find_client(cmcp_server, sender_id);
+        if (index >= 0) {
+            /* reset timeout time */
+            vsp_time_real_timespec_from_now(
+                &cmcp_server->client_data[index]->time_connection_timeout,
+                VSP_CMCP_NODE_CONNECTION_TIMEOUT);
+        }
+    }
+
     /* check if internal control message received */
     if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
         /* handle control message */
