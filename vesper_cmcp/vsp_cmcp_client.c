@@ -226,11 +226,14 @@ void vsp_cmcp_client_message_callback(void *param,
     }
 
     /* check if internal control message received */
-    if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
+    if (vsp_cmcp_message_get_type(cmcp_message)
+        == VSP_CMCP_MESSAGE_TYPE_CONTROL) {
         /* handle control message */
         vsp_cmcp_client_handle_control_message(cmcp_client, sender_id,
             command_id, cmcp_datalist);
     } else {
+        /* check if message is directed to this node */
+        VSP_CHECK(topic_id == cmcp_client->id, return);
         /* handle data message */
         /* ... */
     }
@@ -313,7 +316,7 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     /* send message */
     ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
         VSP_CMCP_MESSAGE_TYPE_CONTROL,
-        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_client->id,
+        cmcp_client->server_id, cmcp_client->id,
         VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
     /* check for errors */
     VSP_CHECK(ret == 0, goto error_exit);

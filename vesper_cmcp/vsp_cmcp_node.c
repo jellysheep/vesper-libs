@@ -70,13 +70,6 @@ struct vsp_cmcp_node {
 static int vsp_cmcp_node_send_message(int socket,
     vsp_cmcp_message *cmcp_message);
 
-/**
- * Subscribe the node to the specified topic ID.
- * Returns non-zero and sets vsp_error_num() if failed.
- */
-static void vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node,
-    uint16_t topic_id);
-
 /** Event loop for message reception running in its own thread. */
 static void *vsp_cmcp_node_run(void *param);
 
@@ -368,8 +361,25 @@ void vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
 {
     int ret;
 
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL);
+
     /* subscribe to topic ID */
     ret = nn_setsockopt(cmcp_node->subscribe_socket, NN_SUB, NN_SUB_SUBSCRIBE,
+        &topic_id, sizeof(topic_id));
+    /* check for errors */
+    VSP_ASSERT(ret == 0);
+}
+
+void vsp_cmcp_node_unsubscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
+{
+    int ret;
+
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL);
+
+    /* unsubscribe from topic ID */
+    ret = nn_setsockopt(cmcp_node->subscribe_socket, NN_SUB, NN_SUB_UNSUBSCRIBE,
         &topic_id, sizeof(topic_id));
     /* check for errors */
     VSP_ASSERT(ret == 0);

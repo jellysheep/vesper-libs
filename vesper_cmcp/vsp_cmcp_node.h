@@ -99,6 +99,16 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
  */
 int vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node, void **message_buffer);
 
+/**
+ * Subscribe the node to the specified topic ID.
+ */
+void vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
+
+/**
+ * Unsubscribe the node from the specified topic ID.
+ */
+void vsp_cmcp_node_unsubscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);
+
 #if defined __cplusplus
 }
 #endif /* defined __cplusplus */

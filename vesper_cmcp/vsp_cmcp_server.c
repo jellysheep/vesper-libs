@@ -188,11 +188,18 @@ void vsp_cmcp_server_message_callback(void *param,
     }
 
     /* check if internal control message received */
-    if (topic_id == VSP_CMCP_BROADCAST_TOPIC_ID) {
+    if (vsp_cmcp_message_get_type(cmcp_message)
+        == VSP_CMCP_MESSAGE_TYPE_CONTROL) {
+        /* check if message is broadcasted or directed to this node */
+        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
+            || topic_id == cmcp_server->id, return);
         /* handle control message */
         vsp_cmcp_server_handle_control_message(cmcp_server, sender_id,
             command_id, cmcp_datalist);
     } else {
+        /* check if message is broadcasted or directed to a client topic */
+        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
+            || (topic_id & 1) == 1, return);
         /* handle data message */
         /* ... */
     }
@@ -258,10 +265,12 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
         success = 0;
     }
     if (success == 0) {
+        /* subscribe to messages from this client peer */
+        vsp_cmcp_node_subscribe(cmcp_server->cmcp_node, client_id);
         /* new client peer ID registered, send acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
             VSP_CMCP_MESSAGE_TYPE_CONTROL,
-            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
+            client_id, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_ACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);
@@ -269,7 +278,7 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
         /* new client peer ID rejected, send negative acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
             VSP_CMCP_MESSAGE_TYPE_CONTROL,
-            VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
+            client_id, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_NACK_CLIENT, cmcp_datalist);
         /* check for errors */
         VSP_CHECK(ret == 0, /* failures are silently ignored */);
@@ -315,6 +324,9 @@ void vsp_cmcp_server_deregister_client(vsp_cmcp_server *cmcp_server,
         cmcp_server->client_ids[cmcp_server->client_count];
     cmcp_server->client_data[index] =
         cmcp_server->client_data[cmcp_server->client_count];
+
+    /* unsubscribe from messages from this client peer */
+    vsp_cmcp_node_unsubscribe(cmcp_server->cmcp_node, client_id);
 
     /* client ID deleted from client peer list; deregistering done */
 }
