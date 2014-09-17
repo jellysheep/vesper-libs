@@ -91,15 +91,6 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
     vsp_cmcp_datalist *cmcp_datalist);
 
 /**
- * Wait for and receive message from the subscribe socket of the node.
- * Blocks until message could be received.
- * Stores a pointer to the message data and returns the data length.
- * The message data has to be freed with nn_freemsg().
- * Returns negative value and sets vsp_error_num() if failed.
- */
-int vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node, void **message_buffer);
-
-/**
  * Subscribe the node to the specified topic ID.
  */
 void vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id);

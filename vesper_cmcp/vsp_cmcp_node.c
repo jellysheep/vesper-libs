@@ -201,12 +201,13 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     /* check for errors set by nanomsg, cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
-    /* subscribe to broadcast ID and node ID */
-    vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_BROADCAST_TOPIC_ID);
-    vsp_cmcp_node_subscribe(cmcp_node, cmcp_node->id);
 
     /* set state */
     vsp_cmcp_state_set(cmcp_node->state, VSP_CMCP_NODE_INITIALIZED);
+
+    /* subscribe to broadcast ID and node ID */
+    vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_BROADCAST_TOPIC_ID);
+    vsp_cmcp_node_subscribe(cmcp_node, cmcp_node->id);
 
     /* sockets successfully bound */
     return 0;
@@ -339,30 +340,16 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
     return success;
 }
 
-int vsp_cmcp_node_recv_message(vsp_cmcp_node *cmcp_node, void **message_buffer)
-{
-    int data_length;
-
-    /* check parameters */
-    VSP_ASSERT(cmcp_node != NULL);
-    VSP_ASSERT(message_buffer != NULL);
-
-    /* try to receive message */
-    data_length = nn_recv(cmcp_node->subscribe_socket,
-        message_buffer, NN_MSG, 0);
-    /* check for errors */
-    VSP_CHECK(data_length > 0, *message_buffer = NULL; return -1);
-
-    /* success: return data length */
-    return data_length;
-}
-
 void vsp_cmcp_node_subscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
 {
     int ret;
 
     /* check parameter */
     VSP_ASSERT(cmcp_node != NULL);
+
+    /* check if sockets are initialized */
+    VSP_ASSERT(vsp_cmcp_state_get(cmcp_node->state)
+        >= VSP_CMCP_NODE_INITIALIZED);
 
     /* subscribe to topic ID */
     ret = nn_setsockopt(cmcp_node->subscribe_socket, NN_SUB, NN_SUB_SUBSCRIBE,
@@ -377,6 +364,10 @@ void vsp_cmcp_node_unsubscribe(vsp_cmcp_node *cmcp_node, uint16_t topic_id)
 
     /* check parameter */
     VSP_ASSERT(cmcp_node != NULL);
+
+    /* check if sockets are initialized */
+    VSP_ASSERT(vsp_cmcp_state_get(cmcp_node->state)
+        >= VSP_CMCP_NODE_INITIALIZED);
 
     /* unsubscribe from topic ID */
     ret = nn_setsockopt(cmcp_node->subscribe_socket, NN_SUB, NN_SUB_UNSUBSCRIBE,
@@ -416,7 +407,8 @@ void *vsp_cmcp_node_run(void *param)
         cmcp_node->regular_callback(cmcp_node->callback_param);
 
         /* try to receive message */
-        data_length = vsp_cmcp_node_recv_message(cmcp_node, &message_buffer);
+        data_length = nn_recv(cmcp_node->subscribe_socket,
+            &message_buffer, NN_MSG, 0);
         /* check error: in case of failure just retry */
         VSP_CHECK(data_length > 0, goto cleanup);
         /* parse message data */
