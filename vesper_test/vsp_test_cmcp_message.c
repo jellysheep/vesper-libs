@@ -28,10 +28,12 @@ MU_TEST(vsp_test_cmcp_message_test)
     void *data_pointer;
     void *data_item_pointer;
     uint16_t message_id;
+    vsp_cmcp_message_type message_type;
 
     /* allocate message without data list */
-    cmcp_message1 = vsp_cmcp_message_create(VSP_TEST_MESSAGE_TOPIC_ID,
-        VSP_TEST_MESSAGE_SENDER_ID, VSP_TEST_MESSAGE_COMMAND_ID, NULL);
+    cmcp_message1 = vsp_cmcp_message_create(VSP_CMCP_MESSAGE_TYPE_DATA,
+        VSP_TEST_MESSAGE_TOPIC_ID, VSP_TEST_MESSAGE_SENDER_ID,
+        VSP_TEST_MESSAGE_COMMAND_ID, NULL);
     mu_assert_abort(cmcp_message1 != NULL, vsp_error_str(vsp_error_num()));
     /* get binary data array length */
     data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
@@ -52,9 +54,9 @@ MU_TEST(vsp_test_cmcp_message_test)
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 
     /* allocate message */
-    cmcp_message1 = vsp_cmcp_message_create(VSP_TEST_MESSAGE_TOPIC_ID,
-        VSP_TEST_MESSAGE_SENDER_ID, VSP_TEST_MESSAGE_COMMAND_ID,
-        cmcp_datalist1);
+    cmcp_message1 = vsp_cmcp_message_create(VSP_CMCP_MESSAGE_TYPE_DATA,
+        VSP_TEST_MESSAGE_TOPIC_ID, VSP_TEST_MESSAGE_SENDER_ID,
+        VSP_TEST_MESSAGE_COMMAND_ID, cmcp_datalist1);
 
     /* get binary data array length */
     data_length = vsp_cmcp_message_get_data_length(cmcp_message1);
@@ -70,6 +72,11 @@ MU_TEST(vsp_test_cmcp_message_test)
     /* construct second message using binary data array */
     cmcp_message2 = vsp_cmcp_message_create_parse(data_length, data_pointer);
     mu_assert_abort(cmcp_message2 != NULL, vsp_error_str(vsp_error_num()));
+
+    /* get back and verify message type */
+    message_type = vsp_cmcp_message_get_type(cmcp_message2);
+    mu_assert(message_type == VSP_CMCP_MESSAGE_TYPE_DATA,
+        vsp_error_str(EINVAL));
 
     /* get back and verify message IDs */
     message_id = vsp_cmcp_message_get_topic_id(cmcp_message2);

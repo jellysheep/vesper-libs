@@ -260,6 +260,7 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
     if (success == 0) {
         /* new client peer ID registered, send acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
+            VSP_CMCP_MESSAGE_TYPE_CONTROL,
             VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_ACK_CLIENT, cmcp_datalist);
         /* check for errors */
@@ -267,6 +268,7 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
     } else {
         /* new client peer ID rejected, send negative acknowledge message */
         ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
+            VSP_CMCP_MESSAGE_TYPE_CONTROL,
             VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_server->id,
             VSP_CMCP_COMMAND_SERVER_NACK_CLIENT, cmcp_datalist);
         /* check for errors */

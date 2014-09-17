@@ -312,6 +312,7 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     VSP_CHECK(ret == 0, goto error_exit);
     /* send message */
     ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
+        VSP_CMCP_MESSAGE_TYPE_CONTROL,
         VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_client->id,
         VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
     /* check for errors */

@@ -86,6 +86,7 @@ void vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node);
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
+    vsp_cmcp_message_type message_type,
     uint16_t topic_id, uint16_t sender_id, uint16_t command_id,
     vsp_cmcp_datalist *cmcp_datalist);
 

@@ -311,6 +311,7 @@ int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message)
 }
 
 int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
+    vsp_cmcp_message_type message_type,
     uint16_t topic_id, uint16_t sender_id, uint16_t command_id,
     vsp_cmcp_datalist *cmcp_datalist)
 {
@@ -325,8 +326,8 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
     VSP_ASSERT(cmcp_node != NULL);
 
     /* generate message */
-    cmcp_message = vsp_cmcp_message_create(topic_id, sender_id, command_id,
-        cmcp_datalist);
+    cmcp_message = vsp_cmcp_message_create(message_type,
+        topic_id, sender_id, command_id, cmcp_datalist);
     /* check for errors */
     VSP_ASSERT(cmcp_message != NULL);
 
@@ -465,6 +466,7 @@ void vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node)
         command_id = VSP_CMCP_COMMAND_CLIENT_HEARTBEAT;
     }
     ret = vsp_cmcp_node_create_send_message(cmcp_node,
+        VSP_CMCP_MESSAGE_TYPE_CONTROL,
         VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_node->id, command_id, NULL);
     /* check for errors */
     VSP_ASSERT(ret == 0);
