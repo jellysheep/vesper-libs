@@ -285,6 +285,9 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
             /* negative acknowledge received, rejected */
             vsp_cmcp_state_set(cmcp_client->state,
                 VSP_CMCP_CLIENT_DISCONNECTED);
+            /* client ID is already registered to server; regenerate node ID */
+            vsp_cmcp_node_generate_id(cmcp_client->cmcp_node);
+            cmcp_client->id = vsp_cmcp_node_get_id(cmcp_client->cmcp_node);
             /* connection establishment will be automatically retried when next
              * server heartbeat signal is received */
         }

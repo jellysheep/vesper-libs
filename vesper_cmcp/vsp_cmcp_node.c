@@ -91,18 +91,8 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
     cmcp_node->state = vsp_cmcp_state_create(VSP_CMCP_NODE_UNINITIALIZED);
     /* in case of failure vsp_error_num() is already set */
     VSP_ASSERT(cmcp_node->state != NULL);
-    /* generate node ID that does not equal broadcast topic ID */
-    if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
-        /* node type: ID is even (first bit cleared) */
-        do {
-            cmcp_node->id = (uint16_t) (vsp_random_get() << 1);
-        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
-    } else {
-        /* node type: ID is odd (first bit set) */
-        do {
-            cmcp_node->id = (uint16_t) (vsp_random_get() | 1);
-        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
-    }
+    /* generate node ID */
+    vsp_cmcp_node_generate_id(cmcp_node);
     cmcp_node->publish_socket = -1;
     cmcp_node->subscribe_socket = -1;
     cmcp_node->time_next_heartbeat = vsp_time_real_double();
@@ -143,6 +133,25 @@ void vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node)
 
     /* free memory */
     VSP_FREE(cmcp_node);
+}
+
+void vsp_cmcp_node_generate_id(vsp_cmcp_node *cmcp_node)
+{
+    /* check parameter */
+    VSP_ASSERT(cmcp_node != NULL);
+
+    /* generate node ID that does not equal broadcast topic ID */
+    if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
+        /* node type: ID is even (first bit cleared) */
+        do {
+            cmcp_node->id = (uint16_t) (vsp_random_get() << 1);
+        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
+    } else {
+        /* node type: ID is odd (first bit set) */
+        do {
+            cmcp_node->id = (uint16_t) (vsp_random_get() | 1);
+        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
+    }
 }
 
 uint16_t vsp_cmcp_node_get_id(vsp_cmcp_node *cmcp_node)

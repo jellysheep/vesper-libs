@@ -64,6 +64,11 @@ vsp_cmcp_node *vsp_cmcp_node_create(vsp_cmcp_node_type node_type,
  */
 void vsp_cmcp_node_free(vsp_cmcp_node *cmcp_node);
 
+/** Generate a new network ID for this node.
+ * This function is called automatically when vsp_cmcp_node_create() is invoked.
+ * It may be called to avoid duplicate node IDs if no peers are connected. */
+void vsp_cmcp_node_generate_id(vsp_cmcp_node *cmcp_node);
+
 /** Get the network ID of this node. */
 uint16_t vsp_cmcp_node_get_id(vsp_cmcp_node *cmcp_node);
 
