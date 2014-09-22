@@ -13,7 +13,6 @@
 #include <vesper_cmcp/vsp_cmcp_datalist.h>
 #include <vesper_util/vsp_error.h>
 #include <vesper_util/vsp_util.h>
-#include <err.h>
 #include <errno.h>
 #include <stddef.h>
 #include <string.h>

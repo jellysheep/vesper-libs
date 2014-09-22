@@ -37,6 +37,10 @@ struct vsp_cmcp_server {
     uint16_t client_ids[VSP_CMCP_SERVER_MAX_PEERS];
     /** Client peer data. */
     vsp_cmcp_server_peer *client_data[VSP_CMCP_SERVER_MAX_PEERS];
+    /** Client announcement callback function, specified by API user. */
+    vsp_cmcp_server_announcement_cb announcement_cb;
+    /** Callback function parameter. */
+    void *callback_param;
 };
 
 /** Regular callback function invoked by cmcp_node.
@@ -82,6 +86,8 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     cmcp_server->id = vsp_cmcp_node_get_id(cmcp_server->cmcp_node);
     /* no client peers registered yet */
     cmcp_server->client_count = 0;
+    /* initialize callback data */
+    cmcp_server->announcement_cb = NULL;
     /* return struct pointer */
     return cmcp_server;
 }
@@ -102,6 +108,17 @@ void vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
 
     /* free memory */
     VSP_FREE(cmcp_server);
+}
+
+void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_announcement_cb announcement_cb, void *callback_param)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL, return);
+
+    /* set callback data */
+    cmcp_server->announcement_cb = announcement_cb;
+    cmcp_server->callback_param = callback_param;
 }
 
 int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
@@ -248,21 +265,30 @@ void vsp_cmcp_server_register_client(vsp_cmcp_server *cmcp_server,
         /* maximum number of peers already registered */
         success = -1;
     } else {
-        /* register client peer ID */
-        vsp_cmcp_server_peer *client;
-        /* create client data struct */
-        VSP_ALLOC(client, vsp_cmcp_server_peer);
-        /* initialize struct data */
-        vsp_time_real_timespec_from_now(&client->time_connection_timeout,
-            VSP_CMCP_NODE_CONNECTION_TIMEOUT);
-        /* store client peer ID */
-        cmcp_server->client_ids[cmcp_server->client_count] = client_id;
-        /* store client peer data */
-        cmcp_server->client_data[cmcp_server->client_count] = client;
-        /* increment client peer count */
-        ++cmcp_server->client_count;
-        /* success */
-        success = 0;
+        if (cmcp_server->announcement_cb == NULL) {
+            /* no callback function registered; reject client */
+            success = -1;
+        } else if (cmcp_server->announcement_cb(
+            cmcp_server->callback_param, client_id) != 0) {
+            /* callback function returns non-zero; reject client */
+            success = -1;
+        } else {
+            /* register client peer ID */
+            vsp_cmcp_server_peer *client;
+            /* create client data struct */
+            VSP_ALLOC(client, vsp_cmcp_server_peer);
+            /* initialize struct data */
+            vsp_time_real_timespec_from_now(&client->time_connection_timeout,
+                VSP_CMCP_NODE_CONNECTION_TIMEOUT);
+            /* store client peer ID */
+            cmcp_server->client_ids[cmcp_server->client_count] = client_id;
+            /* store client peer data */
+            cmcp_server->client_data[cmcp_server->client_count] = client;
+            /* increment client peer count */
+            ++cmcp_server->client_count;
+            /* success */
+            success = 0;
+        }
     }
     if (success == 0) {
         /* subscribe to messages from this client peer */

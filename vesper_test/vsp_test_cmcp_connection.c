@@ -11,8 +11,10 @@
 #include "vsp_test.h"
 
 #include <vesper_cmcp/vsp_cmcp_client.h>
+#include <vesper_cmcp/vsp_cmcp_node.h>
 #include <vesper_cmcp/vsp_cmcp_server.h>
 #include <vesper_util/vsp_error.h>
+#include <errno.h>
 #include <stddef.h>
 
 /** Global CMCP server object. */
@@ -20,6 +22,9 @@ vsp_cmcp_server *global_cmcp_server;
 
 /** Global CMCP client object. */
 vsp_cmcp_client *global_cmcp_client;
+
+/** Client announcement callback function. */
+int vsp_test_cmcp_connection_cb(void*, uint16_t);
 
 /** Create global global_cmcp_server and global_cmcp_client objects. */
 void vsp_test_cmcp_connection_setup(void);
@@ -44,11 +49,26 @@ MU_TEST(vsp_test_cmcp_client_invalid_parameters);
 /** Test connection between vsp_cmcp_server and vsp_cmcp_client. */
 MU_TEST(vsp_test_cmcp_connection_test);
 
+int vsp_test_cmcp_connection_cb(void *callback_param, uint16_t client_id)
+{
+    /* check if callback parameter equals global server object */
+    mu_assert_abort(callback_param == global_cmcp_server,
+        vsp_error_str(EINVAL));
+    /* check if client ID is valid */
+    mu_assert_abort(client_id != VSP_CMCP_BROADCAST_TOPIC_ID
+        && (client_id & 1) == 1, vsp_error_str(EINVAL));
+    /* accept new client */
+    return 0;
+}
+
 void vsp_test_cmcp_connection_setup(void)
 {
     /* create server */
     global_cmcp_server = vsp_cmcp_server_create();
     mu_assert_abort(global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
+    /* register callback function */
+    vsp_cmcp_server_set_announcement_cb(global_cmcp_server,
+        vsp_test_cmcp_connection_cb, global_cmcp_server);
     /* create client */
     global_cmcp_client = vsp_cmcp_client_create();
     mu_assert_abort(global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));

@@ -13,6 +13,8 @@
 #include "vsp_cmcp_datalist.h"
 #include "vsp_cmcp_message.h"
 
+#include <stdint.h>
+
 #if defined __cplusplus
 extern "C" {
 #endif /* defined __cplusplus */

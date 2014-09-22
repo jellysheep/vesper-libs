@@ -11,6 +11,7 @@
 #define VSP_CMCP_SERVER_H_INCLUDED
 
 #include <vesper_util/vsp_api.h>
+#include <stdint.h>
 
 #if defined __cplusplus
 extern "C" {
@@ -21,6 +22,11 @@ struct vsp_cmcp_server;
 
 /** Define type vsp_cmcp_server to avoid 'struct' keyword. */
 typedef struct vsp_cmcp_server vsp_cmcp_server;
+
+/** Callback function invoked for every newly announced client.
+ * If callback returns zero, client will be registered (ACK message sent);
+ * otherwise client will be rejected (NACK message sent). */
+typedef int (*vsp_cmcp_server_announcement_cb)(void*, uint16_t);
 
 /**
  * Create new vsp_cmcp_server object.
@@ -34,6 +40,15 @@ VSP_API vsp_cmcp_server *vsp_cmcp_server_create(void);
  * Object should be created with vsp_cmcp_server_create().
  */
 VSP_API void vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server);
+
+/**
+ * Set callback function invoked for every newly announced client.
+ * If announcement_cb is NULL, the callback function is cleared. In this case,
+ * or if this function was not invoked yet (i.e. no callback is registered),
+ * newly announced clients will be rejected. callback_param may be NULL.
+ */
+VSP_API void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_announcement_cb announcement_cb, void *callback_param);
 
 /**
  * Initialize sockets and wait for incoming connections.

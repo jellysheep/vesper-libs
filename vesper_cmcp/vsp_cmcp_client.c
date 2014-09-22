@@ -126,7 +126,7 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     /* establish connection */
     ret = vsp_cmcp_client_establish_connection(cmcp_client);
     /* check for errors */
-    VSP_CHECK(ret == 0, return -1);
+    VSP_CHECK(ret == 0, vsp_error_set_num(ENOTCONN); return -1);
 
     /* successfully connected and waiting for messages */
     return 0;
