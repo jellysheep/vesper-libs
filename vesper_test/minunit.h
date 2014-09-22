@@ -29,23 +29,11 @@
     extern "C" {
 #endif
 
-#if defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
-
-/* Change POSIX C SOURCE version for pure c99 compilers */
-#if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
-#undef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 200112L
-#endif
-
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 
 /* Maximum length of last message */
 #define MINUNIT_MESSAGE_LEN 1024
-/* Do not change */
-#define MINUNIT_EPSILON 1E-12
 
 /* Misc. counters */
 extern int minunit_run;
@@ -117,24 +105,6 @@ extern void (*minunit_teardown)(void);
 )
 
 /* Assertions */
-#define mu_check(test) MU__SAFE_BLOCK(\
-    minunit_assert++;\
-    if (!(test)) {\
-        snprintf(minunit_last_message, MINUNIT_MESSAGE_LEN, "%s failed:\n\t%s:%d: %s", __func__, __FILE__, __LINE__, #test);\
-        minunit_status = 1;\
-        return;\
-    } else {\
-        printf(".");\
-    }\
-)
-
-#define mu_fail(message) MU__SAFE_BLOCK(\
-    minunit_assert++;\
-    snprintf(minunit_last_message, MINUNIT_MESSAGE_LEN, "%s failed:\n\t%s:%d: %s", __func__, __FILE__, __LINE__, message);\
-    minunit_status = 1;\
-    return;\
-)
-
 #define mu_assert_abort(test, message) MU__SAFE_BLOCK(\
     minunit_assert++;\
     if (!(test)) {\
@@ -151,32 +121,6 @@ extern void (*minunit_teardown)(void);
     if (!(test)) {\
         snprintf(minunit_last_message, MINUNIT_MESSAGE_LEN, "%s failed:\n\t%s:%d: %s", __func__, __FILE__, __LINE__, message);\
         minunit_status = 1;\
-    } else {\
-        printf(".");\
-    }\
-)
-
-#define mu_assert_int_eq(expected, result) MU__SAFE_BLOCK(\
-    minunit_assert++;\
-    int minunit_tmp_e = (expected);\
-    int minunit_tmp_r = (result);\
-    if (minunit_tmp_e != minunit_tmp_r) {\
-        snprintf(minunit_last_message, MINUNIT_MESSAGE_LEN, "%s failed:\n\t%s:%d: %d expected but was %d", __func__, __FILE__, __LINE__, minunit_tmp_e, minunit_tmp_r);\
-        minunit_status = 1;\
-        return;\
-    } else {\
-        printf(".");\
-    }\
-)
-
-#define mu_assert_double_eq(expected, result) MU__SAFE_BLOCK(\
-    minunit_assert++;\
-    double minunit_tmp_e = (expected);\
-    double minunit_tmp_r = (result);\
-    if (fabs(minunit_tmp_e-minunit_tmp_r) > MINUNIT_EPSILON) {\
-        snprintf(minunit_last_message, MINUNIT_MESSAGE_LEN, "%s failed:\n\t%s:%d: %g expected but was %g", __func__, __FILE__, __LINE__, minunit_tmp_e, minunit_tmp_r);\
-        minunit_status = 1;\
-        return;\
     } else {\
         printf(".");\
     }\

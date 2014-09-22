@@ -23,8 +23,6 @@
 
 #include "minunit.h"
 
-#include <stddef.h>
-
 /* Misc. counters */
 int minunit_run = 0;
 int minunit_assert = 0;
