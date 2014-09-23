@@ -81,9 +81,11 @@ void vsp_test_cmcp_communication_setup(void)
 
     /* create server and client */
     vsp_test_cmcp_connection_setup();
+    /* register server callback parameter */
+    vsp_cmcp_server_set_callback_param(global_cmcp_server, global_cmcp_server);
     /* register server callback function */
     vsp_cmcp_server_set_announcement_cb(global_cmcp_server,
-        vsp_test_cmcp_connection_cb, global_cmcp_server);
+        vsp_test_cmcp_connection_cb);
 
     /* bind server */
     ret = vsp_cmcp_server_bind(global_cmcp_server,

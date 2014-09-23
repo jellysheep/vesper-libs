@@ -110,15 +110,24 @@ void vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server)
     VSP_FREE(cmcp_server);
 }
 
-void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
-    vsp_cmcp_server_announcement_cb announcement_cb, void *callback_param)
+void vsp_cmcp_server_set_callback_param(vsp_cmcp_server *cmcp_server,
+    void *callback_param)
 {
     /* check parameters */
     VSP_CHECK(cmcp_server != NULL, return);
 
-    /* set callback data */
-    cmcp_server->announcement_cb = announcement_cb;
+    /* set callback param */
     cmcp_server->callback_param = callback_param;
+}
+
+void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_announcement_cb announcement_cb)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL, return);
+
+    /* set callback function */
+    cmcp_server->announcement_cb = announcement_cb;
 }
 
 int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,

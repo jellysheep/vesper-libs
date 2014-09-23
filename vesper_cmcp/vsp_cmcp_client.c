@@ -15,7 +15,6 @@
 #include <vesper_util/vsp_random.h>
 #include <vesper_util/vsp_time.h>
 #include <vesper_util/vsp_util.h>
-#include <nanomsg/nn.h>
 
 /** vsp_cmcp_node finite state machine flag. */
 typedef enum {

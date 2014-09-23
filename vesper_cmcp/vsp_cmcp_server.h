@@ -24,8 +24,10 @@ struct vsp_cmcp_server;
 typedef struct vsp_cmcp_server vsp_cmcp_server;
 
 /** Callback function invoked for every newly announced client.
- * If callback returns zero, client will be registered (ACK message sent);
- * otherwise client will be rejected (NACK message sent). */
+ * The parameters are the callback parameter set by
+ * vsp_cmcp_server_set_callback_param() and the client ID.
+ * If the callback returns zero, the client will be registered (ACK message
+ * sent); otherwise the client will be rejected (NACK message sent). */
 typedef int (*vsp_cmcp_server_announcement_cb)(void*, uint16_t);
 
 /**
@@ -42,13 +44,20 @@ VSP_API vsp_cmcp_server *vsp_cmcp_server_create(void);
 VSP_API void vsp_cmcp_server_free(vsp_cmcp_server *cmcp_server);
 
 /**
+ * Set callback function parameter used for all registered callback functions.
+ * callback_param may be NULL.
+ */
+VSP_API void vsp_cmcp_server_set_callback_param(vsp_cmcp_server *cmcp_server,
+    void *callback_param);
+
+/**
  * Set callback function invoked for every newly announced client.
  * If announcement_cb is NULL, the callback function is cleared. In this case,
  * or if this function was not invoked yet (i.e. no callback is registered),
- * newly announced clients will be rejected. callback_param may be NULL.
+ * newly announced clients will be rejected.
  */
 VSP_API void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
-    vsp_cmcp_server_announcement_cb announcement_cb, void *callback_param);
+    vsp_cmcp_server_announcement_cb announcement_cb);
 
 /**
  * Initialize sockets and wait for incoming connections.
