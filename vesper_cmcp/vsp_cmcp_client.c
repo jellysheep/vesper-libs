@@ -77,14 +77,14 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     cmcp_client->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_CLIENT,
         vsp_cmcp_client_message_callback, vsp_cmcp_client_regular_callback,
         cmcp_client);
-    /* in case of failure vsp_error_num() is already set */
+    /* vsp_error_num() is set by vsp_cmcp_node_create() */
     VSP_CHECK(cmcp_client->cmcp_node != NULL,
         VSP_FREE(cmcp_client); return NULL);
     /* get node ID */
     cmcp_client->id = vsp_cmcp_node_get_id(cmcp_client->cmcp_node);
     /* initialize state struct */
     cmcp_client->state = vsp_cmcp_state_create(VSP_CMCP_CLIENT_DISCONNECTED);
-    /* in case of failure vsp_error_num() is already set */
+    /* vsp_error_num() is set by vsp_cmcp_state_create() */
     VSP_CHECK(cmcp_client->state != NULL, VSP_FREE(cmcp_client); return NULL);
     /* return struct pointer */
     return cmcp_client;
@@ -149,7 +149,7 @@ int vsp_cmcp_client_send(vsp_cmcp_client *cmcp_client,
         VSP_CMCP_MESSAGE_TYPE_DATA, cmcp_client->id, cmcp_client->id,
         command_id, cmcp_datalist);
 
-    /* check for errors */
+    /* vsp_error_num() is set by vsp_cmcp_node_create_send_message() */
     VSP_CHECK(ret == 0, return -1);
 
     /* message sent successfully */
@@ -185,7 +185,8 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     } while (ret == 0 && state != VSP_CMCP_CLIENT_CONNECTED);
 
     /* check if connected */
-    VSP_CHECK(state == VSP_CMCP_CLIENT_CONNECTED, success = -1);
+    VSP_CHECK(state == VSP_CMCP_CLIENT_CONNECTED,
+        vsp_error_set_num(ENOTCONN); success = -1);
 
     return success;
 }
@@ -338,19 +339,20 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     /* add nonce parameter as a data list item */
     ret = vsp_cmcp_datalist_add_item(cmcp_datalist, VSP_CMCP_PARAMETER_NONCE,
         sizeof(uint64_t), &cmcp_client->nonce);
-    /* check for errors */
+    /* vsp_error_num() is set by vsp_cmcp_datalist_add_item() */
     VSP_CHECK(ret == 0, goto error_exit);
     /* send message */
     ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
         VSP_CMCP_MESSAGE_TYPE_CONTROL, cmcp_client->server_id, cmcp_client->id,
         VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
-    /* check for errors */
+    /* vsp_error_num() is set by vsp_cmcp_node_create_send_message() */
     VSP_CHECK(ret == 0, goto error_exit);
 
     /* success: clean up and exit */
     goto cleanup_exit;
 
     error_exit:
+        /* vsp_error_num() is already set */
         success = -1;
         /* fall through to cleanup_exit */
 

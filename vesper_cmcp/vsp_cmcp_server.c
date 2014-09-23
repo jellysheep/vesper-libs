@@ -79,7 +79,7 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     cmcp_server->cmcp_node = vsp_cmcp_node_create(VSP_CMCP_NODE_SERVER,
         vsp_cmcp_server_message_callback,
         vsp_cmcp_server_regular_callback, cmcp_server);
-    /* in case of failure vsp_error_num() is already set */
+    /* vsp_error_num() is set by vsp_cmcp_node_create() */
     VSP_CHECK(cmcp_server->cmcp_node != NULL,
         VSP_FREE(cmcp_server); return NULL);
     /* get node ID */
@@ -133,13 +133,11 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     /* bind sockets */
     ret = vsp_cmcp_node_connect(cmcp_server->cmcp_node,
         publish_address, subscribe_address);
-    /* check for errors */
+    /* vsp_error_num() is set by vsp_cmcp_node_connect() */
     VSP_CHECK(ret == 0, return -1);
 
     /* start worker thread */
     vsp_cmcp_node_start(cmcp_server->cmcp_node);
-    /* check for errors */
-    VSP_CHECK(ret == 0, return -1);
 
     /* sockets successfully bound */
     return 0;

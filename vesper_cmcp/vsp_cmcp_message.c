@@ -95,7 +95,7 @@ vsp_cmcp_message *vsp_cmcp_message_create_parse(uint16_t data_length,
     /* parse data list values */
     cmcp_message->cmcp_datalist = vsp_cmcp_datalist_create_parse(
         data_length - VSP_CMCP_MESSAGE_HEADER_LENGTH, current_data_pointer);
-    /* in case of failure vsp_error_num() is already set */
+    /* vsp_error_num() is set by vsp_cmcp_datalist_create_parse() */
     VSP_CHECK(cmcp_message->cmcp_datalist != NULL,
         VSP_FREE(cmcp_message); return NULL);
 

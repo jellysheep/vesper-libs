@@ -176,7 +176,7 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
 
     /* initialize and connect publish socket */
     cmcp_node->publish_socket = nn_socket(AF_SP, NN_PUB);
-    /* check for errors set by nanomsg */
+    /* vsp_error_num() is set by nn_socket() */
     VSP_CHECK(cmcp_node->publish_socket != -1, return -1);
     /* connect or bind socket */
     if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
@@ -184,13 +184,14 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     } else {
         ret = nn_connect(cmcp_node->publish_socket, publish_address);
     }
-    /* check for errors set by nanomsg */
+    /* vsp_error_num() is set by nn_bind() or nn_connect() */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         return -1);
 
     /* initialize and connect subscribe socket */
     cmcp_node->subscribe_socket = nn_socket(AF_SP, NN_SUB);
-    /* check for errors set by nanomsg, cleanup publish socket if failed */
+    /* vsp_error_num() is set by nn_socket() */
+    /* cleanup publish socket if failed */
     VSP_CHECK(cmcp_node->subscribe_socket != -1,
         nn_close(cmcp_node->publish_socket); return -1);
     /* connect or bind socket */
@@ -201,13 +202,15 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
         ret = nn_connect(cmcp_node->subscribe_socket,
             subscribe_address);
     }
-    /* check for errors set by nanomsg, cleanup both sockets if failed */
+    /* vsp_error_num() is set by nn_bind() or nn_connect() */
+    /* cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
     /* set receive timeout */
     ret = nn_setsockopt(cmcp_node->subscribe_socket,
         NN_SOL_SOCKET, NN_RCVTIMEO, &VSP_CMCP_NODE_HEARTBEAT_TIME, sizeof(int));
-    /* check for errors set by nanomsg, cleanup both sockets if failed */
+    /* vsp_error_num() is set by nn_setsockopt() */
+    /* cleanup both sockets if failed */
     VSP_CHECK(ret >= 0, nn_close(cmcp_node->publish_socket);
         nn_close(cmcp_node->subscribe_socket); return -1);
 
@@ -300,7 +303,7 @@ int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message)
 
     /* actually send message to socket */
     ret = nn_send(socket, &data_buffer, NN_MSG, 0);
-    /* check for errors */
+    /* vsp_error_num() is set by nn_send() */
     VSP_CHECK(ret >= 0, goto error_exit);
 
     /* success */
@@ -310,6 +313,7 @@ int vsp_cmcp_node_send_message(int socket, vsp_cmcp_message *cmcp_message)
         /* cleanup */
         ret = nn_freemsg(data_buffer);
         VSP_ASSERT(ret == 0);
+        /* vsp_error_num() is already set */
         return -1;
 }
 
@@ -339,13 +343,14 @@ int vsp_cmcp_node_create_send_message(vsp_cmcp_node *cmcp_node,
         >= VSP_CMCP_NODE_INITIALIZED);
     /* send message */
     ret = vsp_cmcp_node_send_message(cmcp_node->publish_socket, cmcp_message);
+    /* vsp_error_num() is set by nn_send() */
     /* check for error, but do not directly return to avoid memory leaks */
     VSP_CHECK(ret == 0, success = -1);
 
     /* free message */
     vsp_cmcp_message_free(cmcp_message);
 
-    /* success */
+    /* vsp_error_num() is already set */
     return success;
 }
 
