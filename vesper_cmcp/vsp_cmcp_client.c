@@ -132,6 +132,30 @@ int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     return 0;
 }
 
+int vsp_cmcp_client_send(vsp_cmcp_client *cmcp_client,
+    uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
+{
+    int ret;
+
+    /* check parameters */
+    VSP_CHECK(cmcp_client != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    /* check connection state */
+    VSP_CHECK(vsp_cmcp_state_get(cmcp_client->state)
+        == VSP_CMCP_CLIENT_CONNECTED, vsp_error_set_num(ENOTCONN); return -1);
+
+    /* send message */
+    ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
+        VSP_CMCP_MESSAGE_TYPE_DATA, cmcp_client->id, cmcp_client->id,
+        command_id, cmcp_datalist);
+
+    /* check for errors */
+    VSP_CHECK(ret == 0, return -1);
+
+    /* message sent successfully */
+    return 0;
+}
+
 int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
     int ret;
@@ -318,8 +342,7 @@ int vsp_cmcp_client_send_announcement(vsp_cmcp_client *cmcp_client)
     VSP_CHECK(ret == 0, goto error_exit);
     /* send message */
     ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
-        VSP_CMCP_MESSAGE_TYPE_CONTROL,
-        cmcp_client->server_id, cmcp_client->id,
+        VSP_CMCP_MESSAGE_TYPE_CONTROL, cmcp_client->server_id, cmcp_client->id,
         VSP_CMCP_COMMAND_CLIENT_ANNOUNCE, cmcp_datalist);
     /* check for errors */
     VSP_CHECK(ret == 0, goto error_exit);

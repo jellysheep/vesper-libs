@@ -26,10 +26,13 @@ vsp_cmcp_client *global_cmcp_client;
 /** Client announcement callback function. */
 int vsp_test_cmcp_connection_cb(void*, uint16_t);
 
-/** Create global global_cmcp_server and global_cmcp_client objects. */
+/** Create global_cmcp_server and global_cmcp_client objects. */
 void vsp_test_cmcp_connection_setup(void);
 
-/** Free global global_cmcp_server and global_cmcp_client objects. */
+/** Create and connect global_cmcp_server and global_cmcp_client objects. */
+void vsp_test_cmcp_communication_setup(void);
+
+/** Free global_cmcp_server and global_cmcp_client objects. */
 void vsp_test_cmcp_connection_teardown(void);
 
 /** Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). */
@@ -46,8 +49,9 @@ MU_TEST(vsp_test_cmcp_server_invalid_parameters);
  * behave correctly and do not abort. */
 MU_TEST(vsp_test_cmcp_client_invalid_parameters);
 
-/** Test connection between vsp_cmcp_server and vsp_cmcp_client. */
-MU_TEST(vsp_test_cmcp_connection_test);
+/** Test connection and communication between vsp_cmcp_server and
+ * vsp_cmcp_client. */
+MU_TEST(vsp_test_cmcp_communication_test);
 
 int vsp_test_cmcp_connection_cb(void *callback_param, uint16_t client_id)
 {
@@ -66,12 +70,29 @@ void vsp_test_cmcp_connection_setup(void)
     /* create server */
     global_cmcp_server = vsp_cmcp_server_create();
     mu_assert_abort(global_cmcp_server != NULL, vsp_error_str(vsp_error_num()));
-    /* register callback function */
-    vsp_cmcp_server_set_announcement_cb(global_cmcp_server,
-        vsp_test_cmcp_connection_cb, global_cmcp_server);
     /* create client */
     global_cmcp_client = vsp_cmcp_client_create();
     mu_assert_abort(global_cmcp_client != NULL, vsp_error_str(vsp_error_num()));
+}
+
+void vsp_test_cmcp_communication_setup(void)
+{
+    int ret;
+
+    /* create server and client */
+    vsp_test_cmcp_connection_setup();
+    /* register server callback function */
+    vsp_cmcp_server_set_announcement_cb(global_cmcp_server,
+        vsp_test_cmcp_connection_cb, global_cmcp_server);
+
+    /* bind server */
+    ret = vsp_cmcp_server_bind(global_cmcp_server,
+        VSP_TEST_SERVER_PUBLISH_ADDRESS, VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
+    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    /* connect client */
+    ret = vsp_cmcp_client_connect(global_cmcp_client,
+        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, VSP_TEST_SERVER_PUBLISH_ADDRESS);
+    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
 }
 
 void vsp_test_cmcp_connection_teardown(void)
@@ -166,26 +187,37 @@ MU_TEST(vsp_test_cmcp_client_invalid_parameters)
     mu_assert(ret != 0, VSP_TEST_INVALID_PARAMETER_ACCEPTED);
 }
 
-MU_TEST(vsp_test_cmcp_connection_test)
+MU_TEST(vsp_test_cmcp_communication_test)
 {
     int ret;
-    /* bind */
-    ret = vsp_cmcp_server_bind(global_cmcp_server,
-        VSP_TEST_SERVER_PUBLISH_ADDRESS, VSP_TEST_SERVER_SUBSCRIBE_ADDRESS);
+    vsp_cmcp_datalist *cmcp_datalist;
+
+    /* create data list */
+    cmcp_datalist = vsp_cmcp_datalist_create();
+    mu_assert_abort(cmcp_datalist != NULL, vsp_error_str(vsp_error_num()));
+    /* add a data list item */
+    ret = vsp_cmcp_datalist_add_item(cmcp_datalist, VSP_TEST_DATALIST_ITEM1_ID,
+        VSP_TEST_DATALIST_ITEM1_LENGTH, VSP_TEST_DATALIST_ITEM1_DATA);
+    mu_assert_abort(ret == 0, vsp_error_str(vsp_error_num()));
+    /* send a message */
+    ret = vsp_cmcp_client_send(global_cmcp_client, VSP_TEST_MESSAGE_COMMAND_ID,
+        NULL);
     mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
-    /* connect */
-    ret = vsp_cmcp_client_connect(global_cmcp_client,
-        VSP_TEST_SERVER_SUBSCRIBE_ADDRESS, VSP_TEST_SERVER_PUBLISH_ADDRESS);
-    mu_assert(ret == 0, vsp_error_str(vsp_error_num()));
+    /* free data list */
+    vsp_cmcp_datalist_free(cmcp_datalist);
 }
 
 MU_TEST_SUITE(vsp_test_cmcp_connection)
 {
     MU_RUN_TEST(vsp_test_cmcp_server_allocation);
     MU_RUN_TEST(vsp_test_cmcp_client_allocation);
+
     MU_SUITE_CONFIGURE(&vsp_test_cmcp_connection_setup,
         &vsp_test_cmcp_connection_teardown);
     MU_RUN_TEST(vsp_test_cmcp_server_invalid_parameters);
     MU_RUN_TEST(vsp_test_cmcp_client_invalid_parameters);
-    MU_RUN_TEST(vsp_test_cmcp_connection_test);
+
+    MU_SUITE_CONFIGURE(&vsp_test_cmcp_communication_setup,
+        &vsp_test_cmcp_connection_teardown);
+    MU_RUN_TEST(vsp_test_cmcp_communication_test);
 }

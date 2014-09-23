@@ -44,7 +44,7 @@ extern "C" {
 #define VSP_TEST_MESSAGE_TOPIC_ID 28437
 /** Message sender ID. */
 #define VSP_TEST_MESSAGE_SENDER_ID 6391
-/** Message command ID. Has to be lower than 2^31. */
+/** Message command ID. Has to be lower than 2^15. */
 #define VSP_TEST_MESSAGE_COMMAND_ID 27743
 
 

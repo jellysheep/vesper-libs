@@ -10,7 +10,10 @@
 #if !defined VSP_CMCP_CLIENT_H_INCLUDED
 #define VSP_CMCP_CLIENT_H_INCLUDED
 
+#include "vsp_cmcp_datalist.h"
+
 #include <vesper_util/vsp_api.h>
+#include <stdint.h>
 
 #if defined __cplusplus
 extern "C" {
@@ -42,6 +45,15 @@ VSP_API void vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client);
  */
 VSP_API int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
     const char *publish_address, const char *subscribe_address);
+
+/**
+ * Send a message to the connected server.
+ * The specified command_id has to be lower than 2^15, i.e. MSB cleared.
+ * This function blocks until the message could be sent.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+VSP_API int vsp_cmcp_client_send(vsp_cmcp_client *cmcp_client,
+    uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
 
 #if defined __cplusplus
 }
