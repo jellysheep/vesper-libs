@@ -10,6 +10,8 @@
 #if !defined VSP_CMCP_SERVER_H_INCLUDED
 #define VSP_CMCP_SERVER_H_INCLUDED
 
+#include "vsp_cmcp_datalist.h"
+
 #include <vesper_util/vsp_api.h>
 #include <stdint.h>
 
@@ -29,6 +31,13 @@ typedef struct vsp_cmcp_server vsp_cmcp_server;
  * If the callback returns zero, the client will be registered (ACK message
  * sent); otherwise the client will be rejected (NACK message sent). */
 typedef int (*vsp_cmcp_server_announcement_cb)(void*, uint16_t);
+
+/** Callback function invoked for a received message.
+ * The parameters are the callback parameter set by
+ * vsp_cmcp_server_set_callback_param(), the client ID, the command ID and the
+ * data list. */
+typedef void (*vsp_cmcp_server_message_cb)(void*, uint16_t, uint16_t,
+    vsp_cmcp_datalist*);
 
 /**
  * Create new vsp_cmcp_server object.
@@ -58,6 +67,13 @@ VSP_API void vsp_cmcp_server_set_callback_param(vsp_cmcp_server *cmcp_server,
  */
 VSP_API void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
     vsp_cmcp_server_announcement_cb announcement_cb);
+
+/**
+ * Set callback function invoked for every received message.
+ * If message_cb is NULL, the callback function is cleared.
+ */
+VSP_API void vsp_cmcp_server_set_message_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_message_cb message_cb);
 
 /**
  * Initialize sockets and wait for incoming connections.

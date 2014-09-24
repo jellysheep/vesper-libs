@@ -37,10 +37,12 @@ struct vsp_cmcp_server {
     uint16_t client_ids[VSP_CMCP_SERVER_MAX_PEERS];
     /** Client peer data. */
     vsp_cmcp_server_peer *client_data[VSP_CMCP_SERVER_MAX_PEERS];
-    /** Client announcement callback function, specified by API user. */
-    vsp_cmcp_server_announcement_cb announcement_cb;
     /** Callback function parameter. */
     void *callback_param;
+    /** Client announcement callback function. */
+    vsp_cmcp_server_announcement_cb announcement_cb;
+    /** Message callback function. */
+    vsp_cmcp_server_message_cb message_cb;
 };
 
 /** Regular callback function invoked by cmcp_node.
@@ -86,8 +88,10 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     cmcp_server->id = vsp_cmcp_node_get_id(cmcp_server->cmcp_node);
     /* no client peers registered yet */
     cmcp_server->client_count = 0;
-    /* initialize callback data */
+    /* initialize callback parameter and functions */
+    cmcp_server->callback_param = NULL;
     cmcp_server->announcement_cb = NULL;
+    cmcp_server->message_cb = NULL;
     /* return struct pointer */
     return cmcp_server;
 }
@@ -128,6 +132,16 @@ void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
 
     /* set callback function */
     cmcp_server->announcement_cb = announcement_cb;
+}
+
+void vsp_cmcp_server_set_message_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_message_cb message_cb)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL, return);
+
+    /* set callback function */
+    cmcp_server->message_cb = message_cb;
 }
 
 int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
@@ -179,6 +193,7 @@ void vsp_cmcp_server_message_callback(void *param,
     vsp_cmcp_server *cmcp_server;
     vsp_cmcp_datalist *cmcp_datalist;
     uint16_t topic_id, sender_id, command_id;
+    int client_index;
 
     /* check parameters; failures are silently ignored */
     VSP_CHECK(param != NULL && cmcp_message != NULL, return);
@@ -190,25 +205,23 @@ void vsp_cmcp_server_message_callback(void *param,
     sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
     command_id = vsp_cmcp_message_get_command_id(cmcp_message);
 
-    /* check if message has valid sender */
-    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID, return);
+    /* check if message has valid sender and is received from a client,
+     * as server-to-server messages are not supported yet */
+    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID
+        && (sender_id & 1) == 1, return);
 
     /* get data list */
     cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
     /* check data list; failures are silently ignored */
     VSP_CHECK(cmcp_datalist != NULL, return);
 
-    /* reset client peer timeout time if message received */
-    if ((sender_id & 1) == 1) {
-        int index;
-        /* try to find client in registered peers */
-        index = vsp_cmcp_server_find_client(cmcp_server, sender_id);
-        if (index >= 0) {
-            /* reset timeout time */
-            vsp_time_real_timespec_from_now(
-                &cmcp_server->client_data[index]->time_connection_timeout,
-                VSP_CMCP_NODE_CONNECTION_TIMEOUT);
-        }
+    /* try to find client in registered peers */
+    client_index = vsp_cmcp_server_find_client(cmcp_server, sender_id);
+    if (client_index >= 0) {
+        /* reset client peer timeout time */
+        vsp_time_real_timespec_from_now(
+            &cmcp_server->client_data[client_index]->time_connection_timeout,
+            VSP_CMCP_NODE_CONNECTION_TIMEOUT);
     }
 
     /* check if internal control message received */
@@ -224,8 +237,15 @@ void vsp_cmcp_server_message_callback(void *param,
         /* check if message is broadcasted or directed to a client topic */
         VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
             || (topic_id & 1) == 1, return);
+        /* check if client is registered; server-to-server messages are not
+         * supported yet */
+        VSP_CHECK(client_index >= 0, return);
         /* handle data message */
-        /* ... */
+        if (cmcp_server->message_cb != NULL) {
+            /* callback function registered; invoke it */
+            cmcp_server->message_cb(cmcp_server->callback_param, sender_id,
+                command_id, cmcp_datalist);
+        }
     }
 }
 
