@@ -33,6 +33,8 @@ vsp_cmcp_state *vsp_cmcp_state_create(int initial_state);
 /**
  * Free vsp_cmcp_state object.
  * Object should be created with vsp_cmcp_state_create().
+ * The mutex must not be locked and threads must not wait on the condition
+ * variable using vsp_cmcp_state_wait() when calling this function.
  * Returns non-zero and sets vsp_error_num() if failed.
  */
 void vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state);

@@ -39,6 +39,9 @@ void vsp_cmcp_state_free(vsp_cmcp_state *cmcp_state)
 {
     /* check parameter */
     VSP_ASSERT(cmcp_state != NULL);
+    /* destroy mutex and condition variable */
+    pthread_mutex_destroy(&cmcp_state->mutex);
+    pthread_cond_destroy(&cmcp_state->condition);
     /* free memory */
     VSP_FREE(cmcp_state);
 }
