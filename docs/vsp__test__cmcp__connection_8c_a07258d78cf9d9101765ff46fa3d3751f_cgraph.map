@@ -1,16 +1,47 @@
 <map id="MU_TEST_SUITE" name="MU_TEST_SUITE">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#a83eefc197feed4361a7b76c318a9ab67" title="Create global global_cmcp_server and global_cmcp_client objects. " alt="" coords="184,93,365,134"/>
-<area shape="rect" id="node11" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global global_cmcp_server and global_cmcp_client objects. " alt="" coords="184,158,365,199"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="413,5,581,32"/>
-<area shape="rect" id="node8" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="448,107,547,133"/>
-<area shape="rect" id="node9" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="443,157,551,184"/>
-<area shape="rect" id="node10" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="416,56,579,83"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="629,56,789,83"/>
-<area shape="rect" id="node7" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="658,5,761,32"/>
-<area shape="rect" id="node5" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="1035,195,1168,221"/>
-<area shape="rect" id="node6" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="853,43,971,69"/>
-<area shape="rect" id="node12" href="$vsp__cmcp__client_8h.html#a46863c659a7e266ede803aea7bb228f5" title="Free vsp_cmcp_client object. " alt="" coords="423,259,572,285"/>
-<area shape="rect" id="node15" href="$vsp__cmcp__server_8h.html#ad4fec321bdb127af235ac0e4bdead5a7" title="Free vsp_cmcp_server object. " alt="" coords="420,208,575,235"/>
-<area shape="rect" id="node13" href="$vsp__cmcp__node_8h.html#a1167e9ff2773e0a497c5c25a37d39e34" title="Free vsp_cmcp_node object. " alt="" coords="636,220,783,247"/>
-<area shape="rect" id="node14" href="$vsp__cmcp__node_8h.html#a20071bc5474786b9f6086ab75ebd7370" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="837,245,987,272"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#a83eefc197feed4361a7b76c318a9ab67" title="Create global_cmcp_server and global_cmcp_client objects. " alt="" coords="439,99,620,141"/>
+<area shape="rect" id="node14" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global_cmcp_server and global_cmcp_client objects. " alt="" coords="197,1423,378,1465"/>
+<area shape="rect" id="node26" href="$vsp__test__cmcp__connection_8c.html#aa97d457f2e26128c1dac85d346fe9eb9" title="Initialize global_test_state object, create and connect global_cmcp_server and global_cmcp_client obj..." alt="" coords="184,893,391,934"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="696,56,864,83"/>
+<area shape="rect" id="node11" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="983,1101,1082,1128"/>
+<area shape="rect" id="node12" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="979,781,1087,808"/>
+<area shape="rect" id="node13" href="$vsp__cmcp__client_8h.html#a86cf02810e4a5f4a055da5d5f23670c0" title="Create new vsp_cmcp_client object. " alt="" coords="699,107,861,133"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a5572ac9f135ee2dffe0700068cdc869e" title="Create new vsp_cmcp_node object. " alt="" coords="953,56,1113,83"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__node_8h.html#a076eff4fd14c46158c4b7962555355a1" title="Get the network ID of this node. " alt="" coords="953,5,1112,32"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__state_8h.html#ab9fb5be8bf233ed430fca78b01fb7a61" title="Create new vsp_cmcp_state object. " alt="" coords="1188,107,1349,133"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__node_8h.html#ad2d812f50b4f3111db9eb0b86b8d1b27" title="Generate a new network ID for this node. " alt="" coords="1173,5,1364,32"/>
+<area shape="rect" id="node8" href="$vsp__time_8h.html#ad7e72490eb95fabac8e52582f8069b8b" title="Get real (wall clock) time since epoch in seconds. " alt="" coords="1195,56,1343,83"/>
+<area shape="rect" id="node7" href="$vsp__random_8h.html#a280093081b59ce8d17eebff45ed29903" title="Get a pseudo&#45;random 64 bit integer value. " alt="" coords="1434,5,1553,32"/>
+<area shape="rect" id="node9" href="$vsp__time_8h.html#aa4e7e59e94ddd81f3c9955b4fccf6468" title="Get real (wall clock) time since epoch as a timespec struct. " alt="" coords="1412,56,1575,83"/>
+<area shape="rect" id="node15" href="$vsp__cmcp__client_8h.html#acee85a751d866898c313a1dbca71ccbf" title="Free vsp_cmcp_client object. " alt="" coords="455,1507,604,1533"/>
+<area shape="rect" id="node24" href="$vsp__cmcp__state_8h.html#a6b59c5a2b431ea2a95b5177ed8e8f5c0" title="Free vsp_cmcp_state object. " alt="" coords="959,1456,1106,1483"/>
+<area shape="rect" id="node25" href="$vsp__cmcp__server_8h.html#a37bd99410636b2d7aef0d137d354f230" title="Free vsp_cmcp_server object. " alt="" coords="452,1405,607,1432"/>
+<area shape="rect" id="node16" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="1197,1203,1340,1229"/>
+<area shape="rect" id="node17" href="$vsp__cmcp__node_8h.html#a78c5f72439eb39dddf7c79d7317029e3" title="Create and send message to the publish socket of the node. " alt="" coords="700,1630,860,1671"/>
+<area shape="rect" id="node21" href="$vsp__cmcp__node_8h.html#acaf47d98a67eff05b74df0a7640e8d91" title="Free vsp_cmcp_node object. " alt="" coords="707,1405,853,1432"/>
+<area shape="rect" id="node18" href="$vsp__cmcp__message_8h.html#a58d3337c6cc925bdd89cdcdfdc0f241d" title="Create new vsp_cmcp_message object to send message data. " alt="" coords="940,1709,1125,1736"/>
+<area shape="rect" id="node19" href="$vsp__cmcp__message_8h.html#af0f90da1fc0271d485916477d084ee0c" title="Free vsp_cmcp_message object. " alt="" coords="947,1659,1118,1685"/>
+<area shape="rect" id="node20" href="$vsp__cmcp__datalist_8h.html#ab63a26a8a160df69955ac1db61cfe414" title="Free vsp_cmcp_datalist object. " alt="" coords="1189,1659,1349,1685"/>
+<area shape="rect" id="node22" href="$vsp__cmcp__node_8h.html#a560a282606612368d090ff986a1a1984" title="Stop message reception thread and wait until thread has finished. " alt="" coords="958,1304,1107,1331"/>
+<area shape="rect" id="node23" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="1197,1000,1340,1027"/>
+<area shape="rect" id="node27" href="$vsp__cmcp__server_8h.html#a72e458d3bfc6d443117f047506dff7ae" title="Set callback function parameter used for all registered callback functions. " alt="" coords="454,1078,605,1119"/>
+<area shape="rect" id="node28" href="$vsp__cmcp__server_8h.html#ab3fc3a02ed4169e1edd6164edf3d4ead" title="Set callback function invoked for every newly announced client. " alt="" coords="454,1143,605,1185"/>
+<area shape="rect" id="node29" href="$vsp__test__cmcp__connection_8c.html#a85dd330638db21064eca156d3144aa83" title="Client announcement callback function. " alt="" coords="668,1127,892,1153"/>
+<area shape="rect" id="node30" href="$vsp__cmcp__server_8h.html#a65df6bb030850d1415b4a18488d8e7c4" title="Set callback function invoked for every disconnected client. " alt="" coords="454,1209,605,1250"/>
+<area shape="rect" id="node31" href="$vsp__test__cmcp__connection_8c.html#a2d0c98decdec35e14ca9110ce8a848d3" title="Client disconnection callback function. " alt="" coords="679,1228,881,1255"/>
+<area shape="rect" id="node32" href="$vsp__cmcp__server_8h.html#a15acb4b09babdbb97fed991dbe76394f" title="Set callback function invoked for every received message. " alt="" coords="454,1274,605,1315"/>
+<area shape="rect" id="node33" href="$vsp__test__cmcp__connection_8c.html#a26001fad81aef18212d5460d405d6ed3" title="Server message callback function. " alt="" coords="703,825,857,866"/>
+<area shape="rect" id="node36" href="$vsp__cmcp__client_8h.html#ad70c30d3b743c886d07ca7867f161892" title="Set callback function parameter used for all registered callback functions. " alt="" coords="457,1339,602,1381"/>
+<area shape="rect" id="node37" href="$vsp__cmcp__client_8h.html#ab94948c21e56c39d296dc472f19d3ebb" title="Set callback function invoked for every received message. " alt="" coords="457,462,602,503"/>
+<area shape="rect" id="node38" href="$vsp__test__cmcp__connection_8c.html#a79b82bb6378fcdb845bb7b4d21cd6221" title="Client message callback function. " alt="" coords="705,890,855,931"/>
+<area shape="rect" id="node39" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize sockets and wait for incoming connections. " alt="" coords="451,579,607,605"/>
+<area shape="rect" id="node46" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="443,528,616,555"/>
+<area shape="rect" id="node34" href="$vsp__cmcp__datalist_8h.html#a066c5081ae2d0538c2ec21a9880cc290" title="Get pointer to data stored in the data list. " alt="" coords="955,883,1111,925"/>
+<area shape="rect" id="node35" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="1202,427,1335,453"/>
+<area shape="rect" id="node40" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="695,579,865,605"/>
+<area shape="rect" id="node42" href="$vsp__cmcp__node_8h.html#ab2b47f14e35c75c37a4b14486562a41c" title="Start message reception thread and wait until thread has started. " alt="" coords="705,376,855,403"/>
+<area shape="rect" id="node41" href="$vsp__cmcp__node_8h.html#a6b2d23e48b42a586fcc08a678a44f5d8" title="Subscribe the node to the specified topic ID. " alt="" coords="943,731,1123,757"/>
+<area shape="rect" id="node43" href="$vsp__cmcp__state_8h.html#a8a0e2e4d6a4df2b838d1000f71c38d05" title="Wait and lock the current state. " alt="" coords="958,259,1107,285"/>
+<area shape="rect" id="node44" href="$vsp__cmcp__state_8h.html#a0278b255ba8aebbce6fa60a211e2b390" title="Wait for the specified state or the time to pass timeout_time. " alt="" coords="955,361,1111,402"/>
+<area shape="rect" id="node45" href="$vsp__cmcp__state_8h.html#a6df00c1e113c27350f71a15951dd1b8c" title="Unlock the current state. " alt="" coords="951,309,1114,336"/>
 </map>

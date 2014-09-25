@@ -1,3 +1,6 @@
 <map id="vsp_cmcp_node_connect" name="vsp_cmcp_node_connect">
-<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="224,5,357,32"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="452,54,595,81"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="247,29,381,56"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="243,80,385,106"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__node_8h.html#a6b2d23e48b42a586fcc08a678a44f5d8" title="Subscribe the node to the specified topic ID. " alt="" coords="224,130,404,157"/>
 </map>

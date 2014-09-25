@@ -1,6 +1,0 @@
-<map id="vsp_cmcp_node_start" name="vsp_cmcp_node_start">
-<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="204,5,377,32"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize sockets and wait for incoming connections. " alt="" coords="213,56,369,83"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#ab69481fb2440c57365c22062643f56c1" title="Test to invoke client functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="425,5,509,32"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#ae8dd7b88e5a9dcdc6db334fc5f6d92de" title="Test to invoke server functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="425,56,509,83"/>
-</map>

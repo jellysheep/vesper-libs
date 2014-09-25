@@ -1,6 +1,9 @@
 <map id="vsp_cmcp_server_create" name="vsp_cmcp_server_create">
-<area shape="rect" id="node2" href="$vsp__cmcp__node_8h.html#a06b9268dda2a9ef704eede9907208f95" title="Create new vsp_cmcp_node object. " alt="" coords="221,31,381,57"/>
-<area shape="rect" id="node5" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="250,81,353,108"/>
-<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="429,5,563,32"/>
-<area shape="rect" id="node4" href="$vsp__random_8h.html#a33506ede2fc3899b24937d472c133d75" title="Get a pseudo&#45;random 32 bit integer value. " alt="" coords="437,56,555,83"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__node_8h.html#a5572ac9f135ee2dffe0700068cdc869e" title="Create new vsp_cmcp_node object. " alt="" coords="221,56,381,83"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__node_8h.html#a076eff4fd14c46158c4b7962555355a1" title="Get the network ID of this node. " alt="" coords="222,107,381,133"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__state_8h.html#ab9fb5be8bf233ed430fca78b01fb7a61" title="Create new vsp_cmcp_state object. " alt="" coords="444,5,605,32"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#ad2d812f50b4f3111db9eb0b86b8d1b27" title="Generate a new network ID for this node. " alt="" coords="429,56,620,83"/>
+<area shape="rect" id="node6" href="$vsp__time_8h.html#ad7e72490eb95fabac8e52582f8069b8b" title="Get real (wall clock) time since epoch in seconds. " alt="" coords="451,107,599,133"/>
+<area shape="rect" id="node5" href="$vsp__random_8h.html#a280093081b59ce8d17eebff45ed29903" title="Get a pseudo&#45;random 64 bit integer value. " alt="" coords="690,56,809,83"/>
+<area shape="rect" id="node7" href="$vsp__time_8h.html#aa4e7e59e94ddd81f3c9955b4fccf6468" title="Get real (wall clock) time since epoch as a timespec struct. " alt="" coords="668,107,831,133"/>
 </map>

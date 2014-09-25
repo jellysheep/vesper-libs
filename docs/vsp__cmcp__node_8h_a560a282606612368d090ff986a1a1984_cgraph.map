@@ -1,0 +1,4 @@
+<map id="vsp_cmcp_node_stop" name="vsp_cmcp_node_stop">
+<area shape="rect" id="node2" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="203,5,345,32"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="203,56,345,83"/>
+</map>

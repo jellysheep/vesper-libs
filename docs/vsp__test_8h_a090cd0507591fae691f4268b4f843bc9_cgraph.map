@@ -1,9 +1,8 @@
 <map id="MU_TEST_SUITE" name="MU_TEST_SUITE">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__datalist_8c.html#a83e40b8c484d81f753b708be4b53c4ba" title="Create global global_cmcp_datalist object. " alt="" coords="184,42,344,83"/>
-<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html#a20c3bc6d1ce08f51c28973c31adce8e5" title="Free global global_cmcp_datalist object. " alt="" coords="184,107,344,149"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__datalist_8c.html#a83e40b8c484d81f753b708be4b53c4ba" title="Create global global_cmcp_datalist object. " alt="" coords="184,58,344,99"/>
+<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html#a20c3bc6d1ce08f51c28973c31adce8e5" title="Free global global_cmcp_datalist object. " alt="" coords="184,133,344,174"/>
 <area shape="rect" id="node3" href="$vsp__cmcp__datalist_8h.html#aad32a2bf270077a1059702a2a62cb750" title="Create new vsp_cmcp_datalist object. " alt="" coords="392,5,567,32"/>
 <area shape="rect" id="node4" href="$vsp__error_8h.html#ab49518b79866a1a5aaed01ba6a96147a" title="Return error string for any error number. " alt="" coords="430,56,529,83"/>
 <area shape="rect" id="node5" href="$vsp__error_8h.html#a6035c7961a5a79ff4014a30bc6485e25" title="Return current error number. " alt="" coords="425,107,533,133"/>
-<area shape="rect" id="node7" href="$vsp__cmcp__datalist_8h.html#a61bd80b31cdd53db650e452e6d50145e" title="Free vsp_cmcp_datalist object. " alt="" coords="399,157,559,184"/>
-<area shape="rect" id="node8" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="615,157,748,184"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__datalist_8h.html#ab63a26a8a160df69955ac1db61cfe414" title="Free vsp_cmcp_datalist object. " alt="" coords="399,157,559,184"/>
 </map>

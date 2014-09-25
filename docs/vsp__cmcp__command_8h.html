@@ -96,17 +96,29 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="vsp__cmcp__command_8h__dep__incl.png" border="0" usemap="#vesper__cmcp_2vsp__cmcp__command_8hdep" alt=""/></div>
 <map name="vesper__cmcp_2vsp__cmcp__command_8hdep" id="vesper__cmcp_2vsp__cmcp__command_8hdep">
-<area shape="rect" id="node2" href="vsp__cmcp__client_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_client.c" alt="" coords="5,95,169,136"/><area shape="rect" id="node3" href="vsp__cmcp__server_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_server.c" alt="" coords="193,95,357,136"/></map>
+<area shape="rect" id="node2" href="vsp__cmcp__client_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_client.c" alt="" coords="5,95,169,136"/><area shape="rect" id="node3" href="vsp__cmcp__node_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_node.c" alt="" coords="193,95,357,136"/><area shape="rect" id="node4" href="vsp__cmcp__server_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_server.c" alt="" coords="381,95,545,136"/></map>
 </div>
 </div>
 <p><a href="vsp__cmcp__command_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a7ca4f2b351dac57f9307fea48eb8fe5f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__command_8h.html#a7ca4f2b351dac57f9307fea48eb8fe5f">vsp_cmcp_command_id</a> { <a class="el" href="vsp__cmcp__command_8h.html#a7ca4f2b351dac57f9307fea48eb8fe5fabdfee4cfd19bea2aa34132514e1e2805">VSP_CMCP_COMMAND_HEARTBEAT</a>
+<tr class="memitem:ab0c32224789694ca1f6992e50e94b3ed"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3ed">vsp_cmcp_server_command_id</a> { <a class="el" href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3eda7bd843e6c6adef0c9790e5ee95bb1211">VSP_CMCP_COMMAND_SERVER_HEARTBEAT</a>, 
+<a class="el" href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3edab3b3cc1d1df0d395a1f0e6921f10172a">VSP_CMCP_COMMAND_SERVER_ACK_CLIENT</a>, 
+<a class="el" href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3edadb02ef4907be73e1e2bdbfabfee7ce94">VSP_CMCP_COMMAND_SERVER_NACK_CLIENT</a>
  }</td></tr>
-<tr class="memdesc:a7ca4f2b351dac57f9307fea48eb8fe5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal message commands used for CMCP handshake as well as connection establishment and maintaining.  <a href="vsp__cmcp__command_8h.html#a7ca4f2b351dac57f9307fea48eb8fe5f">More...</a><br /></td></tr>
-<tr class="separator:a7ca4f2b351dac57f9307fea48eb8fe5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ab0c32224789694ca1f6992e50e94b3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal message commands from servers used for CMCP handshake as well as connection establishment and maintaining.  <a href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3ed">More...</a><br /></td></tr>
+<tr class="separator:ab0c32224789694ca1f6992e50e94b3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c1808782ab14e74eea9ef2d132048d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048d">vsp_cmcp_client_command_id</a> { <a class="el" href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048da9f89da13e9465381987b4a19c6f1e6b3">VSP_CMCP_COMMAND_CLIENT_ANNOUNCE</a>, 
+<a class="el" href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048da157c623a0e7c7baf966a3d690987fced">VSP_CMCP_COMMAND_CLIENT_HEARTBEAT</a>, 
+<a class="el" href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048daef88cc4aa9e078b3397584f62fba5e2f">VSP_CMCP_COMMAND_CLIENT_DISCONNECT</a>
+ }</td></tr>
+<tr class="memdesc:a99c1808782ab14e74eea9ef2d132048d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal message commands from clients used for CMCP handshake as well as connection establishment and maintaining.  <a href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048d">More...</a><br /></td></tr>
+<tr class="separator:a99c1808782ab14e74eea9ef2d132048d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af92437173632faf385ca1677744711bc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vsp__cmcp__command_8h.html#af92437173632faf385ca1677744711bc">vsp_cmcp_command_parameter_id</a> { <a class="el" href="vsp__cmcp__command_8h.html#af92437173632faf385ca1677744711bca9f7e68f6ae716047fdb255ffaefcf1ee">VSP_CMCP_PARAMETER_NONCE</a>
+ }</td></tr>
+<tr class="memdesc:af92437173632faf385ca1677744711bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal message command parameters used for CMCP handshake as well as connection establishment and maintaining.  <a href="vsp__cmcp__command_8h.html#af92437173632faf385ca1677744711bc">More...</a><br /></td></tr>
+<tr class="separator:af92437173632faf385ca1677744711bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Max Mertens</dd></dl>
@@ -114,22 +126,30 @@ Enumerations</h2></td></tr>
 
 <p>Definition in file <a class="el" href="vsp__cmcp__command_8h_source.html">vsp_cmcp_command.h</a>.</p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a class="anchor" id="a7ca4f2b351dac57f9307fea48eb8fe5f"></a>
+<a class="anchor" id="ab0c32224789694ca1f6992e50e94b3ed"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="vsp__cmcp__command_8h.html#a7ca4f2b351dac57f9307fea48eb8fe5f">vsp_cmcp_command_id</a></td>
+          <td class="memname">enum <a class="el" href="vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3ed">vsp_cmcp_server_command_id</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Internal message commands used for CMCP handshake as well as connection establishment and maintaining. </p>
+<p>Internal message commands from servers used for CMCP handshake as well as connection establishment and maintaining. </p>
 <p>Necessary data list parameters have to be listed here. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a7ca4f2b351dac57f9307fea48eb8fe5fabdfee4cfd19bea2aa34132514e1e2805"></a>VSP_CMCP_COMMAND_HEARTBEAT&#160;</td><td class="fielddoc">
-<p>Heartbeat signal command. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ab0c32224789694ca1f6992e50e94b3eda7bd843e6c6adef0c9790e5ee95bb1211"></a>VSP_CMCP_COMMAND_SERVER_HEARTBEAT&#160;</td><td class="fielddoc">
+<p>Server heartbeat signal command. </p>
 <p>No parameters required. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ab0c32224789694ca1f6992e50e94b3edab3b3cc1d1df0d395a1f0e6921f10172a"></a>VSP_CMCP_COMMAND_SERVER_ACK_CLIENT&#160;</td><td class="fielddoc">
+<p>Acknowledge signal when registering a new client. </p>
+<p>Parameters: VSP_CMCP_PARAMETER_NONCE. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ab0c32224789694ca1f6992e50e94b3edadb02ef4907be73e1e2bdbfabfee7ce94"></a>VSP_CMCP_COMMAND_SERVER_NACK_CLIENT&#160;</td><td class="fielddoc">
+<p>Negative acknowledge when rejecting a new client. </p>
+<p>Parameters: VSP_CMCP_PARAMETER_NONCE. </p>
 </td></tr>
 </table>
 
@@ -137,10 +157,64 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a99c1808782ab14e74eea9ef2d132048d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048d">vsp_cmcp_client_command_id</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Internal message commands from clients used for CMCP handshake as well as connection establishment and maintaining. </p>
+<p>Necessary data list parameters have to be listed here. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a99c1808782ab14e74eea9ef2d132048da9f89da13e9465381987b4a19c6f1e6b3"></a>VSP_CMCP_COMMAND_CLIENT_ANNOUNCE&#160;</td><td class="fielddoc">
+<p>Command to announce client connection to server. </p>
+<p>Parameters: VSP_CMCP_PARAMETER_NONCE. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a99c1808782ab14e74eea9ef2d132048da157c623a0e7c7baf966a3d690987fced"></a>VSP_CMCP_COMMAND_CLIENT_HEARTBEAT&#160;</td><td class="fielddoc">
+<p>Client heartbeat signal command. </p>
+<p>No parameters required. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a99c1808782ab14e74eea9ef2d132048daef88cc4aa9e078b3397584f62fba5e2f"></a>VSP_CMCP_COMMAND_CLIENT_DISCONNECT&#160;</td><td class="fielddoc">
+<p>Client disconnection command. </p>
+<p>No parameters required. </p>
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__command_8h_source.html#l00034">34</a> of file <a class="el" href="vsp__cmcp__command_8h_source.html">vsp_cmcp_command.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af92437173632faf385ca1677744711bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="vsp__cmcp__command_8h.html#af92437173632faf385ca1677744711bc">vsp_cmcp_command_parameter_id</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Internal message command parameters used for CMCP handshake as well as connection establishment and maintaining. </p>
+<p>The data type and size (in bytes) has to be specified. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="af92437173632faf385ca1677744711bca9f7e68f6ae716047fdb255ffaefcf1ee"></a>VSP_CMCP_PARAMETER_NONCE&#160;</td><td class="fielddoc">
+<p>A randomly generated nonce used for temporary node indentification. </p>
+<p>Type: uint64_t. Size: 8 bytes. </p>
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__command_8h_source.html#l00047">47</a> of file <a class="el" href="vsp__cmcp__command_8h_source.html">vsp_cmcp_command.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 19:37:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['lmutex',['lMutex',['../classVesper_1_1Vout.html#af91287b6fdbfbd8d8d153e1bfa9ccc2a',1,'Vesper::Vout']]],
-  ['logging',['Logging',['../classVesper_1_1Logging.html#acc3d848a3d05076fd185cd95e9c648d5',1,'Vesper::Logging']]],
-  ['logging',['Logging',['../classVesper_1_1Logging.html',1,'Vesper']]],
-  ['loggingpipe',['LoggingPipe',['../structVesper_1_1LoggingType_1_1LoggingPipe.html',1,'Vesper::LoggingType']]]
+  ['id',['id',['../structvsp__cmcp__client.html#ad43d8279a0f81e281e09d6f5bafeda97',1,'vsp_cmcp_client::id()'],['../structvsp__cmcp__node.html#abd9aca1f200712a6b3fbe6e976aaa66b',1,'vsp_cmcp_node::id()'],['../structvsp__cmcp__server.html#a456191c0271aa1e2f4879ec10e267985',1,'vsp_cmcp_server::id()']]],
+  ['inline',['inline',['../vsp__util_8h.html#a00d24c7231be28dbaf71f5408f30e44c',1,'vsp_util.h']]]
 ];

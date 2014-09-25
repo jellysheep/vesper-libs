@@ -1,8 +1,0 @@
-<map id="vsp_cmcp_datalist_free" name="vsp_cmcp_datalist_free">
-<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a84eebc0e9381c53c466b8f559113d128" title="Free vsp_cmcp_message object. " alt="" coords="213,67,384,94"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__datalist_8c.html#a20c3bc6d1ce08f51c28973c31adce8e5" title="Free global global_cmcp_datalist object. " alt="" coords="219,119,379,160"/>
-<area shape="rect" id="node7" href="$vsp__test__cmcp__datalist_8c.html#ac0138c288f71832748c0463a149f823f" title="Test to invoke data list functions with invalid parameters and check if they behave correctly and do ..." alt="" coords="257,185,341,211"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a5e59d537ab0df914f38506a61fab8dd4" title="Create and send message to the node&#39;s publish socket. " alt="" coords="432,5,592,47"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__message_8c.html#abc2facfd1744ec12ffd18efa462d0567" title="Test to invoke message functions with invalid parameters and check if they behave correctly and do no..." alt="" coords="470,71,554,98"/>
-<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html#a090cd0507591fae691f4268b4f843bc9" title="Test data list implementation. " alt="" coords="447,126,577,153"/>
-</map>

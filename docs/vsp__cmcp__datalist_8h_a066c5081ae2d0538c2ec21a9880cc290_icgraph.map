@@ -1,3 +1,7 @@
 <map id="vsp_cmcp_datalist_get_data_item" name="vsp_cmcp_datalist_get_data_item">
-<area shape="rect" id="node2" href="$vsp__test__cmcp__datalist_8c.html#ac0138c288f71832748c0463a149f823f" title="Test to invoke data list functions with invalid parameters and check if they behave correctly and do ..." alt="" coords="209,13,293,39"/>
+<area shape="rect" id="node2" href="$vsp__test__cmcp__connection_8c.html#a26001fad81aef18212d5460d405d6ed3" title="Server message callback function. " alt="" coords="209,5,364,47"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a79b82bb6378fcdb845bb7b4d21cd6221" title="Client message callback function. " alt="" coords="212,71,361,112"/>
+<area shape="rect" id="node6" href="$vsp__test__cmcp__datalist_8c.html#ac0138c288f71832748c0463a149f823f" title="Test to invoke data list functions with invalid parameters and check if they behave correctly and do ..." alt="" coords="245,137,329,163"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#aa97d457f2e26128c1dac85d346fe9eb9" title="Initialize global_test_state object, create and connect global_cmcp_server and global_cmcp_client obj..." alt="" coords="412,39,619,80"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="667,46,797,73"/>
 </map>

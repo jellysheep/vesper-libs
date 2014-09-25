@@ -7,6 +7,7 @@ var searchData=
   ['vsp_5fcmcp_5fmessage_2eh',['vsp_cmcp_message.h',['../vsp__cmcp__message_8h.html',1,'']]],
   ['vsp_5fcmcp_5fnode_2eh',['vsp_cmcp_node.h',['../vsp__cmcp__node_8h.html',1,'']]],
   ['vsp_5fcmcp_5fserver_2eh',['vsp_cmcp_server.h',['../vsp__cmcp__server_8h.html',1,'']]],
+  ['vsp_5fcmcp_5fstate_2eh',['vsp_cmcp_state.h',['../vsp__cmcp__state_8h.html',1,'']]],
   ['vsp_5ferror_2eh',['vsp_error.h',['../vsp__error_8h.html',1,'']]],
   ['vsp_5frandom_2eh',['vsp_random.h',['../vsp__random_8h.html',1,'']]],
   ['vsp_5ftest_2ec',['vsp_test.c',['../vsp__test_8c.html',1,'']]],

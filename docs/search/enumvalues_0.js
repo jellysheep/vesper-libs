@@ -1,15 +1,19 @@
 var searchData=
 [
-  ['vsp_5fcmcp_5fcommand_5fheartbeat',['VSP_CMCP_COMMAND_HEARTBEAT',['../vsp__cmcp__command_8h.html#a7ca4f2b351dac57f9307fea48eb8fe5fabdfee4cfd19bea2aa34132514e1e2805',1,'vsp_cmcp_command.h']]],
-  ['vsp_5fcmcp_5fmessage_5fcommand_5fid',['VSP_CMCP_MESSAGE_COMMAND_ID',['../vsp__cmcp__message_8h.html#a5ea222491cc41ef3703cab764dd56593a95a85c5477450cbe675ee723fbd4a4a4',1,'vsp_cmcp_message.h']]],
-  ['vsp_5fcmcp_5fmessage_5fsender_5fid',['VSP_CMCP_MESSAGE_SENDER_ID',['../vsp__cmcp__message_8h.html#a5ea222491cc41ef3703cab764dd56593aa9a1d9be0087a32550fd09d128a7792c',1,'vsp_cmcp_message.h']]],
-  ['vsp_5fcmcp_5fmessage_5ftopic_5fid',['VSP_CMCP_MESSAGE_TOPIC_ID',['../vsp__cmcp__message_8h.html#a5ea222491cc41ef3703cab764dd56593aa6fff62d6deaf441d775d8496ca1eeec',1,'vsp_cmcp_message.h']]],
+  ['vsp_5fcmcp_5fcommand_5fclient_5fannounce',['VSP_CMCP_COMMAND_CLIENT_ANNOUNCE',['../vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048da9f89da13e9465381987b4a19c6f1e6b3',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fcommand_5fclient_5fdisconnect',['VSP_CMCP_COMMAND_CLIENT_DISCONNECT',['../vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048daef88cc4aa9e078b3397584f62fba5e2f',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fcommand_5fclient_5fheartbeat',['VSP_CMCP_COMMAND_CLIENT_HEARTBEAT',['../vsp__cmcp__command_8h.html#a99c1808782ab14e74eea9ef2d132048da157c623a0e7c7baf966a3d690987fced',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fcommand_5fserver_5fack_5fclient',['VSP_CMCP_COMMAND_SERVER_ACK_CLIENT',['../vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3edab3b3cc1d1df0d395a1f0e6921f10172a',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fcommand_5fserver_5fheartbeat',['VSP_CMCP_COMMAND_SERVER_HEARTBEAT',['../vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3eda7bd843e6c6adef0c9790e5ee95bb1211',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fcommand_5fserver_5fnack_5fclient',['VSP_CMCP_COMMAND_SERVER_NACK_CLIENT',['../vsp__cmcp__command_8h.html#ab0c32224789694ca1f6992e50e94b3edadb02ef4907be73e1e2bdbfabfee7ce94',1,'vsp_cmcp_command.h']]],
+  ['vsp_5fcmcp_5fmessage_5ftype_5fcontrol',['VSP_CMCP_MESSAGE_TYPE_CONTROL',['../vsp__cmcp__message_8h.html#a477dfd2e410d24d26342fea0940bfa6da84c26905cfbf162d37978599c3737d24',1,'vsp_cmcp_message.h']]],
+  ['vsp_5fcmcp_5fmessage_5ftype_5fdata',['VSP_CMCP_MESSAGE_TYPE_DATA',['../vsp__cmcp__message_8h.html#a477dfd2e410d24d26342fea0940bfa6dae0e8ee1fc61c8357769fc8be45885807',1,'vsp_cmcp_message.h']]],
   ['vsp_5fcmcp_5fnode_5fclient',['VSP_CMCP_NODE_CLIENT',['../vsp__cmcp__node_8h.html#a49582ae31c5548da5bba892c9e3f178aaa6af5bb01797bef47910d3cc3a9013a5',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5finitialized',['VSP_CMCP_NODE_INITIALIZED',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a7b63c58efee1eb918bc2e72a0c63f61d',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5fmax_5fstate',['VSP_CMCP_NODE_MAX_STATE',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a5338e8008b51543ead77efc74f5ecb1e',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5frunning',['VSP_CMCP_NODE_RUNNING',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a81bb4213e21a2c707eb89d21c517db17',1,'vsp_cmcp_node.h']]],
   ['vsp_5fcmcp_5fnode_5fserver',['VSP_CMCP_NODE_SERVER',['../vsp__cmcp__node_8h.html#a49582ae31c5548da5bba892c9e3f178aa04f3ce1b867eb79c8b5962293781f4bb',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5fstarting',['VSP_CMCP_NODE_STARTING',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a08ef5f689701b376b5ba2d086ddddbaf',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5fstopping',['VSP_CMCP_NODE_STOPPING',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a734a29f73a110a12ca3460d6ba3ebf16',1,'vsp_cmcp_node.h']]],
-  ['vsp_5fcmcp_5fnode_5funinitialized',['VSP_CMCP_NODE_UNINITIALIZED',['../vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2a731622ed5af9810b1a6db31855fc8e6b',1,'vsp_cmcp_node.h']]]
+  ['vsp_5fcmcp_5fparameter_5fnonce',['VSP_CMCP_PARAMETER_NONCE',['../vsp__cmcp__command_8h.html#af92437173632faf385ca1677744711bca9f7e68f6ae716047fdb255ffaefcf1ee',1,'vsp_cmcp_command.h']]],
+  ['vsp_5ftest_5fcmcp_5fclient_5fmessage_5freceived',['VSP_TEST_CMCP_CLIENT_MESSAGE_RECEIVED',['../vsp__test__cmcp__connection_8c.html#a38c7c227b3c35e4e3bb18c8557696764a93ae48feb58e4168ad39e7c930e02e65',1,'vsp_test_cmcp_connection.c']]],
+  ['vsp_5ftest_5fcmcp_5fconnected',['VSP_TEST_CMCP_CONNECTED',['../vsp__test__cmcp__connection_8c.html#a38c7c227b3c35e4e3bb18c8557696764a992643b0e67f6a91d481e1cc92fe1854',1,'vsp_test_cmcp_connection.c']]],
+  ['vsp_5ftest_5fcmcp_5fdisconnected',['VSP_TEST_CMCP_DISCONNECTED',['../vsp__test__cmcp__connection_8c.html#a38c7c227b3c35e4e3bb18c8557696764a2e4fb7d45802ad60d202b1c676db6ef6',1,'vsp_test_cmcp_connection.c']]],
+  ['vsp_5ftest_5fcmcp_5fnot_5fconnected',['VSP_TEST_CMCP_NOT_CONNECTED',['../vsp__test__cmcp__connection_8c.html#a38c7c227b3c35e4e3bb18c8557696764a1574ef6f601aafb9bcb688a9a3c96f32',1,'vsp_test_cmcp_connection.c']]],
+  ['vsp_5ftest_5fcmcp_5fserver_5fmessage_5freceived',['VSP_TEST_CMCP_SERVER_MESSAGE_RECEIVED',['../vsp__test__cmcp__connection_8c.html#a38c7c227b3c35e4e3bb18c8557696764a7be04bd8575a5df635a22f6857b15c09',1,'vsp_test_cmcp_connection.c']]]
 ];

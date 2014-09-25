@@ -1,0 +1,8 @@
+<map id="vsp_cmcp_node_start" name="vsp_cmcp_node_start">
+<area shape="rect" id="node2" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="214,5,357,32"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="214,56,357,83"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__state_8h.html#a8a0e2e4d6a4df2b838d1000f71c38d05" title="Wait and lock the current state. " alt="" coords="211,107,360,133"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__state_8h.html#a0278b255ba8aebbce6fa60a211e2b390" title="Wait for the specified state or the time to pass timeout_time. " alt="" coords="207,158,363,199"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__state_8h.html#a6df00c1e113c27350f71a15951dd1b8c" title="Unlock the current state. " alt="" coords="204,224,367,251"/>
+<area shape="rect" id="node6" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="415,165,548,192"/>
+</map>

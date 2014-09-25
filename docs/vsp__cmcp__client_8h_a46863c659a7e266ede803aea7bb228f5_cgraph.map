@@ -1,5 +1,0 @@
-<map id="vsp_cmcp_client_free" name="vsp_cmcp_client_free">
-<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="595,31,728,57"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a1167e9ff2773e0a497c5c25a37d39e34" title="Free vsp_cmcp_node object. " alt="" coords="203,31,349,57"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a20071bc5474786b9f6086ab75ebd7370" title="Stop message reception thread and wait until thread has finished and joined. " alt="" coords="397,81,547,108"/>
-</map>

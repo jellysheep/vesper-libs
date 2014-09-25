@@ -1,7 +1,0 @@
-<map id="vsp_time_real" name="vsp_time_real">
-<area shape="rect" id="node2" href="$vsp__cmcp__server_8h.html#aac59cd97418da09bc2c5b6ba89734f8e" title="Create new vsp_cmcp_server object. " alt="" coords="156,42,324,69"/>
-<area shape="rect" id="node6" href="$vsp__test__util_8c.html#aabd7d8a20af3de6a70374d48c32a7380" title="Check time measurement functions. " alt="" coords="198,93,282,119"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#a83eefc197feed4361a7b76c318a9ab67" title="Create global global_cmcp_server and global_cmcp_client objects. " alt="" coords="372,5,553,47"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="421,71,505,98"/>
-<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="601,13,732,39"/>
-</map>

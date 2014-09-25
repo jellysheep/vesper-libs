@@ -97,7 +97,7 @@ Collaboration diagram for vsp_cmcp_server:</div>
 <div class="dyncontent">
 <div class="center"><img src="structvsp__cmcp__server__coll__graph.png" border="0" usemap="#vsp__cmcp__server_coll__map" alt="Collaboration graph"/></div>
 <map name="vsp__cmcp__server_coll__map" id="vsp__cmcp__server_coll__map">
-<area shape="rect" id="node2" href="structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="9,5,127,32"/></map>
+<area shape="rect" id="node2" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. " alt="" coords="5,95,136,121"/><area shape="rect" id="node3" href="structvsp__cmcp__server__peer.html" title="Data of a network node connected to server. " alt="" coords="160,95,317,121"/><area shape="rect" id="node4" href="structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="341,95,459,121"/><area shape="rect" id="node5" href="structvsp__cmcp__state.html" title="State storage with locking and waiting for change capabilities. " alt="" coords="341,5,459,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -105,14 +105,35 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a4afe940d2a0470466b93db355a84c4fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvsp__cmcp__node.html">vsp_cmcp_node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a4afe940d2a0470466b93db355a84c4fd">cmcp_node</a></td></tr>
 <tr class="memdesc:a4afe940d2a0470466b93db355a84c4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic node and finite-state machine data.  <a href="#a4afe940d2a0470466b93db355a84c4fd">More...</a><br /></td></tr>
 <tr class="separator:a4afe940d2a0470466b93db355a84c4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a891fcfa7e992bf9e5e9412a619ed6f8d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a891fcfa7e992bf9e5e9412a619ed6f8d">time_next_heartbeat</a></td></tr>
-<tr class="memdesc:a891fcfa7e992bf9e5e9412a619ed6f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real time of next heartbeat.  <a href="#a891fcfa7e992bf9e5e9412a619ed6f8d">More...</a><br /></td></tr>
-<tr class="separator:a891fcfa7e992bf9e5e9412a619ed6f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456191c0271aa1e2f4879ec10e267985"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a456191c0271aa1e2f4879ec10e267985">id</a></td></tr>
+<tr class="memdesc:a456191c0271aa1e2f4879ec10e267985"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID identifying this server in the network.  <a href="#a456191c0271aa1e2f4879ec10e267985">More...</a><br /></td></tr>
+<tr class="separator:a456191c0271aa1e2f4879ec10e267985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc0c513f1a3e298b25c02d71307648a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#aacc0c513f1a3e298b25c02d71307648a">client_count</a></td></tr>
+<tr class="memdesc:aacc0c513f1a3e298b25c02d71307648a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of registered client peers.  <a href="#aacc0c513f1a3e298b25c02d71307648a">More...</a><br /></td></tr>
+<tr class="separator:aacc0c513f1a3e298b25c02d71307648a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32cd2b396ffa760548e09da8dd0757af"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a32cd2b396ffa760548e09da8dd0757af">client_ids</a> [VSP_CMCP_SERVER_MAX_PEERS]</td></tr>
+<tr class="memdesc:a32cd2b396ffa760548e09da8dd0757af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client peer IDs.  <a href="#a32cd2b396ffa760548e09da8dd0757af">More...</a><br /></td></tr>
+<tr class="separator:a32cd2b396ffa760548e09da8dd0757af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473382fcebd2a9e301ed1c56dbcf88a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvsp__cmcp__server__peer.html">vsp_cmcp_server_peer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a473382fcebd2a9e301ed1c56dbcf88a3">client_data</a> [VSP_CMCP_SERVER_MAX_PEERS]</td></tr>
+<tr class="memdesc:a473382fcebd2a9e301ed1c56dbcf88a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client peer data.  <a href="#a473382fcebd2a9e301ed1c56dbcf88a3">More...</a><br /></td></tr>
+<tr class="separator:a473382fcebd2a9e301ed1c56dbcf88a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6547f1b982520588354cfada233e180d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a6547f1b982520588354cfada233e180d">callback_param</a></td></tr>
+<tr class="memdesc:a6547f1b982520588354cfada233e180d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function parameter.  <a href="#a6547f1b982520588354cfada233e180d">More...</a><br /></td></tr>
+<tr class="separator:a6547f1b982520588354cfada233e180d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a078b4731099ea333e06e94ca8bca0d4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__cmcp__server_8h.html#a9c72dc330d0ad80a1108454701314e83">vsp_cmcp_server_announcement_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a078b4731099ea333e06e94ca8bca0d4c">announcement_cb</a></td></tr>
+<tr class="memdesc:a078b4731099ea333e06e94ca8bca0d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client announcement callback function.  <a href="#a078b4731099ea333e06e94ca8bca0d4c">More...</a><br /></td></tr>
+<tr class="separator:a078b4731099ea333e06e94ca8bca0d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a163a303fd955951304c6234a340c5eb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__cmcp__server_8h.html#a158f06eec3121bab0c2803d32ddcb4f6">vsp_cmcp_server_disconnect_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a163a303fd955951304c6234a340c5eb9">disconnect_cb</a></td></tr>
+<tr class="memdesc:a163a303fd955951304c6234a340c5eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client disconnection callback function.  <a href="#a163a303fd955951304c6234a340c5eb9">More...</a><br /></td></tr>
+<tr class="separator:a163a303fd955951304c6234a340c5eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9944410a38f8e6507c57dfe7e45048"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__cmcp__server_8h.html#a17c14ff48a37778aeba6f4351fcc749b">vsp_cmcp_server_message_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__server.html#a2f9944410a38f8e6507c57dfe7e45048">message_cb</a></td></tr>
+<tr class="memdesc:a2f9944410a38f8e6507c57dfe7e45048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message callback function.  <a href="#a2f9944410a38f8e6507c57dfe7e45048">More...</a><br /></td></tr>
+<tr class="separator:a2f9944410a38f8e6507c57dfe7e45048"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>State and other data used for network connection. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00023">23</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00029">29</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a4afe940d2a0470466b93db355a84c4fd"></a>
 <div class="memitem">
@@ -126,23 +147,135 @@ Public Attributes</h2></td></tr>
 
 <p>Basic node and finite-state machine data. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00025">25</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00031">31</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a891fcfa7e992bf9e5e9412a619ed6f8d"></a>
+<a class="anchor" id="a456191c0271aa1e2f4879ec10e267985"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double vsp_cmcp_server::time_next_heartbeat</td>
+          <td class="memname">uint16_t vsp_cmcp_server::id</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Real time of next heartbeat. </p>
+<p>ID identifying this server in the network. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00027">27</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00033">33</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aacc0c513f1a3e298b25c02d71307648a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t vsp_cmcp_server::client_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of registered client peers. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00035">35</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a32cd2b396ffa760548e09da8dd0757af"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t vsp_cmcp_server::client_ids[VSP_CMCP_SERVER_MAX_PEERS]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Client peer IDs. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00037">37</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a473382fcebd2a9e301ed1c56dbcf88a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structvsp__cmcp__server__peer.html">vsp_cmcp_server_peer</a>* vsp_cmcp_server::client_data[VSP_CMCP_SERVER_MAX_PEERS]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Client peer data. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00039">39</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6547f1b982520588354cfada233e180d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* vsp_cmcp_server::callback_param</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function parameter. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00041">41</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a078b4731099ea333e06e94ca8bca0d4c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsp__cmcp__server_8h.html#a9c72dc330d0ad80a1108454701314e83">vsp_cmcp_server_announcement_cb</a> vsp_cmcp_server::announcement_cb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Client announcement callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00043">43</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a163a303fd955951304c6234a340c5eb9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsp__cmcp__server_8h.html#a158f06eec3121bab0c2803d32ddcb4f6">vsp_cmcp_server_disconnect_cb</a> vsp_cmcp_server::disconnect_cb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Client disconnection callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00045">45</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f9944410a38f8e6507c57dfe7e45048"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsp__cmcp__server_8h.html#a17c14ff48a37778aeba6f4351fcc749b">vsp_cmcp_server_message_cb</a> vsp_cmcp_server::message_cb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Message callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__server_8c_source.html#l00047">47</a> of file <a class="el" href="vsp__cmcp__server_8c_source.html">vsp_cmcp_server.c</a>.</p>
 
 </div>
 </div>
@@ -152,7 +285,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 19:37:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

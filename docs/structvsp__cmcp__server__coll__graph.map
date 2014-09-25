@@ -1,3 +1,6 @@
 <map id="vsp_cmcp_server" name="vsp_cmcp_server">
-<area shape="rect" id="node2" href="$structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="9,5,127,32"/>
+<area shape="rect" id="node2" href="$structvsp__cmcp__datalist.html" title="State and other data used for network connection. " alt="" coords="5,95,136,121"/>
+<area shape="rect" id="node3" href="$structvsp__cmcp__server__peer.html" title="Data of a network node connected to server. " alt="" coords="160,95,317,121"/>
+<area shape="rect" id="node4" href="$structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="341,95,459,121"/>
+<area shape="rect" id="node5" href="$structvsp__cmcp__state.html" title="State storage with locking and waiting for change capabilities. " alt="" coords="341,5,459,32"/>
 </map>

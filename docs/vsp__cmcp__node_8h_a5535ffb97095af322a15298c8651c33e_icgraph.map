@@ -1,6 +1,8 @@
 <map id="vsp_cmcp_node_connect" name="vsp_cmcp_node_connect">
-<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="224,5,397,32"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize sockets and wait for incoming connections. " alt="" coords="233,56,389,83"/>
-<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#ab69481fb2440c57365c22062643f56c1" title="Test to invoke client functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="445,5,529,32"/>
-<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#ae8dd7b88e5a9dcdc6db334fc5f6d92de" title="Test to invoke server functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="445,56,529,83"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="224,39,397,65"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize sockets and wait for incoming connections. " alt="" coords="233,89,389,116"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#aa97d457f2e26128c1dac85d346fe9eb9" title="Initialize global_test_state object, create and connect global_cmcp_server and global_cmcp_client obj..." alt="" coords="445,57,652,98"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#ab69481fb2440c57365c22062643f56c1" title="Test to invoke client functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="507,5,591,32"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="700,64,831,91"/>
+<area shape="rect" id="node7" href="$vsp__test__cmcp__connection_8c.html#ae8dd7b88e5a9dcdc6db334fc5f6d92de" title="Test to invoke server functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="507,123,591,149"/>
 </map>

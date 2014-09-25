@@ -1,0 +1,9 @@
+<map id="vsp_cmcp_node_create_send_message" name="vsp_cmcp_node_create_send_message">
+<area shape="rect" id="node2" href="$vsp__cmcp__client_8h.html#acee85a751d866898c313a1dbca71ccbf" title="Free vsp_cmcp_client object. " alt="" coords="219,58,368,85"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__client_8h.html#a3e7729c7c3dc9e4d1cdea9c252f4d918" title="Send a message to the connected server. " alt="" coords="216,109,371,135"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__server_8h.html#a381993473328943775dc9233778d0dd1" title="Send a message to the specified client. " alt="" coords="213,159,373,186"/>
+<area shape="rect" id="node3" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global_cmcp_server and global_cmcp_client objects. " alt="" coords="421,5,603,47"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="470,71,554,98"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="651,13,781,39"/>
+<area shape="rect" id="node7" href="$vsp__test__cmcp__connection_8c.html#a6beb4ad4314191b0a81cf4396905a076" title="Test connection and communication between vsp_cmcp_server and vsp_cmcp_client. " alt="" coords="470,134,554,161"/>
+</map>

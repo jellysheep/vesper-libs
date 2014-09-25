@@ -1,0 +1,6 @@
+<map id="vsp_cmcp_node_create_send_message" name="vsp_cmcp_node_create_send_message">
+<area shape="rect" id="node2" href="$vsp__cmcp__message_8h.html#a58d3337c6cc925bdd89cdcdfdc0f241d" title="Create new vsp_cmcp_message object to send message data. " alt="" coords="213,5,399,32"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="235,56,377,83"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__message_8h.html#af0f90da1fc0271d485916477d084ee0c" title="Free vsp_cmcp_message object. " alt="" coords="221,107,391,133"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__datalist_8h.html#ab63a26a8a160df69955ac1db61cfe414" title="Free vsp_cmcp_datalist object. " alt="" coords="447,107,607,133"/>
+</map>

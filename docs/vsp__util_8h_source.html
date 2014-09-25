@@ -110,60 +110,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a00d24c7231be28dbaf71f5408f30e44c">   19</a></span>&#160;<span class="preprocessor">  #define inline</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/** Try to allocate memory, check result and react in case of failure. */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a804c55494b54bb72b1f90fe85e0b8fd4">   23</a></span>&#160;<span class="preprocessor">#define VSP_ALLOC(ptr, type, failure_action) do { \</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">    </span><span class="comment">/* allocate memory */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    ptr = malloc(sizeof(type)); \</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    if (ptr == NULL) { \</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">        </span><span class="comment">/* allocation failed */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">        vsp_error_set_num(ENOMEM); \</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">        failure_action; \</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">    } \</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">} while (0)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/** Try to allocate memory, check result and react in case of failure. */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a83a930fdeaeb76018d2a35b350d8a154">   34</a></span>&#160;<span class="preprocessor">#define VSP_ALLOC_N(ptr, bytes, failure_action) do { \</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">    </span><span class="comment">/* allocate memory */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">    ptr = malloc(bytes); \</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">    if (ptr == NULL) { \</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">        </span><span class="comment">/* allocation failed */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">        vsp_error_set_num(ENOMEM); \</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">        failure_action; \</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    } \</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">} while (0)</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">/** Free memory and set `ptr` to `NULL`. */</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a6cb547cd6c2898416d5e3182cff31de9">   45</a></span>&#160;<span class="preprocessor">#define VSP_FREE(ptr) do { \</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">    </span><span class="comment">/* free memory */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    free(ptr); \</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">    ptr = NULL; \</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">} while (0)</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/** Check condition, set error number and react in case of failure.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * This macro should be used when checking public API function parameters. */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#af16dd729b2f7c9e402a54819476283a0">   53</a></span>&#160;<span class="preprocessor">#define VSP_CHECK(condition, failure_action) do { \</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">    </span><span class="comment">/* check condition */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">    if (!(condition)) { \</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">        </span><span class="comment">/* condition failed */</span><span class="preprocessor"> \</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">        failure_action; \</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    } \</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">} while (0)</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/** Assert condition, set error number and react in case of failure.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * Aborts if condition fails in debug mode.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * This macro should be used when checking for internal runtime errors. */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#if !defined(NDEBUG)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a6d4dc441fd32875ab365b4de6b53f430">   65</a></span>&#160;<span class="preprocessor">  #define VSP_ASSERT(condition, failure_action) assert(condition)</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">  #define VSP_ASSERT(condition, failure_action) \</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">      VSP_CHECK(condition, failure_action);</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined(NDEBUG) */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined VSP_UTIL_H_INCLUDED */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/** Check condition and react in case of failure.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * This macro should be used when checking public API function parameters. */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#af16dd729b2f7c9e402a54819476283a0">   24</a></span>&#160;<span class="preprocessor">#define VSP_CHECK(condition, failure_action) do { \</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    </span><span class="comment">/* check condition */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    if (!(condition)) { \</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">        </span><span class="comment">/* condition failed */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">        failure_action; \</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">    } \</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">} while (0)</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/** Assert condition and abort if condition fails.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * This macro should be used when checking for internal runtime errors. */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#if !defined(NDEBUG)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#af77f14941f79ed5448294808bdfcbf5e">   35</a></span>&#160;<span class="preprocessor">  #define VSP_ASSERT(condition) assert(condition)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">  #define VSP_ASSERT(condition) \</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">      VSP_CHECK(condition, abort());</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined(NDEBUG) */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/** Try to allocate memory, check result and abort in case of failure. */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#adfec8224b00e9dc471ac1c1441329b09">   42</a></span>&#160;<span class="preprocessor">#define VSP_ALLOC(ptr, type) do { \</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">    </span><span class="comment">/* allocate memory */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">    ptr = malloc(sizeof(type)); \</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    VSP_ASSERT(ptr != NULL); \</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">} while (0)</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/** Try to allocate memory, check result and abort in case of failure. */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a2979120678f900ba1bb624c41058417c">   49</a></span>&#160;<span class="preprocessor">#define VSP_ALLOC_N(ptr, bytes) do { \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    </span><span class="comment">/* allocate memory */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">    ptr = malloc(bytes); \</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">    VSP_ASSERT(ptr != NULL); \</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">} while (0)</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/** Free memory and set `ptr` to `NULL`. */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="vsp__util_8h.html#a6cb547cd6c2898416d5e3182cff31de9">   56</a></span>&#160;<span class="preprocessor">#define VSP_FREE(ptr) do { \</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">    VSP_ASSERT(ptr != NULL); \</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    </span><span class="comment">/* free memory */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">    free(ptr); \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">    ptr = NULL; \</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">} while (0)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !defined VSP_UTIL_H_INCLUDED */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 19:37:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

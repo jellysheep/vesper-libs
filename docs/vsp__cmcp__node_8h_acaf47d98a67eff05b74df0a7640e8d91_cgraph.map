@@ -1,0 +1,6 @@
+<map id="vsp_cmcp_node_free" name="vsp_cmcp_node_free">
+<area shape="rect" id="node2" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="397,5,540,32"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a560a282606612368d090ff986a1a1984" title="Stop message reception thread and wait until thread has finished. " alt="" coords="200,56,349,83"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__state_8h.html#a6b59c5a2b431ea2a95b5177ed8e8f5c0" title="Free vsp_cmcp_state object. " alt="" coords="201,107,348,133"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="397,56,540,83"/>
+</map>

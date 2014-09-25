@@ -1,5 +1,11 @@
 <map id="vsp_cmcp_server_bind" name="vsp_cmcp_server_bind">
-<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="428,23,561,50"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="209,23,380,50"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__node_8h.html#a60200672cc9e2b861e3ad338156105cd" title="Start message reception thread and wait until thread has started. " alt="" coords="219,74,370,101"/>
+<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="661,5,794,32"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="209,81,380,108"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__node_8h.html#ab2b47f14e35c75c37a4b14486562a41c" title="Start message reception thread and wait until thread has started. " alt="" coords="219,245,370,272"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="656,107,799,133"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="447,157,589,184"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__node_8h.html#a6b2d23e48b42a586fcc08a678a44f5d8" title="Subscribe the node to the specified topic ID. " alt="" coords="428,56,608,83"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__state_8h.html#a8a0e2e4d6a4df2b838d1000f71c38d05" title="Wait and lock the current state. " alt="" coords="443,376,593,403"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__state_8h.html#a0278b255ba8aebbce6fa60a211e2b390" title="Wait for the specified state or the time to pass timeout_time. " alt="" coords="440,209,596,250"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__state_8h.html#a6df00c1e113c27350f71a15951dd1b8c" title="Unlock the current state. " alt="" coords="437,325,599,352"/>
 </map>

@@ -1,0 +1,11 @@
+<map id="vsp_cmcp_client_free" name="vsp_cmcp_client_free">
+<area shape="rect" id="node2" href="$vsp__cmcp__state_8h.html#af48b21d498fedc07d782f63c6ebee3a2" title="Get the current state. " alt="" coords="653,164,795,191"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__node_8h.html#a78c5f72439eb39dddf7c79d7317029e3" title="Create and send message to the publish socket of the node. " alt="" coords="203,122,363,164"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__node_8h.html#acaf47d98a67eff05b74df0a7640e8d91" title="Free vsp_cmcp_node object. " alt="" coords="209,199,356,226"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__state_8h.html#a6b59c5a2b431ea2a95b5177ed8e8f5c0" title="Free vsp_cmcp_state object. " alt="" coords="430,291,577,318"/>
+<area shape="rect" id="node4" href="$vsp__cmcp__message_8h.html#a58d3337c6cc925bdd89cdcdfdc0f241d" title="Create new vsp_cmcp_message object to send message data. " alt="" coords="411,88,596,115"/>
+<area shape="rect" id="node5" href="$vsp__cmcp__message_8h.html#af0f90da1fc0271d485916477d084ee0c" title="Free vsp_cmcp_message object. " alt="" coords="418,38,589,64"/>
+<area shape="rect" id="node6" href="$vsp__cmcp__datalist_8h.html#ab63a26a8a160df69955ac1db61cfe414" title="Free vsp_cmcp_datalist object. " alt="" coords="644,38,804,64"/>
+<area shape="rect" id="node8" href="$vsp__cmcp__node_8h.html#a560a282606612368d090ff986a1a1984" title="Stop message reception thread and wait until thread has finished. " alt="" coords="429,240,578,267"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__state_8h.html#aca9df26ab0a309c2534dd5f260ce2d9c" title="Set the current state. " alt="" coords="653,240,795,267"/>
+</map>

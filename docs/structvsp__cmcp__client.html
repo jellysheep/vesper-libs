@@ -97,7 +97,7 @@ Collaboration diagram for vsp_cmcp_client:</div>
 <div class="dyncontent">
 <div class="center"><img src="structvsp__cmcp__client__coll__graph.png" border="0" usemap="#vsp__cmcp__client_coll__map" alt="Collaboration graph"/></div>
 <map name="vsp__cmcp__client_coll__map" id="vsp__cmcp__client_coll__map">
-<area shape="rect" id="node2" href="structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="7,5,124,32"/></map>
+<area shape="rect" id="node2" href="structvsp__cmcp__datalist.html" title="State and other data used for network connection. " alt="" coords="5,95,136,121"/><area shape="rect" id="node3" href="structvsp__cmcp__state.html" title="State storage with locking and waiting for change capabilities. " alt="" coords="165,5,283,32"/><area shape="rect" id="node4" href="structvsp__cmcp__node.html" title="State and other data used for network connection. " alt="" coords="241,95,359,121"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -105,11 +105,35 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a46c6929ea4eda4fc16b9eb5a1d450374"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvsp__cmcp__node.html">vsp_cmcp_node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a46c6929ea4eda4fc16b9eb5a1d450374">cmcp_node</a></td></tr>
 <tr class="memdesc:a46c6929ea4eda4fc16b9eb5a1d450374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic node and finite-state machine data.  <a href="#a46c6929ea4eda4fc16b9eb5a1d450374">More...</a><br /></td></tr>
 <tr class="separator:a46c6929ea4eda4fc16b9eb5a1d450374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43d8279a0f81e281e09d6f5bafeda97"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#ad43d8279a0f81e281e09d6f5bafeda97">id</a></td></tr>
+<tr class="memdesc:ad43d8279a0f81e281e09d6f5bafeda97"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID identifying this client in the network.  <a href="#ad43d8279a0f81e281e09d6f5bafeda97">More...</a><br /></td></tr>
+<tr class="separator:ad43d8279a0f81e281e09d6f5bafeda97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a808ab01e3fd53bf13a3b6d296740974c"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a808ab01e3fd53bf13a3b6d296740974c">server_id</a></td></tr>
+<tr class="memdesc:a808ab01e3fd53bf13a3b6d296740974c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node ID of the connected server.  <a href="#a808ab01e3fd53bf13a3b6d296740974c">More...</a><br /></td></tr>
+<tr class="separator:a808ab01e3fd53bf13a3b6d296740974c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa926427df5c21c53c71d19757614d1ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvsp__cmcp__state.html">vsp_cmcp_state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#aa926427df5c21c53c71d19757614d1ed">state</a></td></tr>
+<tr class="memdesc:aa926427df5c21c53c71d19757614d1ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client finite state machine flag, not related to node state.  <a href="#aa926427df5c21c53c71d19757614d1ed">More...</a><br /></td></tr>
+<tr class="separator:aa926427df5c21c53c71d19757614d1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f67368e67a308d5de0fd89eadc14e1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#aa1f67368e67a308d5de0fd89eadc14e1">nonce</a></td></tr>
+<tr class="memdesc:aa1f67368e67a308d5de0fd89eadc14e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Randomly generated nonce used for temporary node indentification.  <a href="#aa1f67368e67a308d5de0fd89eadc14e1">More...</a><br /></td></tr>
+<tr class="separator:aa1f67368e67a308d5de0fd89eadc14e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1697662e71cabc62a2675e3ab32c0077"><td class="memItemLeft" align="right" valign="top">struct timespec&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a1697662e71cabc62a2675e3ab32c0077">time_connection_timeout</a></td></tr>
+<tr class="memdesc:a1697662e71cabc62a2675e3ab32c0077"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time when the connection to server times out.  <a href="#a1697662e71cabc62a2675e3ab32c0077">More...</a><br /></td></tr>
+<tr class="separator:a1697662e71cabc62a2675e3ab32c0077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5d7cd270445365da1a5531edb30faca"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#ab5d7cd270445365da1a5531edb30faca">callback_param</a></td></tr>
+<tr class="memdesc:ab5d7cd270445365da1a5531edb30faca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function parameter.  <a href="#ab5d7cd270445365da1a5531edb30faca">More...</a><br /></td></tr>
+<tr class="separator:ab5d7cd270445365da1a5531edb30faca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884b98f51f8a7734018f03fb1fc91ac6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__cmcp__client_8h.html#abe214c4f443722e044cea5e401714c9a">vsp_cmcp_client_message_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#a884b98f51f8a7734018f03fb1fc91ac6">message_cb</a></td></tr>
+<tr class="memdesc:a884b98f51f8a7734018f03fb1fc91ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message callback function.  <a href="#a884b98f51f8a7734018f03fb1fc91ac6">More...</a><br /></td></tr>
+<tr class="separator:a884b98f51f8a7734018f03fb1fc91ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae984dc287fba8f1bc4d549a2417e02"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsp__cmcp__client_8h.html#a84f776aa9ca9b63d94f74b99118208a0">vsp_cmcp_client_disconnect_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__client.html#adae984dc287fba8f1bc4d549a2417e02">disconnect_cb</a></td></tr>
+<tr class="memdesc:adae984dc287fba8f1bc4d549a2417e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnection callback function.  <a href="#adae984dc287fba8f1bc4d549a2417e02">More...</a><br /></td></tr>
+<tr class="separator:adae984dc287fba8f1bc4d549a2417e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>State and other data used for network connection. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00027">27</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00033">33</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a46c6929ea4eda4fc16b9eb5a1d450374"></a>
 <div class="memitem">
@@ -123,7 +147,135 @@ Public Attributes</h2></td></tr>
 
 <p>Basic node and finite-state machine data. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00029">29</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00035">35</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad43d8279a0f81e281e09d6f5bafeda97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t vsp_cmcp_client::id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ID identifying this client in the network. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00037">37</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a808ab01e3fd53bf13a3b6d296740974c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t vsp_cmcp_client::server_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Node ID of the connected server. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00039">39</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa926427df5c21c53c71d19757614d1ed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structvsp__cmcp__state.html">vsp_cmcp_state</a>* vsp_cmcp_client::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Client finite state machine flag, not related to node state. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00041">41</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1f67368e67a308d5de0fd89eadc14e1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t vsp_cmcp_client::nonce</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Randomly generated nonce used for temporary node indentification. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00043">43</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1697662e71cabc62a2675e3ab32c0077"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct timespec vsp_cmcp_client::time_connection_timeout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The time when the connection to server times out. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00045">45</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab5d7cd270445365da1a5531edb30faca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* vsp_cmcp_client::callback_param</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function parameter. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00047">47</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a884b98f51f8a7734018f03fb1fc91ac6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsp__cmcp__client_8h.html#abe214c4f443722e044cea5e401714c9a">vsp_cmcp_client_message_cb</a> vsp_cmcp_client::message_cb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Message callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00049">49</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adae984dc287fba8f1bc4d549a2417e02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsp__cmcp__client_8h.html#a84f776aa9ca9b63d94f74b99118208a0">vsp_cmcp_client_disconnect_cb</a> vsp_cmcp_client::disconnect_cb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnection callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__client_8c_source.html#l00051">51</a> of file <a class="el" href="vsp__cmcp__client_8c_source.html">vsp_cmcp_client.c</a>.</p>
 
 </div>
 </div>
@@ -133,7 +285,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 19:37:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

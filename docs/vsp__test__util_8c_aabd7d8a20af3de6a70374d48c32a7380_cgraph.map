@@ -1,4 +1,5 @@
 <map id="MU_TEST" name="MU_TEST">
-<area shape="rect" id="node2" href="$vsp__time_8h.html#a6c0df67464968ee91d4c5c83db2bd140" title="Get real time in seconds. " alt="" coords="137,5,240,32"/>
-<area shape="rect" id="node3" href="$vsp__time_8h.html#a38aef29465773d6403c6ae8554d06cef" title="Get the amount of CPU time used by the current process in seconds. " alt="" coords="137,56,240,83"/>
+<area shape="rect" id="node2" href="$vsp__time_8h.html#ad7e72490eb95fabac8e52582f8069b8b" title="Get real (wall clock) time since epoch in seconds. " alt="" coords="137,5,285,32"/>
+<area shape="rect" id="node4" href="$vsp__time_8h.html#afa418ab292381c4a6da2e90b27c13ebf" title="Get the amount of CPU time used by the current process in seconds. " alt="" coords="137,56,285,83"/>
+<area shape="rect" id="node3" href="$vsp__time_8h.html#aa4e7e59e94ddd81f3c9955b4fccf6468" title="Get real (wall clock) time since epoch as a timespec struct. " alt="" coords="333,5,496,32"/>
 </map>

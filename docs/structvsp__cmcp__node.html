@@ -92,8 +92,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>State and other data used for network connection.  
  <a href="structvsp__cmcp__node.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for vsp_cmcp_node:</div>
+<div class="dyncontent">
+<div class="center"><img src="structvsp__cmcp__node__coll__graph.png" border="0" usemap="#vsp__cmcp__node_coll__map" alt="Collaboration graph"/></div>
+<map name="vsp__cmcp__node_coll__map" id="vsp__cmcp__node_coll__map">
+<area shape="rect" id="node2" href="structvsp__cmcp__state.html" title="State storage with locking and waiting for change capabilities. " alt="" coords="5,5,124,32"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -103,15 +108,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:abd9aca1f200712a6b3fbe6e976aaa66b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#abd9aca1f200712a6b3fbe6e976aaa66b">id</a></td></tr>
 <tr class="memdesc:abd9aca1f200712a6b3fbe6e976aaa66b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID identifying this node in the network.  <a href="#abd9aca1f200712a6b3fbe6e976aaa66b">More...</a><br /></td></tr>
 <tr class="separator:abd9aca1f200712a6b3fbe6e976aaa66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a028b353cd4e949335c950c34a3d806db"><td class="memItemLeft" align="right" valign="top">volatile <a class="el" href="vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2">vsp_cmcp_node_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a028b353cd4e949335c950c34a3d806db">state</a></td></tr>
-<tr class="memdesc:a028b353cd4e949335c950c34a3d806db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite state machine flag.  <a href="#a028b353cd4e949335c950c34a3d806db">More...</a><br /></td></tr>
-<tr class="separator:a028b353cd4e949335c950c34a3d806db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3362e59f201977e98961ac3b240b78d5"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a3362e59f201977e98961ac3b240b78d5">mutex</a></td></tr>
-<tr class="memdesc:a3362e59f201977e98961ac3b240b78d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutex locking state changes.  <a href="#a3362e59f201977e98961ac3b240b78d5">More...</a><br /></td></tr>
-<tr class="separator:a3362e59f201977e98961ac3b240b78d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a895d83b7d4205b989b7994ed65da1e79"><td class="memItemLeft" align="right" valign="top">pthread_cond_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a895d83b7d4205b989b7994ed65da1e79">condition</a></td></tr>
-<tr class="memdesc:a895d83b7d4205b989b7994ed65da1e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condition variable used to wait for state changes.  <a href="#a895d83b7d4205b989b7994ed65da1e79">More...</a><br /></td></tr>
-<tr class="separator:a895d83b7d4205b989b7994ed65da1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452b515ee931edf9209d7a43b61b347f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvsp__cmcp__state.html">vsp_cmcp_state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a452b515ee931edf9209d7a43b61b347f">state</a></td></tr>
+<tr class="memdesc:a452b515ee931edf9209d7a43b61b347f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite state machine struct.  <a href="#a452b515ee931edf9209d7a43b61b347f">More...</a><br /></td></tr>
+<tr class="separator:a452b515ee931edf9209d7a43b61b347f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a697dcdd86eb544603e8639e6b2e9736e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a697dcdd86eb544603e8639e6b2e9736e">publish_socket</a></td></tr>
 <tr class="memdesc:a697dcdd86eb544603e8639e6b2e9736e"><td class="mdescLeft">&#160;</td><td class="mdescRight">nanomsg socket number to publish messages.  <a href="#a697dcdd86eb544603e8639e6b2e9736e">More...</a><br /></td></tr>
 <tr class="separator:a697dcdd86eb544603e8639e6b2e9736e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,12 +120,24 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab29348bb8b2c970f72f2229f4dc54e15"><td class="memItemLeft" align="right" valign="top">pthread_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#ab29348bb8b2c970f72f2229f4dc54e15">thread</a></td></tr>
 <tr class="memdesc:ab29348bb8b2c970f72f2229f4dc54e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reception thread.  <a href="#ab29348bb8b2c970f72f2229f4dc54e15">More...</a><br /></td></tr>
 <tr class="separator:ab29348bb8b2c970f72f2229f4dc54e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f557a56393c47717474b5318cf81d5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a16f557a56393c47717474b5318cf81d5">time_next_heartbeat</a></td></tr>
+<tr class="memdesc:a16f557a56393c47717474b5318cf81d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real time of next heartbeat.  <a href="#a16f557a56393c47717474b5318cf81d5">More...</a><br /></td></tr>
+<tr class="separator:a16f557a56393c47717474b5318cf81d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a6187ea9e8ef37d36d8584de73c2ca7"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a4a6187ea9e8ef37d36d8584de73c2ca7">message_callback</a> )(void *, <a class="el" href="structvsp__cmcp__message.html">vsp_cmcp_message</a> *)</td></tr>
+<tr class="memdesc:a4a6187ea9e8ef37d36d8584de73c2ca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message callback function.  <a href="#a4a6187ea9e8ef37d36d8584de73c2ca7">More...</a><br /></td></tr>
+<tr class="separator:a4a6187ea9e8ef37d36d8584de73c2ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b9987efa0b113aa6d2d597117b94fe3"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#a1b9987efa0b113aa6d2d597117b94fe3">regular_callback</a> )(void *)</td></tr>
+<tr class="memdesc:a1b9987efa0b113aa6d2d597117b94fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Regular callback function.  <a href="#a1b9987efa0b113aa6d2d597117b94fe3">More...</a><br /></td></tr>
+<tr class="separator:a1b9987efa0b113aa6d2d597117b94fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ff20e0c815310ee4ad980e935f324f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvsp__cmcp__node.html#aa4ff20e0c815310ee4ad980e935f324f">callback_param</a></td></tr>
+<tr class="memdesc:aa4ff20e0c815310ee4ad980e935f324f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message callback parameter.  <a href="#aa4ff20e0c815310ee4ad980e935f324f">More...</a><br /></td></tr>
+<tr class="separator:aa4ff20e0c815310ee4ad980e935f324f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>State and other data used for network connection. </p>
-<p>Base type for <a class="el" href="structvsp__cmcp__server.html" title="State and other data used for network connection. ">vsp_cmcp_server</a> and <a class="el" href="structvsp__cmcp__client.html" title="State and other data used for network connection. ">vsp_cmcp_client</a>. This structure implements basic functions of a finite-state machine. </p>
+<p>Base type for <a class="el" href="structvsp__cmcp__server.html" title="State and other data used for network connection. ">vsp_cmcp_server</a> and <a class="el" href="structvsp__cmcp__client.html" title="State and other data used for network connection. ">vsp_cmcp_client</a>. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00052">52</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00041">41</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="aabfdc7d6aacc0dc0a6f146c2e735579e"></a>
 <div class="memitem">
@@ -140,7 +151,7 @@ Public Attributes</h2></td></tr>
 
 <p>Node type. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00054">54</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00043">43</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
@@ -157,55 +168,23 @@ Public Attributes</h2></td></tr>
 <p>ID identifying this node in the network. </p>
 <p>Must not equal broadcast topic ID. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00057">57</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00046">46</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a028b353cd4e949335c950c34a3d806db"></a>
+<a class="anchor" id="a452b515ee931edf9209d7a43b61b347f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">volatile <a class="el" href="vsp__cmcp__node_8h.html#a64cfc8ecc237d6f7b3db7aee97bfcff2">vsp_cmcp_node_state</a> vsp_cmcp_node::state</td>
+          <td class="memname"><a class="el" href="structvsp__cmcp__state.html">vsp_cmcp_state</a>* vsp_cmcp_node::state</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Finite state machine flag. </p>
+<p>Finite state machine struct. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00059">59</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3362e59f201977e98961ac3b240b78d5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pthread_mutex_t vsp_cmcp_node::mutex</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Mutex locking state changes. </p>
-
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00061">61</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a895d83b7d4205b989b7994ed65da1e79"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pthread_cond_t vsp_cmcp_node::condition</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Condition variable used to wait for state changes. </p>
-
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00063">63</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00048">48</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
@@ -221,7 +200,7 @@ Public Attributes</h2></td></tr>
 
 <p>nanomsg socket number to publish messages. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00065">65</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00050">50</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
@@ -237,7 +216,7 @@ Public Attributes</h2></td></tr>
 
 <p>nanomsg socket number to receive messages. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00067">67</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00052">52</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
@@ -253,17 +232,81 @@ Public Attributes</h2></td></tr>
 
 <p>Reception thread. </p>
 
-<p>Definition at line <a class="el" href="vsp__cmcp__node_8h_source.html#l00069">69</a> of file <a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a>.</p>
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00054">54</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a16f557a56393c47717474b5318cf81d5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double vsp_cmcp_node::time_next_heartbeat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Real time of next heartbeat. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00056">56</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4a6187ea9e8ef37d36d8584de73c2ca7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* vsp_cmcp_node::message_callback)(void *, <a class="el" href="structvsp__cmcp__message.html">vsp_cmcp_message</a> *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Message callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00058">58</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1b9987efa0b113aa6d2d597117b94fe3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* vsp_cmcp_node::regular_callback)(void *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Regular callback function. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00060">60</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa4ff20e0c815310ee4ad980e935f324f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* vsp_cmcp_node::callback_param</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Message callback parameter. </p>
+
+<p>Definition at line <a class="el" href="vsp__cmcp__node_8c_source.html#l00062">62</a> of file <a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>vesper_cmcp/<a class="el" href="vsp__cmcp__node_8h_source.html">vsp_cmcp_node.h</a></li>
+<li>vesper_cmcp/<a class="el" href="vsp__cmcp__node_8c_source.html">vsp_cmcp_node.c</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 10:50:25 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 19:37:56 for vesper-libs by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

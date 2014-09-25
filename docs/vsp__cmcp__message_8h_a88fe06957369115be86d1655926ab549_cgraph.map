@@ -1,4 +1,4 @@
 <map id="vsp_cmcp_message_get_data_length" name="vsp_cmcp_message_get_data_length">
-<area shape="rect" id="node2" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="424,13,557,39"/>
-<area shape="rect" id="node3" href="$vsp__cmcp__datalist_8h.html#a5f65a5f72dc913157bc69ac9e1f6eb34" title="Calculate necessary length of a binary data array storing all list items. " alt="" coords="220,35,376,76"/>
+<area shape="rect" id="node2" href="$vsp__cmcp__datalist_8h.html#a5f65a5f72dc913157bc69ac9e1f6eb34" title="Calculate necessary length of a binary data array storing all list items. " alt="" coords="220,5,376,47"/>
+<area shape="rect" id="node3" href="$vsp__error_8h.html#a97850dcb056056508e4e57f8dca381ee" title="Set current error number. " alt="" coords="424,13,557,39"/>
 </map>

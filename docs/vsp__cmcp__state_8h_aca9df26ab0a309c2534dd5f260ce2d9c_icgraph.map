@@ -1,0 +1,21 @@
+<map id="vsp_cmcp_state_set" name="vsp_cmcp_state_set">
+<area shape="rect" id="node2" href="$vsp__cmcp__node_8h.html#a5535ffb97095af322a15298c8651c33e" title="Initialize and connect sockets. " alt="" coords="196,56,367,83"/>
+<area shape="rect" id="node9" href="$vsp__cmcp__node_8h.html#ab2b47f14e35c75c37a4b14486562a41c" title="Start message reception thread and wait until thread has started. " alt="" coords="206,5,357,32"/>
+<area shape="rect" id="node10" href="$vsp__cmcp__node_8h.html#a560a282606612368d090ff986a1a1984" title="Stop message reception thread and wait until thread has finished. " alt="" coords="207,341,356,368"/>
+<area shape="rect" id="node17" href="$vsp__test__cmcp__connection_8c.html#a85dd330638db21064eca156d3144aa83" title="Client announcement callback function. " alt="" coords="415,173,639,200"/>
+<area shape="rect" id="node18" href="$vsp__test__cmcp__connection_8c.html#a2d0c98decdec35e14ca9110ce8a848d3" title="Client disconnection callback function. " alt="" coords="425,224,628,251"/>
+<area shape="rect" id="node19" href="$vsp__test__cmcp__connection_8c.html#a26001fad81aef18212d5460d405d6ed3" title="Server message callback function. " alt="" coords="204,275,359,317"/>
+<area shape="rect" id="node20" href="$vsp__test__cmcp__connection_8c.html#a79b82bb6378fcdb845bb7b4d21cd6221" title="Client message callback function. " alt="" coords="207,107,356,149"/>
+<area shape="rect" id="node3" href="$vsp__cmcp__client_8h.html#a8effff79760afe29603c4e99a6644772" title="Initialize sockets and establish connection. " alt="" coords="440,9,613,36"/>
+<area shape="rect" id="node7" href="$vsp__cmcp__server_8h.html#ac2de32fd9c298b22664753ab529a6f34" title="Initialize sockets and wait for incoming connections. " alt="" coords="449,60,605,87"/>
+<area shape="rect" id="node4" href="$vsp__test__cmcp__connection_8c.html#aa97d457f2e26128c1dac85d346fe9eb9" title="Initialize global_test_state object, create and connect global_cmcp_server and global_cmcp_client obj..." alt="" coords="687,166,893,207"/>
+<area shape="rect" id="node6" href="$vsp__test__cmcp__connection_8c.html#ab69481fb2440c57365c22062643f56c1" title="Test to invoke client functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="748,9,832,36"/>
+<area shape="rect" id="node5" href="$vsp__test__cmcp__connection_8c.html#a07258d78cf9d9101765ff46fa3d3751f" title="Test CMCP implementation. " alt="" coords="1171,231,1301,257"/>
+<area shape="rect" id="node8" href="$vsp__test__cmcp__connection_8c.html#ae8dd7b88e5a9dcdc6db334fc5f6d92de" title="Test to invoke server functions with invalid parameters and check if they behave correctly and do not..." alt="" coords="748,60,832,87"/>
+<area shape="rect" id="node11" href="$vsp__cmcp__node_8h.html#acaf47d98a67eff05b74df0a7640e8d91" title="Free vsp_cmcp_node object. " alt="" coords="453,340,600,367"/>
+<area shape="rect" id="node12" href="$vsp__cmcp__client_8h.html#acee85a751d866898c313a1dbca71ccbf" title="Free vsp_cmcp_client object. " alt="" coords="715,340,865,367"/>
+<area shape="rect" id="node15" href="$vsp__cmcp__server_8h.html#a37bd99410636b2d7aef0d137d354f230" title="Free vsp_cmcp_server object. " alt="" coords="713,285,867,312"/>
+<area shape="rect" id="node13" href="$vsp__test__cmcp__connection_8c.html#aedba2a26ec522f7a0fca8f1d4590b9e1" title="Free global_cmcp_server and global_cmcp_client objects. " alt="" coords="941,278,1123,319"/>
+<area shape="rect" id="node14" href="$vsp__test__cmcp__connection_8c.html#a96788edb7c2096a878f5c33ec7f32f81" title="Test vsp_cmcp_client_create() and vsp_cmcp_client_free(). " alt="" coords="990,344,1074,371"/>
+<area shape="rect" id="node16" href="$vsp__test__cmcp__connection_8c.html#a0c92e49263065beff09b56611bf04b9f" title="Test vsp_cmcp_server_create() and vsp_cmcp_server_free(). " alt="" coords="990,227,1074,253"/>
+</map>

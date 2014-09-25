@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['publish_5fsocket',['publish_socket',['../structvsp__cmcp__node.html#a697dcdd86eb544603e8639e6b2e9736e',1,'vsp_cmcp_node']]]
+  ['out',['out',['../classVesper_1_1Logging.html#ab5481866b298aa7c89522860bbc2e9cd',1,'Vesper::Logging']]]
 ];

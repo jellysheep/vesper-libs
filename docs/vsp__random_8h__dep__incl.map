@@ -1,7 +1,6 @@
 <map id="vesper_util/vsp_random.h" name="vesper_util/vsp_random.h">
 <area shape="rect" id="node2" href="$vsp__cmcp__client_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_client.c" alt="" coords="5,80,169,121"/>
 <area shape="rect" id="node3" href="$vsp__cmcp__node_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_node.c" alt="" coords="193,80,357,121"/>
-<area shape="rect" id="node4" href="$vsp__cmcp__server_8c_source.html" title="vesper_cmcp/vsp_cmcp\l_server.c" alt="" coords="381,80,545,121"/>
-<area shape="rect" id="node5" href="$vsp__test__util_8c.html" title="vesper_test/vsp_test\l_util.c" alt="" coords="570,80,714,121"/>
-<area shape="rect" id="node6" href="$vsp__random_8c_source.html" title="vesper_util/vsp_random.c" alt="" coords="738,87,909,114"/>
+<area shape="rect" id="node4" href="$vsp__test__util_8c.html" title="vesper_test/vsp_test\l_util.c" alt="" coords="382,80,526,121"/>
+<area shape="rect" id="node5" href="$vsp__random_8c_source.html" title="vesper_util/vsp_random.c" alt="" coords="550,87,721,114"/>
 </map>
