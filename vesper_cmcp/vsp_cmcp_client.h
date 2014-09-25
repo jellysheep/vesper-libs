@@ -30,6 +30,11 @@ typedef struct vsp_cmcp_client vsp_cmcp_client;
  * vsp_cmcp_client_set_callback_param(), the command ID and the data list. */
 typedef void (*vsp_cmcp_client_message_cb)(void*, uint16_t, vsp_cmcp_datalist*);
 
+/** Callback function invoked for every disconnected client.
+ * The parameter is the callback parameter set by
+ * vsp_cmcp_client_set_callback_param(). */
+typedef void (*vsp_cmcp_client_disconnect_cb)(void*);
+
 /**
  * Create new vsp_cmcp_client object.
  * Returned pointer should be freed with vsp_cmcp_client_free().
@@ -56,6 +61,13 @@ VSP_API void vsp_cmcp_client_set_callback_param(vsp_cmcp_client *cmcp_client,
  */
 VSP_API void vsp_cmcp_client_set_message_cb(vsp_cmcp_client *cmcp_client,
     vsp_cmcp_client_message_cb message_cb);
+
+/**
+ * Set callback function invoked if the connection times out.
+ * If disconnect_cb is NULL, the callback function is cleared.
+ */
+VSP_API void vsp_cmcp_client_set_disconnect_cb(vsp_cmcp_client *cmcp_client,
+    vsp_cmcp_client_disconnect_cb disconnect_cb);
 
 /**
  * Initialize sockets and establish connection.

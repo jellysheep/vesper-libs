@@ -47,6 +47,8 @@ struct vsp_cmcp_client {
     void *callback_param;
     /** Message callback function. */
     vsp_cmcp_client_message_cb message_cb;
+    /** Disconnection callback function. */
+    vsp_cmcp_client_disconnect_cb disconnect_cb;
 };
 
 /** Connect to server and establish connection using handshake.
@@ -92,6 +94,7 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     /* initialize callback parameter and functions */
     cmcp_client->callback_param = NULL;
     cmcp_client->message_cb = NULL;
+    cmcp_client->disconnect_cb = NULL;
     /* return struct pointer */
     return cmcp_client;
 }
@@ -214,8 +217,9 @@ int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
     /* unlock state mutex */
     vsp_cmcp_state_unlock(cmcp_client->state);
 
-    /* check if connected */
-    VSP_CHECK(ret == 0, vsp_error_set_num(ENOTCONN); return -1);
+    /* check if connected; otherwise set state to disable connecting */
+    VSP_CHECK(ret == 0, vsp_cmcp_state_set(cmcp_client->state,
+        VSP_CMCP_CLIENT_DISCONNECTED); vsp_error_set_num(ENOTCONN); return -1);
 
     return 0;
 }
@@ -236,7 +240,11 @@ void vsp_cmcp_client_regular_callback(void *param)
         vsp_cmcp_state_set(cmcp_client->state,
             VSP_CMCP_CLIENT_DISCONNECTED);
         /* connection establishment will not be automatically retried */
-        /* TODO: inform about lost connection through API */
+        /* inform about lost connection by invoking callback function */
+        if (cmcp_client->disconnect_cb != NULL) {
+            /* callback function registered; invoke it */
+            cmcp_client->disconnect_cb(cmcp_client->callback_param);
+        }
     }
 }
 
