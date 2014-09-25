@@ -19,7 +19,7 @@
 #include <stddef.h>
 #include <string.h>
 
-#define VSP_TEST_CMCP_TIMEOUT 15000
+#define VSP_TEST_CMCP_TIMEOUT 5000
 
 /** Test states. */
 typedef enum {

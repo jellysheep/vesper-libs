@@ -14,7 +14,7 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
-/** Internal server message commands used for CMCP handshake as well as
+/** Internal message commands from servers used for CMCP handshake as well as
  * connection establishment and maintaining.
  * Necessary data list parameters have to be listed here. */
 typedef enum {
@@ -28,7 +28,7 @@ typedef enum {
     VSP_CMCP_COMMAND_SERVER_NACK_CLIENT
 } vsp_cmcp_server_command_id;
 
-/** Internal client message commands used for CMCP handshake as well as
+/** Internal message commands from clients used for CMCP handshake as well as
  * connection establishment and maintaining.
  * Necessary data list parameters have to be listed here. */
 typedef enum {
@@ -36,7 +36,9 @@ typedef enum {
      * Parameters: VSP_CMCP_PARAMETER_NONCE. */
     VSP_CMCP_COMMAND_CLIENT_ANNOUNCE,
     /** Client heartbeat signal command. No parameters required. */
-    VSP_CMCP_COMMAND_CLIENT_HEARTBEAT
+    VSP_CMCP_COMMAND_CLIENT_HEARTBEAT,
+    /** Client disconnection command. No parameters required. */
+    VSP_CMCP_COMMAND_CLIENT_DISCONNECT
 } vsp_cmcp_client_command_id;
 
 /** Internal message command parameters used for CMCP handshake as well as

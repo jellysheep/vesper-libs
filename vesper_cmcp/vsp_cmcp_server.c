@@ -265,9 +265,9 @@ void vsp_cmcp_server_message_callback(void *param,
 void vsp_cmcp_server_handle_control_message(vsp_cmcp_server *cmcp_server,
     uint16_t sender_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
 {
-    /* check if client announcement received */
-    if ((sender_id & 1) == 1
-        && command_id == VSP_CMCP_COMMAND_CLIENT_ANNOUNCE) {
+    /* handle only client commands */
+    VSP_CHECK((sender_id & 1) == 1, return);
+    if (command_id == VSP_CMCP_COMMAND_CLIENT_ANNOUNCE) {
         /* client announcement received */
         uint64_t *client_nonce;
         /* get client nonce */
@@ -277,6 +277,9 @@ void vsp_cmcp_server_handle_control_message(vsp_cmcp_server *cmcp_server,
         VSP_CHECK(client_nonce != NULL, return);
         /* try to register client peer */
         vsp_cmcp_server_register_client(cmcp_server, sender_id, *client_nonce);
+    } else if (command_id == VSP_CMCP_COMMAND_CLIENT_DISCONNECT) {
+        /* client disconnection received; deregister client */
+        vsp_cmcp_server_deregister_client(cmcp_server, sender_id);
     }
 }
 

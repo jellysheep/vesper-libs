@@ -91,8 +91,20 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
 
 void vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client)
 {
+    int ret;
+
     /* check parameter */
     VSP_CHECK(cmcp_client != NULL, return);
+
+    /* check if connected */
+    if (vsp_cmcp_state_get(cmcp_client->state) == VSP_CMCP_CLIENT_CONNECTED) {
+        /* disconnect client from server */
+        ret = vsp_cmcp_node_create_send_message(cmcp_client->cmcp_node,
+            VSP_CMCP_MESSAGE_TYPE_CONTROL, cmcp_client->server_id,
+            cmcp_client->id, VSP_CMCP_COMMAND_CLIENT_DISCONNECT, NULL);
+        /* check for errors */
+        VSP_CHECK(ret == 0, /* failures are silently ignored */);
+    }
 
     /* free node base type */
     vsp_cmcp_node_free(cmcp_client->cmcp_node);

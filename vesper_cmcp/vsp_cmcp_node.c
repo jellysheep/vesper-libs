@@ -20,7 +20,7 @@
 
 /** Wall clock time in milliseconds between two heartbeat signals.
  * This is also the timeout of a receive call of a node. */
-const int VSP_CMCP_NODE_HEARTBEAT_TIME = 1000;
+const int VSP_CMCP_NODE_HEARTBEAT_TIME = 500;
 
 /** vsp_cmcp_node finite state machine flag. */
 typedef enum {
