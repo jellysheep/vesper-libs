@@ -253,13 +253,13 @@ void vsp_cmcp_node_start(vsp_cmcp_node *cmcp_node)
     /* check for pthread errors */
     VSP_ASSERT(ret == 0);
 
-    /* wait until thread is running; state is unlocked automatically */
-    ret = vsp_cmcp_state_wait(cmcp_node->state, NULL);
+    /* wait until thread is running */
+    ret = vsp_cmcp_state_await_state(cmcp_node->state,
+        VSP_CMCP_NODE_RUNNING, NULL);
+    /* unlock state mutex */
+    vsp_cmcp_state_unlock(cmcp_node->state);
     /* check for condition waiting errors */
     VSP_ASSERT(ret == 0);
-
-    /* check if thread is running */
-    VSP_ASSERT(vsp_cmcp_state_get(cmcp_node->state) == VSP_CMCP_NODE_RUNNING);
 }
 
 void vsp_cmcp_node_stop(vsp_cmcp_node *cmcp_node)

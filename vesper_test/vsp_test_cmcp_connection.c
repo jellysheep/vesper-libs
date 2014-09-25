@@ -297,9 +297,8 @@ MU_TEST(vsp_test_cmcp_client_invalid_parameters)
 MU_TEST(vsp_test_cmcp_communication_test)
 {
     int ret;
-    int state;
     vsp_cmcp_datalist *cmcp_datalist;
-    struct timespec time_message_timeout;
+    struct timespec time_test_timeout;
 
     /* check if test state is correct */
     mu_assert_abort(vsp_cmcp_state_get(global_test_state)
@@ -323,21 +322,19 @@ MU_TEST(vsp_test_cmcp_communication_test)
     vsp_cmcp_client_free(global_cmcp_client);
     global_cmcp_client = NULL;
 
-    /* start measuring time for heartbeat timeout */
-    vsp_time_real_timespec_from_now(&time_message_timeout,
+    /* start measuring time for test timeout */
+    vsp_time_real_timespec_from_now(&time_test_timeout,
         VSP_TEST_CMCP_TIMEOUT);
 
+    /* lock state mutex */
+    vsp_cmcp_state_lock(global_test_state);
     /* wait until test completed or waiting timed out */
-    state = vsp_cmcp_state_get(global_test_state);
-    ret = 0;
-    while (ret == 0 && state != VSP_TEST_CMCP_DISCONNECTED) {
-        vsp_cmcp_state_lock(global_test_state);
-        ret = vsp_cmcp_state_wait(global_test_state, &time_message_timeout);
-        state = vsp_cmcp_state_get(global_test_state);
-    }
-
+    ret = vsp_cmcp_state_await_state(global_test_state,
+        VSP_TEST_CMCP_DISCONNECTED, &time_test_timeout);
+    /* unlock state mutex */
+    vsp_cmcp_state_unlock(global_test_state);
     /* check if test was successful */
-    mu_assert(state == VSP_TEST_CMCP_DISCONNECTED, vsp_error_str(ETIMEDOUT));
+    mu_assert(ret == 0, vsp_error_str(ETIMEDOUT));
 }
 
 MU_TEST_SUITE(vsp_test_cmcp_connection)

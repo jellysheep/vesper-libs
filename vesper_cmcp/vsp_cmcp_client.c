@@ -170,36 +170,27 @@ int vsp_cmcp_client_send(vsp_cmcp_client *cmcp_client,
 int vsp_cmcp_client_establish_connection(vsp_cmcp_client *cmcp_client)
 {
     int ret;
-    int success;
-    int state;
     struct timespec time_connection_timeout;
-
-    /* initialize local variables */
-    success = 0;
 
     /* start measuring time for heartbeat timeout */
     vsp_time_real_timespec_from_now(&time_connection_timeout,
         VSP_CMCP_NODE_CONNECTION_TIMEOUT);
 
-    state = vsp_cmcp_state_get(cmcp_client->state);
+    /* enable connecting to server */
+    vsp_cmcp_state_set(cmcp_client->state, VSP_CMCP_CLIENT_TRYING_TO_CONNECT);
 
+    /* lock state mutex */
+    vsp_cmcp_state_lock(cmcp_client->state);
     /* wait until connected or waiting timed out */
-    do {
-        if (state == VSP_CMCP_CLIENT_DISCONNECTED) {
-            /* enable connecting to server */
-            vsp_cmcp_state_set(cmcp_client->state,
-                VSP_CMCP_CLIENT_TRYING_TO_CONNECT);
-        }
-        vsp_cmcp_state_lock(cmcp_client->state);
-        ret = vsp_cmcp_state_wait(cmcp_client->state, &time_connection_timeout);
-        state = vsp_cmcp_state_get(cmcp_client->state);
-    } while (ret == 0 && state != VSP_CMCP_CLIENT_CONNECTED);
+    ret = vsp_cmcp_state_await_state(cmcp_client->state,
+        VSP_CMCP_CLIENT_CONNECTED, &time_connection_timeout);
+    /* unlock state mutex */
+    vsp_cmcp_state_unlock(cmcp_client->state);
 
     /* check if connected */
-    VSP_CHECK(state == VSP_CMCP_CLIENT_CONNECTED,
-        vsp_error_set_num(ENOTCONN); success = -1);
+    VSP_CHECK(ret == 0, vsp_error_set_num(ENOTCONN); return -1);
 
-    return success;
+    return 0;
 }
 
 void vsp_cmcp_client_regular_callback(void *param)
@@ -318,7 +309,7 @@ void vsp_cmcp_client_handle_control_message(vsp_cmcp_client *cmcp_client,
         } else if (command_id == VSP_CMCP_COMMAND_SERVER_NACK_CLIENT) {
             /* negative acknowledge received, rejected */
             vsp_cmcp_state_set(cmcp_client->state,
-                VSP_CMCP_CLIENT_DISCONNECTED);
+                VSP_CMCP_CLIENT_TRYING_TO_CONNECT);
             /* client ID is already registered to server; regenerate node ID */
             vsp_cmcp_node_generate_id(cmcp_client->cmcp_node);
             cmcp_client->id = vsp_cmcp_node_get_id(cmcp_client->cmcp_node);

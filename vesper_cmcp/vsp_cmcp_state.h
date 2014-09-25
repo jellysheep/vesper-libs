@@ -64,13 +64,14 @@ void vsp_cmcp_state_lock(vsp_cmcp_state *cmcp_state);
 void vsp_cmcp_state_unlock(vsp_cmcp_state *cmcp_state);
 
 /**
- * Wait for the current state to change or the time to pass timeout_time.
- * The mutex can be locked before invoking this function, it will be
- * automatically unlocked by this function.
- * Returns positive value if timed out.
- * Returns negative value and sets vsp_error_num() if failed.
+ * Wait for the specified state or the time to pass timeout_time.
+ * The mutex has to be locked and will not be unlocked when calling this
+ * function.
+ * If timeout_time is NULL, this function does not time out.
+ * Returns zero if succeeded and the specified state was set.
+ * Returns non-zero and sets vsp_error_num() if timed out.
  */
-int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
+int vsp_cmcp_state_await_state(vsp_cmcp_state *cmcp_state, int state,
     struct timespec *timeout_time);
 
 #if defined __cplusplus

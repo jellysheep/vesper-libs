@@ -22,6 +22,15 @@ struct vsp_cmcp_state {
     pthread_cond_t condition;
 };
 
+/**
+ * Wait for the current state to change or the time to pass timeout_time.
+ * If timeout_time is NULL, this function does not time out.
+ * Returns zero if succeeded and current state changed.
+ * Returns non-zero and sets vsp_error_num() if timed out.
+ */
+int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
+    struct timespec *timeout_time);
+
 vsp_cmcp_state *vsp_cmcp_state_create(int initial_state)
 {
     vsp_cmcp_state *cmcp_state;
@@ -93,8 +102,6 @@ int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
 {
     int ret;
     int success;
-    /* check parameter */
-    VSP_ASSERT(cmcp_state != NULL);
 
     success = 0;
     if (timeout_time != NULL) {
@@ -102,7 +109,8 @@ int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
         ret = pthread_cond_timedwait(&cmcp_state->condition,
             &cmcp_state->mutex, timeout_time);
         if (ret == ETIMEDOUT) {
-            success = 1;
+            vsp_error_set_num(ETIMEDOUT);
+            success = -1;
         } else {
             VSP_ASSERT(ret == 0);
         }
@@ -111,8 +119,29 @@ int vsp_cmcp_state_wait(vsp_cmcp_state *cmcp_state,
         ret = pthread_cond_wait(&cmcp_state->condition, &cmcp_state->mutex);
         VSP_ASSERT(ret == 0);
     }
-    /* unlock mutex */
-    pthread_mutex_unlock(&cmcp_state->mutex);
     /* success */
     return success;
+}
+
+int vsp_cmcp_state_await_state(vsp_cmcp_state *cmcp_state, int state,
+    struct timespec *timeout_time)
+{
+    int ret;
+
+    /* check parameters */
+    VSP_ASSERT(cmcp_state != NULL);
+
+    /* initialize local variable */
+    ret = 0;
+    /* loop until specified state is set or timed out */
+    while (ret == 0 && cmcp_state->state != state) {
+        ret = vsp_cmcp_state_wait(cmcp_state, timeout_time);
+    }
+
+    /* check if specified state is set */
+    VSP_CHECK(cmcp_state->state == state,
+        vsp_error_set_num(ETIMEDOUT); return -1);
+
+    /* success */
+    return 0;
 }
