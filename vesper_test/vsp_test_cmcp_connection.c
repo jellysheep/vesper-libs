@@ -90,7 +90,8 @@ int vsp_test_cmcp_announcement_cb(void *callback_param, uint16_t client_id)
     mu_assert_abort(callback_param == global_cmcp_server,
         vsp_error_str(EINVAL));
     /* check if client ID is valid */
-    mu_assert_abort(client_id != VSP_CMCP_BROADCAST_TOPIC_ID
+    mu_assert_abort(client_id != VSP_CMCP_SERVER_BROADCAST_TOPIC_ID
+        && client_id != VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID
         && (client_id & 1) == 1, vsp_error_str(EINVAL));
     /* check if test state is correct */
     mu_assert_abort(vsp_cmcp_state_get(global_test_state)

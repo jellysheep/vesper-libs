@@ -19,8 +19,11 @@
 extern "C" {
 #endif /* defined __cplusplus */
 
-/** Topic ID used to broadcast to all connected clients or servers. */
-#define VSP_CMCP_BROADCAST_TOPIC_ID 0
+/** Topic ID used to broadcast to all connected servers. */
+#define VSP_CMCP_SERVER_BROADCAST_TOPIC_ID 0
+
+/** Topic ID used to broadcast to all connected clients. */
+#define VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID 1
 
 /** Wall clock time in milliseconds between two heartbeat signals.
  * This is also the timeout of a receive call of a node. */

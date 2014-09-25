@@ -218,10 +218,9 @@ void vsp_cmcp_server_message_callback(void *param,
     sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
     command_id = vsp_cmcp_message_get_command_id(cmcp_message);
 
-    /* check if message has valid sender and is received from a client,
+    /* check if message is received from a client,
      * as server-to-server messages are not supported yet */
-    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID
-        && (sender_id & 1) == 1, return);
+    VSP_CHECK((sender_id & 1) == 1, return);
 
     /* get data list */
     cmcp_datalist = vsp_cmcp_message_get_datalist(cmcp_message);
@@ -241,14 +240,14 @@ void vsp_cmcp_server_message_callback(void *param,
     if (vsp_cmcp_message_get_type(cmcp_message)
         == VSP_CMCP_MESSAGE_TYPE_CONTROL) {
         /* check if message is broadcasted or directed to this node */
-        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
+        VSP_CHECK(topic_id == VSP_CMCP_SERVER_BROADCAST_TOPIC_ID
             || topic_id == cmcp_server->id, return);
         /* handle control message */
         vsp_cmcp_server_handle_control_message(cmcp_server, sender_id,
             command_id, cmcp_datalist);
     } else {
         /* check if message is broadcasted or directed to a client topic */
-        VSP_CHECK(topic_id == VSP_CMCP_BROADCAST_TOPIC_ID
+        VSP_CHECK(topic_id == VSP_CMCP_SERVER_BROADCAST_TOPIC_ID
             || (topic_id & 1) == 1, return);
         /* check if client is registered; server-to-server messages are not
          * supported yet */

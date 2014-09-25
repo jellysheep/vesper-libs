@@ -240,8 +240,6 @@ void vsp_cmcp_client_message_callback(void *param,
     sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
     command_id = vsp_cmcp_message_get_command_id(cmcp_message);
 
-    /* check if message has valid sender */
-    VSP_CHECK(sender_id != VSP_CMCP_BROADCAST_TOPIC_ID, return);
     /* only receive server messages */
     VSP_CHECK((sender_id & 1) == 0, return);
 

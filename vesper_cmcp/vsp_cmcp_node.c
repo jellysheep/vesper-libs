@@ -142,15 +142,15 @@ void vsp_cmcp_node_generate_id(vsp_cmcp_node *cmcp_node)
 
     /* generate node ID that does not equal broadcast topic ID */
     if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
-        /* node type: ID is even (first bit cleared) */
+        /* server node: ID is even (first bit cleared) */
         do {
             cmcp_node->id = (uint16_t) (vsp_random_get() << 1);
-        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
+        } while (cmcp_node->id == VSP_CMCP_SERVER_BROADCAST_TOPIC_ID);
     } else {
-        /* node type: ID is odd (first bit set) */
+        /* client node: ID is odd (first bit set) */
         do {
             cmcp_node->id = (uint16_t) (vsp_random_get() | 1);
-        } while (cmcp_node->id == VSP_CMCP_BROADCAST_TOPIC_ID);
+        } while (cmcp_node->id == VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID);
     }
 }
 
@@ -218,7 +218,11 @@ int vsp_cmcp_node_connect(vsp_cmcp_node *cmcp_node,
     vsp_cmcp_state_set(cmcp_node->state, VSP_CMCP_NODE_INITIALIZED);
 
     /* subscribe to broadcast ID and node ID */
-    vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_BROADCAST_TOPIC_ID);
+    if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
+        vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_SERVER_BROADCAST_TOPIC_ID);
+    } else {
+        vsp_cmcp_node_subscribe(cmcp_node, VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID);
+    }
     vsp_cmcp_node_subscribe(cmcp_node, cmcp_node->id);
 
     /* sockets successfully bound */
@@ -397,6 +401,7 @@ void *vsp_cmcp_node_run(void *param)
     int data_length;
     void *message_buffer;
     vsp_cmcp_message *cmcp_message;
+    uint16_t sender_id;
 
     /* check parameter */
     VSP_ASSERT(param != NULL);
@@ -431,6 +436,11 @@ void *vsp_cmcp_node_run(void *param)
         /* check error: in case of failure clean up and retry */
         VSP_CHECK(cmcp_message != NULL, goto cleanup);
 
+        /* filter out invalid messages; check if message has valid sender */
+        sender_id = vsp_cmcp_message_get_sender_id(cmcp_message);
+        VSP_CHECK(sender_id != VSP_CMCP_SERVER_BROADCAST_TOPIC_ID
+            && sender_id != VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID, goto cleanup);
+
         /* message successfully received; invoke callback function */
         cmcp_node->message_callback(cmcp_node->callback_param, cmcp_message);
 
@@ -462,7 +472,7 @@ void vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node)
 {
     double time_now;
     int ret;
-    uint16_t command_id;
+    uint16_t topic_id, command_id;
 
     time_now = vsp_time_real_double();
     if (time_now < cmcp_node->time_next_heartbeat) {
@@ -474,16 +484,17 @@ void vsp_cmcp_node_heartbeat(vsp_cmcp_node *cmcp_node)
     cmcp_node->time_next_heartbeat =
         time_now + (VSP_CMCP_NODE_HEARTBEAT_TIME / 1000.0);
 
-    /* send heartbeat */
-
+    /* send server heartbeat to all clients, client heartbeat to all servers */
     if (cmcp_node->node_type == VSP_CMCP_NODE_SERVER) {
+        topic_id = VSP_CMCP_CLIENT_BROADCAST_TOPIC_ID;
         command_id = VSP_CMCP_COMMAND_SERVER_HEARTBEAT;
     } else {
+        topic_id = VSP_CMCP_SERVER_BROADCAST_TOPIC_ID;
         command_id = VSP_CMCP_COMMAND_CLIENT_HEARTBEAT;
     }
     ret = vsp_cmcp_node_create_send_message(cmcp_node,
         VSP_CMCP_MESSAGE_TYPE_CONTROL,
-        VSP_CMCP_BROADCAST_TOPIC_ID, cmcp_node->id, command_id, NULL);
+        topic_id, cmcp_node->id, command_id, NULL);
     /* check for errors */
     VSP_ASSERT(ret == 0);
 }
