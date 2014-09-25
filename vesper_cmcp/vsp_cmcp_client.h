@@ -25,6 +25,11 @@ struct vsp_cmcp_client;
 /** Define type vsp_cmcp_client to avoid 'struct' keyword. */
 typedef struct vsp_cmcp_client vsp_cmcp_client;
 
+/** Callback function invoked for a received message.
+ * The parameters are the callback parameter set by
+ * vsp_cmcp_client_set_callback_param(), the command ID and the data list. */
+typedef void (*vsp_cmcp_client_message_cb)(void*, uint16_t, vsp_cmcp_datalist*);
+
 /**
  * Create new vsp_cmcp_client object.
  * Returned pointer should be freed with vsp_cmcp_client_free().
@@ -37,6 +42,20 @@ VSP_API vsp_cmcp_client *vsp_cmcp_client_create(void);
  * Object should be created with vsp_cmcp_client_create().
  */
 VSP_API void vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client);
+
+/**
+ * Set callback function parameter used for all registered callback functions.
+ * callback_param may be NULL.
+ */
+VSP_API void vsp_cmcp_client_set_callback_param(vsp_cmcp_client *cmcp_client,
+    void *callback_param);
+
+/**
+ * Set callback function invoked for every received message.
+ * If message_cb is NULL, the callback function is cleared.
+ */
+VSP_API void vsp_cmcp_client_set_message_cb(vsp_cmcp_client *cmcp_client,
+    vsp_cmcp_client_message_cb message_cb);
 
 /**
  * Initialize sockets and establish connection.

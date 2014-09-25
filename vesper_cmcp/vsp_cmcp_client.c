@@ -43,6 +43,10 @@ struct vsp_cmcp_client {
     uint64_t nonce;
     /** The time when the connection to server times out. */
     struct timespec time_connection_timeout;
+    /** Callback function parameter. */
+    void *callback_param;
+    /** Message callback function. */
+    vsp_cmcp_client_message_cb message_cb;
 };
 
 /** Connect to server and establish connection using handshake.
@@ -85,6 +89,9 @@ vsp_cmcp_client *vsp_cmcp_client_create(void)
     cmcp_client->state = vsp_cmcp_state_create(VSP_CMCP_CLIENT_DISCONNECTED);
     /* vsp_error_num() is set by vsp_cmcp_state_create() */
     VSP_CHECK(cmcp_client->state != NULL, VSP_FREE(cmcp_client); return NULL);
+    /* initialize callback parameter and functions */
+    cmcp_client->callback_param = NULL;
+    cmcp_client->message_cb = NULL;
     /* return struct pointer */
     return cmcp_client;
 }
@@ -114,6 +121,26 @@ void vsp_cmcp_client_free(vsp_cmcp_client *cmcp_client)
 
     /* free memory */
     VSP_FREE(cmcp_client);
+}
+
+void vsp_cmcp_client_set_callback_param(vsp_cmcp_client *cmcp_client,
+    void *callback_param)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_client != NULL, return);
+
+    /* set callback param */
+    cmcp_client->callback_param = callback_param;
+}
+
+void vsp_cmcp_client_set_message_cb(vsp_cmcp_client *cmcp_client,
+    vsp_cmcp_client_message_cb message_cb)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_client != NULL, return);
+
+    /* set callback function */
+    cmcp_client->message_cb = message_cb;
 }
 
 int vsp_cmcp_client_connect(vsp_cmcp_client *cmcp_client,
@@ -257,10 +284,15 @@ void vsp_cmcp_client_message_callback(void *param,
         vsp_cmcp_client_handle_control_message(cmcp_client, sender_id,
             command_id, cmcp_datalist);
     } else {
-        /* check if message is directed to this node */
-        VSP_CHECK(topic_id == cmcp_client->id, return);
+        /* check if message is broadcasted or directed to this node */
+        VSP_CHECK(topic_id == VSP_CMCP_SERVER_BROADCAST_TOPIC_ID
+            || topic_id == cmcp_client->id, return);
         /* handle data message */
-        /* ... */
+        if (cmcp_client->message_cb != NULL) {
+            /* callback function registered; invoke it */
+            cmcp_client->message_cb(cmcp_client->callback_param, command_id,
+                cmcp_datalist);
+        }
     }
 }
 
