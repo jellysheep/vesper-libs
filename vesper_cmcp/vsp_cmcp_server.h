@@ -95,6 +95,15 @@ VSP_API void vsp_cmcp_server_set_message_cb(vsp_cmcp_server *cmcp_server,
 VSP_API int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     const char *publish_address, const char *subscribe_address);
 
+/**
+ * Send a message to the specified client.
+ * The specified command_id has to be lower than 2^15, i.e. MSB cleared.
+ * This function blocks until the message could be sent.
+ * Returns non-zero and sets vsp_error_num() if failed.
+ */
+VSP_API int vsp_cmcp_server_send(vsp_cmcp_server *cmcp_server,
+    uint16_t client_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist);
+
 #if defined __cplusplus
 }
 #endif /* defined __cplusplus */

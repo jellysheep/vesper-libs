@@ -179,6 +179,31 @@ int vsp_cmcp_server_bind(vsp_cmcp_server *cmcp_server,
     return 0;
 }
 
+int vsp_cmcp_server_send(vsp_cmcp_server *cmcp_server,
+    uint16_t client_id, uint16_t command_id, vsp_cmcp_datalist *cmcp_datalist)
+{
+    int ret;
+    int client_index;
+
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL, vsp_error_set_num(EINVAL); return -1);
+
+    /* try to find client in registered peers */
+    client_index = vsp_cmcp_server_find_client(cmcp_server, client_id);
+    VSP_CHECK(client_index >= 0, vsp_error_set_num(EINVAL); return -1);
+
+    /* send message */
+    ret = vsp_cmcp_node_create_send_message(cmcp_server->cmcp_node,
+        VSP_CMCP_MESSAGE_TYPE_DATA, client_id, cmcp_server->id,
+        command_id, cmcp_datalist);
+
+    /* vsp_error_num() is set by vsp_cmcp_node_create_send_message() */
+    VSP_CHECK(ret == 0, return -1);
+
+    /* message sent successfully */
+    return 0;
+}
+
 void vsp_cmcp_server_regular_callback(void *param)
 {
     vsp_cmcp_server *cmcp_server;
