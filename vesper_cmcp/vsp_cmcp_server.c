@@ -41,6 +41,8 @@ struct vsp_cmcp_server {
     void *callback_param;
     /** Client announcement callback function. */
     vsp_cmcp_server_announcement_cb announcement_cb;
+    /** Client disconnection callback function. */
+    vsp_cmcp_server_disconnect_cb disconnect_cb;
     /** Message callback function. */
     vsp_cmcp_server_message_cb message_cb;
 };
@@ -91,6 +93,7 @@ vsp_cmcp_server *vsp_cmcp_server_create(void)
     /* initialize callback parameter and functions */
     cmcp_server->callback_param = NULL;
     cmcp_server->announcement_cb = NULL;
+    cmcp_server->disconnect_cb = NULL;
     cmcp_server->message_cb = NULL;
     /* return struct pointer */
     return cmcp_server;
@@ -132,6 +135,16 @@ void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
 
     /* set callback function */
     cmcp_server->announcement_cb = announcement_cb;
+}
+
+void vsp_cmcp_server_set_disconnect_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_disconnect_cb disconnect_cb)
+{
+    /* check parameters */
+    VSP_CHECK(cmcp_server != NULL, return);
+
+    /* set callback function */
+    cmcp_server->disconnect_cb = disconnect_cb;
 }
 
 void vsp_cmcp_server_set_message_cb(vsp_cmcp_server *cmcp_server,
@@ -380,6 +393,12 @@ void vsp_cmcp_server_deregister_client(vsp_cmcp_server *cmcp_server,
 
     /* unsubscribe from messages from this client peer */
     vsp_cmcp_node_unsubscribe(cmcp_server->cmcp_node, client_id);
+
+    /* invoke callback function */
+    if (cmcp_server->disconnect_cb != NULL) {
+        /* callback function registered; invoke it */
+        cmcp_server->disconnect_cb(cmcp_server->callback_param, client_id);
+    }
 
     /* client ID deleted from client peer list; deregistering done */
 }

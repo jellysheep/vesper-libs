@@ -19,17 +19,19 @@
 #include <stddef.h>
 #include <string.h>
 
-#define VSP_TEST_CMCP_MESSAGE_TIMEOUT 10000
+#define VSP_TEST_CMCP_TIMEOUT 15000
 
 /** Test states. */
 typedef enum {
     /** Client is not connected to server. */
-    VSP_TEST_CMCP_DISCONNECTED,
+    VSP_TEST_CMCP_NOT_CONNECTED,
     /** Client is connected to server, main thread is waiting until message
      * callback is invoked. */
     VSP_TEST_CMCP_CONNECTED,
     /** Message was received in message callback. */
-    VSP_TEST_CMCP_MESSAGE_RECEIVED
+    VSP_TEST_CMCP_MESSAGE_RECEIVED,
+    /** Client was disconnected from server. */
+    VSP_TEST_CMCP_DISCONNECTED
 } vsp_cmcp_client_state;
 
 /** Global test state. */
@@ -46,6 +48,9 @@ uint16_t global_cmcp_client_id;
 
 /** Client announcement callback function. */
 int vsp_test_cmcp_announcement_cb(void *callback_param, uint16_t client_id);
+
+/** Client disconnection callback function. */
+void vsp_test_cmcp_disconnect_cb(void *callback_param, uint16_t client_id);
 
 /** Client message callback function. */
 void vsp_test_cmcp_message_cb(void *callback_param, uint16_t client_id,
@@ -89,13 +94,27 @@ int vsp_test_cmcp_announcement_cb(void *callback_param, uint16_t client_id)
         && (client_id & 1) == 1, vsp_error_str(EINVAL));
     /* check if test state is correct */
     mu_assert_abort(vsp_cmcp_state_get(global_test_state)
-        == VSP_TEST_CMCP_DISCONNECTED, vsp_error_str(EINVAL));
+        == VSP_TEST_CMCP_NOT_CONNECTED, vsp_error_str(EINVAL));
     /* store client ID */
     global_cmcp_client_id = client_id;
     /* update test state */
     vsp_cmcp_state_set(global_test_state, VSP_TEST_CMCP_CONNECTED);
     /* accept new client */
     return 0;
+}
+
+void vsp_test_cmcp_disconnect_cb(void *callback_param, uint16_t client_id)
+{
+    /* check if callback parameter equals global server object */
+    mu_assert_abort(callback_param == global_cmcp_server,
+        vsp_error_str(EINVAL));
+    /* check if client ID is valid */
+    mu_assert_abort(client_id == global_cmcp_client_id, vsp_error_str(EINVAL));
+    /* check if test state is correct */
+    mu_assert_abort(vsp_cmcp_state_get(global_test_state)
+        == VSP_TEST_CMCP_MESSAGE_RECEIVED, vsp_error_str(EINVAL));
+    /* update test state */
+    vsp_cmcp_state_set(global_test_state, VSP_TEST_CMCP_DISCONNECTED);
 }
 
 void vsp_test_cmcp_message_cb(void *callback_param, uint16_t client_id,
@@ -148,7 +167,7 @@ void vsp_test_cmcp_communication_setup(void)
     vsp_test_cmcp_connection_setup();
 
     /* initialize test state */
-    global_test_state = vsp_cmcp_state_create(VSP_TEST_CMCP_DISCONNECTED);
+    global_test_state = vsp_cmcp_state_create(VSP_TEST_CMCP_NOT_CONNECTED);
     mu_assert_abort(global_test_state != NULL, vsp_error_str(vsp_error_num()));
 
     /* register server callback parameter */
@@ -156,6 +175,8 @@ void vsp_test_cmcp_communication_setup(void)
     /* register server callback functions */
     vsp_cmcp_server_set_announcement_cb(global_cmcp_server,
         vsp_test_cmcp_announcement_cb);
+    vsp_cmcp_server_set_disconnect_cb(global_cmcp_server,
+        vsp_test_cmcp_disconnect_cb);
     vsp_cmcp_server_set_message_cb(global_cmcp_server,
         vsp_test_cmcp_message_cb);
 
@@ -172,12 +193,19 @@ void vsp_test_cmcp_communication_setup(void)
 void vsp_test_cmcp_connection_teardown(void)
 {
     /* free client */
-    vsp_cmcp_client_free(global_cmcp_client);
+    if (global_cmcp_client != NULL) {
+        vsp_cmcp_client_free(global_cmcp_client);
+        global_cmcp_client = NULL;
+    }
     /* free server */
-    vsp_cmcp_server_free(global_cmcp_server);
+    if (global_cmcp_server != NULL) {
+        vsp_cmcp_server_free(global_cmcp_server);
+        global_cmcp_server = NULL;
+    }
     /* free test state if created */
     if (global_test_state != NULL) {
         vsp_cmcp_state_free(global_test_state);
+        global_test_state = NULL;
     }
 }
 
@@ -290,24 +318,25 @@ MU_TEST(vsp_test_cmcp_communication_test)
     /* free data list */
     vsp_cmcp_datalist_free(cmcp_datalist);
 
+    /* disconnect client by freeing it */
+    vsp_cmcp_client_free(global_cmcp_client);
+    global_cmcp_client = NULL;
+
     /* start measuring time for heartbeat timeout */
     vsp_time_real_timespec_from_now(&time_message_timeout,
-        VSP_TEST_CMCP_MESSAGE_TIMEOUT);
+        VSP_TEST_CMCP_TIMEOUT);
 
+    /* wait until test completed or waiting timed out */
     state = vsp_cmcp_state_get(global_test_state);
-
     ret = 0;
-
-    /* wait until message received or waiting timed out */
-    while (ret == 0 && state != VSP_TEST_CMCP_MESSAGE_RECEIVED) {
+    while (ret == 0 && state != VSP_TEST_CMCP_DISCONNECTED) {
         vsp_cmcp_state_lock(global_test_state);
         ret = vsp_cmcp_state_wait(global_test_state, &time_message_timeout);
         state = vsp_cmcp_state_get(global_test_state);
     }
 
-    /* check if message was received */
-    mu_assert(state == VSP_TEST_CMCP_MESSAGE_RECEIVED,
-        vsp_error_str(ETIMEDOUT));
+    /* check if test was successful */
+    mu_assert(state == VSP_TEST_CMCP_DISCONNECTED, vsp_error_str(ETIMEDOUT));
 }
 
 MU_TEST_SUITE(vsp_test_cmcp_connection)

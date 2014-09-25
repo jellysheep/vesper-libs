@@ -32,6 +32,11 @@ typedef struct vsp_cmcp_server vsp_cmcp_server;
  * sent); otherwise the client will be rejected (NACK message sent). */
 typedef int (*vsp_cmcp_server_announcement_cb)(void*, uint16_t);
 
+/** Callback function invoked for every disconnected client.
+ * The parameters are the callback parameter set by
+ * vsp_cmcp_server_set_callback_param() and the client ID. */
+typedef void (*vsp_cmcp_server_disconnect_cb)(void*, uint16_t);
+
 /** Callback function invoked for a received message.
  * The parameters are the callback parameter set by
  * vsp_cmcp_server_set_callback_param(), the client ID, the command ID and the
@@ -67,6 +72,13 @@ VSP_API void vsp_cmcp_server_set_callback_param(vsp_cmcp_server *cmcp_server,
  */
 VSP_API void vsp_cmcp_server_set_announcement_cb(vsp_cmcp_server *cmcp_server,
     vsp_cmcp_server_announcement_cb announcement_cb);
+
+/**
+ * Set callback function invoked for every disconnected client.
+ * If disconnect_cb is NULL, the callback function is cleared.
+ */
+VSP_API void vsp_cmcp_server_set_disconnect_cb(vsp_cmcp_server *cmcp_server,
+    vsp_cmcp_server_disconnect_cb disconnect_cb);
 
 /**
  * Set callback function invoked for every received message.
